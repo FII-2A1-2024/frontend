@@ -1,8 +1,8 @@
 /*
 Ciprian 5 apr
 
-Daca vom avea lista de mesaje in stanga iar o conversatie individuala pe restul ecranului, fisierul asta va ramane
-Daca nu, va fi sters probabil
+If the user will have all convs on the left and the current one on the right, this file will remain
+Otherwise, most likely it will be deleted
 */
 
 import { Link } from "react-router-dom";

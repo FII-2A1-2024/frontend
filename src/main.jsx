@@ -10,6 +10,9 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 
 import './index.css'
 
+/* Ciprian 5 apr: routing system
+Use <Link to=""> instead of <a href=""> 
+TODO: If the user is not connected, redirect at "/connect" */
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: '/conversation/:conversationId',
     element: <ConversationPage/>
+    /* This needs to be a child if all convs will be on the left and current conv on the right */
   }
 ]);
 

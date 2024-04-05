@@ -1,5 +1,3 @@
-import './ConnectPage.css'
-
 function ConnectPage() {
   const name = 'Ugly Button';
   return (<>
