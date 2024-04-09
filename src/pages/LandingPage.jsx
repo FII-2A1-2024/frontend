@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Navbar_superior from "c:/FrontEnd_IP/FrontEnd_IP/src/Components/Navbar_superior";
+import Navbar_superior from "../components";
 
 function LandingPage() {
     const name = 'Ugly Button';
