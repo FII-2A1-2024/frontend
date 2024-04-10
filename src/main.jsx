@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import ConnectPage from './pages/ConnectPage.jsx'
 import LandingPage from './pages/LandingPage.jsx'
+import PostPage from './pages/PostPage.jsx'
 import ConversationsPage from './pages/ConversationsPage.jsx'
 import ConversationPage from './pages/ConversationPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
@@ -12,7 +13,8 @@ import './index.css'
 
 /* Ciprian 5 apr: routing system
 Use <Link to=""> instead of <a href=""> 
-TODO: If the user is not connected, redirect at "/connect" */
+TODO: If the user is not connected, redirect at "/connect" 
+TODO: Redirect the user to the most recent conv if he types manually "/conversation" (without or invalid ID) in the URL*/
 
 const router = createBrowserRouter([
   {
@@ -21,18 +23,24 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage/>
   },
   {
+    path: '/post/:postId',
+    element: <PostPage/>
+  },
+  {
     path: '/connect',
     element: <ConnectPage/>
   },
   {
     path: '/conversation',
-    element: <ConversationsPage/>
+    element: <ConversationsPage/>,
+    children: [
+      {
+        path: '/conversation/:conversationId',
+        element: <ConversationPage/>
+        /* Ciprian: This can be reverted to be a separate page if needed */
+      }
+    ]
   },
-  {
-    path: '/conversation/:conversationId',
-    element: <ConversationPage/>
-    /* This needs to be a child if all convs will be on the left and current conv on the right */
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
