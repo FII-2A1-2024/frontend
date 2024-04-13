@@ -9,13 +9,39 @@ function ConnectPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, SetConfirmedPassword] = useState("");
-  const Submit = (event) => {
+  const [passwordMatchError,setPasswordMatchError] = useState(false);
+  const Submit = async (event) => {
     event.preventDefault();
-    console.log("form submited: ");
-    console.log("username: " + username);
-    console.log("email: " + email);
-    console.log("password: " + password);
-    console.log("confirmed password: " + confirmedPassword);
+    
+    if(action=="Sign up"){
+      if(password!==confirmedPassword){
+        setPasswordMatchError(true);
+        return;
+      }else{
+        setPasswordMatchError(false);
+      }
+  
+      const userData={
+        username:username,
+        email:email,
+        password:password,
+        confirmedPassword:confirmedPassword
+      };
+  
+      const data=JSON.stringify(userData);
+  
+      //api de testare
+      fetch('https://reqres.in/api/users',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:data
+      }).then(res=>res.json()).then(result=>console.log(result)).catch(err=>console.log(err))
+    }else{
+      console.log("log in");
+    }
+
     document.getElementById("form").reset();
   };
   return (
@@ -63,7 +89,7 @@ function ConnectPage() {
               <input
                 type="password"
                 id="confirmPassword"
-                className="border-solid border-2 border-black"
+                className={`border-solid border-2 border-black ${passwordMatchError?'border-red-500':'border-black-500'}`}
                 placeholder="enter password"
                 onChange={(e) => SetConfirmedPassword(e.target.value)}
                 required
