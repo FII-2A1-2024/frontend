@@ -1,4 +1,8 @@
 import { useState } from "react";
+import Login from "../media/icons/login.svg"
+import Homepage from "../media/icons/homepage.svg"
+import LeftArrow from "../media/icons/arrow-left.svg"
+import "../styles/Login.css"
 
 //7 aprilie, tudor, log in/sign up form
 
@@ -10,6 +14,7 @@ function ConnectPage() {
   const [password, setPassword] = useState("");
   const [confirmedPassword, SetConfirmedPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
+
   const Submit = async (event) => {
     event.preventDefault();
 
@@ -41,12 +46,47 @@ function ConnectPage() {
         .then((res) => res.json())
         .then((result) => console.log(result))
         .catch((err) => console.log(err));
+        document.getElementById("form").reset();
     } else {
+      const userData = {
+        username: username,
+        email: email,
+      };
+      const data = JSON.stringify(userData);
+      fetch("https://reqres.in/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err)); 
       console.log("log in");
+      document.getElementById("loginForm").reset();
     }
 
-    document.getElementById("form").reset();
+    
   };
+
+  const handleHomePageButtonClick = () => {
+      document.querySelector(".homepage-container").style.display = "none";
+      document.querySelector(".small-login-page-view").style.display = "block";
+      const divToMove = document.querySelector(".right-half");
+      const destinationDiv = document.querySelector(".small-login-page-view");
+      destinationDiv.appendChild(divToMove);
+      console.log("Specific button clicked!");
+  };
+
+  const functie = () => {
+    document.querySelector(".small-login-page-view").style.display = "none";
+    document.querySelector(".homepage-container").style.display = "flex";
+    const divToMove = document.querySelector(".right-half");
+    const destinationDiv = document.querySelector(".desktop-view");
+    destinationDiv.appendChild(divToMove);
+  };
+
   return (
     <>
       {action === "Sign up" ? (
@@ -218,46 +258,76 @@ function ConnectPage() {
           </div>
         </form>
       ) : (
-        <form
-          onSubmit={Submit}
-          id="form"
-          className="flex flex-row justify-center h-screen w-screen"
-        >
-          <div>
-            <h1>{action}</h1>
-            <div>
-              <label htmlFor="username">Username</label>
+        <div>
+        <div className="container desktop-view">
+        <div className="left-half" id="gotoright">
+          <img src={Login} alt="Login Image" className="login-img" />
+        </div>
+  
+        <div className="right-half">
+          <div className="upper-text">
+            <cap-text> Începe bârfa </cap-text>
+            <h1 id="h1">Bine ai revenit</h1>
+            <p id="p">
+              Încă nu ai un cont? 
+              <a href="#" id="link" onClick={() => setAction("Sign up")}>Sign up</a>
+            </p>
+          </div>
+          <form onSubmit={Submit} action="#" method="post" id="loginForm">
+            <h5 id="h5">Email</h5>
+            <label className="usernameLabel">
               <input
                 type="text"
-                id="username"
-                className="border-solid border-2 border-black"
-                placeholder="enter username"
-                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+                placeholder="Username"
+                id="loginInputUsername"
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
+            </label>
+            <h5 id="h5">Parola</h5>
+            <label className="passwordLabel">
               <input
                 type="password"
-                id="password"
-                className="border-solid border-2 border-black"
-                placeholder="enter password"
+                name="password"
+                placeholder="Password"
+                id="loginInputPassword"
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-            </div>
-            <div>
-              <button type="button" onClick={() => setAction("Sign up")}>
-                Sign Up
-              </button>
-              <button type="submit" onClick={() => setAction("Log in")}>
-                Log in
-              </button>
-            </div>
-          </div>
-        </form>
-      )}
+            </label>
+            <button type="submit" className="login-btn" id="login-btn" onClick={() => setAction("Log in")}> Log in </button>
+          </form>
+        </div>
+      </div>
+
+    {/*----------Tablet View Homepage----------*/}
+    <div className="homepage-container tablet-view">
+      <div className="content-homepage">
+        <div className="image">
+          <img src={Homepage} alt="Homepage Image" />
+        </div>
+        <div className="text-content">
+          <h1 id="h1">Ne bucurăm să te vedem</h1>
+          <p id="p">
+            Bine ai venit pe platforma noastră! Pentru a continua, te rugăm să
+            te loghezi sau să te înregistrezi
+          </p>
+        </div>
+        <div className="buttons">
+        <button className="login-btn" id="btn-homepage" onClick={handleHomePageButtonClick}>Log in</button>
+          <button className="signup-btn" id="btn-homepage">Sign up</button>
+        </div>
+      </div>
+    </div>
+
+    {/*---------- Tablet/Phone View Login Page --------------*/}
+    <div className="container small-login-page-view">
+      <img src={LeftArrow} alt="Left Arrow" id="leftArrow" onClick={functie}/> 
+    </div>
+      </div>
+     )
+      }
     </>
   );
 }
