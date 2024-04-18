@@ -13,7 +13,7 @@
     --body-color: rgba(91, 107, 134, 1);
     --headings-color: rgba(21, 24, 30, 1);
     --padding-inline-section: 20px;
-    --section-login-color: rgba(240, 244, 253, 1);
+    --section-login-color: rgb(254, 212, 212);
 }
 
 /* Fonts */
@@ -76,15 +76,12 @@ cap-text {
 }
 
 .left-half {
-    min-width: 680px;
-}
-
-
-.left-half {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    margin-right: 10px;
+    background-color: var(--section-login-color);
+    background-position: center;
+    border-radius: 0 20px 20px 0;
 }
 .content {
     display: none;
@@ -280,14 +277,14 @@ cap-text {
     display: none;
 }
 
-@media screen and (max-width: 1700px) {
-    .homepage-container, .tablet-view {
+@media screen and (min-width: 921px) {
+    .homepage-container, .tablet-view, .small-login-page-view{
       display: none !important;
     }
   }
 
 /* Media Query for tablets */
-@media (max-width: 1024px) {
+@media (max-width: 920px) {
     #h1 {font-size: 36px;}
     #h5 {font-size: 20px;}
     #p {font-size: 14px;}
@@ -299,25 +296,27 @@ cap-text {
         display: flex;
     }
 
-    .right-half{
-       height: 100vh;
-    }
     .image{
         display: flex;
         align-items: center;
     }
 
     .small-login-page-view{
+        flex-direction: column;
         padding-left: 30px;
         padding-right: 30px;
+        overflow-y: auto;
     }
 
+    .small-login-page-view .leftArrowContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
     .small-login-page-view #leftArrow{
         cursor: pointer;
         width: 50px;
-        position:fixed;
-        top: 30px !important;
-        left: 24px !important;
+        padding-top: 15px;
     }
     .small-login-page-view #leftArrow:hover{
         background-color: rgb(231, 224, 224) !important;
@@ -326,26 +325,25 @@ cap-text {
 .homepage-container {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column ;
     align-items: center;
-    height: 100vh;
     padding: 5px;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .content-homepage{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15%;
-    padding-bottom: 20px;
-    padding-top: 0;
+    padding: 3% 15%; /* Adjusted padding for better fit */
 }
 }
 
 @media (max-width: 480px) {
-    #h1 {font-size: 24px;}
+    #h1 {font-size: 36px;}
     #h5 {font-size: 16px;}
-    #p {font-size: 14px;}
+    #p {font-size: 20px;}
 
     .image img {
        width: 98%;
@@ -355,6 +353,7 @@ cap-text {
         padding: 10%;
         padding-bottom: 20px;
         padding-top: 0;
+        overflow-y: scroll;
     }
 
     .text-content #p {
@@ -364,6 +363,10 @@ cap-text {
 
     .login-btn {
         margin-bottom: 5px;
+    }
+
+    .small-login-page-view .upper-text {
+        gap: 5px;
     }
 
 }

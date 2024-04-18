@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Login from "../media/icons/login.svg";
+import Login from "../media/icons/Ilustratie-log_in.svg";
 import Signup from "../media/icons/Signup.svg";
 import Homepage from "../media/icons/homepage.svg";
 import LeftArrow from "../media/icons/arrow-left.svg";
@@ -72,10 +72,10 @@ function ConnectPage() {
 
   const handleHomePageButtonClick = () => {
     document.querySelector(".homepage-container").style.display = "none";
-    document.querySelector(".small-login-page-view").style.display = "block";
-    const divToMove = document.querySelector(".right-half");
-    const destinationDiv = document.querySelector(".small-login-page-view");
-    destinationDiv.appendChild(divToMove);
+    document.querySelector(".small-login-page-view").style.display = "flex";
+   // const divToMove = document.querySelector(".right-half");
+   // const destinationDiv = document.querySelector(".small-login-page-view");
+   // destinationDiv.appendChild(divToMove);
     console.log("Specific button clicked!");
   };
 
@@ -93,9 +93,9 @@ function ConnectPage() {
   const functie = () => {
     document.querySelector(".small-login-page-view").style.display = "none";
     document.querySelector(".homepage-container").style.display = "flex";
-    const divToMove = document.querySelector(".right-half");
-    const destinationDiv = document.querySelector(".desktop-view");
-    destinationDiv.appendChild(divToMove);
+    //const divToMove = document.querySelector(".right-half");
+   // const destinationDiv = document.querySelector(".desktop-view");
+   // destinationDiv.appendChild(divToMove);
   };
 
   return (
@@ -364,7 +364,6 @@ function ConnectPage() {
                     type="text"
                     name="username"
                     placeholder="Username"
-                    id="loginInputUsername"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
@@ -375,7 +374,6 @@ function ConnectPage() {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    id="loginInputPassword"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
@@ -423,12 +421,58 @@ function ConnectPage() {
 
           {/*---------- Tablet/Phone View Login Page --------------*/}
           <div className="container small-login-page-view">
+            <div className="leftArrowContainer">            
             <img
               src={LeftArrow}
               alt="Left Arrow"
               id="leftArrow"
               onClick={functie}
-            />
+            /></div>
+
+              <div className="right-half">
+              <div className="upper-text">
+                <cap-text> Începe bârfa </cap-text>
+                <h1 id="h1">Bine ai revenit</h1>
+                <p id="p">
+                  Încă nu ai un cont?
+                  <a href="#" id="link" onClick={() => setAction("Sign up")}>
+                    Sign up
+                  </a>
+                </p>
+              </div>
+              <form onSubmit={Submit} action="#" method="post" id="loginForm">
+                <h5 id="h5">Email</h5>
+                <label className="usernameLabel">
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </label>
+                <h5 id="h5">Parola</h5>
+                <label className="passwordLabel">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="login-btn"
+                  id="login-btn"
+                  onClick={() => setAction("Log in")}
+                >
+                  {" "}
+                  Log in{" "}
+                </button>
+              </form>
+            </div>
+
           </div>
         </div>
       )}
