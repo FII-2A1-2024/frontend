@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "../media/icons/Ilustratie-log_in.svg";
 import Signup from "../media/icons/Signup.svg";
 import Homepage from "../media/icons/homepage.svg";
@@ -14,8 +14,17 @@ function ConnectPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmedPassword, SetConfirmedPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
+
+  useEffect(() => {
+    if (action == "Log in") {
+      handleHomePageButtonClick();
+    }
+    if (action == "Sign up") {
+      handleHomePageButtonClick2();
+    }
+  }, [action]);
 
   const Submit = async (event) => {
     event.preventDefault();
@@ -73,29 +82,36 @@ function ConnectPage() {
   const handleHomePageButtonClick = () => {
     document.querySelector(".homepage-container").style.display = "none";
     document.querySelector(".small-login-page-view").style.display = "flex";
-   // const divToMove = document.querySelector(".right-half");
-   // const destinationDiv = document.querySelector(".small-login-page-view");
-   // destinationDiv.appendChild(divToMove);
+    // const divToMove = document.querySelector(".right-half");
+    // const destinationDiv = document.querySelector(".small-login-page-view");
+    // destinationDiv.appendChild(divToMove);
     console.log("Specific button clicked!");
   };
 
   const handleHomePageButtonClick2 = (event) => {
+    document.querySelector(".main-content").classList.remove("hide2");
+    document.querySelector(".main-content").style.display = "block";
+    document.querySelector(".sign").style.display = "none";
+  };
+  const handleHomePageButtonClick2Prevent = (event) => {
     event.preventDefault();
+    document.querySelector(".main-content").classList.remove("hide2");
     document.querySelector(".main-content").style.display = "block";
     document.querySelector(".sign").style.display = "none";
   };
   const handleHomePageButtonClick3 = (event) => {
     event.preventDefault();
-    document.querySelector(".main-content").style.display = "none";
-    document.querySelector(".sign").style.display = "block";
+    document.querySelector(".main-content").classList.add("hide2");
+    document.querySelector(".main-content").style.display = "";
+    document.querySelector(".sign").style.display = "";
   };
 
   const functie = () => {
     document.querySelector(".small-login-page-view").style.display = "none";
     document.querySelector(".homepage-container").style.display = "flex";
     //const divToMove = document.querySelector(".right-half");
-   // const destinationDiv = document.querySelector(".desktop-view");
-   // destinationDiv.appendChild(divToMove);
+    // const destinationDiv = document.querySelector(".desktop-view");
+    // destinationDiv.appendChild(divToMove);
   };
 
   return (
@@ -106,30 +122,32 @@ function ConnectPage() {
           id="form"
           className="h-screen signup-form flex flex-row justify-center"
         >
-          <div className="block lg:hidden sign my-auto">
+          <div className="sign my-auto hide">
             <div className="flex flex-col items-center">
-              <div className="image">
+              <div className="image max-sm:w-3/5">
                 <img src={Homepage} alt="Homepage Image" />
               </div>
-              <div className="text-content w-[354px]">
-                <h1 id="h1">Ne bucurăm să te vedem</h1>
-                <p id="p">
+              <div className="mt-5 w-[354px] max-sm:w-[300px]">
+                <h1 className="max-md:text-4xl h1">Ne bucurăm să te vedem</h1>
+                <p className="p py-3 text-gray-400">
                   Bine ai venit pe platforma noastră! Pentru a continua, te
                   rugăm să te loghezi sau să te înregistrezi
                 </p>
               </div>
-              <div className="buttons w-[354px]">
+              <div className="buttons w-[354px] max-sm:w-[300px]">
                 <button
-                  className="login-btn"
+                  className="signup-btn max-md:mb-[5px]"
                   id="btn-homepage"
-                  onClick={() => setAction("Log in")}
+                  onClick={() => {
+                    setAction("Log in", handleHomePageButtonClick);
+                  }}
                 >
                   Log in
                 </button>
                 <button
                   className="signup-btn-white"
                   id="btn-homepage"
-                  onClick={handleHomePageButtonClick2}
+                  onClick={handleHomePageButtonClick2Prevent}
                 >
                   Sign up
                 </button>
@@ -137,8 +155,8 @@ function ConnectPage() {
             </div>
           </div>
 
-          <div className="my-auto main-content lg:flex-1 max-lg:hidden flex flex-col">
-            <div className="h-[24px] text-left -ml-12">
+          <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 lg:pt-4">
+            <div className="text-left absolute left-5 top-5">
               <button
                 className="lg:hidden inapoi"
                 onClick={handleHomePageButtonClick3}
@@ -159,15 +177,12 @@ function ConnectPage() {
                 </svg>
               </button>
             </div>
-            <div className="w-[485px] h-[715px] m-auto">
-              <div className="h-[178px]">
+            <div className="max-sm:w-4/5 w-[485px] h-[715px] m-auto">
+              <div>
                 <div className="flex flex-row">
                   <cap-text>INREGISTREAZA-TE ACUM</cap-text>
                 </div>
-                <h1
-                  id="h1"
-                  className=" text-5xl font-semibold mb- mt-5 text-left text-black"
-                >
+                <h1 className="h1 text-4xl font-semibold max-sm:text-3xl mt-5 text-left text-black">
                   Invata SQL rapid si usor cu noi.
                 </h1>
                 <div className="mb-5 flex flex-row">
@@ -297,7 +312,7 @@ function ConnectPage() {
                       passwordMatchError ? "bg-red-300" : "border-gray-300"
                     }`}
                     placeholder="**********"
-                    onChange={(e) => SetConfirmedPassword(e.target.value)}
+                    onChange={(e) => setConfirmedPassword(e.target.value)}
                     required
                   />
                   <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
@@ -320,9 +335,11 @@ function ConnectPage() {
                 <div className="h-[86]">
                   <button
                     type="submit"
-                    className="signup-btn mt-10"
+                    className="signup-btn mt-5"
                     id="signup-btn"
-                    onClick={() => setAction("Sign up")}
+                    onClick={() => {
+                      setAction("Sign up");
+                    }}
                   >
                     Sign up
                   </button>
@@ -412,7 +429,13 @@ function ConnectPage() {
                 >
                   Log in
                 </button>
-                <button className="signup-btn" id="btn-homepage">
+                <button
+                  className="signup-btn"
+                  id="btn-homepage"
+                  onClick={() => {
+                    setAction("Sign up", handleHomePageButtonClick2);
+                  }}
+                >
                   Sign up
                 </button>
               </div>
@@ -421,15 +444,16 @@ function ConnectPage() {
 
           {/*---------- Tablet/Phone View Login Page --------------*/}
           <div className="container small-login-page-view">
-            <div className="leftArrowContainer">            
-            <img
-              src={LeftArrow}
-              alt="Left Arrow"
-              id="leftArrow"
-              onClick={functie}
-            /></div>
+            <div className="leftArrowContainer">
+              <img
+                src={LeftArrow}
+                alt="Left Arrow"
+                id="leftArrow"
+                onClick={functie}
+              />
+            </div>
 
-              <div className="right-half">
+            <div className="right-half">
               <div className="upper-text">
                 <cap-text> Începe bârfa </cap-text>
                 <h1 id="h1">Bine ai revenit</h1>
@@ -465,14 +489,15 @@ function ConnectPage() {
                   type="submit"
                   className="login-btn"
                   id="login-btn"
-                  onClick={() => setAction("Log in")}
+                  onClick={() =>
+                    setAction("Log in", handleHomePageButtonClick2)
+                  }
                 >
                   {" "}
                   Log in{" "}
                 </button>
               </form>
             </div>
-
           </div>
         </div>
       )}

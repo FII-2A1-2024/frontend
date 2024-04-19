@@ -4,6 +4,20 @@
   --accent-color: rgb(155, 25, 25);
 }
 
+.h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 130%;
+}
+.p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+  margin-bottom: 12px;
+  color: var(--body-color);
+}
+
 .right-img {
   background-color: #f7ecec;
   height: 100%;
@@ -58,4 +72,20 @@
 .signup-btn-white:active {
   background-color: rgb(79, 12, 12);
   transform: translateY(2px);
+}
+@media (min-width: 1024px) {
+  .hide {
+    display: none;
+  }
+  .hide2 {
+    display: block;
+  }
+}
+@media (max-width: 1024px) {
+  .hide {
+    display: block;
+  }
+  .hide2 {
+    display: none;
+  }
 }
