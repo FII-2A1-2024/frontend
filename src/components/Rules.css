@@ -1,0 +1,56 @@
+.rules_container {
+    height: auto;
+    color: black;
+    max-width: 90vw;
+    font-family: 'Josefin Sans';
+    margin-left: 2vw;
+    overflow-x: hidden !important;
+}
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 5vh;
+    text-align: justify;
+}
+
+.subtitle {
+    margin-left: 2vw;
+}
+
+.introduction {
+    margin-bottom: 5vh;
+    text-align: justify;
+    max-width: 90%;
+}
+
+.rules_list {
+    text-align: justify;
+    max-width: 90%;
+}
+
+.paragraph {
+    margin-bottom: 2vh;
+}
+
+.beginning {
+    margin-top: 5vh;
+}
+
+h1 {
+    font-size: 30px !important;
+    color: #333;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+h2 {
+    font-size: 24px !important;
+}
+
+h3 {
+    font-size: 20px !important;
+}
+

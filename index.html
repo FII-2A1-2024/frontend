@@ -1,13 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React project</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+import { Link } from "react-router-dom";
+import Navbar_superior from "../components/Navbar_superior";
+import Navbar from '../components/Navbar';
+import Post from '../components/post';
+
+function LandingPage() {
+    const name = 'Ugly Button';
+    return (<>      
+        <h1>{name}</h1>
+        <p>Pagina principala (main)</p>
+        <Navbar_superior />
+        <Navbar />
+        < Post userName='Samuel Jackson' title='The title goes here' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ' upVotesCount={124} commentsCount={12}/>
+        <div className="flex flex-col gap-1 temporary">
+            <Link to="/connect">Conectare</Link>
+            <Link to="/conversation">Conversatii</Link>
+            <Link to="/rules">Reguli</Link>
+        </div>  
+    </>);
+}
+
+export default LandingPage
