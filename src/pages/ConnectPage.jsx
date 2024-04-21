@@ -117,245 +117,247 @@ function ConnectPage() {
   return (
     <>
       {action === "Sign up" ? (
-        <form
-          onSubmit={Submit}
-          id="form"
-          className="h-screen signup-form flex flex-row justify-center"
-        >
-          <div className="sign my-auto hide">
-            <div className="flex flex-col items-center">
-              <div className="image max-sm:w-3/5">
-                <img src={Homepage} alt="Homepage Image" />
-              </div>
-              <div className="mt-5 w-[354px] max-sm:w-[300px]">
-                <h1 className="max-md:text-4xl h1">Ne bucurăm să te vedem</h1>
-                <p className="p py-3 text-gray-400">
-                  Bine ai venit pe platforma noastră! Pentru a continua, te
-                  rugăm să te loghezi sau să te înregistrezi
-                </p>
-              </div>
-              <div className="buttons w-[354px] max-sm:w-[300px]">
-                <button
-                  className="signup-btn max-md:mb-[5px]"
-                  id="btn-homepage"
-                  onClick={() => {
-                    setAction("Log in", handleHomePageButtonClick);
-                  }}
-                >
-                  Log in
-                </button>
-                <button
-                  className="signup-btn-white"
-                  id="btn-homepage"
-                  onClick={handleHomePageButtonClick2Prevent}
-                >
-                  Sign up
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 lg:pt-4">
-            <div className="text-left absolute left-5 top-5">
-              <button
-                className="lg:hidden inapoi"
-                onClick={handleHomePageButtonClick3}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="max-sm:w-4/5 w-[485px] h-[715px] m-auto">
-              <div>
-                <div className="flex flex-row">
-                  <cap-text>INREGISTREAZA-TE ACUM</cap-text>
+        <body className="overflow-x-hidden">
+          <form
+            onSubmit={Submit}
+            id="form"
+            className="min-h-screen signup-form flex flex-row justify-center"
+          >
+            <div className="sign my-auto hide">
+              <div className="flex flex-col items-center">
+                <div className="image max-sm:w-3/5">
+                  <img src={Homepage} alt="Homepage Image" />
                 </div>
-                <h1 className="h1 text-4xl font-semibold max-sm:text-3xl mt-5 text-left text-black">
-                  Invata SQL rapid si usor cu noi.
-                </h1>
-                <div className="mb-5 flex flex-row">
-                  <p
-                    className=" text-base font-normal pr-1 mt-2"
-                    htmlFor="signedAlready"
-                  >
-                    Ai deja un cont?
+                <div className="mt-5 w-[354px] max-sm:w-[300px]">
+                  <h1 className="max-md:text-4xl h1">Ne bucurăm să te vedem</h1>
+                  <p className="p py-3 text-gray-400">
+                    Bine ai venit pe platforma noastră! Pentru a continua, te
+                    rugăm să te loghezi sau să te înregistrezi
                   </p>
+                </div>
+                <div className="buttons w-[354px] max-sm:w-[300px]">
                   <button
-                    type="button"
-                    className=" text-lg font-medium text-red-800 font-bold mt-2"
-                    onClick={() => setAction("Log in")}
+                    className="signup-btn max-md:mb-[5px]"
+                    id="btn-homepage"
+                    onClick={() => {
+                      setAction("Log in", handleHomePageButtonClick);
+                    }}
                   >
                     Log in
                   </button>
-                </div>
-              </div>
-              <div className="h-[430px]">
-                <div className="h-[86]">
-                  <label
-                    className="font-bold block my-3  text-lg font-medium text-left text-black"
-                    htmlFor="username"
-                  >
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    id="username"
-                    className="py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-                    placeholder="student"
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                  <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="gray"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="h-[86]">
-                  <label
-                    className="font-bold block my-3   text-lg font-medium text-left text-black"
-                    htmlFor="email"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className=" py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-                    placeholder="numestudent@gmail.com"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="gray"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="h-[86]">
-                  <label
-                    className="font-bold block my-3  text-lg font-medium text-left text-black"
-                    htmlFor="password"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    className=" py-[14px] w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-                    placeholder="**********"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="gray"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="h-[86]">
-                  <label
-                    className="font-bold block my-3 text-lg font-medium text-left text-black"
-                    htmlFor="confirmPassword"
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    className={`py-3 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
-                      passwordMatchError ? "bg-red-300" : "border-gray-300"
-                    }`}
-                    placeholder="**********"
-                    onChange={(e) => setConfirmedPassword(e.target.value)}
-                    required
-                  />
-                  <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="gray"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="h-[86]">
                   <button
-                    type="submit"
-                    className="signup-btn mt-5"
-                    id="signup-btn"
-                    onClick={() => {
-                      setAction("Sign up");
-                    }}
+                    className="signup-btn-white"
+                    id="btn-homepage"
+                    onClick={handleHomePageButtonClick2Prevent}
                   >
                     Sign up
                   </button>
                 </div>
-                <div className="text-left font-normal text-sm text-gray-300">
-                  Prin apăsarea butonului Crează cont, sunteți de acord cu
-                  Politica de Confidențialitate. Pentru mai multe informații,
-                  click aici
+              </div>
+            </div>
+
+            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4">
+              <div className="text-left absolute left-5 top-5">
+                <button
+                  className="lg:hidden inapoi"
+                  onClick={handleHomePageButtonClick3}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="max-sm:w-4/5 w-[485px] h-[715px] m-auto">
+                <div>
+                  <div className="flex flex-row">
+                    <cap-text>INREGISTREAZA-TE ACUM</cap-text>
+                  </div>
+                  <h1 className="h1 text-4xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                    Invata SQL rapid si usor cu noi.
+                  </h1>
+                  <div className="mb-5 flex flex-row">
+                    <p
+                      className=" text-base font-normal pr-1 mt-2"
+                      htmlFor="signedAlready"
+                    >
+                      Ai deja un cont?
+                    </p>
+                    <button
+                      type="button"
+                      className=" text-lg font-medium text-red-800 font-bold mt-2"
+                      onClick={() => setAction("Log in")}
+                    >
+                      Log in
+                    </button>
+                  </div>
+                </div>
+                <div className="h-[430px]">
+                  <div className="h-[86]">
+                    <label
+                      className="font-bold block my-3  text-lg font-medium text-left text-black"
+                      htmlFor="username"
+                    >
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      id="username"
+                      className="py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
+                      placeholder="student"
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                    <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="gray"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="h-[86]">
+                    <label
+                      className="font-bold block my-3   text-lg font-medium text-left text-black"
+                      htmlFor="email"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      className=" py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
+                      placeholder="numestudent@gmail.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="gray"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="h-[86]">
+                    <label
+                      className="font-bold block my-3  text-lg font-medium text-left text-black"
+                      htmlFor="password"
+                    >
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      className=" py-[14px] w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
+                      placeholder="**********"
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="gray"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="h-[86]">
+                    <label
+                      className="font-bold block my-3 text-lg font-medium text-left text-black"
+                      htmlFor="confirmPassword"
+                    >
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      className={`py-3 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                        passwordMatchError ? "bg-red-300" : "border-gray-300"
+                      }`}
+                      placeholder="**********"
+                      onChange={(e) => setConfirmedPassword(e.target.value)}
+                      required
+                    />
+                    <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="gray"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="h-[86]">
+                    <button
+                      type="submit"
+                      className="signup-btn mt-5"
+                      id="signup-btn"
+                      onClick={() => {
+                        setAction("Sign up");
+                      }}
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                  <div className="text-left font-normal text-sm text-gray-300">
+                    Prin apăsarea butonului Crează cont, sunteți de acord cu
+                    Politica de Confidențialitate. Pentru mai multe informații,
+                    click aici
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="right-img lg:flex-1 max-lg:hidden flex  m-auto">
-            <img src={Signup} alt="img" />
-          </div>
-        </form>
+            <div className="right-img lg:flex-1 max-lg:hidden flex">
+              <img src={Signup} alt="img" />
+            </div>
+          </form>
+        </body>
       ) : (
         <div>
           <div className="container desktop-view">
