@@ -51,7 +51,7 @@
   transform: translateY(2px);
 }
 .signup-btn-white {
-  background-color: white;
+  background-color: #f0f4fd;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   border-radius: 8px;
@@ -87,4 +87,7 @@
   .hide2 {
     display: none;
   }
+}
+.fundal {
+  background-color: #f0f4fd;
 }

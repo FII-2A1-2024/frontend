@@ -123,40 +123,44 @@ function ConnectPage() {
             id="form"
             className="min-h-screen signup-form flex flex-row justify-center"
           >
-            <div className="sign my-auto hide">
-              <div className="flex flex-col items-center">
-                <div className="image max-sm:w-3/5">
-                  <img src={Homepage} alt="Homepage Image" />
-                </div>
-                <div className="mt-5 w-[354px] max-sm:w-[300px]">
-                  <h1 className="max-md:text-4xl h1">Ne bucurăm să te vedem</h1>
-                  <p className="p py-3 text-gray-400">
-                    Bine ai venit pe platforma noastră! Pentru a continua, te
-                    rugăm să te loghezi sau să te înregistrezi
-                  </p>
-                </div>
-                <div className="buttons w-[354px] max-sm:w-[300px]">
-                  <button
-                    className="signup-btn max-md:mb-[5px]"
-                    id="btn-homepage"
-                    onClick={() => {
-                      setAction("Log in", handleHomePageButtonClick);
-                    }}
-                  >
-                    Log in
-                  </button>
-                  <button
-                    className="signup-btn-white"
-                    id="btn-homepage"
-                    onClick={handleHomePageButtonClick2Prevent}
-                  >
-                    Sign up
-                  </button>
+            <div className="sign hide fundal w-full min-h-full">
+              <div className="flex flex-col items-center justify-center min-h-screen">
+                <div className="flex flex-col items-center h-full">
+                  <div className="image max-sm:w-3/5">
+                    <img src={Homepage} alt="Homepage Image" />
+                  </div>
+                  <div className="mt-5 w-[354px] max-sm:w-[300px]">
+                    <h1 className="max-md:text-4xl h1">
+                      Ne bucurăm să te vedem
+                    </h1>
+                    <p className="p py-3 text-gray-400">
+                      Bine ai venit pe platforma noastră! Pentru a continua, te
+                      rugăm să te loghezi sau să te înregistrezi
+                    </p>
+                  </div>
+                  <div className="buttons w-[354px] max-sm:w-[300px]">
+                    <button
+                      className="signup-btn mb-[5px]"
+                      id="btn-homepage"
+                      onClick={() => {
+                        setAction("Log in", handleHomePageButtonClick);
+                      }}
+                    >
+                      Log in
+                    </button>
+                    <button
+                      className="signup-btn-white"
+                      id="btn-homepage"
+                      onClick={handleHomePageButtonClick2Prevent}
+                    >
+                      Sign up
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4">
+            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4 px-5">
               <div className="text-left absolute left-5 top-5">
                 <button
                   className="lg:hidden inapoi"
@@ -353,7 +357,7 @@ function ConnectPage() {
                 </div>
               </div>
             </div>
-            <div className="right-img lg:flex-1 max-lg:hidden flex">
+            <div className="right-img lg:flex-[1.2] max-lg:hidden flex">
               <img src={Signup} alt="img" />
             </div>
           </form>
