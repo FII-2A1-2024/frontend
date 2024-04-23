@@ -5,7 +5,7 @@
     border-radius: 20px;
     padding: 5px 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: 0.3s ease;
   }
 
   .auth-buttons button:hover {
