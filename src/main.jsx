@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import ConversationsPage from './pages/ConversationsPage.jsx'
 import ConversationPage from './pages/ConversationPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import RulesPage from './pages/RulesPage.jsx'
 
 import './index.css'
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     path: '/conversation/:conversationId',
     element: <ConversationPage/>
     /* This needs to be a child if all convs will be on the left and current conv on the right */
+  },
+  {
+    path: '/rules',
+    element: <RulesPage/>
   }
 ]);
 
