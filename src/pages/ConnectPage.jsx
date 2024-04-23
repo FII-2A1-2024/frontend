@@ -105,9 +105,6 @@ function ConnectPage() {
   const functie = () => {
     document.querySelector(".small-login-page-view").style.display = "none";
     document.querySelector(".homepage-container").style.display = "flex";
-    //const divToMove = document.querySelector(".right-half");
-    // const destinationDiv = document.querySelector(".desktop-view");
-    // destinationDiv.appendChild(divToMove);
   };
 
   return (
@@ -382,7 +379,7 @@ function ConnectPage() {
                   <input
                     type="text"
                     name="username"
-                    placeholder="numestudent@gmail.com"
+                    placeholder="numestudent@uaic.ro"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
@@ -392,11 +389,16 @@ function ConnectPage() {
                   <input
                     type="password"
                     name="password"
-                    placeholder="***************"
+                    placeholder="***********"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </label>
+                <div id="forgetPassword">
+                  <a href="#" id="">
+                    Forgot password?
+                  </a>
+                </div>
                 <button
                   type="submit"
                   className="login-btn"
@@ -406,6 +408,7 @@ function ConnectPage() {
                   {" "}
                   Log in{" "}
                 </button>
+                
               </form>
             </div>
           </div>
@@ -487,6 +490,11 @@ function ConnectPage() {
                     required
                   />
                 </label>
+                <div id="forgetPassword">
+                  <a href="#" id="">
+                    Forgot password?
+                  </a>
+                </div>
                 <button
                   type="submit"
                   className="login-btn"

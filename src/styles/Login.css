@@ -265,13 +265,22 @@ cap-text {
 .tablet-view , .homepage-container{
     display: none;
 }
-
 .right-half1 {
     display: none;
 }
 
 .small-login-page-view {
     display: none;
+}
+
+#forgetPassword{
+    display: flex;
+    justify-content: end;
+    margin-top : -15px;
+    margin-bottom: 25px;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
 }
 
 @media screen and (min-width: 921px) {
