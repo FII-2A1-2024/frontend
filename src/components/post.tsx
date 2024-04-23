@@ -45,7 +45,7 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
       <div className="feedback-section">
 
         {/* Likes/DisLike Button */}
-        <div className="container" >
+        <div className="feedback-container" >
           <div className="btn" onClick={() => handleVote('upvote')}>
              <img src={upVotes} alt="nush" />
           </div>
@@ -57,7 +57,7 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
         </div>
 
         {/* Comments Button*/}
-        <div className="container">
+        <div className="feedback-container">
           <div className="btn">
           <img src={comments} alt="nush" className='SVG' />
           </div>
@@ -66,11 +66,10 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
         </div>
 
         {/* Shares Button */}
-        <div className="container">
+        <div className="feedback-container">
           <div className="btn">
           <img src={shareSVG} alt="nush" />
           </div>
-          
           <p>Share</p>
         </div>
       </div>

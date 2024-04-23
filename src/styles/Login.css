@@ -55,7 +55,7 @@ cap-text {
     text-transform: uppercase;
 }
 
-.container {
+.login-page-container {
     display: flex;
     height: 100vh;
     margin: 0;

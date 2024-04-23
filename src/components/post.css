@@ -62,7 +62,7 @@
 }
 
 
-.container{
+.feedback-container{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -80,12 +80,12 @@
   cursor : pointer;
 }
 
-.container p {
+.feedback-container p {
   font-size: small;
   font-weight: 500;
 }
 
-.container img {
+.feedback-container img {
   transform: translateY(1px); /* Adjust the value as needed */
 }
 

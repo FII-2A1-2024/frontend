@@ -352,7 +352,7 @@ function ConnectPage() {
         </body>
       ) : (
         <body className="overflow-x-hidden">
-          <div className="container desktop-view">
+          <div className="login-page-container desktop-view">
             <div className="left-half" id="gotoright">
               <img src={Login} alt="Login Image" className="login-img" />
             </div>
