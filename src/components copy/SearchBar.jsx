@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './SearchBar.css';
 
 function SearchBar() {
   // Starea care reține valoarea introdusă în bara de căutare
@@ -21,7 +20,7 @@ function SearchBar() {
         */}
         <input
           type="text"
-          placeholder="Search AOT"
+          placeholder="Search"
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
