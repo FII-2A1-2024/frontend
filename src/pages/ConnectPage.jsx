@@ -153,7 +153,7 @@ function ConnectPage() {
               </div>
             </div>
 
-            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4 px-5">
+            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4 px-5 pb-4">
               <div className="text-left absolute left-5 top-5">
                 <button
                   className="lg:hidden inapoi"
@@ -180,8 +180,8 @@ function ConnectPage() {
                   <div className="flex flex-row">
                     <cap-text>INREGISTREAZA-TE ACUM</cap-text>
                   </div>
-                  <h1 className="h1 text-4xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                    Invata SQL rapid si usor cu noi.
+                  <h1 className="h1 text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                    Alătură-te acum comunității noastre
                   </h1>
                   <div className="mb-5 flex flex-row">
                     <p
@@ -342,11 +342,6 @@ function ConnectPage() {
                       Sign up
                     </button>
                   </div>
-                  <div className="text-left font-normal text-sm text-gray-300">
-                    Prin apăsarea butonului Crează cont, sunteți de acord cu
-                    Politica de Confidențialitate. Pentru mai multe informații,
-                    click aici
-                  </div>
                 </div>
               </div>
             </div>
@@ -356,7 +351,7 @@ function ConnectPage() {
           </form>
         </body>
       ) : (
-        <div>
+        <body className="overflow-x-hidden">
           <div className="container desktop-view">
             <div className="left-half" id="gotoright">
               <img src={Login} alt="Login Image" className="login-img" />
@@ -408,7 +403,6 @@ function ConnectPage() {
                   {" "}
                   Log in{" "}
                 </button>
-                
               </form>
             </div>
           </div>
@@ -509,7 +503,7 @@ function ConnectPage() {
               </form>
             </div>
           </div>
-        </div>
+        </body>
       )}
     </>
   );
