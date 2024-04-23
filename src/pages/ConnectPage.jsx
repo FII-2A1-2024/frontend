@@ -153,7 +153,7 @@ function ConnectPage() {
               </div>
             </div>
 
-            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 md:pt-4 px-5 pb-4">
+            <div className="max-sm:w-screen hide2 my-auto main-content lg:flex-1 max-md:pt-16 px-5">
               <div className="text-left absolute left-5 top-5">
                 <button
                   className="lg:hidden inapoi"
@@ -175,7 +175,7 @@ function ConnectPage() {
                   </svg>
                 </button>
               </div>
-              <div className="max-sm:w-4/5 w-[485px] h-[715px] m-auto">
+              <div className="max-sm:w-4/5 w-[485px] h-[675px] m-auto">
                 <div>
                   <div className="flex flex-row">
                     <cap-text>INREGISTREAZA-TE ACUM</cap-text>
