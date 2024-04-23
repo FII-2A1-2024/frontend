@@ -82,10 +82,6 @@ function ConnectPage() {
   const handleHomePageButtonClick = () => {
     document.querySelector(".homepage-container").style.display = "none";
     document.querySelector(".small-login-page-view").style.display = "flex";
-    // const divToMove = document.querySelector(".right-half");
-    // const destinationDiv = document.querySelector(".small-login-page-view");
-    // destinationDiv.appendChild(divToMove);
-    console.log("Specific button clicked!");
   };
 
   const handleHomePageButtonClick2 = (event) => {
@@ -374,7 +370,7 @@ function ConnectPage() {
                 <cap-text> Începe bârfa </cap-text>
                 <h1 id="h1">Bine ai revenit</h1>
                 <p id="p">
-                  Încă nu ai un cont?
+                  Încă nu ai un cont? &nbsp;
                   <a href="#" id="link" onClick={() => setAction("Sign up")}>
                     Sign up
                   </a>
@@ -386,7 +382,7 @@ function ConnectPage() {
                   <input
                     type="text"
                     name="username"
-                    placeholder="Username"
+                    placeholder="numestudent@gmail.com"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
@@ -396,7 +392,7 @@ function ConnectPage() {
                   <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="***************"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
@@ -464,7 +460,7 @@ function ConnectPage() {
                 <cap-text> Începe bârfa </cap-text>
                 <h1 id="h1">Bine ai revenit</h1>
                 <p id="p">
-                  Încă nu ai un cont?
+                  Încă nu ai un cont? &nbsp;
                   <a href="#" id="link" onClick={() => setAction("Sign up")}>
                     Sign up
                   </a>

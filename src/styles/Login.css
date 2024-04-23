@@ -4,16 +4,9 @@
 :root {
     --accent-color: rgb(155, 25, 25);
     --background-color: rgba(251, 252, 255, 1);
-    --details-color: rgba(197, 210, 247, 0.2);
-    --details-on-blue: rgba(254, 255, 255, 1);
-    --heading-on-blue: rgba(252, 252, 253, 1);
-    --body-on-blue: rgba(224, 228, 234, 1);
-    --small-body-color: rgba(168, 179, 196, 1);
-    --slider-background: rgba(130, 146, 170, 1);
     --body-color: rgba(91, 107, 134, 1);
     --headings-color: rgba(21, 24, 30, 1);
-    --padding-inline-section: 20px;
-    --section-login-color: rgb(254, 212, 212);
+    --primary-dark-red : #F7ECEC;
 }
 
 /* Fonts */
@@ -38,6 +31,7 @@ h4,
     font-weight: 500;
     line-height: 130%;
     text-align: left;
+    font-weight: 600;
 }
 
 #p {
@@ -79,7 +73,7 @@ cap-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--section-login-color);
+    background-color: var(--primary-dark-red);
     background-position: center;
     border-radius: 0 20px 20px 0;
 }
@@ -122,7 +116,7 @@ cap-text {
     align-items: flex-start;
     margin-bottom: 28px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -133,14 +127,14 @@ cap-text {
 
 #loginForm {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 #loginForm input[type="text"], #loginForm input[type="password"] {
     width: 100%; 
     padding: 14px;
     padding-right: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-sizing: border-box;
@@ -156,6 +150,7 @@ cap-text {
 #link{
     color: var(--accent-color);
     text-decoration: none;
+    font-weight: 700;
 }
 
 #p a:hover {
@@ -217,7 +212,7 @@ cap-text {
 
 #btn-homepage{
     height: 47px;
-    max-width: 400px;
+    max-width: 350px;
 }
 
 
@@ -257,7 +252,8 @@ cap-text {
 }
 
 .signup-btn:hover {
-    background-color: var(--background-color);
+    background-color: var(--accent-color);
+ 
 }
 
 
@@ -307,6 +303,7 @@ cap-text {
         padding-left: 30px;
         padding-right: 30px;
         overflow-y: auto;
+        min-width: 300px;
     }
 
     .small-login-page-view .leftArrowContainer {
@@ -316,11 +313,8 @@ cap-text {
     }
     .small-login-page-view #leftArrow{
         cursor: pointer;
-        width: 50px;
-        padding-top: 15px;
-    }
-    .small-login-page-view #leftArrow:hover{
-        background-color: rgb(231, 224, 224) !important;
+        width: 30px;
+        padding-top: 30px;
     }
     
 .homepage-container {
@@ -329,10 +323,10 @@ cap-text {
     flex-direction: column ;
     align-items: center;
     padding: 5px;
-    height: 100vh;
+    min-height: 100vh;
     overflow-y: auto;
 
-    background-color: #f0f4fd;
+    background-color: var(--primary-dark-red);
 }
 
 .content-homepage{
@@ -347,19 +341,36 @@ cap-text {
     background-color: transparent;
     border: 1px solid var(--accent-color);
 }
+.homepage-container .signup-btn:hover {
+    color : white !important;
+}
+
+.homepage-container .login-btn {
+    margin-bottom: 10px;
+}
+.homepage-container .text-content {
+    max-width: 450px;
+}
+
 }
 
 @media (max-width: 480px) {
-    #h1 {font-size: 36px;}
+    #h1 {font-size: 30px;}
     #h5 {font-size: 16px;}
-    #p {font-size: 20px;}
+    #p {font-size: 16px;}
+
+    .text-content #h1 {
+        font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        font-size: 36px;
+    }
 
     .image img {
        width: 98%;
     }
 
     .content-homepage{
-        padding: 10%;
+        padding: 4%;
         padding-bottom: 20px;
         padding-top: 0;
         overflow-y: scroll;
@@ -370,12 +381,17 @@ cap-text {
         margin-right: 0;
     }
 
+
     .login-btn {
         margin-bottom: 5px;
     }
 
     .small-login-page-view .upper-text {
         gap: 5px;
+    }
+
+    .small-login-page-view{
+        min-width: 300px;
     }
 
 }
