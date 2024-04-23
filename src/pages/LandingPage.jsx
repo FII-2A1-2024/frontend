@@ -14,6 +14,7 @@ function LandingPage() {
         <div className="flex flex-col gap-1 temporary">
             <Link to="/connect">Conectare</Link>
             <Link to="/conversation">Conversatii</Link>
+            <Link to="/rules">Reguli</Link>
         </div>  
     </>);
 }
