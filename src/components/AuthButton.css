@@ -1,13 +1,24 @@
-.auth-buttons button {
-    background-color: #cccccc35;
-    color: rgba(255, 255, 255, 0.116);
-    border: none;
-    border-radius: 20px;
-    padding: 5px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+.auth-buttons {
+  position: absolute;
+  top: 10px;
+  background-color: #570000;
+  color: #FFFBFB;
+  border: 1px solid #850000;
+  border-radius: 100px;
+  padding: 10px 24px;
+  width: 95px;
+  height: 44px;
+  right: 20px; 
+  cursor: pointer;
+  gap: 10px;
+}
 
-  .auth-buttons button:hover {
-    background-color: #999;
+@media (max-width: 768px) {
+  .auth-buttons {
+    right: 10px;
   }
+}
+
+.auth-buttons link {
+  align-items: center;
+}

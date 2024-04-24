@@ -1,22 +1,28 @@
 :root{
-  --post-background: white;
-  --post-feedback-button-background: rgb(240, 240, 240);
+  --post-background: #FFFBFB;
+  --post-feedback-button-background: #F7ECEC;
 }
 
 .post {
-  border: 1px solid black;
+  border: 1px solid #E0C9C9;
   border-radius: 10px;
   max-width: 600px;
   padding: 20px;
+  background-color: #FFFBFB;
+  margin-top: 40px; 
+  margin-left: 5px;
+  margin-right: auto;
+
 }
 
 .three-dots {
   cursor: pointer;
   border-radius: 70%;
   padding: 5px;
+  color: #757575
 }
 .three-dots:hover {
-  background-color: rgb(223, 223, 223);
+  background-color: #757575;
 }
 
 .postHeader{
@@ -24,6 +30,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .userHeader{ 
@@ -32,6 +39,7 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 10px;
+  color: #000000;
 }
 
 .userProfileImage {
@@ -46,11 +54,13 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 2%;
+  color: #000000;
 }
 
 .postArticle p {
   text-align: left;
   font-size: 13px;
+  color: #000000;
 }
 
 .feedback-section {
@@ -68,22 +78,25 @@
   align-items: center;
   justify-content:space-between;
 
-  gap:7px;
-  margin-right: 10px;
+  gap: 7px;
+  margin-top: 20px; 
 
   padding: 6px;
   border-radius: 12px;
 
   width: fit-content;
-
+  color: #330000;
+  ;
   background-color: var(--post-feedback-button-background);
   cursor : pointer;
+  margin-right: 10px;
 }
 
 .feedback-container p {
   font-size: small;
   font-weight: 500;
 }
+
 
 .feedback-container img {
   transform: translateY(1px); /* Adjust the value as needed */
@@ -98,3 +111,24 @@
   color: #ffffff; 
 }
 
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: calc(100% - 20px);
+    
+  }
+  .container {
+    width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto; 
+  }
+
+  .userProfileImage {
+    width: 20px; 
+    height: 20px;
+  }
+
+  .postArticle p {
+    font-size: 12px; 
+  }
+}

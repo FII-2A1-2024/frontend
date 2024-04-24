@@ -1,28 +1,25 @@
-.navbar {
-    background-color: #333;
+  
+  .navbar-toggle {
+    display: none;
+  }
+
+  .navbar {
     color: #fff;
     margin-top: 65px;
+  
+
   }
   
   .navbar-container {
     position: sticky;
     padding: 10px;
     width: 302px;
-    height: 90vh;
+    height: 100vh;
     justify-content: space-between;
-    background-color: blue;
-    margin-left: 0px;
-    margin-top: -50px;
-  }
+    background-color: #FFFBFB;
+    border-right: 1px solid #E0C9C9;
+    margin-top: -65px;
   
-  .navbar-logo {
-    margin-top: 15px;
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .navbar-toggle {
-    display: none;
   }
   
   .categories {
@@ -30,6 +27,37 @@
     list-style: none;
     justify-content: space-between;
     flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .hot-topics {
+    width: 254px;
+    height: 48px;
+    top: 105px;
+    left: 24px;
+    border: 1px solid #330000;
+    background-color: #570000;
+    border-radius: 16px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hot-topics-icon {
+    width: 24px;
+    height: 24px;
+    color: #FFFBFB;
+  }
+  
+  .hot-topics-text {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 10px;
+    color: #FFFBFB;
   }
   
   .navbar-item {
@@ -39,35 +67,58 @@
   }
   
   .navbar-link {
-    color: #fff;
+    color: #3C0000;
     text-decoration: none;
   }
   
-  .close-btn{
+  .close-btn {
     position: absolute;
     top: 50%;
     right: 0;
-    /*background-color: #f00;*/
-    color: #fff;
+    color: #570000;
     padding: 5px 10px;
     cursor: pointer;
   }
-
-  .hidden-container{
+  
+  .hidden-container {
     position: sticky;
     padding: 10px;
     width: 20px;
     height: 90vh;
-    margin-top: -50px;
-    background-color:blue;
- }
-
- .administartiv{
-    margin-top: 30px;
-    margin-right: -10px;
-    margin-left: -10px;
+    margin-top: -65px;
+    background-color: #FFFBFB;
+  }
+  
+  .administrativ {
+    margin-top: 10px;
     display: flex;
     list-style: none;
     justify-content: space-between;
     flex-direction: column;
- }
+  }
+  
+  .break {
+    width: 254px;
+    height: 1px;
+    background-color: #330000;
+    margin: 10px 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navbar-container {
+      width: 100%; 
+      margin-left: 0;
+    }
+  
+    .hot-topics,
+    .categories,
+    .administrativ {
+      width: 100%; 
+      margin-left: 0; 
+    }
+  
+    .break {
+      width: 100%;
+    }
+  }
+  

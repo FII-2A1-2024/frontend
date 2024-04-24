@@ -16,11 +16,13 @@ function Navbar() {
         </div>
       ) : ( 
         <div className="navbar-container"> {/*daca nu a fost apasat pe buton*/}
-          <div className="navbar-logo">Meniu</div>
           <button className="close-btn" onClick={toggleMenu}>&lt;</button>
-          <ul className='hot_topics'> <li className="navbar-item">
-                <Link to='/' className="navbar-link"># Popular</Link>
-            </li></ul>{/*topicurile populare*/}
+          <ul className='hot-topics'> 
+            <li>
+              <Link to='/' className="hot-topics-link"># Popular</Link>
+            </li>
+          </ul>{/*topicurile populare*/}
+          <div className="break"></div>
           <ul className="categories"> 
             <li className="navbar-item">
                 <Link to='/' className="navbar-link"># Courses</Link>
@@ -41,6 +43,7 @@ function Navbar() {
                 <Link to='/' className="navbar-link"># Jobs</Link>
             </li>
         </ul>
+        <div className="break"></div>
         <ul className="administartiv"> {/*setari si alte butoane default*/}
             <li className="navbar-item">
                 <Link to='/' className="navbar-link">Rules</Link>
