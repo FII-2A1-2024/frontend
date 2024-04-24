@@ -1,8 +1,8 @@
-.content {
+.landing-content {
     display: flex;
   }
   
-  .main-content {
+  .landing-main-content {
     flex-grow: 1;
     margin-left: 20px;
   }
