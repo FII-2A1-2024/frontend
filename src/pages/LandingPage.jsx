@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar_superior from "../components/Navbar_superior";
 import Navbar from '../components/Navbar';
 import Post from '../components/post';
+import './LandingPage.css';
 
 function LandingPage() {
     return (
