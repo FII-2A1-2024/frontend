@@ -6,6 +6,7 @@
 body{
   width: 100vw;
   height: 100vh;
+  max-width: 100%;
 }
 
 /* Temporary css - Ciprian 5 apr
