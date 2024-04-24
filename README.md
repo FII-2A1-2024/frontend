@@ -11,5 +11,5 @@
 8. Click pe localhost-ul oferit
 9. Exceptând index.html, NU editați fișierele care nu sunt în vreun folder (.json și ce o mai fi). Doar .gitignore în caz de nevoie, însă e inițializat deja, ar trebui să nu fie nevoie editarea lui.
 
-## Rulare când aveți deja node_modules
+## Rulare când aveți deja node_modules.
 În terminal, în folder-ul cu proiectul, `npm run dev`.
