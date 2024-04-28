@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar_superior from "../components/Navbar_superior";
 import Navbar from '../components/Navbar';
-import Post from '../components/post';
+import Post from '../components/Post/post';
 import '../styles/LandingPage.css';
 
 function LandingPage() {

@@ -5,12 +5,12 @@ Descriere: Facut template-ul la post, trebuie de vazut cum punem hover si click 
 */
 import React, { useState } from 'react';
 import './post.css';
-import userProfile from '../media/icons/pikachu.jpg';
-import threeDots from '../media/icons/three-dots.svg';
-import shareSVG from '../media/icons/arrow-bar-up.svg';
-import downVotesSVG from '../media/icons/arrow-down.svg';
-import upVotes from '../media/icons/arrow-up.svg';
-import comments from '../media/icons/chat-left.svg';
+import userProfile from './icons/user_profile.svg';
+import threeDots from './icons/3-dots.svg';
+import shareSVG from './icons/share.svg';
+import downVotesSVG from './icons/shift_down.svg';
+import upVotesSVG from './icons/shift_up.svg';
+import commentsSVG from './icons/chat_bubble.svg';
 
 const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
   const [voted, setVoted] = useState(null); 
@@ -46,20 +46,20 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
 
         {/* Likes/DisLike Button */}
         <div className="feedback-container" >
-          <div className="btn" onClick={() => handleVote('upvote')}>
-             <img src={upVotes} alt="nush" />
+          <div className="btn btn-upvotes" onClick={() => handleVote('upvote')}>
+             <img src={upVotesSVG} alt="nush" />
           </div>
           <p>{upVotesCount + (voted === 'upvote' ? 1 : 0)}</p>
-          <div className="btn"  onClick={() => handleVote('downvote')}>
+          <div className="btn btn-downVotes"  onClick={() => handleVote('downvote')}>
           <img src={downVotesSVG} alt="nush"/>
           </div>
         
         </div>
 
         {/* Comments Button*/}
-        <div className="feedback-container">
+        <div className="feedback-container comm-btn">
           <div className="btn">
-          <img src={comments} alt="nush" className='SVG' />
+          <img src={commentsSVG} alt="nush" className='SVG' />
           </div>
           
           <p>{commentsCount}</p>
@@ -67,7 +67,7 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
 
         {/* Shares Button */}
         <div className="feedback-container">
-          <div className="btn">
+          <div className="btn btn-share">
           <img src={shareSVG} alt="nush" />
           </div>
           <p>Share</p>
