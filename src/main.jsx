@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import ConnectPage from './pages/ConnectPage.jsx'
 import LandingPage from './pages/LandingPage.jsx'
-import ConversationsPage from './pages/ConversationsPage.jsx'
-import ConversationPage from './pages/ConversationPage.jsx'
+import MessagesPage from './pages/MessagesPage.jsx'
+import MessagePage from './pages/MessagePage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import RulesPage from './pages/RulesPage.jsx'
 
@@ -26,13 +26,14 @@ const router = createBrowserRouter([
     element: <ConnectPage/>
   },
   {
-    path: '/conversation',
-    element: <ConversationsPage/>
-  },
-  {
-    path: '/conversation/:conversationId',
-    element: <ConversationPage/>
-    /* This needs to be a child if all convs will be on the left and current conv on the right */
+    path: '/messages',
+    element: <MessagesPage/>,
+    children: [
+      {
+        path: '/messages/:messageId',
+        element: <MessagePage/>
+      }
+    ]
   },
   {
     path: '/rules',

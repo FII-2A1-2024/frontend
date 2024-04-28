@@ -1,13 +1,13 @@
 import {useParams} from 'react-router-dom'
 
-function ConversationPage() {
+function MessagePage() {
     const params = useParams();
     console.log(params);
     return (
         <div className="font-bold text-4xl text-blue-700 uppercase tracking-wide">
-            Conversatie individuala, ID: {params.conversationId}
+            Conversatie individuala, ID: {params.messageId}
         </div>
     );
 }
 
-export default ConversationPage
+export default MessagePage
