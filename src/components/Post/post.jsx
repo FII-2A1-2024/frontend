@@ -12,6 +12,8 @@ import downVotesSVG from './icons/shift_down.svg';
 import upVotesSVG from './icons/shift_up.svg';
 import commentsSVG from './icons/chat_bubble.svg';
 
+import Comments from '../comments/Comments';
+
 const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
   const [voted, setVoted] = useState(null); 
 
@@ -23,6 +25,7 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
     }
   };
   return (
+    <div>
     <div className="post">
       <div className="postHeader">
 
@@ -73,6 +76,8 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
           <p>Share</p>
         </div>
       </div>
+    </div>
+    <Comments currentUserId = "1"/>
     </div>
   );
 };
