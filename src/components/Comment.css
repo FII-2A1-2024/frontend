@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --post-background: #FFFBFB;
+    --post-feedback-button-background: #F7ECEC;
+    --btn-more-otpions-hover: #dac5c5;
+    --btn-feedback-section-click: #af3e3e;
+}
+
+.comment_body {
+    position: absolute;
+    border: 1px solid rgb(204, 187, 187);
+    border-radius: 10px;
+    width: 801px;
+    height: 50px;
+    background-color: #FFFBFB;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: auto;
+    align-items: center;
+    box-sizing: border-box;
+    color: black;
+}
+
+.comment_content {
+    font-family: "Poppins", "sans-serif";
+    width: 801px;
+    height: 50px;
+    background-color: #FFFBFB;
+    border: 1px solid rgb(204, 187, 187);
+    border-radius: 10px;
+}
+
+.comment_button {
+    color: black;
+    margin-left: 45vw;
+}
+
+@media screen and (max-width: 768px) {
+    .comment_body {
+        width: auto;
+    }
+
+    .comment_content {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

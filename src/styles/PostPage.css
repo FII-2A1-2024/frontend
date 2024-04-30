@@ -1,0 +1,20 @@
+.post-content {
+    display: flex;
+  }
+  
+  .post-main-content {
+    flex-grow: 1;
+    margin-left: 20px;
+    max-width: 830px;
+  }
+  
+  @media (min-width: 1024px) {
+    .hide_news {
+        display: block;
+      }
+  }
+  @media (max-width: 1024px) {
+    .hide_news {
+      display: block;
+    }
+}
