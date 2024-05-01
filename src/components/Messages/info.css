@@ -1,0 +1,65 @@
+.info-container {
+    height: 100%;
+    width: 20vw;
+    /* left: 80vw; hard coded solution, but right: 0 or left: auto do not work */
+
+    right: 0;
+    border-left: 1px solid gray;
+    z-index: 2;
+    background-color: white;
+}
+
+.info-container > * {
+    width: 100%;
+}
+
+.info-top {
+    max-height: 20%;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-big {
+    width: 5rem;
+    height: 5rem;
+}
+
+.circle-small {
+    width: 2em;
+    height: 2em;
+}
+
+.interests-container {
+    display: flex;
+    overflow-y: auto;
+}
+
+.info-stats-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.info-stats-container > div:not(:last-of-type) {
+    border-right: 1px solid gray;
+}
+
+.info-stats {
+    padding: 0 1em;
+}
+
+.interests-title {
+    padding-bottom: 1em;
+    border-bottom: 1px solid gray;
+}
+
+.interest-item {
+    padding: .5em 1em;
+    border-radius: .5em;
+    border: 1px solid gray;
+}
