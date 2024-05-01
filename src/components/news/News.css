@@ -1,0 +1,35 @@
+.news_body {
+    /* News */
+    position: absolute;
+    width: 340px;
+    /*height: 407px;*/
+    left: 878px;
+    top: 456px;
+
+    /* Auto layout */
+    display: inline-block;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 24px;
+    box-sizing: border-box;
+
+    /* primary dark red/primary-200 */
+    border: 1px solid rgb(224, 201, 201);
+    border-radius: 20px;
+    margin-top: -352px;
+    margin-left: 280px;
+}
+
+.article-link {
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+    .news_body {
+        display: none;
+      }
+      .article-link{
+        display: none;
+      }
+  }
