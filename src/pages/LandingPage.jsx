@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar_superior from "../components/Navbar_superior";
 import Navbar from '../components/Navbar';
 import Post from '../components/Post/post';
-import News from '../components/News';
+import News from '../components/news/News';
 import '../styles/LandingPage.css';
 
 function LandingPage() {

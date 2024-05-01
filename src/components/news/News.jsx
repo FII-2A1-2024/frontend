@@ -23,7 +23,7 @@ function News() {
 
   return (
     <div className="news_body">
-      <h2>Latest News</h2>
+      <h2>News</h2>
       <ul>
         {articles.map((article, index) => (
           <li key={index}>
