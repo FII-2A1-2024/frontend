@@ -2,10 +2,14 @@
 User: Daniela Rusu
 Date: 9 aprilie 2024
 Descriere: Facut template-ul la post, trebuie de vazut cum punem hover si click  la butoanele de like/dislike, comment si share
+
+Patricia Onisor(01.05.2024)
+Am adaugat pop-ul pt 3Dots
 */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./post.css";
+import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
 import userProfile from "./icons/user_profile.svg";
 import threeDots from "./icons/3-dots.svg";
 import shareSVG from "./icons/share.svg";
@@ -13,10 +17,19 @@ import downVotesSVG from "./icons/shift_down.svg";
 import upVotesSVG from "./icons/shift_up.svg";
 import commentsSVG from "./icons/chat_bubble.svg";
 
-const Post = ({ id, userName, title, content, upVotesCount, commentsCount }) => {
+const Post = ({
+  id,
+  userName,
+  title,
+  content,
+  upVotesCount,
+  commentsCount,
+}) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
-
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  //const userId = getCurrentUserIdFromCookies();
+  
   const handleVote = (voteType) => {
     if (voted === voteType) {
       setVoted(null);
@@ -30,14 +43,25 @@ const Post = ({ id, userName, title, content, upVotesCount, commentsCount }) => 
   };
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:3000/posts?id=${id}`)
-      .then(response => {
-        console.log('Post deleted successfully');
-        onDelete(id);// Aici puteți face ceva, cum ar fi actualizarea listei de postări după ștergere
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete = () => {
+    axios
+      .delete(`http://localhost:3000/posts?id=${id}`)
+      .then((response) => {
+        console.log("Post deleted successfully");
+        onDelete(id);
       })
-      .catch(error => {
-        console.error('Error deleting post:', error);
+      .catch((error) => {
+        console.error("Error deleting post:", error);
       });
+
+    setShowDeleteConfirmation(false);
+  };
+
+  const handleCloseDeleteConfirmation = () => {
+    setShowDeleteConfirmation(false);
   };
 
   return (
@@ -48,7 +72,11 @@ const Post = ({ id, userName, title, content, upVotesCount, commentsCount }) => 
           <h2>{userName}</h2>
         </div>
 
-        <div className="three-dots" onMouseEnter={() => setMenuVisible(true)} onMouseLeave={() => setMenuVisible(false)}>
+        <div
+          className="three-dots"
+          onMouseEnter={() => setMenuVisible(true)}
+          onMouseLeave={() => setMenuVisible(false)}
+        >
           <button onClick={toggleMenu}>
             <img src={threeDots} alt="ThreeDots" />
           </button>
@@ -56,8 +84,34 @@ const Post = ({ id, userName, title, content, upVotesCount, commentsCount }) => 
             <div className="post_menu">
               <button className="post_menu_btn">Report</button>
               <button className="post_menu_btn">Edit</button>
-              <button className="post_menu_btn" onClick={handleDelete}>Delete</button>
+              <button className="post_menu_btn" onClick={handleDelete}>
+                Delete
+              </button>
             </div>
+          )}
+
+          {/* 
+          {userId === authorId && menuVisible && (
+            <div className="post_menu">
+              <button className="post_menu_btn">Edit</button>
+              <button className="post_menu_btn" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
+          )}
+          
+          {userId !== authorId && menuVisible && (
+            <div className="post_menu">
+              <button className="post_menu_btn">Report</button>
+          )}
+          */}
+
+          {/* Delete confirmation popup */}
+          {showDeleteConfirmation && (
+            <DeleteConfirmationPopup
+              onDelete={handleConfirmDelete}
+              onClose={handleCloseDeleteConfirmation}
+            />
           )}
         </div>
       </div>
