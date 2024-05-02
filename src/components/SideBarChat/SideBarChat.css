@@ -17,3 +17,15 @@
   .sidebar_message{
     margin-bottom: 7px;
   }
+
+  @media screen and (max-width: 1204px) {
+    .message_content {
+        display: none;
+      }
+      .sidebar_message{
+        display: none;
+      }
+      .user_Header{
+        display: none;
+      }
+  }

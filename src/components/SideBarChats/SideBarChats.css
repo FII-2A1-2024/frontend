@@ -37,7 +37,7 @@
     background-color: #888; /* culoarea thumb-ului atunci când este hover */
   }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1500px) {
     .side_bar_chats_body {
         display: none;
       }
