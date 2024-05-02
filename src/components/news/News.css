@@ -2,9 +2,9 @@
     /* News */
     position: absolute;
     width: 340px;
-    /*height: 407px;*/
+    height:auto;
     left: 878px;
-    top: 456px;
+    bottom: 0;
 
     /* Auto layout */
     display: inline-block;
