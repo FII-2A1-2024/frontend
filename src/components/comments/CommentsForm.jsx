@@ -3,7 +3,7 @@ import { useState } from "react";
 const CommentsForm  = ({
   handleSubmit, 
   submitLabel,
-  hasCancelButton= false,
+  hasCancelButton = false,
   initialText='',
   handleCancel
 }) => {

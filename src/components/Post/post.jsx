@@ -77,7 +77,8 @@ const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
         </div>
       </div>
     </div>
-    <Comments currentUserId = "1"/>
+   { /*<Comments currentUserId = "1"/>*/}
+   <Comments/>
     </div>
   );
 };
