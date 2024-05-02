@@ -1,0 +1,27 @@
+
+/* DeleteConfirmationPopup.css */
+.delete-confirmation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFBFB;
+    padding: 5px;
+    border: 1px solid #E0C9C9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Poppins", "sans-serif";
+    z-index: 9999;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .buttons button {
+    margin-right: 40px;
+    margin-left: 80px;
+  }
+  

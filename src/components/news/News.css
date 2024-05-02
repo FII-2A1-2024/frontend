@@ -2,9 +2,9 @@
     /* News */
     position: absolute;
     width: 340px;
-    /*height: 407px;*/
-    left: 878px;
-    top: 456px;
+    height:auto;
+    right: 25px;
+    bottom: 0;
 
     /* Auto layout */
     display: inline-block;
@@ -17,15 +17,13 @@
     /* primary dark red/primary-200 */
     border: 1px solid rgb(224, 201, 201);
     border-radius: 20px;
-    margin-top: -352px;
-    margin-left: 280px;
 }
 
 .article-link {
     color: black;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1500px) {
     .news_body {
         display: none;
       }
