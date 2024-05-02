@@ -3,7 +3,7 @@
     position: absolute;
     width: 340px;
     height:auto;
-    left: 878px;
+    right: 25px;
     bottom: 0;
 
     /* Auto layout */
@@ -17,8 +17,6 @@
     /* primary dark red/primary-200 */
     border: 1px solid rgb(224, 201, 201);
     border-radius: 20px;
-    margin-top: -352px;
-    margin-left: 280px;
 }
 
 .article-link {

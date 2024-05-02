@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Post from '../components/Post/post';
 import PostList from '../components/PostsList/PostList';
 import News from '../components/news/News';
+import SideBarChats from '../components/SideBarChats/SideBarChats'
 import '../styles/LandingPage.css';
 
 function LandingPage() {
@@ -11,7 +12,7 @@ function LandingPage() {
     <div className="landing-page">      
         <Navbar_superior />
         <div className="landing-content">
-            <Navbar /> <News />
+            <Navbar /><SideBarChats /> <News />
             <div className="landing-main-content">
                 <PostList />
             </div> 

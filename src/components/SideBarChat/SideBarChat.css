@@ -1,0 +1,19 @@
+.user_Header {
+    text-align: left;
+    margin-left: 10px;
+    height: 24px;
+  }
+  
+  .message_content
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 2%;
+    color: #000000;
+  }
+
+  .sidebar_message{
+    margin-bottom: 7px;
+  }
