@@ -31,3 +31,12 @@
         display: none;
       }
   }
+
+  @media screen and (max-height: 680px) {
+    .news_body {
+        display: none;
+      }
+      .article-link{
+        display: none;
+      }
+  }
