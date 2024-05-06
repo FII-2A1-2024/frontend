@@ -6,21 +6,6 @@ Descriere: Facut template-ul la post, trebuie de vazut cum punem hover si click 
 Patricia Onisor(01.05.2024)
 Am adaugat pop-ul pt 3Dots
 */
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import './post.css';
-import userProfile from './icons/user_profile.svg';
-import threeDots from './icons/3-dots.svg';
-import shareSVG from './icons/share.svg';
-import downVotesSVG from './icons/shift_down.svg';
-import upVotesSVG from './icons/shift_up.svg';
-import commentsSVG from './icons/chat_bubble.svg';
-
-import Comments from '../comments/Comments';
-
-const Post = ({ userName, title, content, upVotesCount, commentsCount }) => {
-  const [voted, setVoted] = useState(null); 
-=======
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./post.css";
@@ -31,7 +16,8 @@ import shareSVG from "./icons/share.svg";
 import downVotesSVG from "./icons/shift_down.svg";
 import upVotesSVG from "./icons/shift_up.svg";
 import commentsSVG from "./icons/chat_bubble.svg";
->>>>>>> 16f8f0a5b2364b0c0d18510b964f87439e9f487c
+
+import Comments from "../comments/Comments";
 
 const Post = ({
   id,
@@ -171,8 +157,6 @@ const Post = ({
         </div>
       </div>
     </div>
-   { /*<Comments currentUserId = "1"/>*/}
-   <Comments/>
     </div>
   );
 };

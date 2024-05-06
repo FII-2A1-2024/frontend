@@ -4,6 +4,8 @@ import UserPofile from './user_profile.svg';
 import upVotesSVG from '../Post/icons/shift_up.svg';
 import downVotesSVG from '../Post/icons/shift_down.svg';
 import commentsSVG from '../Post/icons/chat_bubble.svg';
+import commentHideButton from "./comment-hide-button.svg";
+import commentUnhideButton from "./comment-unhide-button.svg";
 import { useState } from 'react';
 
 const Comment  = ({
@@ -17,12 +19,14 @@ const Comment  = ({
         addComment,
         parentId}) => {
   const fiveMinutes = 300000;
-  const timePassed = new Date() - new Date(comment.detaliiComentariu.created_at) > fiveMinutes;
+ // const timePassed = new Date() - new Date(comment.detaliiComentariu.created_at) > fiveMinutes;
   const canReply = Boolean(currentUserId);
-  const canEdit = currentUserId === comment.detaliiComentariu.author_id && !timePassed;
-  const canDelete = currentUserId === comment.detaliiComentariu.author_id && !timePassed;
+  const canEdit = currentUserId === comment.detaliiComentariu.author_id;
+  const canDelete = currentUserId === comment.detaliiComentariu.author_id;
   const createdAt = new Date(comment.detaliiComentariu.created_at).toLocaleDateString();
   const upVotesCount = comment.detaliiComentariu.votes;
+
+  const [isHidden, setIsHidden] = useState(false);
 
   const isReplying = 
         activeComment && 
@@ -44,11 +48,21 @@ const Comment  = ({
           }
   };
 
+  const handleHideButton = () => {
+    setIsHidden(!isHidden);
+  }
+
   //const replyId = parentId ? parentId : comment.id;
   return (
     <div className="comment">
       <div className="comment-image-container">
         <img src={UserPofile} alt="profile" />
+        <div className="comment-hide-line">
+          <div className="hide-line"></div>
+        </div>
+        <div className="comment-hide-button" onClick={handleHideButton}>
+          <img src={isHidden ? commentUnhideButton : commentHideButton} alt="comment-hide-button" />
+        </div>
       </div>
       <div className="comment-right-part">
 
@@ -58,14 +72,18 @@ const Comment  = ({
           <div className="comment-createdAt">{createdAt}</div>
         </div>
         {!isEditing && <div className="comment-text">{comment.detaliiComentariu.description}</div>}
-        {/*isEditing && (
+        {isEditing && (
           <CommentsForm 
            submitLabel="Update" 
            hasCancelButton 
-           initialText={comment.description}
-           handleSubmit={(text) => updateComment(text, comment.id)} handleCancel={() => setActiveComment(null)}
+           initialText={comment.detaliiComentariu.description}
+           handleSubmit={(text) => {
+               const updateData = {description: text};
+               updateComment(comment.detaliiComentariu.id, updateData);
+           }
+          } handleCancel={() => setActiveComment(null)}
            />
-        )*/}
+        )}
         <div className="comment-actions">
 
         <div className="comment-reacts">
@@ -83,11 +101,12 @@ const Comment  = ({
             <img src={commentsSVG} alt="nush" className='SVG' />
           </div>
           <div>Reply</div>
+          
         </div>
 
-          {canEdit && <div className="comment-action" /*onClick={() => setActiveComment({id:comment.id, type:"editing"})}*/>Edit</div>}
-
-          {canDelete && <div className="comment-action" /*onClick={() => deleteComment(comment.id)}*/>Delete</div>}
+        
+        {canEdit && <div className="comment-reacts" onClick={() => setActiveComment({id:comment.detaliiComentariu.id, type:"editing"})}>Edit</div>}
+        {canDelete && <div className="comment-reacts" onClick={() => deleteComment(comment.detaliiComentariu.id)}>Delete</div>}
       </div>
       </div>
        { isReplying && (
@@ -98,15 +117,16 @@ const Comment  = ({
                 comment.detaliiComentariu.id, 
                 comment.detaliiComentariu.post_id, 
                 comment.detaliiComentariu.author_id
-              )}/>
+              )}
+              handleCancel={() => setActiveComment(null)}/>
         )}
-        {comment.subcomentarii && comment.subcomentarii.map(subComment => (
+        {!isHidden && comment.subcomentarii && comment.subcomentarii.map(subComment => (
           <Comment
             key={subComment.detaliiComentariu.id}
             comment={subComment}
             currentUserId={currentUserId}
-            //deleteComment={deleteComment}
-            //updateComment={updateComment}
+            deleteComment={deleteComment}
+            updateComment={updateComment}
             activeComment={activeComment}
             setActiveComment={setActiveComment}
             addComment={addComment} 
