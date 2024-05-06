@@ -19,8 +19,6 @@ import downVotesSVG from "./icons/shift_down.svg";
 import upVotesSVG from "./icons/shift_up.svg";
 import commentsSVG from "./icons/chat_bubble.svg";
 
-import Comments from "../comments/Comments";
-
 const Post = ({
   id,
   userName,
@@ -155,7 +153,6 @@ const Post = ({
   };
 
   return (
-    <div>
     <div className="post">
       <div className="postHeader">
         <div className="userHeader">
@@ -248,7 +245,7 @@ const Post = ({
         {/* Comments Button*/}
         <div className="feedback-container comm-btn">
           <div className="btn">
-            <Link to="/post" style={{ color: "black" }}>
+            <Link to={`/post/${id}`} style={{ color: "black" }}>
               <img src={commentsSVG} alt="Comments" className="SVG" />
             </Link>
           </div>
@@ -264,7 +261,6 @@ const Post = ({
           <p>Share</p>
         </div>
       </div>
-    </div>
     </div>
   );
 };
