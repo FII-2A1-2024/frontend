@@ -26,7 +26,7 @@ const Post = ({
   content,
   upVotesCount,
   commentsCount,
-  category,
+  category
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
