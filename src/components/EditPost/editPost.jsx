@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 import CategoryDropdown from "../CreatePost/CategoryDropdown";
 import axios from "axios";
-import close from "../../media/icons/close.svg"
+import close from "../../media/icons/close.svg";
 import "./editPost.css";
 
 const EditPopup = ({
   currentTitle,
   currentContent,
   currentCategory,
-  onSave, onCancel
+  onSave,
+  onCancel,
 }) => {
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
   const [editedCategory, setEditedCategory] = useState(currentCategory);
-  
+
   const handleSave = () => {
-    onSave(editedTitle, editedContent, "testing");
+    onSave(editedTitle, editedContent, editedCategory);
   };
 
   const handleClose = () => {
     onCancel();
+  };
+
+  const handleCategoryChange = (category) => {
+    setEditedCategory(category);
   };
 
   const handleContentChange = (event) => {
@@ -31,12 +36,16 @@ const EditPopup = ({
   };
 
   return (
-    <div className="popup">  <button className="X_btn" onClick={handleClose}><img src={close} alt="close" /></button>
+    <div className="popup">
+      {" "}
+      <button className="X_btn" onClick={handleClose}>
+        <img src={close} alt="close" />
+      </button>
       <div className="popup-inner">
         <h2 className="header_edit">Edit Post</h2>
-      
+
         <div>
-          <CategoryDropdown onSelectCategory={setEditedCategory}/>
+          <CategoryDropdown value={editedCategory} onSelectCategory={handleCategoryChange} />
         </div>
         <div>
           <label className="title" htmlFor="title">
@@ -46,7 +55,7 @@ const EditPopup = ({
             className="title_content"
             type="text"
             id="title"
-            value={currentTitle}
+            value={editedTitle}
             onChange={handleTitleChange}
           />
         </div>
@@ -57,7 +66,7 @@ const EditPopup = ({
           <textarea
             id="content"
             className="edit_content"
-            value={currentContent}
+            value={editedContent}
             onChange={handleContentChange}
           />
         </div>

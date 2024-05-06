@@ -99,44 +99,52 @@ const Post = ({
     setShowEditPopup(true);
   };
 
-  const handleSave = (editedTitle, editedContent, new_category) => {
-    updatePost(editedTitle, editedContent, new_category);
+  const handleSave = (editedTitle, editedContent, editedCategory) => {
+    updateTitle(editedTitle);
+    updateContent(editedContent);
+    updateCategory(editedCategory);
     window.location.reload();
   };
 
-  const updatePost = (new_title, new_content, new_category) => {
+  const updateTitle = (new_title) => {
     axios
       .put(`http://localhost:3000/posts`, {
         id: id,
-        title: new_title,
+        title: new_title
       })
       .then((response) => {
         console
-          .log("Post title updated successfully")
-          .put(`http://localhost:3000/posts`, {
-            id: id,
-            description: new_content,
-          })
-          .then((response) => {
-            console
-              .log("Post content updated successfully")
-              .put(`http://localhost:3000/posts`, {
-                id: id,
-                category: new_category,
-              })
-              .then((response) => {
-                console.log("Post category updated successfully");
-              })
-              .catch((error) => {
-                console.error("Error updating post category:", error);
-              });
-          })
-          .catch((error) => {
-            console.error("Error updating post content:", error);
-          });
-      })
+          .log("Post title updated successfully")})
       .catch((error) => {
         console.error("Error updating post title:", error);
+      });
+  };
+
+  const updateContent = (new_content) => {
+    axios
+      .put(`http://localhost:3000/posts`, {
+        id: id,
+        description: new_content
+      })
+      .then((response) => {
+        console
+          .log("Post content updated successfully")})
+      .catch((error) => {
+        console.error("Error updating post content:", error);
+      });
+  };
+
+  const updateCategory = (new_category) => {
+    axios
+      .put(`http://localhost:3000/posts`, {
+        id: id,
+        category: new_category
+      })
+      .then((response) => {
+        console
+          .log("Post category updated successfully")})
+      .catch((error) => {
+        console.error("Error updating post category:", error);
       });
   };
 
@@ -192,7 +200,7 @@ const Post = ({
           */}
 
           {showEditPopup && (
-            <EditPopup onSave={handleSave} onCancel={handleCancel} />
+            <EditPopup currentCategory={category} currentContent={content} currentTitle={title} onSave={handleSave} onCancel={handleCancel} />
           )}
 
           {/* Delete confirmation popup */}
