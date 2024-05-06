@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
-import EditPopup from "./editPost";
+import EditPopup from "../EditPost/editPost";
 import userProfile from "./icons/user_profile.svg";
 import threeDots from "./icons/3-dots.svg";
 import shareSVG from "./icons/share.svg";

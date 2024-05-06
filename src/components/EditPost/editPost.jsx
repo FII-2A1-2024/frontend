@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CategoryDropdown from "../CreatePost/CategoryDropdown";
 import axios from "axios";
 import close from "../../media/icons/close.svg"
 import "./editPost.css";
@@ -6,10 +7,12 @@ import "./editPost.css";
 const EditPopup = ({
   currentTitle,
   currentContent,
+  currentCategory,
   onSave, onCancel
 }) => {
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
+  const [editedCategory, setEditedCategory] = useState(currentCategory);
   
   const handleSave = () => {
     onSave(editedTitle, editedContent, "testing");
@@ -33,12 +36,7 @@ const EditPopup = ({
         <h2 className="header_edit">Edit Post</h2>
       
         <div>
-          {/*<label htmlFor="category">Category:</label>
-                    <select id="category" value={category} onChange={handleCategoryChange}>
-                        {categoryOptions.map((option, index) => (
-                            <option key={index} value={option}>{option}</option>
-                        ))}
-                    </select>*/}
+          <CategoryDropdown onSelectCategory={setEditedCategory}/>
         </div>
         <div>
           <label className="title" htmlFor="title">
