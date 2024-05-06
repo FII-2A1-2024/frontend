@@ -4,19 +4,48 @@ Date: 1 mai 2024
 Description: template-ul la create post
 */
 import React, { useState, useEffect } from "react";
+import CreatePostForm from "../CreatePost/CreatePostForm";
 import axios from "axios";
-import "./post.css";
-import userProfile from "./icons/user_profile.svg";
-import threeDots from "./icons/3-dots.svg";
-import shareSVG from "./icons/share.svg";
-import downVotesSVG from "./icons/shift_down.svg";
-import upVotesSVG from "./icons/shift_up.svg";
-import commentsSVG from "./icons/chat_bubble.svg";
+import "./CreatePost.css";
+import userProfile from "../Post/icons/user_profile.svg";
 
 const CreatePost = (userName) => {
- 
+  const [showCreatePostForm, setShowCreatePostForm] = useState(false);
+
+  const handleCreate = (title, content, category) => {
+    setShowCreatePostForm(true);
+    {
+      axios
+        .post(`http://localhost:3000/posts`, {
+          author_id: 5,
+          title: title,
+          description: content,
+          votes: 1,
+          category: category,
+        })
+        .then((response) => {
+          console.log("Post title updated successfully");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error updating post:", error);
+        });
+    }
+  };
+
+  const handleClose = () => {
+    setShowCreatePostForm(false);
+  };
+
   return (
-    <div>
+    <div className="createPost_frame">
+      <img src={userProfile} alt="Header" className="userProfileImage" />
+      <button className="createPost_redirect" onClick={handleCreate}>
+        Ask a question or write a new post
+      </button>
+      {showCreatePostForm && (
+        <CreatePostForm onCreate={handleCreate} onCancel={handleClose} />
+      )}
     </div>
   );
 };

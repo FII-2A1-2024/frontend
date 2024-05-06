@@ -7,7 +7,7 @@ import "./SideBarChats.css";
 function SideBarChats() {
   const [messages, getAll] = useState([]);
 
- /* useEffect(() => {
+{/*useEffect(() => {
     axios
       .get("http://localhost:3000/messages/all")
       .then((response) => {
@@ -16,7 +16,7 @@ function SideBarChats() {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-  }, []);*/
+  }, []);*/}
 
   return (
     <div className="side_bar_chats_body">
