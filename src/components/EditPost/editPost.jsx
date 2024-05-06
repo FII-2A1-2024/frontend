@@ -9,7 +9,7 @@ const EditPopup = ({
   currentContent,
   currentCategory,
   onSave,
-  onCancel,
+  onCancel
 }) => {
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
