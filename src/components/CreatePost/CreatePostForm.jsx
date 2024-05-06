@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import CategoryDropdown from "./CategoryDropdown";
 import close from "../../media/icons/close.svg";
 import "./CreatePostForm.css";
 
 const CreatePostForm = ({ onCreate, onCancel }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -18,8 +20,8 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
   const handleCreate = () => {
     console.log("Title: ", title);
     console.log("Content: ", content);
-    //console.log("Category: ", category);
-    onCreate(title, content, "category");
+    console.log("Category: ", category);
+    onCreate(title, content, category);
   };
 
   const handleClose = () => {
@@ -28,20 +30,15 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
 
   return (
     <div className="popup">
-      {" "}
       <button className="X_btn" onClick={handleClose}>
         <img src={close} alt="close" />
       </button>
       <div className="popup-inner">
         <h2 className="header_edit">Create New Post</h2>
-
         <div>
-          {/*<label htmlFor="category">Category:</label>
-                    <select id="category" value={category} onChange={handleCategoryChange}>
-                        {categoryOptions.map((option, index) => (
-                            <option key={index} value={option}>{option}</option>
-                        ))}
-                    </select>*/}
+        <CategoryDropdown 
+        onSelectCategory={setCategory}
+        />
         </div>
         <div>
           <label className="title" htmlFor="title">

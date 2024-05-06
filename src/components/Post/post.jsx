@@ -83,13 +83,12 @@ const Post = ({
       .delete(`http://localhost:3000/posts?id=${id}`)
       .then((response) => {
         console.log("Post deleted successfully");
-        onDelete(id);
+        window.location.reload();
+        setShowDeleteConfirmation(false);
       })
       .catch((error) => {
         console.error("Error deleting post:", error);
       });
-    window.location.reload();
-    setShowDeleteConfirmation(false);
   };
 
   const handleCloseDeleteConfirmation = () => {
@@ -139,30 +138,6 @@ const Post = ({
       .catch((error) => {
         console.error("Error updating post title:", error);
       });
-    {
-      /*axios
-      .put(`http://localhost:3000/posts`, {
-        id: postId,
-        description: new_content
-      })
-      .then((response) => {
-        console.log("Post updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating post:", error);
-      });
-      axios
-      .put(`http://localhost:3000/posts`, {
-        id: postId,
-        category: "edit_post"
-      })
-      .then((response) => {
-        console.log("Post updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating post:", error);
-      });*/
-    }
   };
 
   const handleCancel = () => {
