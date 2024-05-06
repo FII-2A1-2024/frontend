@@ -26,7 +26,7 @@ const Post = ({
   content,
   upVotesCount,
   commentsCount,
-  category
+  category,
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -110,11 +110,11 @@ const Post = ({
     axios
       .put(`http://localhost:3000/posts`, {
         id: id,
-        title: new_title
+        title: new_title,
       })
       .then((response) => {
-        console
-          .log("Post title updated successfully")})
+        console.log("Post title updated successfully");
+      })
       .catch((error) => {
         console.error("Error updating post title:", error);
       });
@@ -124,11 +124,11 @@ const Post = ({
     axios
       .put(`http://localhost:3000/posts`, {
         id: id,
-        description: new_content
+        description: new_content,
       })
       .then((response) => {
-        console
-          .log("Post content updated successfully")})
+        console.log("Post content updated successfully");
+      })
       .catch((error) => {
         console.error("Error updating post content:", error);
       });
@@ -138,11 +138,11 @@ const Post = ({
     axios
       .put(`http://localhost:3000/posts`, {
         id: id,
-        category: new_category
+        category: new_category,
       })
       .then((response) => {
-        console
-          .log("Post category updated successfully")})
+        console.log("Post category updated successfully");
+      })
       .catch((error) => {
         console.error("Error updating post category:", error);
       });
@@ -200,7 +200,13 @@ const Post = ({
           */}
 
           {showEditPopup && (
-            <EditPopup currentCategory={category} currentContent={content} currentTitle={title} onSave={handleSave} onCancel={handleCancel} />
+            <EditPopup
+              currentCategory={category}
+              currentContent={content}
+              currentTitle={title}
+              onSave={handleSave}
+              onCancel={handleCancel}
+            />
           )}
 
           {/* Delete confirmation popup */}
@@ -239,7 +245,9 @@ const Post = ({
         {/* Comments Button*/}
         <div className="feedback-container comm-btn">
           <div className="btn">
-            <img src={commentsSVG} alt="Comments" className="SVG" />
+            <Link to="/post" style={{ color: "black" }}>
+              <img src={commentsSVG} alt="Comments" className="SVG" />
+            </Link>
           </div>
 
           <p>{commentsCount}</p>
