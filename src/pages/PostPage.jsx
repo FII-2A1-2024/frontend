@@ -3,6 +3,7 @@ import Navbar_superior from "../components/Navbar_superior";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
+import Comments from "../components/comments/Comments";
 import "../styles/PostPage.css";
 
 function PostPage() {
@@ -19,6 +20,7 @@ function PostPage() {
             upVotesCount={124}
             commentsCount={12}
           /><News />
+          <Comments currentUserId={2} postId={31}/>
         </div>
       </div>
     </div>
