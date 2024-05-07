@@ -29,10 +29,10 @@ const Comments = ({ currentUserId, postId }) => {
     try {
       if (updateData.description !== undefined) {
         // Update the comment text
-        tconsole.log("Updatam textul comentului");
+        console.log("Updatam textul comentului");
         const response = await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
-          description: updaeData.description
+          description: updateData.description
         });
         console.log('Success:', response.data);
       } else if (updateData.votes !== undefined) {

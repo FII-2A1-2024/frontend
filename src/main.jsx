@@ -40,12 +40,13 @@ const router = createBrowserRouter([
     element: <RulesPage/>
   },
   {
-    path: '/post/:id',
+    path: '/post/:postId',
     element: <PostPage/>,
-    render: ({ match }) => {
+    /*render: ({ match }) => {
+      console.log("Match varibale", match);
       const { id } = match.params;
       return <PostPage postId={id} />;
-    }
+    }*/
   }
 ]);
 
