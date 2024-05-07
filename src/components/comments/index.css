@@ -21,10 +21,11 @@
   max-width: 801px;
 
   margin-top: 1rem;
+  margin-left: 5px;
   padding: 12px;
   border: 1px solid #CCBBBB;
   border-radius: 8px;
-
+  background-color: white;
   font-family: "Poppins", "sans-serif";
   font-size: 14px;
   font-weight: 400;
