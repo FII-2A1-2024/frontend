@@ -149,7 +149,7 @@
 
   padding: 8px;
   border-radius: 8px;
-
+  width: -moz-fit-content;
   width: fit-content;
   color: #330000;
   cursor : pointer;
@@ -161,6 +161,7 @@
   flex-direction: row;
   justify-content: center;
   border-radius: 100px;
+  width: -moz-fit-content;
   width: fit-content;
  
   position: relative;
