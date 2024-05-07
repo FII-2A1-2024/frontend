@@ -5,6 +5,7 @@ import Navbar_superior from "../components/Navbar_superior";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
+import SideBarChats from "../components/SideBarChats/SideBarChats"
 import Comments from "../components/comments/Comments";
 import "../styles/PostPage.css";
 
@@ -34,7 +35,7 @@ const PostPage = () => {
     <div className="post-page">
       <Navbar_superior />
       <div className="post-content">
-        <Navbar />
+        <Navbar /><SideBarChats />
         <div className="post-main-content">
           <>
              <Post
