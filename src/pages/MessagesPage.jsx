@@ -59,8 +59,8 @@ function MessagesPage() {
                         </nav>) : (
                         <button className="chat-list-toggle chat-list-expand" onClick={handleCloseChatList} title="Expand chat list">
                             {location.pathname === "/messages" ? (
-                                <img src="src/media/icons/message-expand.svg" alt="Expand" />) : (
-                                <img src="../src/media/icons/message-expand.svg" alt="Expand" />
+                                <img src="src/components/Messages/media/message-expand.svg" alt="Expand" />) : (
+                                <img src="../src/components/Messages/media/message-expand.svg" alt="Expand" />
                             )}
                         </button>
                     )}
