@@ -3,7 +3,6 @@ import axios from "axios";
 //import {getComments as getCommentsApi, createComment as createCommentApi, updateComment as updateCommentApi} from "./api";
 import Comment from './Comment';
 import { createComment as createCommentApi, getComments as getCommentsApi, deleteComment as deleteCommentApi } from "./api";
-import { comment } from "postcss";
 //import { deleteComment as deleteCommentApi } from "./api";
 import CommentsForm from './CommentsForm'
 

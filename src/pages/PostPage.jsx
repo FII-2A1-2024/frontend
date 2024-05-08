@@ -12,6 +12,7 @@ const PostPage = () => {
   const [post, setPost] = useState([]);
   const {postId} = useParams();
 
+  const postIdInt = parseInt(postId, 10);
   useEffect(() => {
     axios
       .get(`http://localhost:3000/posts?id=${postId}`)
@@ -51,7 +52,7 @@ const PostPage = () => {
           </>
 
           <News />
-          <Comments currentUserId={2} postId={postId} />
+          <Comments currentUserId={2} postId={postIdInt} />
         </div>
       </div>
     </div>
