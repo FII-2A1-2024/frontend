@@ -8,6 +8,7 @@ import MessagesPage from './pages/MessagesPage.jsx'
 import MessagePage from './pages/MessagePage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import RulesPage from './pages/RulesPage.jsx'
+import PostPage from './pages/PostPage.jsx'
 
 import './index.css'
 
@@ -38,6 +39,15 @@ const router = createBrowserRouter([
   {
     path: '/rules',
     element: <RulesPage/>
+  },
+  {
+    path: '/post/:postId',
+    element: <PostPage/>,
+    /*render: ({ match }) => {
+      console.log("Match varibale", match);
+      const { id } = match.params;
+      return <PostPage postId={id} />;
+    }*/
   }
 ]);
 

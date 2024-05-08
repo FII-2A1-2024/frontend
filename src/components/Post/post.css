@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --post-background: #FFFBFB;
+  --post-feedback-button-background: #F7ECEC;
+  --btn-more-options-hover: #dac5c5;
+  --btn-feedback-section-click: #af3e3e;
+}
+
+.post {
+  font-family: "Poppins", "sans-serif";
+  position: relative;
+  border: 1px solid #E0C9C9;
+  border-radius: 10px;
+  max-width: 801px;
+  padding: 20px;
+  background-color: #FFFBFB;
+  margin-top: 40px;
+  margin-left: 5px;
+  margin-right: auto;
+  margin-bottom: -25px;
+}
+
+.three-dots {
+  cursor: pointer;
+  border-radius: 70%;
+  padding: 3px;
+  color: #757575;
+  position: relative;
+  cursor: pointer;
+}
+
+.three-dots:hover {
+  background-color: var(--btn-more-options-hover);
+}
+
+.post_menu {
+  background-color: #FFFBFB;
+  padding: 5px;
+  border: 1px solid #E0C9C9;
+  border-radius: 10px;
+  font-family: "Poppins", "sans-serif";
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+.postHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  color: #000000;
+}
+
+.userHeader h2 {
+  font-weight: 500;
+  font-size: 16px !important;
+  line-height: 24px;
+  letter-spacing: -1%;
+}
+
+.userProfileImage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.postArticle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 2%;
+  color: #000000;
+}
+
+.postArticle p {
+  text-align: left;
+  font-size: 13px;
+  color: #000000;
+}
+
+.postArticle h1 {
+  font-weight: 500;
+  font-size: 18px !important;
+  line-height: 27px;
+  height: 27px;
+  letter-spacing: -1%;
+}
+
+.feedback-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-left: 2%;
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding: 8px;
+  border-radius: 8px;
+  width: -moz-fit-content;
+  width: fit-content;
+
+  color: #330000;
+  background-color: var(--post-feedback-button-background);
+  cursor: pointer;
+  height: 40px;
+}
+
+.feedback-container p {
+  font-size: 12px !important;
+  font-weight: 400;
+}
+
+
+/*.feedback-container img {
+  transform: translateY(1px); 
+}*/
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 100px;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+}
+
+
+.btn-upVotes:active img,
+.btn-share:active img {
+  transform: translate(0%, -20%) scale(1.000001);
+}
+
+.btn-downVotes:active img {
+  transform: translate(0%, 20%) scale(1.000001);
+}
+
+.comm-btn {
+  transition: background-color 0.29s ease;
+}
+
+.comm-btn:hover {
+  background-color: var(--btn-more-options-hover);
+}
+
+.comm-btn:active {
+  background-color: var(--btn-feedback-section-click);
+}
+
+/*.btn-upVotes img {
+  transition: transform 0.3s ease;
+}
+
+.btn-upVotes:hover  img{
+  transform: rotate(360deg);
+}*/
+
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: calc(100% - 20px);
+
+  }
+
+  .container {
+    width: calc(100% - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .userProfileImage {
+    width: 20px;
+    height: 20px;
+  }
+
+  .postArticle p {
+    font-size: 12px;
+  }
+}
