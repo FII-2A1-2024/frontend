@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
-import EditPopup from "../EditPost/editPost";
+import EditPopup from "./EditPost/editPost";
 import userProfile from "./icons/user_profile.svg";
 import threeDots from "./icons/3-dots.svg";
 import shareSVG from "./icons/share.svg";
@@ -32,7 +32,7 @@ const Post = ({
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); 
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
   //const userId = getCurrentUserIdFromCookies();

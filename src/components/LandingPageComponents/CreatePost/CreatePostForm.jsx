@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CategoryDropdown from "./CategoryDropdown";
-import close from "../../media/icons/close.svg";
+import close from "./media/close.svg";
 import "./CreatePostForm.css";
 
 const CreatePostForm = ({ onCreate, onCancel }) => {

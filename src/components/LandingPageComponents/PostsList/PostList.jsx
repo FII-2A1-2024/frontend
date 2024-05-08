@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import "../PostsList/PostList.css";
+import "./PostList.css";
 
-const Post = React.lazy(() => import("../Post/post"));
+const Post = React.lazy(() => import("../../Post/post"));
 
 const PostList = () => {
   const [posts, getAll] = useState([]);

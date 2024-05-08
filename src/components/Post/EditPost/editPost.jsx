@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CategoryDropdown from "../CreatePost/CategoryDropdown";
+import CategoryDropdown from "../../LandingPageComponents/CreatePost/CategoryDropdown";
 import axios from "axios";
-import close from "../../media/icons/close.svg";
+import close from "../icons/close.svg";
 import "./editPost.css";
 
 const EditPopup = ({
@@ -9,7 +9,7 @@ const EditPopup = ({
   currentContent,
   currentCategory,
   onSave,
-  onCancel
+  onCancel,
 }) => {
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
@@ -45,7 +45,10 @@ const EditPopup = ({
         <h2 className="header_edit">Edit Post</h2>
 
         <div>
-          <CategoryDropdown value={editedCategory} onSelectCategory={handleCategoryChange} />
+          <CategoryDropdown
+            value={editedCategory}
+            onSelectCategory={handleCategoryChange}
+          />
         </div>
         <div>
           <label className="title" htmlFor="title">

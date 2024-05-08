@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import CreatePostForm from "../CreatePost/CreatePostForm";
 import axios from "axios";
 import "./CreatePost.css";
-import userProfile from "../Post/icons/user_profile.svg";
+import userProfile from "./media/user_profile.svg";
 
 const CreatePost = (userName) => {
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);

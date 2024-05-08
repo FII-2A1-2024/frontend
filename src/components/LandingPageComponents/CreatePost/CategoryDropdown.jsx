@@ -1,10 +1,10 @@
 import React from "react";
-import Courses from "../../media/icons/book_2.svg"
+{/*import Courses from "../../media/icons/book_2.svg"
 import Professors from "../../media/icons/school.svg"
 import Students from "../../media/icons/boy.svg"
 import Unrelated from "../../media/icons/emoji_objects.svg"
 import Memes from "../../media/icons/celebration.svg"
-import Jobs from "../../media/icons/work.svg"
+import Jobs from "../../media/icons/work.svg"*/}
 import "./CategoryDropdown.css"
 
 const CategoryDropdown = ({ onSelectCategory }) => {
