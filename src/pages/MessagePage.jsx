@@ -17,6 +17,10 @@ function MessagePage() {
         setIsInfoButtonClicked(true);
     };
 
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
     useEffect(() => {
         function handleResize() {
             if (!isInfoButtonClicked) { // do the change only if the user hasn't interacted with the buttons
@@ -56,7 +60,10 @@ function MessagePage() {
                 <MessagesContainer />
 
                 <div className="form-container flex items-center gap-4 relative">
-                    <img src="../src/media/icons/attachment.svg" alt="Attach files" className='icon' />
+                    <label htmlFor="file-input">
+                            <img src="../src/media/icons/attachment.svg" alt="Attach files" className='icon' />
+                    </label>
+                    <input type="file" id="file-input" style={{ display: "none" }} onChange={handleFileChange} /> {/* Inputul de tip "file" ascuns, care va fi activat atunci când utilizatorul face clic pe iconita de atașare */}
                     <form action="" className='flex items-center flex-grow gap-2 relative'>
                         <input type="text" name="send-message" id="send-message" placeholder='Send a message...' />
                         <button type="submit">

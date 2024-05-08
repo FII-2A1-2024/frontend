@@ -19,6 +19,7 @@ const Message = ({ sender, content }) => {
         }
     }, [sender]);
 
+
     return (
         <div
             ref={messageRef}
