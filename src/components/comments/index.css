@@ -2,7 +2,7 @@
 
 :root{
   --comment-text-content : #543F3F;
-  --primary-dark-red : #850000;
+  --primary-dark-red-btn : #850000;
   --primary-dark-red-hover-btn : #a35050;
 }
 
@@ -21,13 +21,15 @@
   max-width: 801px;
 
   margin-top: 1rem;
+  margin-left: 5px;
   padding: 12px;
   border: 1px solid #CCBBBB;
   border-radius: 8px;
-
+  background-color: white;
   font-family: "Poppins", "sans-serif";
   font-size: 14px;
   font-weight: 400;
+  color: black;
 }
 
 .comment-form-buttons{
@@ -149,7 +151,7 @@
 
   padding: 8px;
   border-radius: 8px;
-
+  width: -moz-fit-content;
   width: fit-content;
   color: #330000;
   cursor : pointer;
@@ -161,6 +163,7 @@
   flex-direction: row;
   justify-content: center;
   border-radius: 100px;
+  width: -moz-fit-content;
   width: fit-content;
  
   position: relative;
