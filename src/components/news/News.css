@@ -3,8 +3,8 @@
     position: absolute;
     width: 340px;
     height:auto;
-    right: 25px;
-    bottom: 0;
+    right: 24px;
+    top: 420px;
 
     /* Auto layout */
     display: inline-block;
