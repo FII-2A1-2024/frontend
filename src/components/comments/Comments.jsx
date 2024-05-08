@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-//import {getComments as getCommentsApi, createComment as createCommentApi, updateComment as updateCommentApi} from "./api";
 import Comment from './Comment';
-import { createComment as createCommentApi, getComments as getCommentsApi, deleteComment as deleteCommentApi } from "./api";
-//import { deleteComment as deleteCommentApi } from "./api";
+import { createComment as createCommentApi, getComments as getCommentsApi } from "./api";
 import CommentsForm from './CommentsForm'
 
 const Comments = ({ currentUserId, postId }) => {
@@ -16,18 +14,15 @@ const Comments = ({ currentUserId, postId }) => {
     );
 
   const addComment = (text, parentId, post_id, author_id) => {
-    //console.log("AddComment", text, parentId);
     createCommentApi(text, parentId, post_id, author_id).then(newComment => {
       fetchComments(postId);
     });
-    //setBackendComments(backendComments);
     setActiveComment(null);
   };
 
   const updateComment = async (commentId, updateData) => {
     try {
       if (updateData.description !== undefined) {
-        // Update the comment text
         console.log("Updatam textul comentului");
         const response = await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
@@ -35,7 +30,7 @@ const Comments = ({ currentUserId, postId }) => {
         });
         console.log('Success:', response.data);
       } else if (updateData.votes !== undefined) {
-        // Update the number of votes
+        console.log("Updatam voturile comentului");
         const response = await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
           votes: updateData.votes
@@ -95,7 +90,7 @@ const Comments = ({ currentUserId, postId }) => {
 
   return (
     <div className="comments">
-      {<CommentsForm submitLabel="Comment" hasCancelButton handleSubmit={(text) => addComment(
+      {<CommentsForm submitLabel="Comment" hasCancelButton handleCancel={() => setActiveComment(null)} handleSubmit={(text) => addComment(
         text,
         -1,
         postId,

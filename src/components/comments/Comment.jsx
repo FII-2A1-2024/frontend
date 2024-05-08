@@ -10,17 +10,15 @@ import { useState } from 'react';
 
 const Comment  = ({
         comment, 
-        replies, 
         setActiveComment, 
         activeComment,
         updateComment,
         currentUserId, 
         deleteComment, 
         addComment,
-        parentId}) => {
+      }) => {
   const fiveMinutes = 300000;
  // const timePassed = new Date() - new Date(comment.detaliiComentariu.created_at) > fiveMinutes;
-  const canReply = Boolean(currentUserId);
   const canEdit = currentUserId === comment.detaliiComentariu.author_id;
   const canDelete = currentUserId === comment.detaliiComentariu.author_id;
   const createdAt = new Date(comment.detaliiComentariu.created_at).toLocaleDateString();
@@ -41,11 +39,19 @@ const Comment  = ({
   const [voted, setVoted] = useState(null); 
 
   const handleVote = (voteType) => {
-          if (voted === voteType) {
-            setVoted(null); 
-          } else {
-            setVoted(voteType); 
-          }
+    if (voteType === "upvote" && voted !== "upvote") {
+      setVoted("upvote");
+      const updateData = {votes: upVotesCount + 1};
+      updateComment(comment.detaliiComentariu.id, updateData);
+    } else if (voteType === "downvote" && voted !== "downvote") {
+      setVoted("downvote");
+      const updateData = {votes: upVotesCount - 1};
+      updateComment(comment.detaliiComentariu.id, updateData);
+    } else {
+      setVoted(null);
+      const updateData = {votes: upVotesCount};
+      updateComment(comment.detaliiComentariu.id, updateData);
+    }
   };
 
   const handleHideButton = () => {
@@ -90,7 +96,7 @@ const Comment  = ({
           <div className="comments-react-btn comments-react-btn-upvotes" onClick={() => handleVote('upvote')}>
              <img src={upVotesSVG} alt="upVote" />
           </div>
-          <p>{upVotesCount + (voted === 'upvote' ? 1 : 0)}</p>
+          <p>{upVotesCount}</p>
           <div className="comments-react-btn comments-react-btn-upvotes"  onClick={() => handleVote('downvote')}>
              <img src={downVotesSVG} alt="downVote"/>
           </div>

@@ -29,14 +29,14 @@ export const addComment = async(text, parentId, post_id, author_id) => {
   }
 }
 
-export const deleteComment = async(commentId) => {
+/*export const deleteComment = async(commentId) => {
   try {
     const response = await axios.delete(`http://localhost:3000/comments?id=${commentId}`);
     console.log('Success:', response.data);
   } catch (error) {
     console.error('Error:', error);
   }
-}
+}*/
 
 export const createComment = async (text,parentId, post_id, author_id ) => {
   await addComment(text, parentId, post_id, author_id);
