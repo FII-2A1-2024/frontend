@@ -1,10 +1,12 @@
 /**
 User: Daniela Rusu
-Date: 9 aprilie 2024
-Descriere: Facut template-ul la post, trebuie de vazut cum punem hover si click  la butoanele de like/dislike, comment si share
+Date: 9 april 2024
+Description: template-ul la post
 
 Patricia Onisor(01.05.2024)
-Am adaugat pop-ul pt 3Dots
+Description: pop-ul pt 3Dots, delete confirmation and delete function, edit popup and edit function. UpVotes and DownVote.
+
+TO DO: Share, Report, options regarding post depending on user_id.
 */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -30,25 +32,25 @@ const Post = ({
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  //const userId = getCurrentUserIdFromCookies();
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); 
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
+  //const userId = getCurrentUserIdFromCookies();
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
-      setVoted("upvote");
+      setVoted("upVote");
     } else if (initialVote < upVotesCount) {
-      setVoted("downvote");
+      setVoted("downVote");
     }
   }, []);
 
   const handleVote = (voteType) => {
-    if (voteType === "upvote" && voted !== "upvote") {
-      setVoted("upvote");
+    if (voteType === "upVote" && voted !== "upVote") {
+      setVoted("upVote");
       updateVoteCount(id, upVotesCount + 1);
-    } else if (voteType === "downvote" && voted !== "downvote") {
-      setVoted("downvote");
+    } else if (voteType === "downVote" && voted !== "downVote") {
+      setVoted("downVote");
       updateVoteCount(id, upVotesCount - 1);
     } else {
       setVoted(null);
@@ -227,16 +229,16 @@ const Post = ({
       <div className="feedback-section">
         {/* Likes/DisLike Button */}
         <div className="feedback-container">
-          <div className="btn btn-upvotes" onClick={() => handleVote("upvote")}>
+          <div className="btn btn-upVotes" onClick={() => handleVote("upVote")}>
             <img src={upVotesSVG} alt="upVotes" />
           </div>
           <p>
             {upVotesCount +
-              (voted === "upvote" ? 1 : voted === "downvote" ? -1 : 0)}
+              (voted === "upVote" ? 1 : voted === "downVote" ? -1 : 0)}
           </p>
           <div
             className="btn btn-downVotes"
-            onClick={() => handleVote("downvote")}
+            onClick={() => handleVote("downVote")}
           >
             <img src={downVotesSVG} alt="downVotes" />
           </div>

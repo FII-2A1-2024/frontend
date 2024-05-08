@@ -104,12 +104,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-
   gap: 1rem;
   margin-left: 2%;
-
 }
-
 
 .feedback-container {
   display: flex;
@@ -151,7 +148,7 @@
 }
 
 
-.btn-upvotes:active img,
+.btn-upVotes:active img,
 .btn-share:active img {
   transform: translate(0%, -20%) scale(1.000001);
 }
@@ -165,18 +162,18 @@
 }
 
 .comm-btn:hover {
-  background-color: var(--btn-more-otpions-hover);
+  background-color: var(--btn-more-options-hover);
 }
 
 .comm-btn:active {
   background-color: var(--btn-feedback-section-click);
 }
 
-/*.btn-upvotes img {
+/*.btn-upVotes img {
   transition: transform 0.3s ease;
 }
 
-.btn-upvotes:hover  img{
+.btn-upVotes:hover  img{
   transform: rotate(360deg);
 }*/
 
