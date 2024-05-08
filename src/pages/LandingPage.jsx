@@ -19,12 +19,6 @@ function LandingPage() {
           <PostList />
         </div>
       </div>
-      <Link to="/post" style={{ color: "black" }}>
-        <h1>Post</h1>
-      </Link>
-      <Link to="/conversation" style={{ color: "black" }}>
-        <h1>Conversation</h1>
-      </Link>
     </div>
   );
 }
