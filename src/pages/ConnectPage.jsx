@@ -30,18 +30,6 @@ function ConnectPage() {
     }
   }, [action]);
 
-  function verifEmail(email) {
-    var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    var regexUAIC = /^[a-zA-Z0-9._%+-]+@student\.uaic\.ro$/;
-
-    // verif email
-    if (regex.test(email) && regexUAIC.test(email)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   const Submit = async (event) => {
     event.preventDefault();
 
@@ -305,7 +293,7 @@ function ConnectPage() {
                     <input
                       type="email"
                       id="email"
-                      className={` back py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                      className={`back py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
                         emailError ? "bg-red-300" : "border-gray-300"
                       }`}
                       placeholder="nume.student@student.uaic.ro"

@@ -49,7 +49,7 @@ function Verify() {
         console.log(password);
       })
       .catch((err) => console.log(err));
-    //setAction("congrats");
+    setAction("congrats");
   };
   function getUrlParameter(name) {
     name = name.replace(/[\[\]]/g, "\\$&");

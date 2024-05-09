@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <ConnectPage />,
   },
   {
+    path: "/verify",
+    element: <Verify />,
+  },
+  {
     path: "/messages",
     element: <MessagesPage />,
     children: [
