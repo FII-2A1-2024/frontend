@@ -112,7 +112,7 @@ const Comment  = ({
 
         
         {canEdit && <div className="comment-reacts" onClick={() => setActiveComment({id:comment.detaliiComentariu.id, type:"editing"})}>Edit</div>}
-        {canDelete && <div className="comment-reacts" onClick={() => deleteComment(comment.detaliiComentariu.id)}>Delete</div>}
+        {canDelete && <div className="comment-reacts" onClick={() => deleteComment(comment.detaliiComentariu.id, comment.detaliiComentariu.parent_id)}>Delete</div>}
       </div>
       </div>
        { isReplying && (
