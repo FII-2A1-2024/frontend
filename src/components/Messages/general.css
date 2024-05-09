@@ -1,0 +1,70 @@
+:root {
+    --accent-color: #9a1919;
+    --background-color: rgba(251, 252, 255, 1);
+    --body-color: rgba(91, 107, 134, 1);
+    --headings-color: rgba(21, 24, 30, 1);
+    --primary-dark-red: #F7ECEC;
+
+    color: black !important;
+}
+
+
+/* Values for #info-toggle-btn-active are hard-coded
+Stupid method but works - will change only if a bug appears */
+
+/* All the elements have their parent written before due to specificity
+(this page is loaded before the rest of .css files containig these classes) */
+
+@media (max-width: 1200px) {
+    main .info-container {
+        width: 40vw;
+        position: absolute;
+    }
+
+    div #info-toggle-btn-active {
+        right: 35vw;
+    }
+
+    section .chat-list-container {
+        width: 25vw;
+    }
+}
+
+@media (max-width: 768px) {
+    main .info-container {
+        width: 60vw;
+    }
+
+    div #info-toggle-btn-active {
+        right: 50vw;
+    }
+
+    section .chat-list-container {
+        position: absolute;
+        width: 40vw;
+    }
+}
+
+@media (max-width: 500px) {
+    main .info-container {
+        width: 80vw;
+    }
+
+    div #info-toggle-btn-active {
+        right: 65vw;
+    }
+
+    div .header {
+        padding: 1em 1em 1em 3em;
+    }
+
+    section .chat-list-container {
+        width: 80vw;
+    }
+
+    div .form-container {
+        padding: 1em 0;
+        margin: 0;
+        width: 100%;
+    }
+}
