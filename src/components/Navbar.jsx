@@ -46,7 +46,7 @@ function Navbar() {
         <div className="break"></div>
         <ul className="administartiv"> {/*setari si alte butoane default*/}
             <li className="navbar-item">
-                <Link to='/' className="navbar-link">Rules</Link>
+                <Link to="/rules" className="navbar-link">Rules</Link>
             </li>
             <li className="navbar-item">
                 <Link to='/' className="navbar-link">Help</Link>

@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --post-background: #FFFBFB;
+    --post-feedback-button-background: #F7ECEC;
+    --btn-more-options-hover: #dac5c5;
+    --btn-feedback-section-click: #af3e3e;
+}
+
+.createPost_frame {
+
+    /* New post frame */
+    font-family: "Poppins", "sans-serif";
+    position: relative;
+    max-width: 801px;
+    height: 74px;
+    left: 40px;
+    top: 40px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    /* text-color/Stroke */
+    border: 1px solid #E0C9C9;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #FFFBFB;
+    margin-top: 0px;
+    margin-left: -35px;
+    margin-right: auto;
+    margin-bottom: 55px;
+}
+
+.createPost_redirect {
+    /* Frame 155 */
+    position: static;
+    width: 710px;
+    height: 41px;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 16px 10px 16px;
+    margin-left: 40px !important;
+    margin-top: -35px !important;
+
+    /* Inside Auto Layout */
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    margin: 0px 10px;
+    box-sizing: border-box;
+    /* text-color/Stroke */
+    border: 1px solid rgb(204, 187, 187);
+    border-radius: 100px;
+    background-color: white;
+    color: rgb(204, 187, 187);
+}
+
+.userProfileImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+  }

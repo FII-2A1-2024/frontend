@@ -7,9 +7,10 @@
 4. Intrați în aplicația și selectați folderul FrontEnd_IP. În cazul meu VSC.
 5. Intrați în terminal (în VSC e în Headerul de sus - Terminal - New Terminal) și scrieți:
 6. `npm i` SAU `npm install` (echivalente). Această comandă vă va genera un folder node_modules, fișiere necesare pentru rulare.
-7. `npm run dev` 
-8. Click pe localhost-ul oferit
-9. Exceptând index.html, NU editați fișierele care nu sunt în vreun folder (.json și ce o mai fi). Doar .gitignore în caz de nevoie, însă e inițializat deja, ar trebui să nu fie nevoie editarea lui.
+7. `npm install axios`
+8. `npm run dev` 
+9. Click pe localhost-ul oferit
+10. Exceptând index.html, NU editați fișierele care nu sunt în vreun folder (.json și ce o mai fi). Doar .gitignore în caz de nevoie, însă e inițializat deja, ar trebui să nu fie nevoie editarea lui.
 
 ## Rulare când aveți deja node_modules.
 În terminal, în folder-ul cu proiectul, `npm run dev`.
