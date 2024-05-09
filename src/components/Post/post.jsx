@@ -159,7 +159,7 @@ const Post = ({
       <div className="postHeader">
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
-          <Link to="/conversation" style={{ color: "black" }}>
+          <Link to="/messages" style={{ color: "black" }}>
             <h2>{userName}</h2>
           </Link>
         </div>
