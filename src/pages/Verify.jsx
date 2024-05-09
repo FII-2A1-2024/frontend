@@ -18,6 +18,8 @@ const resetLink = `http://${process.env.SERVER_IP}:5173/verify?token=${resetToke
 
 function Verify() {
   const [action, setAction] = useState("Verify");
+  const [password, setPassword] = useState("");
+
   const handleSubmit = (event) => {
     const token = getUrlParameter("token");
     event.preventDefault();
@@ -31,7 +33,7 @@ function Verify() {
     }
 
     const userData = {
-      password: "123",
+      password: password,
     };
     const data = JSON.stringify(userData);
 
@@ -44,9 +46,10 @@ function Verify() {
     })
       .then((result) => {
         console.log(result);
+        console.log(password);
       })
       .catch((err) => console.log(err));
-    setAction("congrats");
+    //setAction("congrats");
   };
   function getUrlParameter(name) {
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -56,7 +59,6 @@ function Verify() {
     if (!results[2]) return "";
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
-  const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
   const handleLogin = (event) => {
