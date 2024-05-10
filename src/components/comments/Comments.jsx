@@ -30,7 +30,7 @@ const Comments = ({ currentUserId, postId }) => {
           parent_id: parentId,
           author_id : author_id,
           description: text,
-          votes: 1,
+          votes: 0,
           created_at: new Date().toISOString()
         }
       };
@@ -67,7 +67,7 @@ const Comments = ({ currentUserId, postId }) => {
         console.log("Updatam textul comentului");
         updateExistentComment(updatedComments, commentId, updateData);
         setBackendComments(updatedComments);
-        const response = await axios.put(`http://localhost:3000/comments`, {
+        await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
           description: updateData.description
         }).then(() => {
@@ -78,7 +78,7 @@ const Comments = ({ currentUserId, postId }) => {
         console.log("Updatam voturile comentului");
         updateExistentComment(updatedComments, commentId, updateData);
         setBackendComments(updatedComments);
-        const response = await axios.put(`http://localhost:3000/comments`, {
+        await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
           votes: updateData.votes
         }).then(() => {
@@ -102,13 +102,18 @@ const Comments = ({ currentUserId, postId }) => {
       deleteExistentComment(updatedComments, parent_id, commentId);
       setBackendComments(updatedComments);
 
+
+
+      console.log("trying to delete comment from the database...");
+      console.log("trying to delete comment from the database...");
+      console.log("trying to delete comment from the database...");
+      console.log("trying to delete comment from the database...");
       await axios.delete(`http://localhost:3000/comments?id=${commentId}`);
       fetchComments(postId);
 
     } catch (error) {
       console.error('Error:', error);
     }
-
   };
 
   const addNewComment = (comments, parentId, newComment) => {
