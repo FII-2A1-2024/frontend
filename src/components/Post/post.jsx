@@ -253,7 +253,8 @@ const Post = ({
             </Link>
           </div>
 
-          <p>{commentsCount}</p>
+          <p>{ commentsCount !== null ? commentsCount : 0 }</p>
+
         </div>
 
         {/* Shares Button */}
