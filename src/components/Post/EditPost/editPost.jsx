@@ -80,9 +80,6 @@ const EditPopup = ({
           />
         </div>
         <div>
-          <label htmlFor="file" className="upload_label">
-            Upload File:
-          </label>
           <input
             type="file"
             id="file"
