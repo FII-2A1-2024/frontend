@@ -8,7 +8,24 @@ import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
 
-//7 aprilie, tudor, log in/sign up form
+/* ************************************
+1. npm install nodemon
+2. npm install multer
+
+3. in signUpService.js
+  adauga console.log(verificationLink); dupa verificationLink ca sa vezi linkul de verificare
+
+4. in resetPasswordController.js
+  schimba linia asta:
+
+  const resetLink = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/resetPass/verify?token=${resetToken}`;
+
+  in asta:
+
+  const resetLink = `http://${process.env.SERVER_IP}:5173/reset?token=${resetToken}`;
+
+  si adauga console.log(resetLink); dupa ea ca sa vezi linkul de resetare parola
+************************************ */
 
 function ConnectPage() {
   const name = "Ugly Button";
@@ -42,7 +59,7 @@ function ConnectPage() {
       }
 
       const userData = {
-        username: email,
+        email: email,
         password: password,
       };
 

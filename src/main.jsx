@@ -9,6 +9,7 @@ import MessagePage from "./pages/MessagePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import RulesPage from "./pages/RulesPage.jsx";
 import PostPage from "./pages/PostPage.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 
 import "./index.css";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/connect",
     element: <ConnectPage />,
+  },
+  {
+    path: "/reset",
+    element: <ResetPassword />,
   },
   {
     path: "/verify",
