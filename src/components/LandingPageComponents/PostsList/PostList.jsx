@@ -35,7 +35,7 @@ const PostList = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div>
+      <div className="container-posts-list">
         {posts.map((post) => (
           <Post
             key={post.id}

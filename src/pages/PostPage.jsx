@@ -36,7 +36,7 @@ const PostPage = () => {
     <div className="post-page">
       <Navbar_superior />
       <div className="post-content">
-        <Navbar /><SideBarChats />
+        <Navbar />
         <div className="post-main-content">
           <>
              <Post
@@ -53,9 +53,13 @@ const PostPage = () => {
             
           </>
 
-          <News />
+
+          
           <Comments currentUserId={2} postId={postIdInt} />
         </div>
+        <div className="side-containers">
+          <SideBarChats />  <News /> 
+          </div>
       </div>
     </div>
   );
