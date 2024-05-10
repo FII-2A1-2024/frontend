@@ -1,6 +1,6 @@
 .landing-content {
     display: flex;
-    
+    justify-content: space-between;
   }
   
   .landing-main-content {
@@ -13,6 +13,20 @@
     padding-top: 30px;
 
     width: 830px;
-  
+    flex: 0.5;
+  }
+
+  .side-containers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+
+    padding: 5px;
+    flex: 0.2;
+
+    gap : 1rem;
   }
   
+

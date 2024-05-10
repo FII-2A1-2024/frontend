@@ -1,6 +1,6 @@
 .news_body {
     /* News */
-    position: absolute;
+    /*position: absolute;*/
     width: 340px;
     height:auto;
     right: 24px;
@@ -32,11 +32,11 @@
       }
   }
 
-  @media screen and (max-height: 680px) {
+ /* @media screen and (max-height: 680px) {
     .news_body {
         display: none;
       }
       .article-link{
         display: none;
       }
-  }
+  }*/
