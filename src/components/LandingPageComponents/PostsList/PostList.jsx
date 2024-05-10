@@ -46,7 +46,7 @@ const PostList = () => {
             upVotesCount={post.votes}
             commentsCount={post.comments_count} // Count comments nu e în JSON
             category={post.category}
-            url={post.url}
+            file={post.file}
           />
         ))}
       </div>

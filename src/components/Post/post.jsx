@@ -29,7 +29,7 @@ const Post = ({
   upVotesCount,
   commentsCount,
   category,
-  url
+  file,
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -102,10 +102,16 @@ const Post = ({
     setShowEditPopup(true);
   };
 
-  const handleSave = (editedTitle, editedContent, editedCategory) => {
+  const handleSave = (
+    editedTitle,
+    editedContent,
+    editedCategory,
+    editedFile
+  ) => {
     updateTitle(editedTitle);
     updateContent(editedContent);
     updateCategory(editedCategory);
+    updateFile(editedFile);
     window.location.reload();
   };
 
@@ -148,6 +154,26 @@ const Post = ({
       })
       .catch((error) => {
         console.error("Error updating post category:", error);
+      });
+  };
+
+  const updateFile = (new_file) => {
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("file", new_file);
+
+    axios
+      .put(`http://localhost:3000/posts`, formData, {
+        headers:{
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((response) => {
+        console.log("Post file updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating post file:", error);
       });
   };
 
@@ -207,6 +233,7 @@ const Post = ({
               currentCategory={category}
               currentContent={content}
               currentTitle={title}
+              currentFile={file}
               onSave={handleSave}
               onCancel={handleCancel}
             />
@@ -253,8 +280,7 @@ const Post = ({
             </Link>
           </div>
 
-          <p>{ commentsCount !== null ? commentsCount : 0 }</p>
-
+          <p>{commentsCount !== null ? commentsCount : 0}</p>
         </div>
 
         {/* Shares Button */}

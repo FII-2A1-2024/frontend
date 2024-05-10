@@ -8,15 +8,17 @@ const EditPopup = ({
   currentTitle,
   currentContent,
   currentCategory,
+  currentFile,
   onSave,
   onCancel,
 }) => {
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
   const [editedCategory, setEditedCategory] = useState(currentCategory);
+  const [editedFile, setEditedFile] = useState(currentFile);
 
   const handleSave = () => {
-    onSave(editedTitle, editedContent, editedCategory);
+    onSave(editedTitle, editedContent, editedCategory, editedFile);
   };
 
   const handleClose = () => {
@@ -33,6 +35,10 @@ const EditPopup = ({
 
   const handleTitleChange = (event) => {
     setEditedTitle(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    setEditedFile(event.target.files[0]);
   };
 
   return (
@@ -71,6 +77,17 @@ const EditPopup = ({
             className="edit_content"
             value={editedContent}
             onChange={handleContentChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="file" className="upload_label">
+            Upload File:
+          </label>
+          <input
+            type="file"
+            id="file"
+            className="upload_input"
+            onChange={handleFileChange}
           />
         </div>
         <div className="buttons_section">
