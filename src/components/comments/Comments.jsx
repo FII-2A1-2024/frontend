@@ -67,28 +67,30 @@ const Comments = ({ currentUserId, postId }) => {
         console.log("Updatam textul comentului");
         updateExistentComment(updatedComments, commentId, updateData);
         setBackendComments(updatedComments);
+        setActiveComment(null);
         await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
           description: updateData.description
         }).then(() => {
-          fetchComments(postId);
+          //fetchComments(postId);
         });
         console.log('Success:');
       } else if (updateData.votes !== undefined) {
         console.log("Updatam voturile comentului");
         updateExistentComment(updatedComments, commentId, updateData);
         setBackendComments(updatedComments);
+        setActiveComment(null);
         await axios.put(`http://localhost:3000/comments`, {
           id: commentId,
           votes: updateData.votes
         }).then(() => {
-          fetchComments(postId);
+          //fetchComments(postId);
         });
         console.log('Success:');
       } else {
         throw new Error('Invalid update data');
       }
-      setActiveComment(null);
+      //setActiveComment(null);
       //fetchComments(postId);
     } catch (error) {
       console.error('Error updating comment:', error);
@@ -102,15 +104,8 @@ const Comments = ({ currentUserId, postId }) => {
       deleteExistentComment(updatedComments, parent_id, commentId);
       setBackendComments(updatedComments);
 
-
-
-      console.log("trying to delete comment from the database...");
-      console.log("trying to delete comment from the database...");
-      console.log("trying to delete comment from the database...");
-      console.log("trying to delete comment from the database...");
       await axios.delete(`http://localhost:3000/comments?id=${commentId}`);
       fetchComments(postId);
-
     } catch (error) {
       console.error('Error:', error);
     }
@@ -149,18 +144,33 @@ const Comments = ({ currentUserId, postId }) => {
   };
 
   const deleteExistentComment = (comments, parentId, commentId) => {
-    for (let comment of comments) {
-      if (comment.detaliiComentariu.id === parentId) {
-          if (comment.detaliiComentariu.id === commentId) {
-              // Remove the comment
-              comments.splice(comments.indexOf(comment), 1);
+    if (parentId === -1) {
+      console.log("Trying to delete base comment....");
+      for (let i = 0; i < comments.length; i++) {
+          if (comments[i].detaliiComentariu.id === commentId) {
+            
+              comments.splice(i, 1);
               return;
           }
-          if (comment.subcomentarii) {
-              // Recursively search for the comment in subcomments
-              deleteExistentComment(comment.subcomentarii, parentId, commentId);
+      }
+  } else {
+    for (let comment of comments) {
+      if (comment.detaliiComentariu.id === parentId) {
+        if (comment.subcomentarii) {
+
+          for (let i = 0; i < comment.subcomentarii.length; i++) {
+              if (comment.subcomentarii[i].detaliiComentariu.id === commentId) {
+                  comment.subcomentarii.splice(i, 1);
+                  return;
+              }
           }
       }
+    }
+      if (comment.subcomentarii) {
+       
+        deleteExistentComment(comment.subcomentarii, parentId, commentId);
+    }
+  }
   }
   };
 
