@@ -90,8 +90,6 @@ const Comments = ({ currentUserId, postId }) => {
       } else {
         throw new Error('Invalid update data');
       }
-      //setActiveComment(null);
-      //fetchComments(postId);
     } catch (error) {
       console.error('Error updating comment:', error);
     }

@@ -1,9 +1,18 @@
 .landing-content {
     display: flex;
+    
   }
   
   .landing-main-content {
-    flex-grow: 1;
-    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 30px;
+    padding-top: 30px;
+
+    width: 830px;
+  
   }
   

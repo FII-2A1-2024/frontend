@@ -9,16 +9,16 @@
 
 .post {
   font-family: "Poppins", "sans-serif";
-  position: relative;
+
   border: 1px solid #E0C9C9;
   border-radius: 10px;
-  max-width: 801px;
+  width: 801px;
   padding: 20px;
   background-color: #FFFBFB;
-  margin-top: 40px;
+  /*margin-top: 40px;
   margin-left: 5px;
   margin-right: auto;
-  margin-bottom: -25px;
+  margin-bottom: -25px;*/
 }
 
 .three-dots {
