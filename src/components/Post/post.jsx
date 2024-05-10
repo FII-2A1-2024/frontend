@@ -29,6 +29,7 @@ const Post = ({
   upVotesCount,
   commentsCount,
   category,
+  url
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);

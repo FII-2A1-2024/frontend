@@ -44,8 +44,9 @@ const PostList = () => {
             title={post.title}
             content={post.description}
             upVotesCount={post.votes}
-            commentsCount={0} // Count comments nu e în JSON
+            commentsCount={post.comments_count} // Count comments nu e în JSON
             category={post.category}
+            url={post.url}
           />
         ))}
       </div>

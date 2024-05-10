@@ -20,7 +20,7 @@ const CreatePost = (userName) => {
           author_id: 5,
           title: title,
           description: content,
-          votes: 1,
+          votes: 0,
           category: category,
         })
         .then((response) => {
