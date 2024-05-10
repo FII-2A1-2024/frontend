@@ -11,7 +11,7 @@ function AccountSettingsPage() {
                 <div className="flex justify-center items-center flex-grow text-2xl">
                     Account settings
                 </div>) : (
-                <Outlet /> // Individual message chat placeholder - see MessagePage.jsx
+                <Outlet /> 
             )}
         </div>
       </>
