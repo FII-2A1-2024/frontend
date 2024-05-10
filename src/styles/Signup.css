@@ -9,6 +9,12 @@
   font-weight: 600;
   line-height: 130%;
 }
+.h1-dc {
+  font-family: "Poppins", sans-serif;
+}
+.confirma-bg {
+  background-color: #fcf3f3;
+}
 .p {
   font-size: 16px;
   font-weight: 400;
@@ -22,6 +28,11 @@
   background-color: #f7ecec;
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
+}
+.left-img {
+  background-color: #fcf3f3;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
 }
 .signup-form {
   font-family: "Poppins", sans-serif;
@@ -90,4 +101,7 @@
 }
 .fundal {
   background-color: #fcf3f3;
+}
+.back {
+  background-color: #fafafa;
 }

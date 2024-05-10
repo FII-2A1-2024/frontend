@@ -3,19 +3,40 @@ import Login from "../media/icons/Ilustratie-log_in.svg";
 import Signup from "../media/icons/Signup.svg";
 import Homepage from "../media/icons/homepage.svg";
 import LeftArrow from "../media/icons/arrow-left.svg";
+import verify from "../media/icons/verify.svg";
+import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
 
-//7 aprilie, tudor, log in/sign up form
+/* ************************************
+1. npm install nodemon
+2. npm install multer
+
+3. in signUpService.js
+  adauga console.log(verificationLink); dupa verificationLink ca sa vezi linkul de verificare
+
+4. in resetPasswordController.js
+  schimba linia asta:
+
+  const resetLink = `http://${process.env.SERVER_IP}:${process.env.SERVER_PORT}/resetPass/verify?token=${resetToken}`;
+
+  in asta:
+
+  const resetLink = `http://${process.env.SERVER_IP}:5173/reset?token=${resetToken}`;
+
+  si adauga console.log(resetLink); dupa ea ca sa vezi linkul de resetare parola
+************************************ */
 
 function ConnectPage() {
   const name = "Ugly Button";
-  const [action, setAction] = useState("Sign Up");
+  const [action, setAction] = useState("Log in");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [passwordMatchError, setPasswordMatchError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
     if (action == "Log in") {
@@ -38,16 +59,14 @@ function ConnectPage() {
       }
 
       const userData = {
-        username: username,
         email: email,
         password: password,
-        confirmedPassword: confirmedPassword,
       };
 
       const data = JSON.stringify(userData);
 
-      //api de testare
-      fetch("https://reqres.in/api/users", {
+      //api signup
+      fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,16 +74,28 @@ function ConnectPage() {
         body: data,
       })
         .then((res) => res.json())
-        .then((result) => console.log(result))
+        .then((result) => {
+          console.log(result);
+          const resCode = result.resCode;
+          if (resCode === 200) {
+            setAction("Verify");
+            setEmailError(false);
+          } else {
+            setEmailError(true);
+          }
+        })
         .catch((err) => console.log(err));
+
       document.getElementById("form").reset();
     } else {
       const userData = {
-        username: username,
         email: email,
+        password: password,
       };
       const data = JSON.stringify(userData);
-      fetch("https://reqres.in/api/users", {
+
+      //api login
+      fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,10 +103,27 @@ function ConnectPage() {
         body: data,
       })
         .then((res) => res.json())
-        .then((result) => console.log(result))
+        .then((result) => {
+          console.log(result);
+          const resCode = result.resCode;
+          console.log(resCode);
+          if (resCode === 200) {
+            window.location.href = "/";
+          } else if (resCode === 458) {
+            setPasswordError(true);
+          } else if (resCode === 454) {
+            setEmailError(true);
+          } else if (resCode == 459) {
+            setEmailError(true);
+            alert("UNVERIFIED EMAIL");
+          }
+        })
         .catch((err) => console.log(err));
-      console.log("log in");
-      document.getElementById("loginForm").reset();
+
+      document.getElementById("loginForm1").reset();
+      document.getElementById("loginForm2").reset();
+      setEmailError(false);
+      setPasswordError(false);
     }
   };
 
@@ -107,14 +155,59 @@ function ConnectPage() {
     document.querySelector(".homepage-container").style.display = "flex";
   };
 
+  const handleForgot = (event) => {
+    event.preventDefault();
+    setAction("Forgot");
+    setPasswordError(false);
+    setEmailError(false);
+    setEmail();
+  };
+  const handleBack = (event) => {
+    event.preventDefault();
+    setEmailError(false);
+    setAction("Log in");
+  };
+  const handleChange = (event) => {
+    event.preventDefault();
+    //trimite email pentru recuperare parola
+
+    if (email != undefined) {
+      setEmailError(false);
+      const userData = {
+        email: email,
+      };
+      const data = JSON.stringify(userData);
+
+      fetch("http://localhost:3000/resetPass", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: data,
+      })
+        .then((result) => {
+          console.log(result);
+          if (result.status == 200) {
+            setAction("Verify2");
+          } else {
+            setEmailError(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setEmailError(true);
+    }
+  };
+
   return (
     <>
       {action === "Sign up" ? (
-        <body className="overflow-x-hidden">
+        <div className="overflow-x-hidden">
           <form
             onSubmit={Submit}
             id="form"
-            className="min-h-screen signup-form flex flex-row justify-center"
+            className="min-h-screen signup-form flex flex-row justify-center back"
+            autoComplete="on"
           >
             <div className="sign hide fundal w-full min-h-full">
               <div className="flex flex-col items-center justify-center min-h-screen">
@@ -134,7 +227,8 @@ function ConnectPage() {
                   <div className="buttons w-[354px] max-sm:w-[300px]">
                     <button
                       className="signup-btn mb-[5px]"
-                      id="btn-homepage"
+                      type="button"
+                      id="btn-homepage1"
                       onClick={() => {
                         setAction("Log in", handleHomePageButtonClick);
                       }}
@@ -143,7 +237,8 @@ function ConnectPage() {
                     </button>
                     <button
                       className="signup-btn-white"
-                      id="btn-homepage"
+                      id="btn-homepage2"
+                      type="button"
                       onClick={handleHomePageButtonClick2Prevent}
                     >
                       Sign up
@@ -158,6 +253,7 @@ function ConnectPage() {
                 <button
                   className="lg:hidden inapoi"
                   onClick={handleHomePageButtonClick3}
+                  type="button"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -175,14 +271,14 @@ function ConnectPage() {
                   </svg>
                 </button>
               </div>
-              <div className="max-sm:w-4/5 w-[485px] h-[675px] m-auto">
+              <div className="max-sm:w-4/5 w-[485px] h-[600px] m-auto">
                 <div>
                   <div className="flex flex-row">
                     <cap-text>INREGISTREAZA-TE ACUM</cap-text>
                   </div>
-                  <h1 className="h1 text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                  <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
                     Alătură-te acum comunității noastre
-                  </h1>
+                  </p>
                   <div className="mb-5 flex flex-row">
                     <p
                       className=" text-base font-normal pr-1 mt-2"
@@ -193,45 +289,17 @@ function ConnectPage() {
                     <button
                       type="button"
                       className=" text-lg font-medium text-red-800 font-bold mt-2"
-                      onClick={() => setAction("Log in")}
+                      onClick={() => {
+                        setAction("Log in");
+                        setPasswordMatchError(false);
+                        setEmailError(false);
+                      }}
                     >
                       Log in
                     </button>
                   </div>
                 </div>
                 <div className="h-[430px]">
-                  <div className="h-[86]">
-                    <label
-                      className="font-bold block my-3  text-lg font-medium text-left text-black"
-                      htmlFor="username"
-                    >
-                      Username
-                    </label>
-                    <input
-                      type="text"
-                      id="username"
-                      className="py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-                      placeholder="student"
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                    />
-                    <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="gray"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
                   <div className="h-[86]">
                     <label
                       className="font-bold block my-3   text-lg font-medium text-left text-black"
@@ -242,8 +310,10 @@ function ConnectPage() {
                     <input
                       type="email"
                       id="email"
-                      className=" py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
-                      placeholder="numestudent@gmail.com"
+                      className={`back py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                        emailError ? "bg-red-300" : "border-gray-300"
+                      }`}
+                      placeholder="nume.student@student.uaic.ro"
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
@@ -274,7 +344,7 @@ function ConnectPage() {
                     <input
                       type="password"
                       id="password"
-                      className=" py-[14px] w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
+                      className=" py-[14px] w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700  back"
                       placeholder="**********"
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -306,7 +376,7 @@ function ConnectPage() {
                     <input
                       type="password"
                       id="confirmPassword"
-                      className={`py-3 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                      className={` back py-3 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 ${
                         passwordMatchError ? "bg-red-300" : "border-gray-300"
                       }`}
                       placeholder="**********"
@@ -345,41 +415,60 @@ function ConnectPage() {
                 </div>
               </div>
             </div>
-            <div className="right-img lg:flex-[1.2] max-lg:hidden flex">
+            <div className="right-img lg:flex-[1.2] max-lg:hidden flex fundal">
               <img src={Signup} alt="img" />
             </div>
           </form>
-        </body>
-      ) : (
-        <body className="overflow-x-hidden">
-          <div className="login-page-container desktop-view">
-            <div className="left-half" id="gotoright">
+        </div>
+      ) : action === "Log in" ? (
+        <div className="overflow-x-hidden">
+          <div className="login-page-container desktop-view back">
+            <div className="left-half fundal" id="gotoright">
               <img src={Login} alt="Login Image" className="login-img" />
             </div>
 
             <div className="right-half">
               <div className="upper-text">
                 <cap-text> Începe bârfa </cap-text>
-                <h1 id="h1">Bine ai revenit</h1>
+                <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                  Bine ai revenit
+                </p>
                 <p id="p">
                   Încă nu ai un cont? &nbsp;
-                  <a href="#" id="link" onClick={() => setAction("Sign up")}>
+                  <a
+                    href="#"
+                    id="link"
+                    onClick={() => {
+                      setAction("Sign up");
+                      setEmailError(false);
+                      setPasswordError(false);
+                    }}
+                  >
                     Sign up
                   </a>
                 </p>
               </div>
-              <form onSubmit={Submit} action="#" method="post" id="loginForm">
+              <form
+                onSubmit={Submit}
+                action="#"
+                method="post"
+                id="loginForm1"
+                autoComplete="on"
+              >
                 <h5 id="h5">Email</h5>
                 <label className="usernameLabel">
                   <input
                     type="text"
                     name="username"
-                    placeholder="numestudent@uaic.ro"
+                    placeholder="nume.student@student.uaic.ro"
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className={`focus:outline-none focus:ring-2 focus:ring-red-700 back ${
+                      emailError ? "bg-red-300" : "border-gray-300"
+                    }`}
                   />
                 </label>
-                <h5 id="h5">Parola</h5>
+                <h5 id="h5">Password</h5>
                 <label className="passwordLabel">
                   <input
                     type="password"
@@ -387,17 +476,20 @@ function ConnectPage() {
                     placeholder="***********"
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className={`focus:outline-none focus:ring-2 focus:ring-red-700 back ${
+                      passwordError ? "bg-red-300" : "border-gray-300"
+                    }`}
                   />
                 </label>
                 <div id="forgetPassword">
-                  <a href="#" id="">
+                  <button type="button" onClick={handleForgot}>
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
                 <button
                   type="submit"
                   className="login-btn"
-                  id="login-btn"
+                  id="login-btn1"
                   onClick={() => setAction("Log in")}
                 >
                   {" "}
@@ -423,14 +515,16 @@ function ConnectPage() {
               <div className="buttons">
                 <button
                   className="login-btn"
-                  id="btn-homepage"
+                  id="btn-homepage1"
                   onClick={handleHomePageButtonClick}
+                  type="button"
                 >
                   Log in
                 </button>
                 <button
                   className="signup-btn"
-                  id="btn-homepage"
+                  id="btn-homepage2"
+                  type="button"
                   onClick={() => {
                     setAction("Sign up", handleHomePageButtonClick2);
                   }}
@@ -442,7 +536,7 @@ function ConnectPage() {
           </div>
 
           {/*---------- Tablet/Phone View Login Page --------------*/}
-          <div className="container small-login-page-view">
+          <div className="container small-login-page-view back min-h-screen mx-[0px] w-full">
             <div className="leftArrowContainer">
               <img
                 src={LeftArrow}
@@ -455,44 +549,66 @@ function ConnectPage() {
             <div className="right-half">
               <div className="upper-text">
                 <cap-text> Începe bârfa </cap-text>
-                <h1 id="h1">Bine ai revenit</h1>
+                <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                  Bine ai revenit
+                </p>
                 <p id="p">
                   Încă nu ai un cont? &nbsp;
-                  <a href="#" id="link" onClick={() => setAction("Sign up")}>
+                  <a
+                    href="#"
+                    id="link"
+                    onClick={() => {
+                      setAction("Sign up");
+                      setEmailError(false);
+                      setPasswordError(false);
+                    }}
+                  >
                     Sign up
                   </a>
                 </p>
               </div>
-              <form onSubmit={Submit} action="#" method="post" id="loginForm">
+              <form
+                onSubmit={Submit}
+                action="#"
+                method="post"
+                id="loginForm2"
+                autoComplete="on"
+              >
                 <h5 id="h5">Email</h5>
                 <label className="usernameLabel">
                   <input
                     type="text"
                     name="username"
-                    placeholder="Username"
+                    placeholder="nume.student@student.uaic.ro"
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className={`focus:outline-none focus:ring-2 focus:ring-red-700 back ${
+                      emailError ? "bg-red-300" : "border-gray-300"
+                    }`}
                   />
                 </label>
-                <h5 id="h5">Parola</h5>
+                <h5 id="h5">Password</h5>
                 <label className="passwordLabel">
                   <input
                     type="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder="***********"
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className={`back focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                      passwordError ? "bg-red-300" : "border-gray-300"
+                    }`}
                   />
                 </label>
                 <div id="forgetPassword">
-                  <a href="#" id="">
+                  <button type="button" onClick={handleForgot}>
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
                 <button
                   type="submit"
                   className="login-btn"
-                  id="login-btn"
+                  id="login-btn2"
                   onClick={() =>
                     setAction("Log in", handleHomePageButtonClick2)
                   }
@@ -503,7 +619,144 @@ function ConnectPage() {
               </form>
             </div>
           </div>
-        </body>
+        </div>
+      ) : action === "Verify" ? (
+        <div className="min-h-screen flex flex-col items-center confirma-bg">
+          <div className="py-[20px] my-auto">
+            <img
+              src={verify}
+              alt="image"
+              className="w-[645px] h-[481px] mb-[26px] max-lg:h-[416px] max-lg:w-[558px] max-sm:h-[223px] max-sm:w-[299px]"
+            />
+            <div className="w-[496px] h-[213px] mx-auto flex flex-col justify-between items-center max-lg:h-[192px] max-lg:w-[496px] max-sm:h-[197px] max-sm:w-[320px]">
+              <p className="h1-dc max-lg:text-4xl max-sm:text-2xl text-5xl font-semibold">
+                Confirma Email-ul
+              </p>
+              <p className="h1-dc max-lg:text-sm">
+                Buna! Ești aproape gata să folosești platforma noastră. Tot ce
+                ți a rămas este să urmezi linkul primit pe poșta ta electronică.
+              </p>
+              <button
+                type="button"
+                onClick={() => setAction("Log in")}
+                className="login-btn h1-dc w-[217px]"
+              >
+                Verifica email-ul
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : action === "Verify2" ? (
+        <div className="min-h-screen flex flex-col items-center confirma-bg">
+          <div className="py-[20px] my-auto">
+            <img
+              src={verify}
+              alt="image"
+              className="w-[645px] h-[481px] mb-[26px] max-lg:h-[416px] max-lg:w-[558px] max-sm:h-[223px] max-sm:w-[299px]"
+            />
+            <div className="w-[496px] h-[213px] mx-auto flex flex-col justify-between items-center max-lg:h-[192px] max-lg:w-[496px] max-sm:h-[197px] max-sm:w-[320px]">
+              <p className="h1-dc max-lg:text-4xl max-sm:text-2xl text-5xl font-semibold">
+                Verifica Email-ul
+              </p>
+              <p className="h1-dc max-lg:text-sm">
+                Buna! Ești aproape gata să resetezi parola. Tot ce ți a rămas
+                este să urmezi linkul primit pe poșta ta electronică.
+              </p>
+              <button
+                type="button"
+                onClick={() => setAction("Log in")}
+                className="login-btn h1-dc w-[217px]"
+              >
+                Verifica email-ul
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="overflow-x-hidden">
+          <form
+            onSubmit={Submit}
+            id="form"
+            className="min-h-screen signup-form flex flex-row justify-center  back"
+            autoComplete="on"
+          >
+            <div className="left-img lg:flex-[1.2] max-lg:hidden flex">
+              <img src={forgot} alt="img" />
+            </div>
+            <div className="max-sm:w-screen  my-auto main-content lg:flex-1 max-md:pt-16 px-5">
+              <div className="max-sm:w-4/5 w-[485px]  m-auto flex flex-col justify-center">
+                <div>
+                  <p className="text-4xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
+                    Ai uitat parola?
+                  </p>
+                  <div className="mb-5 flex flex-row">
+                    <p className=" text-base font-normal pr-1 mt-4 text-left">
+                      Te rugam sa introduci mai jos mail-ul cu care te ai
+                      conectat pentru a putea recupera parola.
+                    </p>
+                  </div>
+                </div>
+                <div className="">
+                  <label
+                    className="font-bold block my-3  text-lg font-medium text-left text-black"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className={`py-4 w-full px-4 py-[14px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700  back ${
+                      emailError ? "bg-red-300" : "border-gray-300"
+                    }`}
+                    placeholder="nume.student@student.uaic.ro"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <div className="flex flex-row justify-end -mt-10 mb-7 mr-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="gray"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="">
+                    <button
+                      type="submit"
+                      className="signup-btn mt-5"
+                      id="signup-btn"
+                      onClick={handleChange}
+                    >
+                      Reseteaza parola
+                    </button>
+                    <div className="mb-5 flex flex-row justify-center">
+                      <p className=" text-base font-normal pr-1 text-left">
+                        Intoarce-te la pagina de<> </>
+                        <button
+                          type="button"
+                          onClick={handleBack}
+                          className="text-red-700 font-semibold"
+                        >
+                          Log in
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       )}
     </>
   );
