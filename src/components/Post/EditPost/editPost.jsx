@@ -15,7 +15,7 @@ const EditPopup = ({
   const [editedTitle, setEditedTitle] = useState(currentTitle);
   const [editedContent, setEditedContent] = useState(currentContent);
   const [editedCategory, setEditedCategory] = useState(currentCategory);
-  const [editedFile, setEditedFile] = useState(currentFile);
+  const [editedFile, setEditedFile] = useState(null);
 
   const handleSave = () => {
     onSave(editedTitle, editedContent, editedCategory, editedFile);
