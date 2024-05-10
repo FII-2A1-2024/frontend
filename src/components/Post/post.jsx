@@ -252,9 +252,15 @@ const Post = ({
         <h1>{title}</h1>
         <p>{content} </p>
         {file ? (
-          <a href={file} target="_blank" rel="noopener noreferrer">
-            View file
-          </a>
+          file.endsWith(".jpeg") ||
+          file.endsWith(".jpg") ||
+          file.endsWith(".png") ? (
+            <img src={file} alt="Image" />
+          ) : (
+            <a href={file} target="_blank" rel="noopener noreferrer">
+              View file
+            </a>
+          )
         ) : (
           <p></p>
         )}
