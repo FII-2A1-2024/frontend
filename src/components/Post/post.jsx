@@ -158,16 +158,15 @@ const Post = ({
   };
 
   const updateFile = (new_file) => {
-
     const formData = new FormData();
     formData.append("id", id);
     formData.append("file", new_file);
 
     axios
       .put(`http://localhost:3000/posts`, formData, {
-        headers:{
-          'Content-Type': 'multipart/form-data'
-        }
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then((response) => {
         console.log("Post file updated successfully");
@@ -252,6 +251,13 @@ const Post = ({
       <div className="postArticle">
         <h1>{title}</h1>
         <p>{content} </p>
+        {file ? (
+          <a href={file} target="_blank" rel="noopener noreferrer">
+            View file
+          </a>
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div className="feedback-section">

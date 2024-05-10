@@ -14,7 +14,6 @@ const PostList = () => {
     axios
       .delete(`http://localhost:3000/posts?id=${postId}`)
       .then((response) => {
-        // Actualizare listă de postări după ștergere
         setPosts(posts.filter((post) => post.id !== postId));
       })
       .catch((error) => {
@@ -46,7 +45,7 @@ const PostList = () => {
             upVotesCount={post.votes}
             commentsCount={post.comments_count}
             category={post.category}
-            file={post.file}
+            file={post.url}
           />
         ))}
       </div>
