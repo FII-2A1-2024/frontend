@@ -222,4 +222,15 @@
     bottom: 60px;
     left: 20px;
 }
-  
+
+  .upload_delete{
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+  }
+
+  .upload_input_change{
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+  }

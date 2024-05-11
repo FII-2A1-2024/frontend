@@ -225,44 +225,6 @@ const Post = ({
           </button>
 
           {message && <p>{message}</p>}
-         {/*  
-          {menuVisible && (
-            <div className="post_menu">
-              <button className="post_menu_btn">
-                <img
-                  src={flagSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                Report
-              </button>
-              <button className="post_menu_btn" onClick={handleFollow}>
-                <img
-                  src={frameSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                Save
-              </button>
-              <button className="post_menu_btn" onClick={handleEdit}>
-                <img
-                  src={editSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />
-                Edit
-              </button>
-              <button className="post_menu_btn" onClick={handleDelete}>
-                <img
-                  src={blockSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                Delete
-              </button>
-            </div>
-          )}
- */}
           
           {userId === authorId && menuVisible && (
             <div className="post_menu">
@@ -288,6 +250,7 @@ const Post = ({
 
           {showEditPopup && (
             <EditPopup
+              id={id}
               currentCategory={category}
               currentContent={content}
               currentTitle={title}

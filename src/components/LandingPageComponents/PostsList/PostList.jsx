@@ -9,7 +9,6 @@ const PostList = () => {
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Funcție pentru ștergere
   const handleDelete = (postId) => {
     axios
       .delete(`http://localhost:3000/posts?id=${postId}`)

@@ -5,6 +5,7 @@ import close from "../icons/close.svg";
 import "./editPost.css";
 
 const EditPopup = ({
+  id,
   currentTitle,
   currentContent,
   currentCategory,
@@ -16,6 +17,7 @@ const EditPopup = ({
   const [editedContent, setEditedContent] = useState(currentContent);
   const [editedCategory, setEditedCategory] = useState(currentCategory);
   const [editedFile, setEditedFile] = useState(null);
+  const [fileChange, setFileChange] = useState(false);
 
   const handleSave = () => {
     onSave(editedTitle, editedContent, editedCategory, editedFile);
@@ -37,8 +39,26 @@ const EditPopup = ({
     setEditedTitle(event.target.value);
   };
 
-  const handleFileChange = (event) => {
+  const handleFileAddition = (event) => {
     setEditedFile(event.target.files[0]);
+  };
+
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      setEditedFile(event.target.files[0]);
+      setFileChange(true);
+    }
+  };
+
+  const handleFileDelete = (event) => {
+    axios
+      .delete(`http://localhost:3000/posts/file?id=${id}`)
+      .then((response) => {
+        console.log("Post file deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting post file:", error);
+      });
   };
 
   return (
@@ -80,12 +100,33 @@ const EditPopup = ({
           />
         </div>
         <div>
+          {currentFile ? (
+            <div>    
+              <button onClick={() => setFileChange(true)} className="upload_input_change" >Change file</button>
+              <button onClick={handleFileDelete}  className="upload_delete">Delete file</button>
+            </div>
+          ) : (
+            <input type="file"
+            id="file"
+            className="upload_input"
+            onChange={handleFileAddition} />
+          )}
+
+          { fileChange && (
+            <input
+            type="file"
+            id="file"
+            className="upload_input_change"
+            onChange={handleFileChange}
+          />
+          )}
+{/*
           <input
             type="file"
             id="file"
             className="upload_input"
             onChange={handleFileChange}
-          />
+          />*/}
         </div>
         <div className="buttons_section">
           <button className="cancel" onClick={handleClose}>
