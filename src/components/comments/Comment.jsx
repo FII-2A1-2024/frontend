@@ -26,6 +26,7 @@ const Comment = ({
   const upVotesCount = comment.detaliiComentariu.votes;
 
   const [isHidden, setIsHidden] = useState(false);
+  const [voted, setVoted] = useState(null);
 
   const isReplying =
     activeComment &&
@@ -37,8 +38,6 @@ const Comment = ({
     activeComment.type === "editing" &&
     activeComment.id === comment.detaliiComentariu.id;
 
-  const [voted, setVoted] = useState(null);
-
   const handleVote = (voteType) => {
     if (voteType === "upvote" && voted !== "upvote") {
       setVoted("upvote");
@@ -46,11 +45,11 @@ const Comment = ({
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted !== "downvote") {
       setVoted("downvote");
-      const updateData = { votes: upVotesCount - 1 };
+      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "upvote" && voted === "upvote") {
       setVoted(null);
-      const updateData = { votes: upVotesCount - 1 };
+      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted === "downvote") {
       setVoted(null);

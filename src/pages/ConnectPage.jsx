@@ -7,6 +7,7 @@ import verify from "../media/icons/verify.svg";
 import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
+import Cookies from 'js-cookie';
 
 /* ************************************
 1. npm install nodemon
@@ -105,9 +106,11 @@ function ConnectPage() {
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
+          console.log
           const resCode = result.resCode;
           console.log(resCode);
           if (resCode === 200) {
+            Cookies.set('userInfo', result);
             window.location.href = "/main";
           } else if (resCode === 458) {
             setPasswordError(true);
