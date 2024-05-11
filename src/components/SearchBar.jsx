@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SearchBar.css';
 
 function SearchBar() {
@@ -25,6 +26,11 @@ function SearchBar() {
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
+        {searchQuery.trim() !== '' && (
+          <Link to={`/searchBy/${searchQuery}`}>
+            <button type="submit" style={{ display: 'none' }} aria-hidden="true">Search</button>
+          </Link>
+        )}
       </form>
     </div>
   );

@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import './MessagesContainer.css';
 import Message from './Message.jsx';
