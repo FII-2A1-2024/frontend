@@ -12,11 +12,15 @@ function LandingPage() {
     <div className="landing-page">
       <Navbar_superior />
       <div className="landing-content">
+        
         <Navbar />
-        <SideBarChats /> <News />
+        
         <div className="landing-main-content">
           <CreatePost />
           <PostList />
+        </div>
+        <div className="side-containers">
+          <SideBarChats /> <News />
         </div>
       </div>
     </div>

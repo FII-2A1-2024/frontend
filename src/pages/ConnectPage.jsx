@@ -108,7 +108,7 @@ function ConnectPage() {
           const resCode = result.resCode;
           console.log(resCode);
           if (resCode === 200) {
-            window.location.href = "/";
+            window.location.href = "/main";
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {

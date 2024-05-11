@@ -42,27 +42,27 @@
   font-weight: 500;
   padding: 6px 12px 6px 12px;
   background-color: white;
-  border : 1px solid var(--primary-dark-red);
+  border : 1px solid var(--primary-dark-red-btn);
   border-radius: 8px;
-  color: var(--primary-dark-red);
+  color: var(--primary-dark-red-btn);
 }
 
 .comment-form-addComment-button{
   font-size: 14px;
   font-weight: 500;
   padding: 6px 12px 6px 12px;
-  background-color: var(--primary-dark-red);
+  background-color: var(--primary-dark-red-btn);
   border-radius: 8px;
   color: white;
   margin-left: 8px;
 }
 
-.comment-form-button:hover:enabled {
+.comment-form-addComment-button:hover:enabled {
   cursor: pointer;
   background: var(--primary-dark-red-hover-btn);
 }
 
-.comment-form-button:disabled {
+.comment-form-addComment-button:disabled {
   opacity: 0.7;
   cursor: default;
 }
@@ -73,25 +73,37 @@
 
 .comment-form-cancel-button {
   margin-left: 10px;
+  font-weight: 500;
 }
 
+.comment-form-cancel-button:hover{
+  color: white;
+  background-color: var(--primary-dark-red-btn);
+}
 .comment-hide-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100% ;
+  height: 100%;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 
 .comment-hide-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
-.hide-line {
-  width: 1px !important;
+.comment-hide-line .hide-line {
+  width: 2px !important;
   height: 100%;
-  background-color: black;
+  background-color:#850000;
+}
+
+.hide-line .hide-line {
+  display: none;
 }
 
 .comment {

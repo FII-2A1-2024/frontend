@@ -20,12 +20,12 @@ Use <Link to=""> instead of <a href=""> */
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/main",
     element: <LandingPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/connect",
+    path: "/",
     element: <ConnectPage />,
   },
   {

@@ -14,7 +14,6 @@ const PostList = () => {
     axios
       .delete(`http://localhost:3000/posts?id=${postId}`)
       .then((response) => {
-        // Actualizare listă de postări după ștergere
         setPosts(posts.filter((post) => post.id !== postId));
       })
       .catch((error) => {
@@ -35,7 +34,7 @@ const PostList = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div>
+      <div className="container-posts-list">
         {posts.map((post) => (
           <Post
             key={post.id}
@@ -44,8 +43,9 @@ const PostList = () => {
             title={post.title}
             content={post.description}
             upVotesCount={post.votes}
-            commentsCount={0} // Count comments nu e în JSON
+            commentsCount={post.comments_count}
             category={post.category}
+            file={post.url}
           />
         ))}
       </div>
