@@ -36,7 +36,9 @@ const Post = ({
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
+  const [message, setMessage] = useState("");
   //const userId = getCurrentUserIdFromCookies();
+  const userId = 5;
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -180,6 +182,24 @@ const Post = ({
     setShowEditPopup(false);
   };
 
+  const handleFollow = () => {
+    axios
+      .post(`http://localhost:3000/postFollow`, {
+        user_id: 5,
+        post_id: 20,
+      })
+      .then((response) => {
+        console.log("Post saved successfully");
+        setMessage("Post saved successfully");
+        setMenuVisible(false);
+      })
+      .catch((error) => {
+        console.error("Error saving post:", error);
+        setMessage("Error saving post");
+        setMenuVisible(false);
+      });
+  };
+
   return (
     <div className="post">
       <div className="postHeader">
@@ -198,10 +218,13 @@ const Post = ({
           <button onClick={toggleMenu} button="true">
             <img src={threeDots} alt="ThreeDots" />
           </button>
+
           {menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn">Report</button>
-              <button className="post_menu_btn">Save</button>
+              <button className="post_menu_btn" onClick={handleFollow}>
+                Save
+              </button>
               <button className="post_menu_btn" onClick={handleEdit}>
                 Edit
               </button>
@@ -210,6 +233,8 @@ const Post = ({
               </button>
             </div>
           )}
+
+          {message && <p>{message}</p>}
 
           {/* 
           {userId === authorId && menuVisible && (
@@ -220,10 +245,11 @@ const Post = ({
               </button>
             </div>
           )}
-          
+
           {userId !== authorId && menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn">Report</button>
+            </div>
           )}
           */}
 
@@ -256,6 +282,16 @@ const Post = ({
           file.endsWith(".jpg") ||
           file.endsWith(".png") ? (
             <img src={file} alt="Image" />
+          ) : file.endsWith(".mp4") ? (
+            <video controls>
+              <source src={file} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ): file.endsWith(".mp3") ? (
+            <audio controls>
+              <source src={file} type="audio/mpeg" />
+              Your browser does not support the audio tag.
+            </audio>
           ) : (
             <a href={file} target="_blank" rel="noopener noreferrer">
               View file
