@@ -20,6 +20,10 @@ import shareSVG from "./icons/share.svg";
 import downVotesSVG from "./icons/shift_down.svg";
 import upVotesSVG from "./icons/shift_up.svg";
 import commentsSVG from "./icons/chat_bubble.svg";
+import blockSVG from "./EditPost/icons/block.svg";
+import editSVG from "./EditPost/icons/edit.svg";
+import flagSVG from "./EditPost/icons/flag.svg";
+import frameSVG from "./EditPost/icons/Frame.svg";
 
 const Post = ({
   id,
@@ -221,15 +225,16 @@ const Post = ({
 
           {menuVisible && (
             <div className="post_menu">
-              <button className="post_menu_btn">Report</button>
+              <button className="post_menu_btn">
+              <img src={flagSVG} alt="upVotes" className="post_menu_btn_icon"/> Report</button>
               <button className="post_menu_btn" onClick={handleFollow}>
-                Save
+              <img src={frameSVG} alt="upVotes" className="post_menu_btn_icon"/> Save
               </button>
               <button className="post_menu_btn" onClick={handleEdit}>
-                Edit
+              <img src={editSVG} alt="upVotes" className="post_menu_btn_icon"/>Edit
               </button>
               <button className="post_menu_btn" onClick={handleDelete}>
-                Delete
+              <img src={blockSVG} alt="upVotes" className="post_menu_btn_icon"/> Delete
               </button>
             </div>
           )}
