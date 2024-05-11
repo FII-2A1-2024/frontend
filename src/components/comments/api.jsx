@@ -21,7 +21,7 @@ export const addComment = async(text, parentId, post_id, author_id) => {
       parent_id: parentId,
       author_id: author_id,
       description: text,
-      votes: 1 //<--------------- SERVERUL NU ACCEPTA VOTES=0 ??????????
+      votes: 0 //<--------------- SERVERUL NU ACCEPTA VOTES=0 ??????????
     });
     console.log('Success:', response.data);
   } catch (error) {
