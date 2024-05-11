@@ -39,6 +39,7 @@ const PostList = () => {
           <Post
             key={post.id}
             id={post.id}
+            authorId={post.author_id}
             userName={`User ${post.author_id}`}
             title={post.title}
             content={post.description}

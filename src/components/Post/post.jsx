@@ -27,13 +27,14 @@ import frameSVG from "./EditPost/icons/Frame.svg";
 
 const Post = ({
   id,
+  authorId,
   userName,
   title,
   content,
   upVotesCount,
   commentsCount,
   category,
-  file,
+  file
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -223,13 +224,48 @@ const Post = ({
             <img src={threeDots} alt="ThreeDots" />
           </button>
 
+          {message && <p>{message}</p>}
+         {/*  
           {menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn">
-              <img src={flagSVG} alt="upVotes" className="post_menu_btn_icon"/> Report</button>
-              <button className="post_menu_btn" onClick={handleFollow}>
-              <img src={frameSVG} alt="upVotes" className="post_menu_btn_icon"/> Save
+                <img
+                  src={flagSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Report
               </button>
+              <button className="post_menu_btn" onClick={handleFollow}>
+                <img
+                  src={frameSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Save
+              </button>
+              <button className="post_menu_btn" onClick={handleEdit}>
+                <img
+                  src={editSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />
+                Edit
+              </button>
+              <button className="post_menu_btn" onClick={handleDelete}>
+                <img
+                  src={blockSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Delete
+              </button>
+            </div>
+          )}
+ */}
+          
+          {userId === authorId && menuVisible && (
+            <div className="post_menu">
               <button className="post_menu_btn" onClick={handleEdit}>
               <img src={editSVG} alt="upVotes" className="post_menu_btn_icon"/>Edit
               </button>
@@ -239,24 +275,16 @@ const Post = ({
             </div>
           )}
 
-          {message && <p>{message}</p>}
-
-          {/* 
-          {userId === authorId && menuVisible && (
+          {userId !== authorId && menuVisible && (
             <div className="post_menu">
-              <button className="post_menu_btn">Edit</button>
-              <button className="post_menu_btn" onClick={handleDelete}>
-                Delete
+              <button className="post_menu_btn">
+              <img src={flagSVG} alt="upVotes" className="post_menu_btn_icon"/> Report</button>
+              <button className="post_menu_btn" onClick={handleFollow}>
+              <img src={frameSVG} alt="upVotes" className="post_menu_btn_icon"/> Save
               </button>
             </div>
           )}
-
-          {userId !== authorId && menuVisible && (
-            <div className="post_menu">
-              <button className="post_menu_btn">Report</button>
-            </div>
-          )}
-          */}
+         
 
           {showEditPopup && (
             <EditPopup
@@ -292,7 +320,7 @@ const Post = ({
               <source src={file} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          ): file.endsWith(".mp3") ? (
+          ) : file.endsWith(".mp3") ? (
             <audio controls>
               <source src={file} type="audio/mpeg" />
               Your browser does not support the audio tag.
