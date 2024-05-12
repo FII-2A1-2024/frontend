@@ -34,7 +34,7 @@ const Post = ({
   upVotesCount,
   commentsCount,
   category,
-  file
+  file,
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -205,6 +205,19 @@ const Post = ({
       });
   };
 
+  const handleShare = () => {
+    const postUrl = `http://localhost:3000/post/${id}`;
+
+    navigator.clipboard.writeText(postUrl)
+      .then(() => {
+        console.log("Post URL copied to clipboard:", postUrl);
+        alert("Post URL copied to clipboard!");
+      })
+      .catch((error) => {
+        console.error("Error copying post URL to clipboard:", error);
+      });
+  };
+
   return (
     <div className="post">
       <div className="postHeader">
@@ -225,14 +238,24 @@ const Post = ({
           </button>
 
           {message && <p>{message}</p>}
-          
+
           {userId === authorId && menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn" onClick={handleEdit}>
-              <img src={editSVG} alt="upVotes" className="post_menu_btn_icon"/>Edit
+                <img
+                  src={editSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />
+                Edit
               </button>
               <button className="post_menu_btn" onClick={handleDelete}>
-              <img src={blockSVG} alt="upVotes" className="post_menu_btn_icon"/> Delete
+                <img
+                  src={blockSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Delete
               </button>
             </div>
           )}
@@ -240,13 +263,23 @@ const Post = ({
           {userId !== authorId && menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn">
-              <img src={flagSVG} alt="upVotes" className="post_menu_btn_icon"/> Report</button>
+                <img
+                  src={flagSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Report
+              </button>
               <button className="post_menu_btn" onClick={handleFollow}>
-              <img src={frameSVG} alt="upVotes" className="post_menu_btn_icon"/> Save
+                <img
+                  src={frameSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Save
               </button>
             </div>
           )}
-         
 
           {showEditPopup && (
             <EditPopup
@@ -317,18 +350,17 @@ const Post = ({
         </div>
 
         {/* Comments Button*/}
-        <div className="feedback-container comm-btn">
-          <div className="btn">
-            <Link to={`/post/${id}`} style={{ color: "black" }}>
+        <Link to={`/post/${id}`} style={{ color: "black" }}>
+          <div className="feedback-container comm-btn">
+            <div className="btn">
               <img src={commentsSVG} alt="Comments" className="SVG" />
-            </Link>
+            </div>
+            <p>{commentsCount !== null ? commentsCount : 0}</p>
           </div>
-
-          <p>{commentsCount !== null ? commentsCount : 0}</p>
-        </div>
+        </Link>
 
         {/* Shares Button */}
-        <div className="feedback-container">
+        <div className="feedback-container" onClick={handleShare}>
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
           </div>
