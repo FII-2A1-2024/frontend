@@ -12,6 +12,12 @@ function SearchBar() {
     setSearchQuery(event.target.value);
   };
 
+  const [filters, setFilters] = useState({
+    category: 'All',
+    in: ['Title', 'Content'],
+    sort: 'Newest'
+  });
+
   return (
     <div className="search-container">
       <form className="search-form">
@@ -27,10 +33,18 @@ function SearchBar() {
           onChange={handleSearchInputChange}
         />
         {searchQuery.trim() !== '' && (
-          <Link to={`/searchBy/${searchQuery}`}>
-            <button type="submit" style={{ display: 'none' }} aria-hidden="true">Search</button>
-          </Link>
+          <>
+            <Link
+              to={{
+                pathname: `/searchBy/${encodeURIComponent(searchQuery)}`,
+                state: filters
+              }}
+            >
+              <button type="submit" style={{ display: 'none' }} aria-hidden="true">Search</button>
+            </Link>
+          </>
         )}
+
       </form>
     </div>
   );
