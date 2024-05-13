@@ -23,7 +23,9 @@
 
 .three-dots {
   cursor: pointer;
-  border-radius: 70%;
+  border-radius: 60%;
+  width: 2em;
+  height: 2em;
   padding: 3px;
   color: #757575;
   position: relative;

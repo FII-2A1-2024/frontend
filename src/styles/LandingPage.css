@@ -22,10 +22,8 @@
     justify-content: center;
     align-items: center;
     height: fit-content;
-
     padding: 5px;
     flex: 0.2;
-
     gap : 1rem;
   }
   

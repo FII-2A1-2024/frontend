@@ -50,17 +50,13 @@ const PostPage = () => {
                 commentsCount={post.comments_count}
                 category={post.category}
                 file={post.url}
-              />
-            
+              />   
           </>
-
-
-          
           <Comments currentUserId={currentUserId} postId={postIdInt} />
         </div>
         <div className="side-containers">
           <SideBarChats />  <News /> 
-          </div>
+        </div>
       </div>
     </div>
   );

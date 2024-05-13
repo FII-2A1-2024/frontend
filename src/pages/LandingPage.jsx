@@ -12,9 +12,7 @@ function LandingPage() {
     <div className="landing-page">
       <Navbar_superior />
       <div className="landing-content">
-        
         <Navbar />
-        
         <div className="landing-main-content">
           <CreatePost />
           <PostList />
