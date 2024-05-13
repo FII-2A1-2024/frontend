@@ -8,6 +8,7 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -17,11 +18,15 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
     setTitle(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   const handleCreate = () => {
     console.log("Title: ", title);
     console.log("Content: ", content);
     console.log("Category: ", category);
-    onCreate(title, content, category);
+    onCreate(title, content, category, file);
   };
 
   const handleClose = () => {
@@ -63,6 +68,14 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
             placeholder="Write Description..."
             value={content}
             onChange={handleContentChange}
+          />
+        </div>
+        <div>
+        <input
+            type="file"
+            id="file"
+            className="upload_input"
+            onChange={handleFileChange}
           />
         </div>
         <div className="buttons_section">

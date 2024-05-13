@@ -20,12 +20,12 @@ TODO: If the user is not connected, redirect at "/connect" */
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/main",
     element: <LandingPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/connect",
+    path: "/",
     element: <ConnectPage />,
   },
   {

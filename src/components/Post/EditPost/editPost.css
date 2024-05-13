@@ -5,7 +5,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 600px;
-    height: 400px;
+    height: 500px;
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -203,16 +203,34 @@
     margin-top: 0px;
 }
 
-.buttons_section{
-display: flex;
-flex-direction: row;
+.buttons_section {
+    display: flex;
+    flex-direction: row;
 }
 
-.X_btn{
-/* close */
-position: absolute;
-width: 14px;
-height: 14px;
-top: 20px;
-right: 30px;
+.X_btn {
+    /* close */
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 20px;
+    right: 30px;
 }
+
+.upload_input {
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+}
+
+  .upload_delete{
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+  }
+
+  .upload_input_change{
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+  }

@@ -30,35 +30,35 @@ function SideBarChats() {
             content={message.description}
           />
         ))}*/}
-      <Link to="/">
+      <Link to="/main">
         <SideBarChat
           id={0}
           username={"User1"}
           content={"LastMessageLastMessageLastMessageLastM"}
         />
       </Link>
-      <Link to="/">
+      <Link to="/main">
         <SideBarChat
           id={0}
           username={"User2"}
           content={"LastMessageLastMessageLastMessageLastM"}
         />
       </Link>
-      <Link to="/">
+      <Link to="/main">
         <SideBarChat
           id={0}
           username={"User3"}
           content={"LastMessageLastMessageLastMessageLastM"}
         />
       </Link>
-      <Link to="/">
+      <Link to="/main">
         <SideBarChat
           id={0}
           username={"User4"}
           content={"LastMessageLastMessageLastMessageLastM"}
         />
       </Link>
-      <Link to="/">
+      <Link to="/main">
         <SideBarChat
           id={0}
           username={"User5"}

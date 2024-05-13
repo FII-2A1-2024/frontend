@@ -5,7 +5,7 @@ import './AuthButton.css';
 function AuthButton() {
   return (
     <div className="auth-buttons">
-      <Link to="/connect">
+      <Link to="/">
         Login
       </Link>
     </div>
