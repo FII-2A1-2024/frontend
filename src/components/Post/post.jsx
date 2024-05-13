@@ -329,14 +329,14 @@ const Post = ({
           file.endsWith(".jpeg") ||
           file.endsWith(".jpg") ||
           file.endsWith(".png") ? (
-            <img src={file} alt="Image" />
+            <img src={file} alt="Image" className="postFile"/>
           ) : file.endsWith(".mp4") ? (
-            <video controls>
+            <video controls className="postFile">
               <source src={file} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           ) : file.endsWith(".mp3") ? (
-            <audio controls>
+            <audio controls className="postFile">
               <source src={file} type="audio/mpeg" />
               Your browser does not support the audio tag.
             </audio>
