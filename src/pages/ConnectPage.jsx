@@ -92,7 +92,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
-        socket: "STRINZG"
+        socket: "string"
       };
       const data = JSON.stringify(userData);
 
