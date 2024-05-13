@@ -189,8 +189,8 @@ const Post = ({
   const handleFollow = () => {
     axios
       .post(`http://localhost:3000/postFollow`, {
-        user_id: 5,
-        post_id: 20,
+        user_id: userId,
+        post_id: id,
       })
       .then((response) => {
         console.log("Post saved successfully");
@@ -256,7 +256,7 @@ const Post = ({
             <img src={threeDots} alt="ThreeDots" />
           </button>
 
-          {message && <p>{message}</p>}
+          {message && <div className="btn_message">{message}</div>}
 
           {userId === authorId && menuVisible && (
             <div className="post_menu">

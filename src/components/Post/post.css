@@ -221,3 +221,7 @@ flex-direction: row;
     font-size: 12px;
   }
 }
+
+.btn_message{
+  position: absolute;
+}
