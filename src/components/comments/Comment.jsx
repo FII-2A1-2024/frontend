@@ -18,8 +18,6 @@ const Comment = ({
   deleteComment,
   addComment,
 }) => {
-  const fiveMinutes = 300000;
-  // const timePassed = new Date() - new Date(comment.detaliiComentariu.created_at) > fiveMinutes;
   const canEdit = currentUserId === comment.detaliiComentariu.author_id;
   const canDelete = currentUserId === comment.detaliiComentariu.author_id;
   const createdAt = new Date(comment.detaliiComentariu.created_at).toLocaleDateString();
