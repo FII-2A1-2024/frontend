@@ -4,9 +4,9 @@ import UserPofile from './user_profile.svg';
 import upVotesSVG from '../Post/icons/shift_up.svg';
 import downVotesSVG from '../Post/icons/shift_down.svg';
 import commentsSVG from '../Post/icons/chat_bubble.svg';
-import commentHideButton from "./comment-hide-button.svg";
-import commentUnhideButton from "./comment-unhide-button.svg";
-import editSVG from "./edit.svg"
+import commentHideButton from "./icons/comment-hide-button.svg";
+import commentUnhideButton from "./icons/comment-unhide-button.svg";
+import editSVG from "./icons/edit.svg"
 import { useState } from 'react';
 
 const Comment = ({
@@ -18,14 +18,13 @@ const Comment = ({
   deleteComment,
   addComment,
 }) => {
-  const fiveMinutes = 300000;
-  // const timePassed = new Date() - new Date(comment.detaliiComentariu.created_at) > fiveMinutes;
   const canEdit = currentUserId === comment.detaliiComentariu.author_id;
   const canDelete = currentUserId === comment.detaliiComentariu.author_id;
   const createdAt = new Date(comment.detaliiComentariu.created_at).toLocaleDateString();
   const upVotesCount = comment.detaliiComentariu.votes;
 
   const [isHidden, setIsHidden] = useState(false);
+  const [voted, setVoted] = useState(null);
 
   const isReplying =
     activeComment &&
@@ -37,8 +36,6 @@ const Comment = ({
     activeComment.type === "editing" &&
     activeComment.id === comment.detaliiComentariu.id;
 
-  const [voted, setVoted] = useState(null);
-
   const handleVote = (voteType) => {
     if (voteType === "upvote" && voted !== "upvote") {
       setVoted("upvote");
@@ -46,11 +43,11 @@ const Comment = ({
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted !== "downvote") {
       setVoted("downvote");
-      const updateData = { votes: upVotesCount - 1 };
+      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "upvote" && voted === "upvote") {
       setVoted(null);
-      const updateData = { votes: upVotesCount - 1 };
+      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
       updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted === "downvote") {
       setVoted(null);

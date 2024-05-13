@@ -11,10 +11,11 @@ import userProfile from "./media/user_profile.svg";
 
 const CreatePost = (userName) => {
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
+  const userId = parseInt(localStorage.getItem("UserId"), 10);
 
   const handleCreate = (title, content, category, file) => {
       const formData = new FormData();
-      formData.append("author_id", "5");
+      formData.append("author_id", userId);
       formData.append("title", title);
       formData.append("description", content);
       formData.append("votes", "0");

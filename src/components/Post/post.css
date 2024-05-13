@@ -23,7 +23,9 @@
 
 .three-dots {
   cursor: pointer;
-  border-radius: 70%;
+  border-radius: 60%;
+  width: 2em;
+  height: 2em;
   padding: 3px;
   color: #757575;
   position: relative;
@@ -97,6 +99,12 @@ flex-direction: row;
   gap: 0.5rem;
   padding: 2%;
   color: #000000;
+}
+
+.postFile{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .postArticle p {
@@ -212,4 +220,8 @@ flex-direction: row;
   .postArticle p {
     font-size: 12px;
   }
+}
+
+.btn_message{
+  position: absolute;
 }
