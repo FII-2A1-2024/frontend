@@ -4,9 +4,9 @@ import UserPofile from './user_profile.svg';
 import upVotesSVG from '../Post/icons/shift_up.svg';
 import downVotesSVG from '../Post/icons/shift_down.svg';
 import commentsSVG from '../Post/icons/chat_bubble.svg';
-import commentHideButton from "./comment-hide-button.svg";
-import commentUnhideButton from "./comment-unhide-button.svg";
-import editSVG from "./edit.svg"
+import commentHideButton from "./icons/comment-hide-button.svg";
+import commentUnhideButton from "./icons/comment-unhide-button.svg";
+import editSVG from "./icons/edit.svg"
 import { useState } from 'react';
 
 const Comment = ({

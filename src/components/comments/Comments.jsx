@@ -13,13 +13,13 @@ const Comments = ({ currentUserId, postId }) => {
       backendComment.detaliiComentariu.parent_id === -1
     );
 
- /* const addComment = (text, parentId, post_id, author_id) => {
-    createCommentApi(text, parentId, post_id, author_id).then(newComment => {
-      fetchComments(postId);
-    });
-    setActiveComment(null);
-  };*/
-
+   /*
+     how addComment function works
+      ---> add this comment into the local Storage JSON (recursive search)
+      ---> this will update instantly the UI
+      ---> then POST the comment to backend
+      ---> GET the comments (needed for ID of comments from the database)
+   */
    const addComment = async (text, parentId, post_id, author_id) => {
     try{
 
@@ -44,14 +44,10 @@ const Comments = ({ currentUserId, postId }) => {
       }
       setBackendComments(updatedComments);
 
-      //const updatedCommentsWithBackData = [...backendComments];
-      //aici ar trebui sa iau raspunsul de la backend si sa il refac
-      //--> getAll
       addCommentApi(text, parentId, post_id, author_id).then(() =>{
         fetchComments(postId);
       });
       
-      //const createdComment = await createCommentApi(text, parentId, post_id, //author_id);
       setActiveComment(null);
     } catch (error) {
       console.error('Error adding comment:', error);
@@ -72,7 +68,7 @@ const Comments = ({ currentUserId, postId }) => {
           id: commentId,
           description: updateData.description
         }).then(() => {
-          //fetchComments(postId);
+          //fetchComments(postId); we dont need to GET the comments back
         });
         console.log('Success:');
       } else if (updateData.votes !== undefined) {
@@ -84,7 +80,7 @@ const Comments = ({ currentUserId, postId }) => {
           id: commentId,
           votes: updateData.votes
         }).then(() => {
-          //fetchComments(postId);
+          //fetchComments(postId); we dont need to GET the comments back
         });
         console.log('Success:');
       } else {
@@ -172,13 +168,6 @@ const Comments = ({ currentUserId, postId }) => {
   }
   };
 
-  /* const getReplies = (commentId) => {
-     return backendComments.filter(
-       comment => 
-         comment.detaliiComentariu.parent_id === commentId)
-         .map(comment => comment.detaliiComentariu);
-   };*/
-
   const fetchComments = (postId) => {
     getCommentsApi(postId).then((data) => {
       setBackendComments(data); 
@@ -186,15 +175,8 @@ const Comments = ({ currentUserId, postId }) => {
     });
   };
 
-
-
   useEffect(() => {
-   // const cachedComments = localStorage.getItem(`comments_${postId}`);
-    //if (cachedComments) {
-    //  setBackendComments(JSON.parse(cachedComments));
-   // } else {
       fetchComments(postId);
-   // }
   }, [postId]);
 
 

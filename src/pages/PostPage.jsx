@@ -14,6 +14,7 @@ const PostPage = () => {
   const {postId} = useParams();
 
   const postIdInt = parseInt(postId, 10);
+  const currentUserId = parseInt(localStorage.getItem("UserId"), 10);
   useEffect(() => {
     axios
       .get(`http://localhost:3000/posts?id=${postId}`)
@@ -55,7 +56,7 @@ const PostPage = () => {
 
 
           
-          <Comments currentUserId={2} postId={postIdInt} />
+          <Comments currentUserId={currentUserId} postId={postIdInt} />
         </div>
         <div className="side-containers">
           <SideBarChats />  <News /> 

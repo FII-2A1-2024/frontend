@@ -92,6 +92,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
+        socket: "STRINZG"
       };
       const data = JSON.stringify(userData);
 
@@ -105,9 +106,8 @@ function ConnectPage() {
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
-          console.log
           const resCode = result.resCode;
+          localStorage.setItem("UserId", result.uid);
           console.log(resCode);
           if (resCode === 200) {
             Cookies.set('userInfo', result);
