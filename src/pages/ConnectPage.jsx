@@ -8,6 +8,7 @@ import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
 import Cookies from 'js-cookie';
+import socket from "../socket";
 
 /* ************************************
 1. npm install nodemon
@@ -92,7 +93,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
-        socket: "string"
+        socket: socket.id
       };
       const data = JSON.stringify(userData);
 

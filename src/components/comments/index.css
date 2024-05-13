@@ -102,6 +102,12 @@
   background-color:#850000;
 }
 
+.comment-hide-button img {
+    width: 21px !important;
+    height: 20px !important;
+
+    max-width: none !important;
+}
 .hide-line .hide-line {
   display: none;
 }
