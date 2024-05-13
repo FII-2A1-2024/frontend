@@ -93,7 +93,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
-        socket: "string" // TBE in "socket: socket.id" when sockets are implemented in BE
+        socket: socket.id
       };
       const data = JSON.stringify(userData);
 
