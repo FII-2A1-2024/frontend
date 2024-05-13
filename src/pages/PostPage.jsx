@@ -47,9 +47,9 @@ const PostPage = () => {
                 title={post.title}
                 content={post.description}
                 upVotesCount={post.votes}
-                commentsCount={post.comments_count} // Count comments nu e în JSON
+                commentsCount={post.comments_count}
                 category={post.category}
-                url={post.url}
+                file={post.url}
               />
             
           </>
