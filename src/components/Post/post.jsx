@@ -42,8 +42,7 @@ const Post = ({
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [message, setMessage] = useState("");
-  //const userId = getCurrentUserIdFromCookies();
-  const userId = 5;
+  const userId = parseInt(localStorage.getItem("UserId"), 10);
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -205,6 +204,26 @@ const Post = ({
       });
   };
 
+  const handleReport = () => {
+    /*axios
+      .post(`http://localhost:3000/postFollow`, {
+        user_id: 5,
+        post_id: 20,
+      })
+      .then((response) => {
+        console.log("Post saved successfully");
+        setMessage("Post saved successfully");
+        setMenuVisible(false);
+      })
+      .catch((error) => {
+        console.error("Error saving post:", error);
+        setMessage("Error saving post");
+        setMenuVisible(false);
+      });*/
+      setMessage("Post reported successfully");
+      setMenuVisible(false);
+  };
+
   const handleShare = () => {
     const postUrl = `http://localhost:3000/post/${id}`;
 
@@ -262,7 +281,7 @@ const Post = ({
 
           {userId !== authorId && menuVisible && (
             <div className="post_menu">
-              <button className="post_menu_btn">
+              <button className="post_menu_btn" onClick={handleReport}>
                 <img
                   src={flagSVG}
                   alt="upVotes"
