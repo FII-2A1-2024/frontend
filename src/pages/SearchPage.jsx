@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
+import Fuse from 'fuse.js';
 
 import Navbar_superior from "../components/Navbar_superior";
 import Navbar from "../components/Navbar";
@@ -102,11 +103,30 @@ const SearchPage = () => {
             filtered = filtered.filter(post => filterByCategory(post, category));
         }
 
+        // Exact match
         if (searchKeyString !== '""' && searchKeyString.startsWith('"') && searchKeyString.endsWith('"')) {
             const trimmedSearchKey = searchKeyString.slice(1, -1);
             filtered = filtered.filter(post => exactMatch(post, trimmedSearchKey, searchIn));
-        } else {
-            filtered = filtered.filter(post => exactMatch(post, searchKeyString, searchIn));
+        } else // Fuzzy match
+        {
+            // filtered = filtered.filter(post => exactMatch(post, searchKeyString, searchIn)); // old -- exacth match
+
+            const searchKeys = searchIn.map(field => {
+                if (field === 'Title') {
+                    return 'title';
+                } else if (field === 'Content') {
+                    return 'description';
+                }
+            });
+
+            const fuse = new Fuse(filtered, {
+                keys: searchKeys,
+                includeScore: true,
+                threshold: 0.3
+            });
+            const results = fuse.search(searchKeyString);
+            filtered = results.map(result => result.item);
+            
         }
 
         if (orderBy === 'Popular') {
