@@ -336,7 +336,7 @@ const Post = ({
               Your browser does not support the video tag.
             </video>
           ) : file.endsWith(".mp3") ? (
-            <audio controls className="postFile">
+            <audio controls>
               <source src={file} type="audio/mpeg" />
               Your browser does not support the audio tag.
             </audio>
