@@ -12,6 +12,10 @@
   max-width: 801px;
 }
 
+.comments{
+  width: 801px;
+}
+
 .comments-container {
   margin-top: 20px;
 }
