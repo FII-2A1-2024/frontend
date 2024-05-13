@@ -7,7 +7,6 @@ import verify from "../media/icons/verify.svg";
 import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
-import Cookies from 'js-cookie';
 import socket from "../socket";
 
 /* ************************************
@@ -111,7 +110,6 @@ function ConnectPage() {
           localStorage.setItem("UserId", result.uid);
           console.log(resCode);
           if (resCode === 200) {
-            Cookies.set('userInfo', result);
             window.location.href = "/main";
           } else if (resCode === 458) {
             setPasswordError(true);
