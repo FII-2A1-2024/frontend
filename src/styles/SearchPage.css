@@ -1,0 +1,30 @@
+.search-filter-container {
+    width: 100%;
+}
+
+/* .search-filter-title {
+    display: flex;
+    align-self: baseline;
+} */
+
+.search-filter-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    padding-bottom: .5em;
+    border-bottom: 1px solid gray;
+}
+
+.generic-btn {
+    background-color: hsl(0, 100%, 17%);
+    color: #FFFBFB;
+    border: 1px solid #850000;
+    border-radius: 100px;
+    padding: 10px 24px;
+}
+
+.generic-btn:hover, .generic-btn:target {
+    background-color: hsl(0, 100%, 11%);
+}

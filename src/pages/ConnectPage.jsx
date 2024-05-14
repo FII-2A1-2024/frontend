@@ -7,6 +7,7 @@ import verify from "../media/icons/verify.svg";
 import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
+import socket from "../socket";
 
 /* ************************************
 1. npm install nodemon
@@ -91,6 +92,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
+        socket: socket.id
       };
       const data = JSON.stringify(userData);
 
@@ -104,11 +106,11 @@ function ConnectPage() {
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           const resCode = result.resCode;
+          localStorage.setItem("UserId", result.uid);
           console.log(resCode);
           if (resCode === 200) {
-            window.location.href = "/";
+            window.location.href = "/main";
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {

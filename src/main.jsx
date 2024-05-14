@@ -11,23 +11,21 @@ import RulesPage from "./pages/RulesPage.jsx";
 import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
-import AccountSettingsPage from './pages/settings/AccountSettingsPage.jsx';
-import LanguageSettingsPage from './pages/settings/LanguageSettingsPage.jsx';
+import SearchPage from "./pages/SearchPage.jsx";
 
 import "./index.css";
 
 /* Ciprian 5 apr: routing system
-Use <Link to=""> instead of <a href=""> 
-TODO: If the user is not connected, redirect at "/connect" */
+Use <Link to=""> instead of <a href=""> */
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/main",
     element: <LandingPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/connect",
+    path: "/",
     element: <ConnectPage />,
   },
   {
@@ -49,16 +47,6 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/settings",
-    element: <AccountSettingsPage />,
-    children: [
-      {
-        path: "/settings/language",
-        element: <LanguageSettingsPage />,
-      },
-    ],
-  },
-  {
     path: "/rules",
     element: <RulesPage />,
   },
@@ -70,6 +58,10 @@ const router = createBrowserRouter([
       const { id } = match.params;
       return <PostPage postId={id} />;
     }*/
+  },
+  {
+    path: "/searchBy/:searchKey",
+    element: <SearchPage />,
   },
 ]);
 
