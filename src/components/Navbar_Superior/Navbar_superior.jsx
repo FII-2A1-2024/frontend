@@ -35,15 +35,16 @@ function Navbar_superior({ toggleNavbar }) {
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
+          <Link to={`/main`} >
           <img src={logoMascota} alt="Logo-mascota" className="logo-mascota" />
-          <img src={logoFull} alt="Logo" className="logo-full" />
+          <img src={logoFull} alt="Logo" className="logo-full" /></Link>
         </div>
         <SearchBar />
         <div className="right-buttons-nav-superior">
           <Link className='searchButton-navbar' to="/"> {/*acesta apare numai la device uri la cu ecranul mai mic de 769px si la click ar trebui sa apara search-barul*/}
             <img src={searchIconNavbar} alt="" className="searchIconNavbar" />
           </Link>
-          <Link className='messagesButton-navbar' to="/"> {/*linkare la pagina cu chat ul */}
+          <Link className='messagesButton-navbar' to="/messages"> {/*linkare la pagina cu chat ul */}
             <img src={messagesIcon} alt="" className="messagesIcon" />
           </Link>
           <button className="notifications-button" onClick={toggleNotifications}>

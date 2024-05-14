@@ -4,7 +4,7 @@
    position: fixed;
     width: 340px;
     max-height: 300px;
-   /* right: 25px;*/
+    right: 10px;
    /* top: 100px;*/
     overflow-y: auto;
     overflow-x: hidden;
