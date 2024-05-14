@@ -11,7 +11,7 @@ import notificationsIcon from "./media/notificationsIcon.svg"
 import userProfileHolder from "./media/User.svg"
 import searchIconNavbar from "./media/searchIconNavbar.svg"
 
-function Navbar_superior() {
+function Navbar_superior({ toggleNavbar }) {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   const toggleMenu = () => {
@@ -25,7 +25,7 @@ function Navbar_superior() {
     <nav className="navbar_superior">
       <div className="navbar-superior-container">
         <div className="small-screen-navbar-left-items">
-          <button className="hamburger-menu " onClick={toggleMenu}>
+          <button className="hamburger-menu " onClick={toggleNavbar}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
