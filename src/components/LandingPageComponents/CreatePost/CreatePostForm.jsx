@@ -3,8 +3,11 @@ import axios from "axios";
 import CategoryDropdown from "./CategoryDropdown";
 import close from "./media/close.svg";
 import "./CreatePostForm.css";
+import { useTranslation } from "react-i18next";
 
 const CreatePostForm = ({ onCreate, onCancel }) => {
+  const { t } = useTranslation();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -39,39 +42,37 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
         <img src={close} alt="close" />
       </button>
       <div className="popup-inner">
-        <h2 className="header_edit">Create New Post</h2>
+        <h2 className="header_edit">{t("createNewPost")}</h2>
         <div>
-        <CategoryDropdown 
-        onSelectCategory={setCategory}
-        />
+          <CategoryDropdown onSelectCategory={setCategory} />
         </div>
         <div>
           <label className="title" htmlFor="title">
-            Title:
+            {t("newPostTitle")}
           </label>
           <input
             className="title_content"
             type="text"
             id="title"
-            placeholder="Write Title..."
+            placeholder={t("createp1")}
             value={title}
             onChange={handleTitleChange}
           />
         </div>
         <div>
           <label htmlFor="content" className="edit_content_header">
-            Content:
+            {t("newPostContent")}
           </label>
           <input
             id="content"
             className="edit_content"
-            placeholder="Write Description..."
+            placeholder={t("createp2")}
             value={content}
             onChange={handleContentChange}
           />
         </div>
         <div>
-        <input
+          <input
             type="file"
             id="file"
             className="upload_input"
@@ -80,10 +81,10 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
         </div>
         <div className="buttons_section">
           <button className="cancel" onClick={handleClose}>
-            Cancel
+            {t("cancel")}
           </button>
           <button className="save" onClick={handleCreate}>
-            Post
+            {t("post")}
           </button>
         </div>
       </div>
