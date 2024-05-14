@@ -2,7 +2,7 @@
     height: auto;
     color: black;
     max-width: 90vw;
-    font-family: 'Josefin Sans';
+    font-family: 'Poppins';
     margin-left: 2vw;
     overflow-x: hidden !important;
 }
@@ -11,8 +11,12 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-bottom: 5vh;
+    margin-bottom: 5vh; 
+    margin-top: 3.5vh;
     text-align: justify;
+    font-size: 22px;
+    font-weight: 450;
+    color: #200000;
 }
 
 .subtitle {
@@ -20,6 +24,9 @@
 }
 
 .introduction {
+    font-size: 18px;
+    font-weight: 400;
+    color: #543F3F;
     margin-bottom: 5vh;
     text-align: justify;
     max-width: 90%;
@@ -32,25 +39,35 @@
 
 .paragraph {
     margin-bottom: 2vh;
+    margin-top: 2vh;
+    font-size: 18px;
+    font-weight: 400;
+    color: #543F3F;
 }
 
 .beginning {
     margin-top: 5vh;
+    font-size: 38px !important;
+    font-weight: 600;
+    color: #200000;
 }
 
 h1 {
-    font-size: 30px !important;
-    color: #333;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 h2 {
-    font-size: 24px !important;
+    font-size: 22px !important;
+    font-weight: 450 !important;
+    color: #200000;
+    margin-top: 5vh !important;
 }
 
 h3 {
     font-size: 20px !important;
+    font-weight: 450 !important;
+    color: #200000;
+    margin-top: 2vh !important;
 }
-

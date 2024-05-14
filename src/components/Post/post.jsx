@@ -243,7 +243,7 @@ const Post = ({
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
           <Link to="/messages" style={{ color: "black" }}>
-            <h2>{userName}</h2>
+            <p>{userName}</p>
           </Link>
         </div>
 
