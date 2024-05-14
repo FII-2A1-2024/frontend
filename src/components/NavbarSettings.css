@@ -10,7 +10,7 @@
 
   }
   
-  .navbar-container {
+  .navbar-container-settings {
     position: sticky;
     padding: 10px;
     width: 302px;
@@ -105,7 +105,7 @@
   }
   
   @media screen and (max-width: 768px) {
-    .navbar-container {
+    .navbar-container-settings {
       width: 100%; 
       margin-left: 0;
     }
