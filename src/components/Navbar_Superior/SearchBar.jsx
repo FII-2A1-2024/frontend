@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './SearchBar.css';
-import searchIcon from "./media/searchIcon.svg"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./SearchBar.css";
+import searchIcon from "./media/searchIcon.svg";
+import { useTranslation } from "react-i18next";
 function SearchBar() {
+  const { t } = useTranslation();
+
   // Starea care reține valoarea introdusă în bara de căutare
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Funcție care este apelată de fiecare dată când utilizatorul introduce sau șterge text în câmpul de căutare
   const handleSearchInputChange = (event) => {
@@ -13,15 +16,15 @@ function SearchBar() {
   };
 
   const [filters, setFilters] = useState({
-    category: 'All',
-    in: ['Title', 'Content'],
-    sort: 'Newest'
+    category: "All",
+    in: ["Title", "Content"],
+    sort: "Newest",
   });
 
   return (
     <div className="search-container">
       <form className="search-form">
-      <img src={searchIcon} alt="Search" className="search-icon" />
+        <img src={searchIcon} alt="Search" className="search-icon" />
         {/* 
           Câmpul de căutare unde utilizatorul poate introduce text
           Valoarea câmpului este mereu aceeași cu valoarea stării searchQuery
@@ -29,27 +32,31 @@ function SearchBar() {
         */}
         <input
           type="text"
-          placeholder="Search IncogniTalk"
+          placeholder={t("searchBar")}
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
-        {searchQuery.trim() !== '' && (
+        {searchQuery.trim() !== "" && (
           <>
             <Link
               to={{
                 pathname: `/searchBy/${encodeURIComponent(searchQuery)}`,
-                state: filters
+                state: filters,
               }}
             >
-              <button type="submit" style={{ display: 'none' }} aria-hidden="true">Search</button>
+              <button
+                type="submit"
+                style={{ display: "none" }}
+                aria-hidden="true"
+              >
+                {t("search")}
+              </button>
             </Link>
           </>
         )}
-
       </form>
     </div>
   );
 }
 
 export default SearchBar;
-

@@ -1,9 +1,9 @@
-.landing-page{
-  display:flex;
+.landing-page {
+  display: flex;
   flex-direction: column;
 }
 
-.landing-navbar-superior{
+.landing-navbar-superior {
   display: flex;
   position: relative;
 }
@@ -15,7 +15,6 @@
   gap: 30px;
   top: 65px;
   position: relative;
-  
 }
 
 .landing-posts-content {
@@ -33,10 +32,10 @@
 }
 
 .landing-sidebar {
-  flex: 0 0 300px; 
- /* position: fixed;*/
- position: relative;
- /* top: 65px;*/
+  flex: 0 0 300px;
+  /* position: fixed;*/
+  position: relative;
+  /* top: 65px;*/
   width: 300px;
   margin-right: 10px;
 }
@@ -49,4 +48,3 @@
   width: 340px;
   padding-top: 30px;
 }
-

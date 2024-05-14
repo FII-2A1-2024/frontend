@@ -15,31 +15,27 @@ function LandingPage() {
   };
 
   return (
-  
-  <div className="landing-page">
-    
-       <Navbar_superior toggleNavbar={toggleNavbar} />
-    
-    <div className="landing-page-content">
-        { showNavbar && <div className="landing-sidebar"> 
-         <Navbar />
-        </div>}
+    <div className="landing-page">
+      <Navbar_superior toggleNavbar={toggleNavbar} />
+
+      <div className="landing-page-content">
+        {showNavbar && (
+          <div className="landing-sidebar">
+            <Navbar />
+          </div>
+        )}
         <div className="landing-main-content">
-
-        <div className="landing-posts-content">
-          {<CreatePost />}
-          {<PostList />}
-        </div>
-
+          <div className="landing-posts-content">
+            {<CreatePost />}
+            {<PostList />}
+          </div>
         </div>
         <div className="landing-side-containers">
-           <SideBarChats /> <News />
+          <SideBarChats /> <News />
         </div>
-
+      </div>
     </div>
-  </div>
-);
-  
+  );
 }
 
 export default LandingPage;

@@ -5,13 +5,13 @@ import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
 import Navbar from "../components/SideNavbar/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats"
+import SideBarChats from "../components/SideBarChats/SideBarChats";
 import Comments from "../components/comments/Comments";
 import "../styles/PostPage.css";
 
 const PostPage = () => {
   const [post, setPost] = useState([]);
-  const {postId} = useParams();
+  const { postId } = useParams();
 
   const postIdInt = parseInt(postId, 10);
   const currentUserId = parseInt(localStorage.getItem("UserId"), 10);
@@ -25,10 +25,10 @@ const PostPage = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-      console.log("This is the post: ", post)
+    console.log("This is the post: ", post);
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     console.log("This is the post:", post);
   }, [post]); // Log post whenever it changes
 
@@ -36,20 +36,21 @@ const PostPage = () => {
   const toggleNavbar = () => {
     setShowNavbar(!showNavbar);
   };
-  
+
   return (
     <div className="landing-page">
-    
-    <Navbar_superior toggleNavbar={toggleNavbar} />
- 
-      <div className="landing-page-content">
-          { showNavbar && <div className="landing-sidebar"> 
-            <Navbar />
-          </div>}
-          <div className="landing-main-content">
+      <Navbar_superior toggleNavbar={toggleNavbar} />
 
-            <div className="landing-posts-content">
-              {<Post
+      <div className="landing-page-content">
+        {showNavbar && (
+          <div className="landing-sidebar">
+            <Navbar />
+          </div>
+        )}
+        <div className="landing-main-content">
+          <div className="landing-posts-content">
+            {
+              <Post
                 key={post.id}
                 id={post.id}
                 userName={`User ${post.author_id}`}
@@ -59,22 +60,20 @@ const PostPage = () => {
                 commentsCount={post.comments_count}
                 category={post.category}
                 file={post.url}
-              />   }
-              <Comments currentUserId={currentUserId} postId={postIdInt} />
-            </div>
-
+              />
+            }
+            <Comments currentUserId={currentUserId} postId={postIdInt} />
           </div>
-          <div className="landing-side-containers">
-              <SideBarChats /> <News />
-          </div>
-
+        </div>
+        <div className="landing-side-containers">
+          <SideBarChats /> <News />
+        </div>
       </div>
-</div>
+    </div>
   );
 };
 
 export default PostPage;
-
 
 /* <div className="post-page">
       <Navbar_superior />

@@ -8,6 +8,7 @@ import forgot from "../media/icons/forgot.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
 import socket from "../socket";
+import { useTranslation } from "react-i18next";
 
 /* ************************************
 1. npm install nodemon
@@ -29,6 +30,18 @@ import socket from "../socket";
 ************************************ */
 
 function ConnectPage() {
+  const {
+    t,
+    i18n: { changeLanguage, language },
+  } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const handleChangeLanguage = () => {
+    const newLanguage = currentLanguage == "en" ? "ro" : "en";
+    setCurrentLanguage(newLanguage);
+    changeLanguage(newLanguage);
+    localStorage.setItem("language", newLanguage);
+  };
+
   const name = "Ugly Button";
   const [action, setAction] = useState("Log in");
   const [username, setUsername] = useState("");
@@ -40,6 +53,8 @@ function ConnectPage() {
   const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
+    changeLanguage(localStorage.getItem("language"));
+
     if (action == "Log in") {
       handleHomePageButtonClick();
     }
@@ -92,7 +107,7 @@ function ConnectPage() {
       const userData = {
         email: email,
         password: password,
-        socket: socket.id
+        socket: socket.id,
       };
       const data = JSON.stringify(userData);
 
@@ -218,9 +233,7 @@ function ConnectPage() {
                     <img src={Homepage} alt="Homepage Image" />
                   </div>
                   <div className="mt-5 w-[354px] max-sm:w-[300px]">
-                    <h1 className="max-md:text-4xl h1">
-                      Ne bucurăm să te vedem
-                    </h1>
+                    <h1 className="max-md:text-4xl h1">{t("loginSignupH1")}</h1>
                     <p className="p py-3 text-gray-400">
                       Bine ai venit pe platforma noastră! Pentru a continua, te
                       rugăm să te loghezi sau să te înregistrezi
@@ -276,17 +289,17 @@ function ConnectPage() {
               <div className="max-sm:w-4/5 w-[485px] h-[600px] m-auto">
                 <div>
                   <div className="flex flex-row">
-                    <cap-text>INREGISTREAZA-TE ACUM</cap-text>
+                    <cap-text>{t("signUpThing")}</cap-text>
                   </div>
                   <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                    Alătură-te acum comunității noastre
+                    {t("signUpGreeting")}
                   </p>
                   <div className="mb-5 flex flex-row">
                     <p
                       className=" text-base font-normal pr-1 mt-2"
                       htmlFor="signedAlready"
                     >
-                      Ai deja un cont?
+                      {t("signUpQuestion")}
                     </p>
                     <button
                       type="button"
@@ -297,7 +310,7 @@ function ConnectPage() {
                         setEmailError(false);
                       }}
                     >
-                      Log in
+                      {t("loginButton")}
                     </button>
                   </div>
                 </div>
@@ -341,7 +354,7 @@ function ConnectPage() {
                       className="font-bold block my-3  text-lg font-medium text-left text-black"
                       htmlFor="password"
                     >
-                      Password
+                      {t("password")}
                     </label>
                     <input
                       type="password"
@@ -373,7 +386,7 @@ function ConnectPage() {
                       className="font-bold block my-3 text-lg font-medium text-left text-black"
                       htmlFor="confirmPassword"
                     >
-                      Confirm Password
+                      {t("confirmPassword")}
                     </label>
                     <input
                       type="password"
@@ -411,7 +424,7 @@ function ConnectPage() {
                         setAction("Sign up");
                       }}
                     >
-                      Sign up
+                      {t("signUpButton")}
                     </button>
                   </div>
                 </div>
@@ -431,12 +444,13 @@ function ConnectPage() {
 
             <div className="right-half">
               <div className="upper-text">
-                <cap-text> Începe bârfa </cap-text>
+                <cap-text>{t("startGossip")}</cap-text>
+
                 <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                  Bine ai revenit
+                  {t("loginGreeting")}
                 </p>
                 <p id="p">
-                  Încă nu ai un cont? &nbsp;
+                  {t("loginQuestion")}
                   <a
                     href="#"
                     id="link"
@@ -446,7 +460,7 @@ function ConnectPage() {
                       setPasswordError(false);
                     }}
                   >
-                    Sign up
+                    {t("signUpButton")}
                   </a>
                 </p>
               </div>
@@ -470,7 +484,7 @@ function ConnectPage() {
                     }`}
                   />
                 </label>
-                <h5 id="h5">Password</h5>
+                <h5 id="h5">{t("password")}</h5>
                 <label className="passwordLabel">
                   <input
                     type="password"
@@ -485,7 +499,7 @@ function ConnectPage() {
                 </label>
                 <div id="forgetPassword">
                   <button type="button" onClick={handleForgot}>
-                    Forgot password?
+                    {t("forgotButton")}
                   </button>
                 </div>
                 <button
@@ -495,7 +509,7 @@ function ConnectPage() {
                   onClick={() => setAction("Log in")}
                 >
                   {" "}
-                  Log in{" "}
+                  {t("loginButton")}{" "}
                 </button>
               </form>
             </div>
@@ -508,11 +522,8 @@ function ConnectPage() {
                 <img src={Homepage} alt="Homepage Image" />
               </div>
               <div className="text-content">
-                <h1 id="h1">Ne bucurăm să te vedem</h1>
-                <p id="p">
-                  Bine ai venit pe platforma noastră! Pentru a continua, te
-                  rugăm să te loghezi sau să te înregistrezi
-                </p>
+                <h1 id="h1">{t("loginSignupH1")}</h1>
+                <p id="p">{t("loginSignupp")}</p>
               </div>
               <div className="buttons">
                 <button
@@ -521,7 +532,7 @@ function ConnectPage() {
                   onClick={handleHomePageButtonClick}
                   type="button"
                 >
-                  Log in
+                  {t("loginButton")}
                 </button>
                 <button
                   className="signup-btn"
@@ -531,7 +542,7 @@ function ConnectPage() {
                     setAction("Sign up", handleHomePageButtonClick2);
                   }}
                 >
-                  Sign up
+                  {t("signUpButton")}
                 </button>
               </div>
             </div>
@@ -550,12 +561,12 @@ function ConnectPage() {
 
             <div className="right-half">
               <div className="upper-text">
-                <cap-text> Începe bârfa </cap-text>
+                <cap-text>{t("startGossip")}</cap-text>
                 <p className="leading-tight text-5xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                  Bine ai revenit
+                  {t("loginGreeting")}
                 </p>
                 <p id="p">
-                  Încă nu ai un cont? &nbsp;
+                  {t("loginQuestion")}
                   <a
                     href="#"
                     id="link"
@@ -565,7 +576,7 @@ function ConnectPage() {
                       setPasswordError(false);
                     }}
                   >
-                    Sign up
+                    {t("signUpButton")}
                   </a>
                 </p>
               </div>
@@ -589,7 +600,7 @@ function ConnectPage() {
                     }`}
                   />
                 </label>
-                <h5 id="h5">Password</h5>
+                <h5 id="h5">{t("password")}</h5>
                 <label className="passwordLabel">
                   <input
                     type="password"
@@ -604,7 +615,7 @@ function ConnectPage() {
                 </label>
                 <div id="forgetPassword">
                   <button type="button" onClick={handleForgot}>
-                    Forgot password?
+                    {t("forgotButton")}
                   </button>
                 </div>
                 <button
@@ -616,7 +627,7 @@ function ConnectPage() {
                   }
                 >
                   {" "}
-                  Log in{" "}
+                  {t("loginButton")}{" "}
                 </button>
               </form>
             </div>
@@ -632,18 +643,15 @@ function ConnectPage() {
             />
             <div className="w-[496px] h-[213px] mx-auto flex flex-col justify-between items-center max-lg:h-[192px] max-lg:w-[496px] max-sm:h-[197px] max-sm:w-[320px]">
               <p className="h1-dc max-lg:text-4xl max-sm:text-2xl text-5xl font-semibold">
-                Confirma Email-ul
+                {t("confirm")}
               </p>
-              <p className="h1-dc max-lg:text-sm">
-                Buna! Ești aproape gata să folosești platforma noastră. Tot ce
-                ți a rămas este să urmezi linkul primit pe poșta ta electronică.
-              </p>
+              <p className="h1-dc max-lg:text-sm">{t("confirmp")}</p>
               <button
                 type="button"
                 onClick={() => setAction("Log in")}
                 className="login-btn h1-dc w-[217px]"
               >
-                Verifica email-ul
+                {t("confirmButton")}
               </button>
             </div>
           </div>
@@ -658,18 +666,15 @@ function ConnectPage() {
             />
             <div className="w-[496px] h-[213px] mx-auto flex flex-col justify-between items-center max-lg:h-[192px] max-lg:w-[496px] max-sm:h-[197px] max-sm:w-[320px]">
               <p className="h1-dc max-lg:text-4xl max-sm:text-2xl text-5xl font-semibold">
-                Verifica Email-ul
+                {t("confirmButton")}
               </p>
-              <p className="h1-dc max-lg:text-sm">
-                Buna! Ești aproape gata să resetezi parola. Tot ce ți a rămas
-                este să urmezi linkul primit pe poșta ta electronică.
-              </p>
+              <p className="h1-dc max-lg:text-sm">{t("confirmp")}</p>
               <button
                 type="button"
                 onClick={() => setAction("Log in")}
                 className="login-btn h1-dc w-[217px]"
               >
-                Verifica email-ul
+                {t("confirmButton")}
               </button>
             </div>
           </div>
@@ -689,12 +694,11 @@ function ConnectPage() {
               <div className="max-sm:w-4/5 w-[485px]  m-auto flex flex-col justify-center">
                 <div>
                   <p className="text-4xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                    Ai uitat parola?
+                    {t("forgotButton")}
                   </p>
                   <div className="mb-5 flex flex-row">
                     <p className=" text-base font-normal pr-1 mt-4 text-left">
-                      Te rugam sa introduci mai jos mail-ul cu care te ai
-                      conectat pentru a putea recupera parola.
+                      {t("forgotp")}
                     </p>
                   </div>
                 </div>
@@ -739,17 +743,17 @@ function ConnectPage() {
                       id="signup-btn"
                       onClick={handleChange}
                     >
-                      Reseteaza parola
+                      {t("resetPassword")}
                     </button>
                     <div className="mb-5 flex flex-row justify-center">
                       <p className=" text-base font-normal pr-1 text-left">
-                        Intoarce-te la pagina de<> </>
+                        {t("resetBack")}
                         <button
                           type="button"
                           onClick={handleBack}
                           className="text-red-700 font-semibold"
                         >
-                          Log in
+                          {t("loginButton")}
                         </button>
                       </p>
                     </div>
