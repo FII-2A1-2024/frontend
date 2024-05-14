@@ -49,7 +49,7 @@ function Navbar() {
 
         <div className={`side-bar-item ${activeItem === 'popular' ? 'active' : ''}`} onClick={() => handleItemClick('popular')}>
           <img src={activeItem === 'popular' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
-          <Link to='/' className="navbar-link">Popular</Link>
+          <Link to='/main' className="navbar-link">Popular</Link>
         </div>
 
         <div className="break"></div>
