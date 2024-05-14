@@ -18,4 +18,5 @@ i18n.use(initReactI18next).init({
     ro: { ...roJSON },
   },
   lng: localStorage.getItem("language"), // Set the initial language of the App
+  fallbackLng: 'en',
 });
