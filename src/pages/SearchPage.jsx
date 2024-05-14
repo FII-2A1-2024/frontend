@@ -3,8 +3,8 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import Fuse from 'fuse.js';
 
-import Navbar_superior from "../components/Navbar_superior";
-import Navbar from "../components/Navbar";
+import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
+import Navbar from "../components/SideNavbar/Navbar";
 import News from "../components/news/News";
 import SideBarChats from "../components/SideBarChats/SideBarChats";
 import MultiSelect from "../components/SearchFilters/Multiselect";
@@ -139,18 +139,30 @@ const SearchPage = () => {
     }, [posts, category, searchIn, orderBy, searchKey]);
 
 
+    /*toggle menu--> hide sidebar, dont delete this */
+    const [showNavbar, setShowNavbar] = useState(true);
+    const toggleNavbar = () => {
+      setShowNavbar(!showNavbar);
+    };
+
     return (
         <div className="landing-page">
-            <Navbar_superior />
-            <div className="landing-content">
+    
+           <Navbar_superior toggleNavbar={toggleNavbar} />
+    
+            <div className="landing-page-content">
+                { showNavbar && <div className="landing-sidebar"> 
                 <Navbar />
-                <div className="landing-main-content">
+                </div>}
+                    <div className="landing-main-content">
+
+                    <div className="landing-posts-content">
                     <div className='search-filter-container'>
                         {/* <p className="search-filter-title">Filter</p> */}
-                        <div className="search-filter-parent">
+                         <div className="search-filter-parent">
                             <form action="" className='search-filter-form' label="search-filter" name="search-filter">
-                                <div className="search-filter-child">
-                                    <BasicSelect title={'Category'}
+                                 <div className="search-filter-child">
+                                     <BasicSelect title={'Category'}
                                         values={['All', 'Courses', 'Professors', 'Students', 'Unrelated', 'Memes', 'Jobs']}
                                         onSelect={setCategory}
                                         selectedOption={category} />
@@ -198,13 +210,20 @@ const SearchPage = () => {
                     ) : (
                         <div className="empty-posts-message" style={{ marginTop: '2rem' }}>There are no posts matching your search criteria :(</div>
                     )}
+                    </div>
                 </div>
-                <div className="side-containers">
-                    <SideBarChats /> <News />
+                <div className="landing-side-containers">
+                <SideBarChats /> <News />
                 </div>
+
             </div>
-        </div >
+
+
+           
+  </div>
     );
 }
 
 export default SearchPage;
+
+

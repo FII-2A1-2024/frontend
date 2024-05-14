@@ -4,7 +4,7 @@ Ciprian 5 apr & 29 apr
 
 import { Outlet, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import Navbar_superior from "../components/Navbar_superior";
+import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
 import ChatList from "../components/Messages/ChatList";
 import general from '../components/Messages/general.module.css';
 import '../components/Messages/ChatList.css'

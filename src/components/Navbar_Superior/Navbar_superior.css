@@ -1,0 +1,122 @@
+.navbar_superior {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  width: 100%;
+  max-height: 65px;
+  border: 0px 0px 1px 0px;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid #E0C9C9;
+}
+
+.navbar-superior-container {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.small-screen-navbar-left-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+
+}
+.hamburger-menu {
+  display: fixed;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger-menu .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #200000;
+  margin: 5px auto;
+  transition: transform 0.3s ease;
+}
+
+.logo-mascota {
+  display: none;
+}
+.logo-full {
+  height: 100%;
+  cursor: pointer;
+}
+
+.right-buttons-nav-superior {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.searchButton-navbar {
+  display: flex;
+  align-items: center;
+}
+
+.searchIconNavbar {
+  display: none;
+}
+.messagesButton-navbar {
+  display: flex;
+  align-items: center;
+}
+
+.messagesIcon {
+  cursor: pointer;
+}
+
+.notificationsIcon {
+  cursor: pointer;
+}
+
+.profileHolderNavSuperior {
+  cursor: pointer;
+}
+
+.nav-superior-button-primary {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #FCFBFB;
+  background-color: #850000;
+  padding: 10px 28px;
+  border-radius: 8px;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .small-screen-navbar-left-items {
+    gap: 8px;
+
+  }
+
+  .logo-full {
+    display: none;
+  }
+
+  .logo-mascota {
+    display: block;
+  }
+
+  .searchIconNavbar {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-superior-button-primary {
+    display: none;
+  }
+
+  .right-buttons-nav-superior {
+    gap: 8px;
+  }
+}
