@@ -1,44 +1,45 @@
 .side_bar_chats_body {
-    /* Side bar-chats */
-   /* position: absolute;*/
-    width: 340px;
-    max-height: 300px;
-    right: 25px;
-    top: 100px;
-    overflow-y: auto;
-    overflow-x: hidden;
+  /* Side bar-chats */
+  /* position: absolute;*/
+  position: fixed;
+  width: 340px;
+  max-height: 300px;
+  right: 10px;
+  /* top: 100px;*/
+  overflow-y: auto;
+  overflow-x: hidden;
 
-    /* Auto layout */
-    display: inline-block;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 24px;
+  /* Auto layout */
+  display: inline-block;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 24px;
 
-    box-sizing: border-box;
-    /* primary dark red/primary-200 */
-    border: 1px solid rgb(224, 201, 201);
-    border-radius: 20px;
+  box-sizing: border-box;
+  /* primary dark red/primary-200 */
+  border: 1px solid rgb(224, 201, 201);
+  border-radius: 20px;
 
-    /* primary dark red/Background-color */
-    background: rgb(250, 250, 250);
+  /* primary dark red/Background-color */
+  background: rgb(250, 250, 250);
 }
 
 .SideBarChats::-webkit-scrollbar {
-    width: 10px; /* lățimea scrollbarului */
-  }
-  
-  .SideBarChats::-webkit-scrollbar-thumb {
-    background-color: #aaa; /* culoarea de fundal a thumb-ului (mânerului) scrollbarului */
-    border-radius: 5px; /* border radius */
-  }
-  
-  .SideBarChats::-webkit-scrollbar-thumb:hover {
-    background-color: #888; /* culoarea thumb-ului atunci când este hover */
-  }
+  width: 10px; /* lățimea scrollbarului */
+}
+
+.SideBarChats::-webkit-scrollbar-thumb {
+  background-color: #aaa; /* culoarea de fundal a thumb-ului (mânerului) scrollbarului */
+  border-radius: 5px; /* border radius */
+}
+
+.SideBarChats::-webkit-scrollbar-thumb:hover {
+  background-color: #888; /* culoarea thumb-ului atunci când este hover */
+}
 
 @media screen and (max-width: 1500px) {
-    .side_bar_chats_body {
-        display: none;
-      }
+  .side_bar_chats_body {
+    display: none;
   }
+}

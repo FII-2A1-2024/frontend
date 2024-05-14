@@ -5,25 +5,36 @@ import "./News.css"; // Importă fișierul CSS pentru stilizarea știrilor
 
 function News() {
   const [articles, setArticles] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("https://newsapi.org/v2/everything", {
+    const fetchNews= async () => {
+      try{
+      const response = await axios.get("https://api.currentsapi.services/v1/latest-news", {
         params: {
-          q: "computer science",
-          sources: "bbc-news",
-          apiKey: "bfa7c2b03e764ef4afcab8d54f83467c",
+          language: 'en',
+          country: 'US',
+          category: 'technology',
+          apiKey: 'X1TaQkHIhvK2rMvpirkmNH6ViF12k0rWOotbzmkQzpE3y6g3',
         },
       });
-      setArticles(response.data.articles);
-    };
-
-    fetchData();
+      setArticles(response.data.news.slice(0, 4));
+      setLoading(false);
+    }
+    catch(error){
+      console.error('Error fetching news:' , error);
+    }
+  };
+    fetchNews();
   }, []);
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="news_body">
-      <h2>News</h2>
+      <h2 className="news_title">News</h2>
       <ul>
         {articles.map((article, index) => (
           <li key={index}>

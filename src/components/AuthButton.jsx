@@ -5,9 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
 function AuthButton() {
-  const {
-    t,
-  } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="auth-buttons">

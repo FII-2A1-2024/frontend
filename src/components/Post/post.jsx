@@ -24,9 +24,7 @@ import blockSVG from "./EditPost/icons/block.svg";
 import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
-
 import { useTranslation } from "react-i18next";
-
 const Post = ({
   id,
   authorId,
@@ -45,9 +43,7 @@ const Post = ({
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [message, setMessage] = useState("");
   const userId = parseInt(localStorage.getItem("UserId"), 10);
-
   const { t } = useTranslation();
-
   useEffect(() => {
     if (initialVote > upVotesCount) {
       setVoted("upVote");
@@ -248,7 +244,7 @@ const Post = ({
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
           <Link to="/messages" style={{ color: "black" }}>
-            <h2>{userName}</h2>
+            <p>{userName}</p>
           </Link>
         </div>
 

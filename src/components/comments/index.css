@@ -10,6 +10,11 @@
   margin-top: 20px;
   font-family: "Poppins", "sans-serif";
   max-width: 801px;
+  margin-bottom: 20px;
+}
+
+.comments{
+  width: 801px;
 }
 
 .comments{

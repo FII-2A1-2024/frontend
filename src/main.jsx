@@ -76,6 +76,10 @@ const router = createBrowserRouter([
     path: "/searchBy/:searchKey",
     element: <SearchPage />,
   },
+  {
+    path: "*", // Definim o rută implicită pentru NotFoundPage
+    element: <NotFoundPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 
 const CreatePost = (userName) => {
   const { t } = useTranslation();
-
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
 
