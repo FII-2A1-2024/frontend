@@ -88,7 +88,7 @@ function Navbar() {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/" className="navbar-link">
+              <Link to="/settings/languages" className="navbar-link">
                 {t("settings")}
               </Link>
             </li>

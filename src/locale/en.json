@@ -48,6 +48,12 @@
     "resetp": "Please enter your new password in the two fields and make sure you don't forget it.",
     "comment": "Comment",
     "addComment": "Add a comment...",
-    "reply": "Reply"
+    "reply": "Reply",
+    "switch": "Switch the language",
+    "langSet": "Language settings",
+    "account": "Account",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "languages": "languages"
   }
 }

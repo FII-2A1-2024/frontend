@@ -48,6 +48,12 @@
     "resetp": "Te rugam sa introduci noua ta parola in cele doua campuri si vezi sa nu o uiti.",
     "comment": "Comenteaza",
     "addComment": "Adauga un comentariu...",
-    "reply": "Raspunde"
+    "reply": "Raspunde",
+    "switch": "Schimba limba",
+    "langSet": "Setari limba",
+    "account": "Cont",
+    "notifications": "Notificari",
+    "privacy": "Intimitate",
+    "languages": "limbi"
   }
 }
