@@ -11,7 +11,7 @@ const PostList = () => {
 
   const handleDelete = (postId) => {
     axios
-      .delete(`http://localhost:3000/posts?id=${postId}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
       .then((response) => {
         setPosts(posts.filter((post) => post.id !== postId));
       })
@@ -22,7 +22,7 @@ const PostList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/posts/all")
+      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
       .then((response) => {
         getAll(response.data.posts);
       })

@@ -67,7 +67,7 @@ const Post = ({
 
   const updateVoteCount = (postId, voteCount) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: postId,
         votes: voteCount,
       })
@@ -89,7 +89,7 @@ const Post = ({
 
   const handleConfirmDelete = () => {
     axios
-      .delete(`http://localhost:3000/posts?id=${id}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${id}`)
       .then((response) => {
         console.log("Post deleted successfully");
         window.location.reload();
@@ -123,7 +123,7 @@ const Post = ({
 
   const updateTitle = (new_title) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         title: new_title,
       })
@@ -137,7 +137,7 @@ const Post = ({
 
   const updateContent = (new_content) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         description: new_content,
       })
@@ -151,7 +151,7 @@ const Post = ({
 
   const updateCategory = (new_category) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         category: new_category,
       })
@@ -169,7 +169,7 @@ const Post = ({
     formData.append("file", new_file);
 
     axios
-      .put(`http://localhost:3000/posts`, formData, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -188,7 +188,7 @@ const Post = ({
 
   const handleFollow = () => {
     axios
-      .post(`http://localhost:3000/postFollow`, {
+      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
         user_id: userId,
         post_id: id,
       })
@@ -206,7 +206,7 @@ const Post = ({
 
   const handleReport = () => {
     /*axios
-      .post(`http://localhost:3000/postFollow`, {
+      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
         user_id: 5,
         post_id: 20,
       })
@@ -225,7 +225,7 @@ const Post = ({
   };
 
   const handleShare = () => {
-    const postUrl = `http://localhost:3000/post/${id}`;
+    const postUrl = `${import.meta.env.VITE_URL_BACKEND}/post/${id}`;
 
     navigator.clipboard
       .writeText(postUrl)

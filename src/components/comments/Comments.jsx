@@ -66,7 +66,7 @@ const Comments = ({ currentUserId, postId }) => {
         setBackendComments(updatedComments);
         setActiveComment(null);
         await axios
-          .put(`http://localhost:3000/comments`, {
+          .put(`${import.meta.env.VITE_URL_BACKEND}/comments`, {
             id: commentId,
             description: updateData.description,
           })
@@ -80,7 +80,7 @@ const Comments = ({ currentUserId, postId }) => {
         setBackendComments(updatedComments);
         setActiveComment(null);
         await axios
-          .put(`http://localhost:3000/comments`, {
+          .put(`${import.meta.env.VITE_URL_BACKEND}/comments`, {
             id: commentId,
             votes: updateData.votes,
           })
@@ -103,7 +103,7 @@ const Comments = ({ currentUserId, postId }) => {
       deleteExistentComment(updatedComments, parent_id, commentId);
       setBackendComments(updatedComments);
 
-      await axios.delete(`http://localhost:3000/comments?id=${commentId}`);
+      await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/comments?id=${commentId}`);
       fetchComments(postId);
     } catch (error) {
       console.error("Error:", error);

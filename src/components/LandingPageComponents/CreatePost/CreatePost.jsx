@@ -24,7 +24,7 @@ const CreatePost = (userName) => {
     formData.append("category", category);
     formData.append("file", file);
     axios
-      .post(`http://localhost:3000/posts`, formData, {
+      .post(`${import.meta.env.VITE_URL_BACKEND}/posts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

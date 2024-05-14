@@ -82,7 +82,7 @@ function ConnectPage() {
       const data = JSON.stringify(userData);
 
       //api signup
-      fetch("http://localhost:3000/signup", {
+      fetch(`${import.meta.env.VITE_URL_BACKEND}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +112,7 @@ function ConnectPage() {
       const data = JSON.stringify(userData);
 
       //api login
-      fetch("http://localhost:3000/login", {
+      fetch(`${import.meta.env.VITE_URL_BACKEND}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -195,7 +195,7 @@ function ConnectPage() {
       };
       const data = JSON.stringify(userData);
 
-      fetch("http://localhost:3000/resetPass", {
+      fetch(`${import.meta.env.VITE_URL_BACKEND}/resetPass`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
