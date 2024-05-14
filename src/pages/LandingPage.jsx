@@ -19,10 +19,12 @@ function LandingPage() {
       <Navbar_superior toggleNavbar={toggleNavbar} />
       <div className="landing-content">
         {showNavbar && <Navbar />}
-        <SideBarChats /> <News />
         <div className="landing-main-content">
           <CreatePost />
           <PostList />
+        </div>
+        <div className="side-containers">
+          <SideBarChats /> <News />
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SearchBar.css';
 import searchIcon from "./media/searchIcon.svg"
 function SearchBar() {
@@ -10,6 +11,12 @@ function SearchBar() {
     // Actualizează valoarea stării searchQuery cu textul introdus de utilizator
     setSearchQuery(event.target.value);
   };
+
+  const [filters, setFilters] = useState({
+    category: 'All',
+    in: ['Title', 'Content'],
+    sort: 'Newest'
+  });
 
   return (
     <div className="search-container">
@@ -26,6 +33,19 @@ function SearchBar() {
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
+        {searchQuery.trim() !== '' && (
+          <>
+            <Link
+              to={{
+                pathname: `/searchBy/${encodeURIComponent(searchQuery)}`,
+                state: filters
+              }}
+            >
+              <button type="submit" style={{ display: 'none' }} aria-hidden="true">Search</button>
+            </Link>
+          </>
+        )}
+
       </form>
     </div>
   );

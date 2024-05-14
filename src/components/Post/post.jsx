@@ -20,22 +20,29 @@ import shareSVG from "./icons/share.svg";
 import downVotesSVG from "./icons/shift_down.svg";
 import upVotesSVG from "./icons/shift_up.svg";
 import commentsSVG from "./icons/chat_bubble.svg";
+import blockSVG from "./EditPost/icons/block.svg";
+import editSVG from "./EditPost/icons/edit.svg";
+import flagSVG from "./EditPost/icons/flag.svg";
+import frameSVG from "./EditPost/icons/Frame.svg";
 
 const Post = ({
   id,
+  authorId,
   userName,
   title,
   content,
   upVotesCount,
   commentsCount,
   category,
+  file,
 }) => {
   const [voted, setVoted] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
-  //const userId = getCurrentUserIdFromCookies();
+  const [message, setMessage] = useState("");
+  const userId = parseInt(localStorage.getItem("UserId"), 10);
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -101,10 +108,16 @@ const Post = ({
     setShowEditPopup(true);
   };
 
-  const handleSave = (editedTitle, editedContent, editedCategory) => {
+  const handleSave = (
+    editedTitle,
+    editedContent,
+    editedCategory,
+    editedFile
+  ) => {
     updateTitle(editedTitle);
     updateContent(editedContent);
     updateCategory(editedCategory);
+    updateFile(editedFile);
     window.location.reload();
   };
 
@@ -150,8 +163,78 @@ const Post = ({
       });
   };
 
+  const updateFile = (new_file) => {
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("file", new_file);
+
+    axios
+      .put(`http://localhost:3000/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("Post file updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating post file:", error);
+      });
+  };
+
   const handleCancel = () => {
     setShowEditPopup(false);
+  };
+
+  const handleFollow = () => {
+    axios
+      .post(`http://localhost:3000/postFollow`, {
+        user_id: userId,
+        post_id: id,
+      })
+      .then((response) => {
+        console.log("Post saved successfully");
+        setMessage("Post saved successfully");
+        setMenuVisible(false);
+      })
+      .catch((error) => {
+        console.error("Error saving post:", error);
+        setMessage("Error saving post");
+        setMenuVisible(false);
+      });
+  };
+
+  const handleReport = () => {
+    /*axios
+      .post(`http://localhost:3000/postFollow`, {
+        user_id: 5,
+        post_id: 20,
+      })
+      .then((response) => {
+        console.log("Post saved successfully");
+        setMessage("Post saved successfully");
+        setMenuVisible(false);
+      })
+      .catch((error) => {
+        console.error("Error saving post:", error);
+        setMessage("Error saving post");
+        setMenuVisible(false);
+      });*/
+      setMessage("Post reported successfully");
+      setMenuVisible(false);
+  };
+
+  const handleShare = () => {
+    const postUrl = `http://localhost:3000/post/${id}`;
+
+    navigator.clipboard.writeText(postUrl)
+      .then(() => {
+        console.log("Post URL copied to clipboard:", postUrl);
+        alert("Post URL copied to clipboard!");
+      })
+      .catch((error) => {
+        console.error("Error copying post URL to clipboard:", error);
+      });
   };
 
   return (
@@ -159,7 +242,7 @@ const Post = ({
       <div className="postHeader">
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
-          <Link to="/conversation" style={{ color: "black" }}>
+          <Link to="/messages" style={{ color: "black" }}>
             <h2>{userName}</h2>
           </Link>
         </div>
@@ -172,40 +255,58 @@ const Post = ({
           <button onClick={toggleMenu} button="true">
             <img src={threeDots} alt="ThreeDots" />
           </button>
-          {menuVisible && (
+
+          {message && <div className="btn_message">{message}</div>}
+
+          {userId === authorId && menuVisible && (
             <div className="post_menu">
-              <button className="post_menu_btn">Report</button>
-              <button className="post_menu_btn">Save</button>
               <button className="post_menu_btn" onClick={handleEdit}>
+                <img
+                  src={editSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />
                 Edit
               </button>
               <button className="post_menu_btn" onClick={handleDelete}>
+                <img
+                  src={blockSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
                 Delete
               </button>
             </div>
           )}
 
-          {/* 
-          {userId === authorId && menuVisible && (
+          {userId !== authorId && menuVisible && (
             <div className="post_menu">
-              <button className="post_menu_btn">Edit</button>
-              <button className="post_menu_btn" onClick={handleDelete}>
-                Delete
+              <button className="post_menu_btn" onClick={handleReport}>
+                <img
+                  src={flagSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Report
+              </button>
+              <button className="post_menu_btn" onClick={handleFollow}>
+                <img
+                  src={frameSVG}
+                  alt="upVotes"
+                  className="post_menu_btn_icon"
+                />{" "}
+                Save
               </button>
             </div>
           )}
-          
-          {userId !== authorId && menuVisible && (
-            <div className="post_menu">
-              <button className="post_menu_btn">Report</button>
-          )}
-          */}
 
           {showEditPopup && (
             <EditPopup
+              id={id}
               currentCategory={category}
               currentContent={content}
               currentTitle={title}
+              currentFile={file}
               onSave={handleSave}
               onCancel={handleCancel}
             />
@@ -224,6 +325,29 @@ const Post = ({
       <div className="postArticle">
         <h1>{title}</h1>
         <p>{content} </p>
+        {file ? (
+          file.endsWith(".jpeg") ||
+          file.endsWith(".jpg") ||
+          file.endsWith(".png") ? (
+            <img src={file} alt="Image" className="postFile"/>
+          ) : file.endsWith(".mp4") ? (
+            <video controls className="postFile">
+              <source src={file} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : file.endsWith(".mp3") ? (
+            <audio controls>
+              <source src={file} type="audio/mpeg" />
+              Your browser does not support the audio tag.
+            </audio>
+          ) : (
+            <a href={file} target="_blank" rel="noopener noreferrer">
+              View file
+            </a>
+          )
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div className="feedback-section">
@@ -245,18 +369,17 @@ const Post = ({
         </div>
 
         {/* Comments Button*/}
-        <div className="feedback-container comm-btn">
-          <div className="btn">
-            <Link to={`/post/${id}`} style={{ color: "black" }}>
+        <Link to={`/post/${id}`} style={{ color: "black" }}>
+          <div className="feedback-container comm-btn">
+            <div className="btn">
               <img src={commentsSVG} alt="Comments" className="SVG" />
-            </Link>
+            </div>
+            <p>{commentsCount !== null ? commentsCount : 0}</p>
           </div>
-
-          <p>{commentsCount}</p>
-        </div>
+        </Link>
 
         {/* Shares Button */}
-        <div className="feedback-container">
+        <div className="feedback-container" onClick={handleShare}>
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
           </div>
