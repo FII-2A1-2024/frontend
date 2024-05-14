@@ -32,9 +32,51 @@ const PostPage = () => {
     console.log("This is the post:", post);
   }, [post]); // Log post whenever it changes
 
+  const [showNavbar, setShowNavbar] = useState(true);
+  const toggleNavbar = () => {
+    setShowNavbar(!showNavbar);
+  };
   
   return (
-    <div className="post-page">
+    <div className="landing-page">
+    
+    <Navbar_superior toggleNavbar={toggleNavbar} />
+ 
+      <div className="landing-page-content">
+          { showNavbar && <div className="landing-sidebar"> 
+            <Navbar />
+          </div>}
+          <div className="landing-main-content">
+
+            <div className="landing-posts-content">
+              {<Post
+                key={post.id}
+                id={post.id}
+                userName={`User ${post.author_id}`}
+                title={post.title}
+                content={post.description}
+                upVotesCount={post.votes}
+                commentsCount={post.comments_count}
+                category={post.category}
+                file={post.url}
+              />   }
+              <Comments currentUserId={currentUserId} postId={postIdInt} />
+            </div>
+
+          </div>
+          <div className="landing-side-containers">
+              <SideBarChats /> <News />
+          </div>
+
+      </div>
+</div>
+  );
+};
+
+export default PostPage;
+
+
+/* <div className="post-page">
       <Navbar_superior />
       <div className="post-content">
         <Navbar />
@@ -58,8 +100,4 @@ const PostPage = () => {
           <SideBarChats />  <News /> 
         </div>
       </div>
-    </div>
-  );
-};
-
-export default PostPage;
+    </div> */

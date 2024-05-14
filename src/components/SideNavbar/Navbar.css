@@ -1,9 +1,9 @@
   .navbar {
     display: block;
     position: fixed;
-    top: 65px;
-    left: 0;
-    z-index: 1000;
+   /* top: 65px;
+    left: 0;*/
+   /* z-index: 1000;*/
     transition: transform 0.3s ease-out;
   }
 
