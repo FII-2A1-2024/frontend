@@ -12,6 +12,9 @@ import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import SettingsPage from "./pages/settings/AccountSettingsPage.jsx";
+import LanguageSettings from "./pages/settings/LanguageSettingsPage.jsx";
+
 
 import "./index.css";
 
@@ -43,6 +46,16 @@ const router = createBrowserRouter([
       {
         path: "/messages/:messageId",
         element: <MessagePage />,
+      },
+    ],
+  },
+  {
+    path: "/settings",
+    element: <SettingsPage />,
+    children: [
+      {
+        path: "/settings/language",
+        element: <LanguageSettings />,
       },
     ],
   },
