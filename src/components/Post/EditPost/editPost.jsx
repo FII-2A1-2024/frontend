@@ -62,7 +62,7 @@ const EditPopup = ({
   };
 
   return (
-    <div className="popup">
+    <div className="popup_edit">
       {" "}
       <button className="X_btn" onClick={handleClose}>
         <img src={close} alt="close" />

@@ -3,8 +3,8 @@
     position: fixed;
     width: 340px;
     height:auto;
-   /* right: 24px;*/
-    top: 400px;
+    right: 10px;
+    top: 410px ;
 
     /* Auto layout */
     display: inline-block;
@@ -32,11 +32,6 @@
       }
   }
 
- /* @media screen and (max-height: 680px) {
-    .news_body {
-        display: none;
-      }
-      .article-link{
-        display: none;
-      }
-  }*/
+  .news_title{
+    margin-top: -3px !important ;
+}

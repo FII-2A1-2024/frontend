@@ -34,7 +34,7 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
   };
 
   return (
-    <div className="popup">
+    <div className="popup_create">
       <button className="X_btn" onClick={handleClose}>
         <img src={close} alt="close" />
       </button>
@@ -74,7 +74,7 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
         <input
             type="file"
             id="file"
-            className="upload_input"
+            className="upload_input_create"
             onChange={handleFileChange}
           />
         </div>

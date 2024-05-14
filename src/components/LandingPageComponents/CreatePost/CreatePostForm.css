@@ -1,4 +1,4 @@
-.popup {
+.popup_create {
     /* Edit post pop-up */
     position: fixed;
     top: 50%;
@@ -216,4 +216,10 @@ width: 14px;
 height: 14px;
 top: 20px;
 right: 30px;
+}
+
+.upload_input_create {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
 }
