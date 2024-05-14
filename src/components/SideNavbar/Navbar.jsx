@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-// import { useNavbarContext } from '../Navbar_Superior/NavbarContext';
 import './Navbar.css';
 import popularIconRed from "./icons-dark-red/popularIcon.svg"
 import coursesIconRed from "./icons-dark-red/coursesIcon.svg"
@@ -25,8 +24,6 @@ import settingsIconWhite from "./icons-white/settingsIcon-white.svg"
 
 function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
-  // const { isNavbarHidden } = useNavbarContext();
-
 
   const toggleMenu = () => {
     setIsHidden(!isHidden); // Inversăm valoarea lui isHidden
@@ -43,12 +40,17 @@ function Navbar() {
     <nav className="navbar" style={{ display: isHidden ? 'none' : 'block' }}>
       <div className="navbar-container">
         {/* Momentat este implementat dupa cum trebuie doar populars si rules tinand cont ca au linkuri. Daca le setez pe toate asa cum primul, se fac active toate ca nu au linkate ceva */}
-        <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
+        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
           <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
             <img src={location.pathname === '/' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Popular</span>
           </div>
-        </Link>
+        </Link> */}
+
+        <div className={`side-bar-item ${activeItem === 'popular' ? 'active' : ''}`} onClick={() => handleItemClick('popular')}>
+          <img src={activeItem === 'popular' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
+          <Link to='/' className="navbar-link">Popular</Link>
+        </div>
 
         <div className="break"></div>
         {/* Categories */}
@@ -142,12 +144,17 @@ function Navbar() {
 
         {/* Settings and other */}
 
-        <Link to='/rules' className="navbar-link" isActive={(match, location) => location.pathname === '/rules'}>
+        {/* <Link to='/rules' className="navbar-link" isActive={(match, location) => location.pathname === '/rules'}>
           <div className={`side-bar-item ${location.pathname === '/rules' ? 'active' : ''}`}>
             <img src={location.pathname === '/rules' ? rulesIconWhite : rulesIconRed} alt="rulesIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Rules</span>
           </div>
-        </Link>
+        </Link> */}
+
+        <div className={`side-bar-item ${activeItem === 'rules' ? 'active' : ''}`} onClick={() => handleItemClick('rules')}>
+          <img src={activeItem === 'rules' ? rulesIconWhite : rulesIconRed} alt="rulesIcon" className="side-bar-item-icon" />
+          <Link to='/' className="navbar-link">Rules</Link>
+        </div>
 
         {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
           <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
@@ -159,7 +166,7 @@ function Navbar() {
         <div className={`side-bar-item ${activeItem === 'settings' ? 'active' : ''}`} onClick={() => handleItemClick('settings')}>
             <img src={activeItem === 'settings' ? settingsIconWhite : settingsIconRed} alt="settingsIcon" className="side-bar-item-icon" />
             <Link to='/' className="navbar-link">Settings</Link>
-          </div>
+        </div>
       </div>
     </nav>
   );

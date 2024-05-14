@@ -111,4 +111,12 @@
     display: block;
     cursor: pointer;
   }
+
+  .nav-superior-button-primary {
+    display: none;
+  }
+
+  .right-buttons-nav-superior {
+    gap: 8px;
+  }
 }

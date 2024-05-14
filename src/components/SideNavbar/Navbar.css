@@ -4,6 +4,7 @@
     top: 65px;
     left: 0;
     z-index: 1000;
+    transition: transform 0.3s ease-out;
   }
 
   .hidden {
@@ -19,6 +20,7 @@
     height: 100dvh;
     padding: 30px 20px;
     border-right: 1px solid #E0C9C9;
+
   }
 
   .navbar-link {
