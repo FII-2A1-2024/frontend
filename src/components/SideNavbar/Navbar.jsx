@@ -40,7 +40,7 @@ function Navbar() {
 
   return (
     <nav className="navbar" style={{ display: isHidden ? "none" : "block" }}>
-      <div className="navbar-container-settings">
+      <div className="navbar-container">
         {/* Momentat este implementat dupa cum trebuie doar populars si rules tinand cont ca au linkuri. Daca le setez pe toate asa cum primul, se fac active toate ca nu au linkate ceva */}
         {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
           <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>

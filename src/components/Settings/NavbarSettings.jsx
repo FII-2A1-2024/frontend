@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./NavbarSettings.css";
-import AccountCircleIcon from "../media/icons/account-unpushed.svg";
-import NotificationsIcon from "../media/icons/notifications-unpushed.svg";
-import PrivacyIcon from "../media/icons/privacy-unpushed.svg";
-import HelpIcon from "../media/icons/help-unpushed.svg";
-import SupportIcon from "../media/icons/support-unpushed.svg";
-import LanguagesIcon from "../media/icons/language-pushed.svg";
+import AccountCircleIcon from "./media/account-unpushed.svg";
+import NotificationsIcon from "./media/notifications-unpushed.svg";
+import PrivacyIcon from "./media/privacy-unpushed.svg";
+import HelpIcon from "./media/help-unpushed.svg";
+import SupportIcon from "./media/support-unpushed.svg";
+import LanguagesIcon from "./media/language-pushed.svg";
 import { useTranslation } from "react-i18next";
 
 function NavbarSettings() {
@@ -17,7 +17,7 @@ function NavbarSettings() {
     setIsHidden(!isHidden);
   };
   return (
-    <nav className="navbar">
+    <nav className="navbar-settings">
       {" "}
       {/* daca a fost apasat pe buton-ul de restrangere*/}
       {isHidden ? (
@@ -27,7 +27,7 @@ function NavbarSettings() {
           </button>
         </div>
       ) : (
-        <div className="navbar-container">
+        <div className="navbar-container-settings">
           {" "}
           {/*daca nu a fost apasat pe buton*/}
           <button className="close-btn" onClick={toggleMenu}>

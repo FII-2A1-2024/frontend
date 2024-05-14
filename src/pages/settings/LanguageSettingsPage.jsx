@@ -1,5 +1,5 @@
 import Navbar_superior from "../../components/Navbar";
-import NavbarSettings from "../../components/NavbarSettings";
+import NavbarSettings from "../../components/Settings/NavbarSettings";
 import Languages from "../../components/Navbar_Superior/Navbar_superior";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
