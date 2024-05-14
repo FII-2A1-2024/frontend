@@ -5,13 +5,13 @@ import Navbar_superior from "../components/Navbar_superior";
 import Navbar from "../components/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats"
+import SideBarChats from "../components/SideBarChats/SideBarChats";
 import Comments from "../components/comments/Comments";
 import "../styles/PostPage.css";
 
 const PostPage = () => {
   const [post, setPost] = useState([]);
-  const {postId} = useParams();
+  const { postId } = useParams();
 
   const postIdInt = parseInt(postId, 10);
   const currentUserId = parseInt(localStorage.getItem("UserId"), 10);
@@ -25,14 +25,13 @@ const PostPage = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-      console.log("This is the post: ", post)
+    console.log("This is the post: ", post);
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     console.log("This is the post:", post);
   }, [post]); // Log post whenever it changes
 
-  
   return (
     <div className="post-page">
       <Navbar_superior />
@@ -40,22 +39,22 @@ const PostPage = () => {
         <Navbar />
         <div className="post-main-content">
           <>
-             <Post
-                key={post.id}
-                id={post.id}
-                userName={`User ${post.author_id}`}
-                title={post.title}
-                content={post.description}
-                upVotesCount={post.votes}
-                commentsCount={post.comments_count}
-                category={post.category}
-                file={post.url}
-              />   
+            <Post
+              key={post.id}
+              id={post.id}
+              userName={`User ${post.author_id}`}
+              title={post.title}
+              content={post.description}
+              upVotesCount={post.votes}
+              commentsCount={post.comments_count}
+              category={post.category}
+              file={post.url}
+            />
           </>
           <Comments currentUserId={currentUserId} postId={postIdInt} />
         </div>
         <div className="side-containers">
-          <SideBarChats />  <News /> 
+          <SideBarChats /> <News />
         </div>
       </div>
     </div>

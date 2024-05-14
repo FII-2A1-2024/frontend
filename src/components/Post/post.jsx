@@ -25,6 +25,8 @@ import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
 
+import { useTranslation } from "react-i18next";
+
 const Post = ({
   id,
   authorId,
@@ -43,6 +45,8 @@ const Post = ({
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [message, setMessage] = useState("");
   const userId = parseInt(localStorage.getItem("UserId"), 10);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -220,14 +224,15 @@ const Post = ({
         setMessage("Error saving post");
         setMenuVisible(false);
       });*/
-      setMessage("Post reported successfully");
-      setMenuVisible(false);
+    setMessage("Post reported successfully");
+    setMenuVisible(false);
   };
 
   const handleShare = () => {
     const postUrl = `http://localhost:3000/post/${id}`;
 
-    navigator.clipboard.writeText(postUrl)
+    navigator.clipboard
+      .writeText(postUrl)
       .then(() => {
         console.log("Post URL copied to clipboard:", postUrl);
         alert("Post URL copied to clipboard!");
@@ -287,7 +292,7 @@ const Post = ({
                   alt="upVotes"
                   className="post_menu_btn_icon"
                 />{" "}
-                Report
+                {t("report")}
               </button>
               <button className="post_menu_btn" onClick={handleFollow}>
                 <img
@@ -295,7 +300,7 @@ const Post = ({
                   alt="upVotes"
                   className="post_menu_btn_icon"
                 />{" "}
-                Save
+                {t("save")}
               </button>
             </div>
           )}
@@ -329,7 +334,7 @@ const Post = ({
           file.endsWith(".jpeg") ||
           file.endsWith(".jpg") ||
           file.endsWith(".png") ? (
-            <img src={file} alt="Image" className="postFile"/>
+            <img src={file} alt="Image" className="postFile" />
           ) : file.endsWith(".mp4") ? (
             <video controls className="postFile">
               <source src={file} type="video/mp4" />
@@ -383,7 +388,7 @@ const Post = ({
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
           </div>
-          <p>Share</p>
+          <p>{t("share")}</p>
         </div>
       </div>
     </div>

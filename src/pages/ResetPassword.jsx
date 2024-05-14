@@ -3,8 +3,10 @@ import forgot from "../media/icons/forgot.svg";
 import congrats from "../media/icons/congrats.svg";
 import "../styles/Login.css";
 import "../styles/Signup.css";
+import { useTranslation } from "react-i18next";
 
 function ResetPassword() {
+  const { t } = useTranslation();
   const [action, setAction] = useState("Verify");
   const [password, setPassword] = useState("");
 
@@ -71,12 +73,11 @@ function ResetPassword() {
               <div className="max-sm:w-4/5 w-[485px]  m-auto flex flex-col justify-center">
                 <div>
                   <p className="text-4xl font-semibold max-sm:text-3xl mt-2 text-left text-black">
-                    Introdu noua parola
+                    {t("reset")}
                   </p>
                   <div className="mb-5 flex flex-row">
                     <p className=" text-base font-normal pr-1 mt-4 text-left">
-                      Te rugam sa introduci noua ta parola in cele doua campuri
-                      si vezi sa nu o uiti.
+                      {t("resetp")}
                     </p>
                   </div>
                 </div>
@@ -86,7 +87,7 @@ function ResetPassword() {
                       className="font-bold block my-3 text-lg font-medium text-left text-black"
                       htmlFor="confirmPassword"
                     >
-                      Password
+                      {t("password")}
                     </label>
                     <input
                       type="password"
@@ -118,7 +119,7 @@ function ResetPassword() {
                       className="font-bold block my-3 text-lg font-medium text-left text-black"
                       htmlFor="confirmPassword"
                     >
-                      Confirm Password
+                      {t("confirmPassword")}
                     </label>
                     <input
                       type="password"
@@ -153,17 +154,17 @@ function ResetPassword() {
                       className="signup-btn mt-5"
                       id="signup-btn"
                     >
-                      Reseteaza parola
+                      {t("resetPassword")}
                     </button>
                     <div className="mb-5 flex flex-row justify-center">
                       <p className=" text-base font-normal pr-1 text-left">
-                        Intoarce-te la pagina de<> </>
+                        {t("resetBack")}
                         <button
                           type="button"
                           className="text-red-700 font-semibold"
                           onClick={handleLogin}
                         >
-                          Log in
+                          {t("loginButton")}
                         </button>
                       </p>
                     </div>
