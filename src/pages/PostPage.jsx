@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar_superior from "../components/Navbar_superior";
-import Navbar from "../components/Navbar";
+import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
+import Navbar from "../components/SideNavbar/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
 import SideBarChats from "../components/SideBarChats/SideBarChats"

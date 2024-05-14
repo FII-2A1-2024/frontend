@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Navbar_superior from "../components/Navbar_superior";
-import Navbar from "../components/Navbar";
+import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
+import Navbar from "../components/SideNavbar/Navbar";
 import CreatePost from "../components/LandingPageComponents/CreatePost/CreatePost";
 import PostList from "../components/LandingPageComponents/PostsList/PostList";
 import News from "../components/news/News";
