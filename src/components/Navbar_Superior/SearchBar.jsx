@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SearchBar.css';
-
+import searchIcon from "./media/searchIcon.svg"
 function SearchBar() {
   // Starea care reține valoarea introdusă în bara de căutare
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,6 +21,7 @@ function SearchBar() {
   return (
     <div className="search-container">
       <form className="search-form">
+      <img src={searchIcon} alt="Search" className="search-icon" />
         {/* 
           Câmpul de căutare unde utilizatorul poate introduce text
           Valoarea câmpului este mereu aceeași cu valoarea stării searchQuery
@@ -28,7 +29,7 @@ function SearchBar() {
         */}
         <input
           type="text"
-          placeholder="Search AOT"
+          placeholder="Search IncogniTalk"
           value={searchQuery}
           onChange={handleSearchInputChange}
         />

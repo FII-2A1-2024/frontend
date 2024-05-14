@@ -14,13 +14,13 @@
     z-index: 9999;
   }
   
-  .buttons {
+  .delete-confirmation-buttons {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
   }
   
-  .buttons button {
+  .delete-confirmation-buttons button {
     margin-right: 40px;
     margin-left: 80px;
   }
