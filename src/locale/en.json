@@ -20,7 +20,7 @@
     "confirm": "Confirm the Email",
     "confirmp": "Hi! You are almost ready to use our platform. All you have left is to follow the link received in your email",
     "confirmButton": "Verify the email",
-    "searchBar": "Search in AOT",
+    "searchBar": "Search IncogniTalk",
     "search": "Search",
     "courses": "Courses",
     "profs": "Professors",
@@ -54,6 +54,8 @@
     "account": "Account",
     "notifications": "Notifications",
     "privacy": "Privacy",
-    "languages": "languages"
+    "languages": "Languages",
+    "saved": "Saved",
+    "logout": "Log out"
   }
 }

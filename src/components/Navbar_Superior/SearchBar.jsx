@@ -32,7 +32,7 @@ function SearchBar() {
         */}
         <input
           type="text"
-          placeholder="Search IncogniTalk"
+          placeholder={t("searchBar")}
           value={searchQuery}
           onChange={handleSearchInputChange}
         />

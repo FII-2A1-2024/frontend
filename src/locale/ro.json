@@ -20,7 +20,7 @@
     "confirm": "Confirma Email-ul",
     "confirmp": "Buna! Esti aproape gata sa folosesti platforma noastra. Tot ce ti-a ramas este sa urmezi linkul primit pe posta ta electronica",
     "confirmButton": "Verifica email-ul",
-    "searchBar": "Cauta in AOT",
+    "searchBar": "Cauta in IncogniTalk",
     "search": "Cauta",
     "courses": "Cursuri",
     "profs": "Profesori",
@@ -54,6 +54,8 @@
     "account": "Cont",
     "notifications": "Notificari",
     "privacy": "Intimitate",
-    "languages": "limbi"
+    "languages": "limbi",
+    "saved": "Salvate",
+    "logout": "delogheaza-te"
   }
 }

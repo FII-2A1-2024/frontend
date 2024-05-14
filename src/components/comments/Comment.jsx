@@ -9,16 +9,6 @@ import commentUnhideButton from "./icons/comment-unhide-button.svg";
 import editSVG from "./icons/edit.svg";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import CommentsForm from "./CommentsForm";
-import "./index.css";
-import UserPofile from "./user_profile.svg";
-import upVotesSVG from "../Post/icons/shift_up.svg";
-import downVotesSVG from "../Post/icons/shift_down.svg";
-import commentsSVG from "../Post/icons/chat_bubble.svg";
-import commentHideButton from "./icons/comment-hide-button.svg";
-import commentUnhideButton from "./icons/comment-unhide-button.svg";
-import editSVG from "./icons/edit.svg";
-import { useState } from "react";
 
 const Comment = ({
   comment,
