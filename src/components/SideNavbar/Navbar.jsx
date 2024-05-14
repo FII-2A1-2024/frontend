@@ -153,7 +153,7 @@ function Navbar() {
 
         <div className={`side-bar-item ${activeItem === 'rules' ? 'active' : ''}`} onClick={() => handleItemClick('rules')}>
           <img src={activeItem === 'rules' ? rulesIconWhite : rulesIconRed} alt="rulesIcon" className="side-bar-item-icon" />
-          <Link to='/' className="navbar-link">Rules</Link>
+          <Link to="/rules" className="navbar-link">Rules</Link>
         </div>
 
         {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>

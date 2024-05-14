@@ -10,7 +10,7 @@
 .landing-page-content {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   flex: 1;
   gap: 30px;
   top: 65px;
