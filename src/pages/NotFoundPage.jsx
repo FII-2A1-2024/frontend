@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
+import NotFound from "../components/NotFound/NotFound.jsx";
 
 
 function NotFoundPage() {
-    return (<div>404 Not Found<br></br>
-        <Link to="/">Click to go to the Main Page</Link>
-    </div>);
+    return ( <NotFound />);
 }
 
 export default NotFoundPage
