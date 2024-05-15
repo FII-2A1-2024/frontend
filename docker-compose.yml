@@ -1,0 +1,11 @@
+version: "3.4"
+services:
+  frontend-ip:
+    image: frontend-ip
+    build:
+      dockerfile: Dockerfile
+    container_name: frontend-ip
+    ports:
+      - 3001:3001
+    expose:
+      - 3001
