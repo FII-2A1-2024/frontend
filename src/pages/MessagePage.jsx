@@ -5,6 +5,11 @@ import '../components/Messages/messages.css';
 import '../components/Messages/info.css';
 import MessagesContainer from '../components/Messages/MessagesContainer.jsx';
 
+import sendIcon from '../components/Messages/media/send-icon.svg';
+import emojiIcon from '../components/Messages/media/smile-emoji.svg';
+import attachIcon from '../components/Messages/media/attachment.svg';
+
+
 function MessagePage() {
     const params = useParams();
     const interests = ["Test", "Something", "Test2", "Another", "Third", "Max", "Plane", "Drone"];
@@ -61,16 +66,16 @@ function MessagePage() {
 
                 <div className="form-container flex items-center gap-4 relative">
                     <label htmlFor="file-input">
-                            <img src="../src/components/Messages/media/attachment.svg" alt="Attach files" className='icon' />
+                            <img src={attachIcon} alt="Attach files" className='icon' />
                     </label>
                     <input type="file" id="file-input" style={{ display: "none" }} onChange={handleFileChange} /> {/* Inputul de tip "file" ascuns, care va fi activat atunci când utilizatorul face clic pe iconita de atașare */}
                     <form action="" className='flex items-center flex-grow gap-2 relative'>
                         <input type="text" name="send-message" id="send-message" placeholder='Send a message...' />
                         <button type="submit">
-                            <img src="../src/components/Messages/media/send-icon.svg" alt="Send" className='icon' />
+                            <img src={sendIcon} alt="Send" className='icon' />
                         </button>
 
-                        <img src="../src/components/Messages/media/smile-emoji.svg" alt="Emojies" className='icon absolute right-14 top-0 bottom-0 m-auto' id="emojies" />
+                        <img src={emojiIcon} alt="Emojies" className='icon absolute right-14 top-0 bottom-0 m-auto' id="emojies" />
                     </form>
                 </div>
 
