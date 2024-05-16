@@ -27,7 +27,7 @@ function ResetPassword() {
     };
     const data = JSON.stringify(userData);
 
-    fetch(`http://localhost:3000/resetPass/verify?token=${token}`, {
+    fetch(`${import.meta.env.VITE_URL_BACKEND}/resetPass/verify?token=${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

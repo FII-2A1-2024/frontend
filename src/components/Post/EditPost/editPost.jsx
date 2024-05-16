@@ -52,7 +52,7 @@ const EditPopup = ({
 
   const handleFileDelete = (event) => {
     axios
-      .delete(`http://localhost:3000/posts/file?id=${id}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts/file?id=${id}`)
       .then((response) => {
         console.log("Post file deleted successfully");
       })

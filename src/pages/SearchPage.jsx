@@ -72,7 +72,7 @@ const SearchPage = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/posts/all")
+      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
       .then((response) => {
         setPosts(response.data.posts);
         setLoading(false);

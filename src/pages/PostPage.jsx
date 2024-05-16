@@ -17,7 +17,7 @@ const PostPage = () => {
   const currentUserId = parseInt(localStorage.getItem("UserId"), 10);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/posts?id=${postId}`)
+      .get(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
       .then((response) => {
         setPost(response.data.post);
         console.log(response.data.post);
