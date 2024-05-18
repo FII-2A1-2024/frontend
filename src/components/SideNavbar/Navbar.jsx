@@ -86,7 +86,7 @@ function Navbar() {
             alt="coursesIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/courses" className="navbar-link">
             {t("courses")}
           </Link>
         </div>
@@ -113,7 +113,7 @@ function Navbar() {
             alt="professorsIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/professors" className="navbar-link">
             {t("profs")}
           </Link>
         </div>
@@ -138,7 +138,7 @@ function Navbar() {
             alt="studentsIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/students" className="navbar-link">
             {t("students")}
           </Link>
         </div>
@@ -163,7 +163,7 @@ function Navbar() {
             alt="unrelatedIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/unrelated" className="navbar-link">
             {t("unrelated")}
           </Link>
         </div>
@@ -184,7 +184,7 @@ function Navbar() {
             alt="memesIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/memes" className="navbar-link">
             {t("memes")}
           </Link>
         </div>
@@ -205,7 +205,7 @@ function Navbar() {
             alt="jobsIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/jobs" className="navbar-link">
             {t("jobs")}
           </Link>
         </div>
@@ -226,7 +226,7 @@ function Navbar() {
             alt="savedIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/" className="navbar-link">
+          <Link to="/main/saved" className="navbar-link">
             {t("saved")}
           </Link>
         </div>
