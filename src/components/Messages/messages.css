@@ -6,7 +6,7 @@
 .header {
     text-align: start;
     padding: 1em 3em;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid var(--border-color);
     font-size: 1.5em;
     position: relative;
 }
@@ -42,7 +42,7 @@
 .form-container input[type="text"] {
     width: calc(100% - 40px);
     background-color: #FFFBFB;
-    border: 1px solid gray;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     outline: none;
     color: var(--accent-color);

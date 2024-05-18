@@ -4,6 +4,9 @@
     --body-color: rgba(91, 107, 134, 1);
     --headings-color: rgba(21, 24, 30, 1);
     --primary-dark-red: #F7ECEC;
+    --border-color: hsl(0, 27%, 83%);
+    --primary-msg-color: hsl(0, 100%, 26%);
+    --msg-bg-color: hsl(0, 0%, 98%);
 
     color: black !important;
 }

@@ -54,7 +54,7 @@ function MessagesPage() {
                     {isChatListOpen ? (
                         <nav className="chat-list-container flex flex-col">
                             <div className="chat-list-top flex justify-around items-center">
-                                <div className="chat-list-title text-2xl">Chat</div>
+                                <div className="chat-list-title text-2xl font-bold">Chats</div>
                                 <button className="chat-list-toggle p-4 flex justify-center items-center" title="Close chat list" onClick={handleCloseChatList}>X</button>
                             </div>
                             <ChatList />
