@@ -25,7 +25,7 @@
 
 }
 .hamburger-menu {
-  display: fixed;
+  display: none;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -33,7 +33,7 @@
 }
 
 .hamburger-menu .bar {
-  display: block;
+  display: none;
   width: 25px;
   height: 3px;
   background-color: #200000;
@@ -113,6 +113,14 @@
 
   .nav-superior-button-primary {
     display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .hamburger-menu .bar {
+    display: block;
   }
 
   .right-buttons-nav-superior {
