@@ -73,13 +73,13 @@ function AccountSettingsPage() {
                             <div className="reset-password-container" style={{display: showResetPass ? "flex" : "none" }}>
                               <div className="setting-option-line input-forms-password">
                                 <form className="password-input-reset">
-                                  <label for="current-password">{t("Current password")}</label>
-                                  <input type="password" id="password" name="password"/>
+                                  <label htmlFor="current-password">{t("Current password")}</label>
+                                  <input type="password" id="curr-password" name="password"/>
                                 </form>
 
                                 <form className="password-input-reset">
-                                  <label for="new-password">{t("New password")}</label>
-                                  <input type="password" id="password" name="password"/>
+                                  <label htmlFor="new-password">{t("New password")}</label>
+                                  <input type="password" id="new-password" name="password"/>
                                 </form>
                               </div>
 
