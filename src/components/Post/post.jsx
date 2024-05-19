@@ -212,6 +212,7 @@ const Post = ({
         console.log("Post saved successfully");
         setMessage("Post saved successfully");
         setMenuVisible(false);
+        setFollowedPostIds([...followedPostIds, id]);
       })
       .catch((error) => {
         console.error("Error saving post:", error);
@@ -222,7 +223,7 @@ const Post = ({
 
   const handleUnfollow = () => {
     axios
-      .delete(`http://localhost:3000/postFollow/?user_id=${userId}&post_id=${id}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/postFollow/?user_id=${userId}&post_id=${id}`)
       .then((response) => {
         console.log("Post unsaved successfully");
         setMessage("Post unsaved successfully");
