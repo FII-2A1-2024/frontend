@@ -56,6 +56,9 @@
     "privacy": "Privacy",
     "languages": "Languages",
     "saved": "Saved",
-    "logout": "Log out"
+    "logout": "Log out",
+    "popular" : "Popular",
+    "Account settings" : "Account settings",
+    "Language settings" : "Language settings"
   }
 }

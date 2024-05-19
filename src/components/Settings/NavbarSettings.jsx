@@ -37,7 +37,7 @@ function NavbarSettings() {
       </Link> */}
 
       <div className="side-bar-item">
-      <h3 className="h3-as-h2">Settings</h3>
+       <h3 className="h3-as-h2">Settings</h3>
 
       </div>
 

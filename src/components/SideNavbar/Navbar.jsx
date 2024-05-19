@@ -22,6 +22,7 @@ import jobsIconWhite from "./icons-white/jobsIcon-white.svg";
 import rulesIconWhite from "./icons-white/rulesIcon-white.svg";
 import settingsIconWhite from "./icons-white/settingsIcon-white.svg";
 import { useTranslation } from "react-i18next";
+import useViewport from './useViewPort';
 
 function Navbar() {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ function Navbar() {
          <Link to='/main' className="navbar-link" isActive={(match, location) => location.pathname === '/main'}>
           <div className={`side-bar-item ${location.pathname === '/main' ? 'active' : ''}`}>
             <img src={location.pathname === '/main' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
-            <span className="navbar-link-text">Popular</span>
+            <span className="navbar-link-text">{t("popular")}</span>
           </div>
         </Link> 
 
@@ -94,7 +95,7 @@ function Navbar() {
         <Link to='/main/professors' className="navbar-link" isActive={(match, location) => location.pathname === '/main/professors'}>
           <div className={`side-bar-item ${location.pathname === '/main/professors' ? 'active' : ''}`}>
             <img src={location.pathname === '/main/professors' ? professorsIconWhite : professorsIconRed} alt="professorsIcon" className="side-bar-item-icon" />
-            <span className="navbar-link-text">{t("professors")}</span>
+            <span className="navbar-link-text">{t("profs")}</span>
           </div>
         </Link> 
 

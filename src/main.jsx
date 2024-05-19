@@ -12,8 +12,7 @@ import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
-import AccountSettings from "./pages/settings/AccountSettingsPage.jsx";
-import LanguageSettings from "./pages/settings/LanguageSettingsPage.jsx";
+import AccountSettings from "./pages/AccountSettingsPage.jsx";
 import "./i18n.js";
 
 import "./index.css";
