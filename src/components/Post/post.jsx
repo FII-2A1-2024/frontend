@@ -221,10 +221,8 @@ const Post = ({
   };
 
   const handleUnfollow = () => {
-    const url = `${import.meta.env.VITE_URL_BACKEND}/postFollow/?user_id=${userId}&post_id=${id}`;
-    console.log("URL for unfollow request:", url); // Log the URL to verify
     axios
-      .delete(url)
+      .delete(`http://localhost:3000/postFollow/?user_id=${userId}&post_id=${id}`)
       .then((response) => {
         console.log("Post unsaved successfully");
         setMessage("Post unsaved successfully");
