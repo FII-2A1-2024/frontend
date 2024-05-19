@@ -276,7 +276,7 @@ function Navbar() {
             alt="settingsIcon"
             className="side-bar-item-icon"
           />
-          <Link to="/settings/languages" className="navbar-link">
+          <Link to="/settings" className="navbar-link">
             {t("settings")}
           </Link>
         </div>

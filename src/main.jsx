@@ -51,13 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <AccountSettings />,
-    children: [
-      {
-        path: "/settings/languages",
-        element: <LanguageSettings />,
-      },
-    ],
+    element: <AccountSettings />
   },
   {
     path: "/rules",

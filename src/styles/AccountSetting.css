@@ -1,0 +1,68 @@
+.settings-page-content {
+  justify-content: left;
+  gap: 30px;
+}
+
+.settins-option-item {
+  display: flex;
+  flex-direction:column;
+  padding:12px 0;
+}
+
+.settings-option-item-break {
+  border-bottom: 1px solid #ccbbbb;
+  width: 100%;
+}
+
+.settings-page-content-options {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.setting-item-functions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.settings-item-function-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+.setting-preferences {
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #AF9595;
+  gap: 200px;
+}
+
+h4 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #AF9595;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+
+.button-change-language {
+
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px 6px 12px;
+    background-color: white;
+    border : 1px solid var(--primary-dark-red-btn);
+    border-radius: 8px;
+    color: var(--primary-dark-red-btn);
+  
+}
+
+.button-change-language:hover {
+  color: white;
+  background-color: var(--primary-dark-red-btn);
+}

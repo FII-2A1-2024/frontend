@@ -41,7 +41,7 @@ const CommentsForm = ({
           className="comment-form-button comment-form-addComment-button"
           disabled={isTextareaDisabled}
         >
-          {t("post")}
+          {t("comment")}
         </button>
       </div>
     </form>
