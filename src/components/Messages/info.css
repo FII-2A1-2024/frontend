@@ -1,6 +1,6 @@
 .info-container {
     height: 100%;
-    width: 20vw;
+    min-width: 20vw;
     /* left: 80vw; hard coded solution, but right: 0 or left: auto do not work */
 
     right: 0;

@@ -91,12 +91,12 @@ function MessagePage() {
                     <p className="text-2xl">ID: {params.messageId}</p>
                 </div>
                 <div className="info-stats-container flex justify-around">
-                    <UserStats number="1" title="Posts made"></UserStats>
-                    <UserStats number="2" title="Comments on posts"></UserStats>
-                    <UserStats number="0" title="Votes on posts"></UserStats>
+                    <UserStats number="13" title="Messages"></UserStats>
+                    <UserStats number="2" title="Files"></UserStats>
+                    {/* <UserStats number="0" title="Votes on posts"></UserStats> */}
                 </div>
                 <p className="interests-title text-xl">
-                    Interests
+                    Utilities
                 </p>
                 <div className="interests-container flex flex-wrap gap-3 justify-center">
                     {interests.map((interest) => (

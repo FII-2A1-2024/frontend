@@ -20,7 +20,7 @@ Stupid method but works - will change only if a bug appears */
 
 @media (max-width: 1200px) {
     main .info-container {
-        width: 40vw;
+        min-width: 40vw;
         position: absolute;
     }
 
@@ -35,7 +35,7 @@ Stupid method but works - will change only if a bug appears */
 
 @media (max-width: 768px) {
     main .info-container {
-        width: 60vw;
+        min-width: 60vw;
     }
 
     div #info-toggle-btn-active {
@@ -50,7 +50,7 @@ Stupid method but works - will change only if a bug appears */
 
 @media (max-width: 500px) {
     main .info-container {
-        width: 80vw;
+        min-width: 80vw;
     }
 
     div #info-toggle-btn-active {
