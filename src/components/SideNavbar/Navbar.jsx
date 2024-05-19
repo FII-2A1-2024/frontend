@@ -42,14 +42,14 @@ function Navbar() {
     <nav className="navbar" style={{ display: isHidden ? "none" : "block" }}>
       <div className="navbar-container">
         {/* Momentat este implementat dupa cum trebuie doar populars si rules tinand cont ca au linkuri. Daca le setez pe toate asa cum primul, se fac active toate ca nu au linkate ceva */}
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
+         <Link to='/main' className="navbar-link" isActive={(match, location) => location.pathname === '/main'}>
+          <div className={`side-bar-item ${location.pathname === '/main' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main' ? popularIconWhite : popularIconRed} alt="popularIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Popular</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+       {/* <div
           className={`side-bar-item ${
             activeItem === "popular" ? "active" : ""
           }`}
@@ -63,19 +63,19 @@ function Navbar() {
           <Link to="/main" className="navbar-link">
             Popular
           </Link>
-        </div>
+        </div>*/}
 
         <div className="break"></div>
         {/* Categories */}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? coursesIconWhite : coursesIconRed} alt="coursesIcon" className="side-bar-item-icon" />
+         <Link to='/main/courses' className="navbar-link" isActive={(match, location) => location.pathname === '/main/courses'}>
+          <div className={`side-bar-item ${location.pathname === '/main/courses' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/courses' ? coursesIconWhite : coursesIconRed} alt="coursesIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Courses</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/*<div
           className={`side-bar-item ${
             activeItem === "courses" ? "active" : ""
           }`}
@@ -89,16 +89,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("courses")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? professorsIconWhite : professorsIconRed} alt="professorsIcon" className="side-bar-item-icon" />
+        <Link to='/main/professors' className="navbar-link" isActive={(match, location) => location.pathname === '/main/professors'}>
+          <div className={`side-bar-item ${location.pathname === '/main/professors' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/professors' ? professorsIconWhite : professorsIconRed} alt="professorsIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Professors</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/*<div
           className={`side-bar-item ${
             activeItem === "professors" ? "active" : ""
           }`}
@@ -116,16 +116,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("profs")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? studentsIconWhite : studentsIconRed} alt="studentsIcon" className="side-bar-item-icon" />
+        <Link to='/main/students' className="navbar-link" isActive={(match, location) => location.pathname === '/main/students'}>
+          <div className={`side-bar-item ${location.pathname === '/main/students' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/students' ? studentsIconWhite : studentsIconRed} alt="studentsIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Students</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/*<div
           className={`side-bar-item ${
             activeItem === "students" ? "active" : ""
           }`}
@@ -141,16 +141,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("students")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? unrelatedIconWhite : unrelatedIconRed} alt="unrelatedIcon" className="side-bar-item-icon" />
+         <Link to='/main/unrelated' className="navbar-link" isActive={(match, location) => location.pathname === '/main/unrelated'}>
+          <div className={`side-bar-item ${location.pathname === '/main/unrelated' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/unrelated' ? unrelatedIconWhite : unrelatedIconRed} alt="unrelatedIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Unrelated</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+       {/*  <div
           className={`side-bar-item ${
             activeItem === "unrelated" ? "active" : ""
           }`}
@@ -166,16 +166,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("unrelated")}
           </Link>
-        </div>
+        </div> */}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? memesIconWhite : memesIconRed} alt="memesIcon" className="side-bar-item-icon" />
+        <Link to='/main/memes' className="navbar-link" isActive={(match, location) => location.pathname === '/main/memes'}>
+          <div className={`side-bar-item ${location.pathname === '/main/memes' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/memes' ? memesIconWhite : memesIconRed} alt="memesIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Memes</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/*<div
           className={`side-bar-item ${activeItem === "memes" ? "active" : ""}`}
           onClick={() => handleItemClick("memes")}
         >
@@ -187,16 +187,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("memes")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? jobsIconWhite : jobsIconRed} alt="jobsIcon" className="side-bar-item-icon" />
+        <Link to='/main/jobs' className="navbar-link" isActive={(match, location) => location.pathname === '/main/jobs'}>
+          <div className={`side-bar-item ${location.pathname === '/main/jobs' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/jobs' ? jobsIconWhite : jobsIconRed} alt="jobsIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Jobs</span>
           </div>
-        </Link> */}
+        </Link>
 
-        <div
+        {/* <div
           className={`side-bar-item ${activeItem === "jobs" ? "active" : ""}`}
           onClick={() => handleItemClick("jobs")}
         >
@@ -208,16 +208,16 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("jobs")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? savedIconWhite : savedIconRed} alt="savedIcon" className="side-bar-item-icon" />
+        <Link to='/main/saved' className="navbar-link" isActive={(match, location) => location.pathname === '/main/saved'}>
+          <div className={`side-bar-item ${location.pathname === '/main/saved' ? 'active' : ''}`}>
+            <img src={location.pathname === '/main/saved' ? savedIconWhite : savedIconRed} alt="savedIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Saved</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/*<div
           className={`side-bar-item ${activeItem === "saved" ? "active" : ""}`}
           onClick={() => handleItemClick("saved")}
         >
@@ -229,20 +229,20 @@ function Navbar() {
           <Link to="/" className="navbar-link">
             {t("saved")}
           </Link>
-        </div>
+        </div>*/}
 
         <div className="break"></div>
 
         {/* Settings and other */}
 
-        {/* <Link to='/rules' className="navbar-link" isActive={(match, location) => location.pathname === '/rules'}>
+        <Link to='/rules' className="navbar-link" isActive={(match, location) => location.pathname === '/rules'}>
           <div className={`side-bar-item ${location.pathname === '/rules' ? 'active' : ''}`}>
             <img src={location.pathname === '/rules' ? rulesIconWhite : rulesIconRed} alt="rulesIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Rules</span>
           </div>
-        </Link> */}
+        </Link>
 
-        <div
+        {/* <div
           className={`side-bar-item ${activeItem === "rules" ? "active" : ""}`}
           onClick={() => handleItemClick("rules")}
         >
@@ -254,16 +254,16 @@ function Navbar() {
           <Link to="/rules" className="navbar-link">
             {t("rules")}
           </Link>
-        </div>
+        </div>*/}
 
-        {/* <Link to='/' className="navbar-link" isActive={(match, location) => location.pathname === '/'}>
-          <div className={`side-bar-item ${location.pathname === '/' ? 'active' : ''}`}>
-            <img src={location.pathname === '/' ? settingsIconWhite : settingsIconRed} alt="popularIcon" className="side-bar-item-icon" />
+        <Link to='/settings' className="navbar-link" isActive={(match, location) => location.pathname === '/settings'}>
+          <div className={`side-bar-item ${location.pathname === '/settings' ? 'active' : ''}`}>
+            <img src={location.pathname === '/settings' ? settingsIconWhite : settingsIconRed} alt="popularIcon" className="side-bar-item-icon" />
             <span className="navbar-link-text">Settings</span>
           </div>
-        </Link> */}
+        </Link> 
 
-        <div
+        {/* <div
           className={`side-bar-item ${
             activeItem === "settings" ? "active" : ""
           }`}
@@ -279,7 +279,7 @@ function Navbar() {
           <Link to="/settings/languages" className="navbar-link">
             {t("settings")}
           </Link>
-        </div>
+        </div>*/}
       </div>
     </nav>
   );
