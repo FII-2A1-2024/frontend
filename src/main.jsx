@@ -12,8 +12,7 @@ import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
-import AccountSettings from "./pages/settings/AccountSettingsPage.jsx";
-import LanguageSettings from "./pages/settings/LanguageSettingsPage.jsx";
+import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
 import LandingPageF from "./pages/LandingPageF.jsx";
 import LandingPageSaved from "./pages/LandingPageSaved.jsx";
 import "./i18n.js";
@@ -53,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <AccountSettings />
+    element: <AccountSettingsPage />
   },
   {
     path: "/rules",
