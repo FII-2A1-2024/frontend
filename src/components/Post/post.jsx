@@ -42,8 +42,10 @@ const Post = ({
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [message, setMessage] = useState("");
+  const [followedPostIds, setFollowedPostIds] = useState([]);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
   const { t } = useTranslation();
+
   useEffect(() => {
     if (initialVote > upVotesCount) {
       setVoted("upVote");
@@ -51,6 +53,20 @@ const Post = ({
       setVoted("downVote");
     }
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_URL_BACKEND}/postFollow/user?id=${userId}`)
+      .then((response) => {
+        const followedPosts = response.data.postFollow.map(
+          (follow) => follow.post_id
+        );
+        setFollowedPostIds(followedPosts);
+      })
+      .catch((error) => {
+        console.error("Error fetching followed posts:", error);
+      });
+  }, [userId]);
 
   const handleVote = (voteType) => {
     if (voteType === "upVote" && voted !== "upVote") {
@@ -196,10 +212,27 @@ const Post = ({
         console.log("Post saved successfully");
         setMessage("Post saved successfully");
         setMenuVisible(false);
+        setFollowedPostIds([...followedPostIds, id]);
       })
       .catch((error) => {
         console.error("Error saving post:", error);
         setMessage("Error saving post");
+        setMenuVisible(false);
+      });
+  };
+
+  const handleUnfollow = () => {
+    axios
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/postFollow/?user_id=${userId}&post_id=${id}`)
+      .then((response) => {
+        console.log("Post unsaved successfully");
+        setMessage("Post unsaved successfully");
+        setMenuVisible(false);
+        setFollowedPostIds(followedPostIds.filter((postId) => postId !== id));
+      })
+      .catch((error) => {
+        console.error("Error unsaving post:", error);
+        setMessage("Error unsaving post");
         setMenuVisible(false);
       });
   };
@@ -285,19 +318,31 @@ const Post = ({
               <button className="post_menu_btn" onClick={handleReport}>
                 <img
                   src={flagSVG}
-                  alt="upVotes"
+                  alt="Report"
                   className="post_menu_btn_icon"
                 />{" "}
-                {t("report")}
+                {t("Report")}
               </button>
-              <button className="post_menu_btn" onClick={handleFollow}>
-                <img
-                  src={frameSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                {t("save")}
-              </button>
+
+              {followedPostIds.includes(id) ? (
+                <button className="post_menu_btn" onClick={handleUnfollow}>
+                  <img
+                    src={frameSVG}
+                    alt="upVotes"
+                    className="post_menu_btn_icon"
+                  />{" "}
+                  {t("Unsave")}
+                </button>
+              ) : (
+                <button className="post_menu_btn" onClick={handleFollow}>
+                  <img
+                    src={frameSVG}
+                    alt="upVotes"
+                    className="post_menu_btn_icon"
+                  />{" "}
+                  {t("Save")}
+                </button>
+              )}
             </div>
           )}
 
