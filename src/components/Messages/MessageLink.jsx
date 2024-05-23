@@ -1,0 +1,52 @@
+/*
+Ciprian 23 may
+
+This component is used to display the author name of a post or comment
+If clicked & author is online, user will be redirected to DMs
+Otherwise, error shows up. Different class for each type (post & comment) due to size
+*/
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { encryptData } from "./encrypt";
+import { checkConnection } from "./checkConnection";
+
+const MessageLink = ({ username, id, type }) => {
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const hashedUsername = encryptData(username, id);
+
+    const handleClick = async (e) => {
+        e.preventDefault();  // stop a redirect
+        const data = await checkConnection(id);
+
+        if (data.message === 'User not logged in' || !data.socket) {
+            setError("User not logged in.");
+        } else {
+            navigate(`/messages/${hashedUsername}`);
+        }
+    };
+
+    useEffect(() => {
+        let timer;
+        if (error) {
+            timer = setTimeout(() => {
+                setError(null);
+            }, 1500);  // error pop up stays for 1.5 seconds
+        }
+        return () => clearTimeout(timer); 
+    }, [error]);
+
+    const errorClass = type === "PostLink" ? "error-msg error-msg-post" : "error-msg error-msg-comm";
+
+    return (
+        <span>
+            <a href={`/messages/${hashedUsername}`} style={{ color: "black" }} onClick={handleClick}>
+                <p>{username}</p>
+            </a>
+            {error && <div className={errorClass}>{error}</div>}
+        </span>
+    );
+};
+
+export default MessageLink;

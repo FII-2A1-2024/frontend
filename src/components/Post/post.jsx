@@ -14,6 +14,7 @@ import axios from "axios";
 import "./post.css";
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
 import EditPopup from "./EditPost/editPost";
+import MessageLink from '../Messages/MessageLink';
 import userProfile from "./icons/user_profile.svg";
 import threeDots from "./icons/3-dots.svg";
 import shareSVG from "./icons/share.svg";
@@ -243,9 +244,7 @@ const Post = ({
       <div className="postHeader">
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
-          <Link to="/messages" style={{ color: "black" }}>
-            <p>{userName}</p>
-          </Link>
+            <MessageLink username={userName} id={authorId} type={"PostLink"}/>
         </div>
 
         <div
@@ -328,8 +327,8 @@ const Post = ({
         <p>{content} </p>
         {file ? (
           file.endsWith(".jpeg") ||
-          file.endsWith(".jpg") ||
-          file.endsWith(".png") ? (
+            file.endsWith(".jpg") ||
+            file.endsWith(".png") ? (
             <img src={file} alt="Image" className="postFile" />
           ) : file.endsWith(".mp4") ? (
             <video controls className="postFile">

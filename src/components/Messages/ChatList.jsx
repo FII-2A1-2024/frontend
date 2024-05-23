@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import './general.css';
 import './ChatList.css';
+import { decryptData } from './encrypt';
 
 import noMessages from './media/no-messages.svg';
 
 function ChatList() {
-    const messagesIds = [1, 2, 3, 4, 5];
+    // object of type {id: id, username: string}
+    const [messagesIds, setMessagesIds] = useState([]);
+
+
+    // usestate on the actual current chat from the url
     const [activeChat, setActiveChat] = useState(null);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
+    useEffect(() => {
+        const urlParams = location.pathname.split('/');
+        const decrypted = decryptData(urlParams[2]);
+
+        if (decrypted.id && decrypted.username) {
+            setMessagesIds(prevMessagesIds => {
+                const chatExists = prevMessagesIds.some(chat => chat.id === parseInt(decrypted.id));
+                if (!chatExists) {
+                    return [...prevMessagesIds, { id: parseInt(decrypted.id), username: decrypted.username }];
+                }
+                return prevMessagesIds;
+            });
+            setActiveChat(parseInt(decrypted.id));
+        }
+    }, [location.pathname]);
 
     if (!Array.isArray(messagesIds) || messagesIds.length === 0) {
         return (
@@ -21,7 +46,7 @@ function ChatList() {
     }
 
 
-    const navigate = useNavigate();
+    
 
     const handleClick = (messId) => {
         setActiveChat(messId);
@@ -30,11 +55,11 @@ function ChatList() {
 
     return (
         <div className={`flex flex-col gap-2`}>
-            {messagesIds.map((messId) => (
-                <div key={messId} className={`chat-list-item flex justify-between px-10 py-4 ${activeChat === messId ? 'active-chat' : ''}`} onClick={() => handleClick(messId)}>
+            {messagesIds.map((messData) => (
+                <div key={messData.id} className={`chat-list-item flex justify-between px-10 py-4 ${activeChat === messData.id ? 'active-chat' : ''}`} onClick={() => handleClick(messData.id)}>
                     <div className="chat-list-item-info">
                         <div className="chat-list-item-name">
-                            Conversatia {messId}
+                            {messData.username}
                         </div>
                         <div className="chat-list-item-mess">
                             FillerLastMessage
