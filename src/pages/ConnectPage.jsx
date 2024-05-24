@@ -130,6 +130,7 @@ function ConnectPage() {
           console.log(resCode);
           if (resCode === 200) {
             navigate("/main");
+            localStorage.removeItem("messages");
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {

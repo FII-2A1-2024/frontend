@@ -6,7 +6,7 @@ import '../components/Messages/info.css';
 import MessagesContainer from '../components/Messages/MessagesContainer.jsx';
 import { decryptData } from '../components/Messages/encrypt.js';
 import { sendMessage } from '../components/Messages/handler.js';
-import socket from '../socket';  // Import the socket instance
+import socket from '../socket'; 
 
 import sendIcon from '../components/Messages/media/send-icon.svg';
 import emojiIcon from '../components/Messages/media/smile-emoji.svg';
@@ -20,11 +20,7 @@ function MessagePage() {
 
     const [isInfoOpen, setIsInfoOpen] = useState(true);
     const [isInfoButtonClicked, setIsInfoButtonClicked] = useState(false);
-    const [messages, setMessages] = useState([
-        { sender: "1", content: "11" },
-        { sender: "0", content: "22" },
-        { sender: "1", content: "33" }
-    ]);
+    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
 
     useEffect(() => {
@@ -48,18 +44,36 @@ function MessagePage() {
     }, [isInfoButtonClicked]);
 
     useEffect(() => {
+        const receiver_id = decrypted.id;
+        const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+        if (storedMessages[receiver_id]) {
+            setMessages(storedMessages[receiver_id].reverse());
+        } else {
+            setMessages([]);
+        }
+
         socket.on('message', (data) => {
             console.log('Event received from server:', data);
-            setMessages((prevMessages) => [data, ...prevMessages]);
+            setMessages((prevMessages) => {
+                const updatedMessages = [data, ...prevMessages];
+                // Save received messages to localStorage
+                const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+                if (!storedMessages[receiver_id]) {
+                    storedMessages[receiver_id] = [];
+                }
+                storedMessages[receiver_id].push(data);
+                localStorage.setItem('messages', JSON.stringify(storedMessages));
+                return updatedMessages;
+            });
         });
 
         return () => {
             socket.off('message');
         };
-    }, []);
+    }, [decrypted.id]);
 
     const handleCloseInfo = () => {
-        setIsInfoOpen(previsInfoOpen => !previsInfoOpen);
+        setIsInfoOpen(prevIsInfoOpen => !prevIsInfoOpen);
         setIsInfoButtonClicked(true);
     };
 
@@ -72,20 +86,26 @@ function MessagePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const sender_id = parseInt(localStorage.getItem("UserId"), 10);
-        console.log("Sending message:", {
-            sender_id: sender_id,
-            receiver_id: decrypted.id,
-            content: newMessage
-        });
+        const receiver_id = decrypted.id;
 
         try {
-            const response = await sendMessage(sender_id, decrypted.id, newMessage);
-            console.log("Message sent successfully:", response);
+            const response = await sendMessage(sender_id, receiver_id, newMessage);
 
             if (newMessage.trim() !== "") {
-                setMessages([{ sender: "0", content: newMessage }, ...messages]);
+                const newMsg = { sender: sender_id, content: newMessage };
+                const updatedMessages = [newMsg, ...messages];
+                setMessages(updatedMessages);
                 setNewMessage("");
-                console.log("Message added to local state");
+
+                // Save messages to localStorage
+                const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+                if (!storedMessages[receiver_id]) {
+                    storedMessages[receiver_id] = [];
+                }
+                storedMessages[receiver_id].push(newMsg);
+                localStorage.setItem('messages', JSON.stringify(storedMessages));
+
+                console.log("Message added to local state and localStorage");
             }
         } catch (error) {
             console.error("Error sending message:", error);
