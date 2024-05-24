@@ -106,5 +106,17 @@
 }
 
 .chat-list-item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
     text-align: left;
+}
+
+.chat-list-item-name,
+.chat-list-item-mess {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
 }

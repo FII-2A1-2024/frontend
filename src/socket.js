@@ -12,9 +12,4 @@ socket.on('connect', () => {
     console.log('Connected to server, Socket ID:', socket.id);
 });
 
-socket.on('message', (data) => {
-    console.log('Event received from server:', data);
-    alert(data);
-});
-
 export default socket;

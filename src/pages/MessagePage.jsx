@@ -6,7 +6,7 @@ import '../components/Messages/info.css';
 import MessagesContainer from '../components/Messages/MessagesContainer.jsx';
 import { decryptData } from '../components/Messages/encrypt.js';
 import { sendMessage } from '../components/Messages/handler.js';
-import socket from '../socket'; 
+import socket from '../socket';
 
 import sendIcon from '../components/Messages/media/send-icon.svg';
 import emojiIcon from '../components/Messages/media/smile-emoji.svg';
@@ -47,21 +47,24 @@ function MessagePage() {
         const receiver_id = decrypted.id;
         const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
         if (storedMessages[receiver_id]) {
-            setMessages(storedMessages[receiver_id].reverse());
+            setMessages(storedMessages[receiver_id].messages.reverse());
         } else {
             setMessages([]);
         }
 
         socket.on('message', (data) => {
-            console.log('Event received from server:', data);
+            const messageWithTimestamp = {
+                ...data,
+                timestamp: Date.now()
+            };
             setMessages((prevMessages) => {
-                const updatedMessages = [data, ...prevMessages];
+                const updatedMessages = [messageWithTimestamp, ...prevMessages];
                 // Save received messages to localStorage
                 const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
                 if (!storedMessages[receiver_id]) {
-                    storedMessages[receiver_id] = [];
+                    storedMessages[receiver_id] = { username: data.username, messages: [] };
                 }
-                storedMessages[receiver_id].push(data);
+                storedMessages[receiver_id].messages.push(messageWithTimestamp);
                 localStorage.setItem('messages', JSON.stringify(storedMessages));
                 return updatedMessages;
             });
@@ -83,16 +86,20 @@ function MessagePage() {
 
     const infoToggleBtnId = isInfoOpen ? "info-toggle-btn-active" : null;
 
+    // In your handleSubmit function in MessagePage
     const handleSubmit = async (e) => {
         e.preventDefault();
         const sender_id = parseInt(localStorage.getItem("UserId"), 10);
         const receiver_id = decrypted.id;
 
         try {
-            const response = await sendMessage(sender_id, receiver_id, newMessage);
+            if (sender_id !== receiver_id) {
+                const response = await sendMessage(sender_id, receiver_id, newMessage);
+            }
 
+            const timestamp = new Date().toISOString();
             if (newMessage.trim() !== "") {
-                const newMsg = { sender: sender_id, content: newMessage };
+                const newMsg = { sender: sender_id, content: newMessage, timestamp: timestamp };
                 const updatedMessages = [newMsg, ...messages];
                 setMessages(updatedMessages);
                 setNewMessage("");
@@ -100,17 +107,16 @@ function MessagePage() {
                 // Save messages to localStorage
                 const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
                 if (!storedMessages[receiver_id]) {
-                    storedMessages[receiver_id] = [];
+                    storedMessages[receiver_id] = { username: decrypted.username, messages: [] };
                 }
-                storedMessages[receiver_id].push(newMsg);
+                storedMessages[receiver_id].messages.push(newMsg);
                 localStorage.setItem('messages', JSON.stringify(storedMessages));
-
-                console.log("Message added to local state and localStorage");
             }
         } catch (error) {
             console.error("Error sending message:", error);
         }
     };
+
 
     return (
         <main className="flex flex-grow" id="messages-main">

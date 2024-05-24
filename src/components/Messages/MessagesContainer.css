@@ -44,6 +44,7 @@
     border-radius: 1em;
     margin: .05em .5em .05em .5em;
     max-width: 70%;
+    word-break: break-word;
 }
 
 .extra-margin-left {

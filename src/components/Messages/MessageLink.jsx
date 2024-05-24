@@ -1,11 +1,3 @@
-/*
-Ciprian 23 may
-
-This component is used to display the author name of a post or comment
-If clicked & author is online, user will be redirected to DMs
-Otherwise, error shows up. Different class for each type (post & comment) due to size
-*/
-
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { encryptData } from "./encrypt";
@@ -19,13 +11,19 @@ const MessageLink = ({ username, id, type }) => {
     const handleClick = async (e) => {
         e.preventDefault();  // stop a redirect
         const data = await checkConnection(id);
-
+    
         if (data.message === 'User not logged in' || !data.socket) {
             setError("User not logged in.");
         } else {
+            // Save the chat in localStorage, with the id, username, and an array of messages
+            const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+            if (!storedMessages[id]) {
+                storedMessages[id] = { username, messages: [], timestamp: Date.now() };
+                localStorage.setItem('messages', JSON.stringify(storedMessages));
+            }
             navigate(`/messages/${hashedUsername}`);
         }
-    };
+    };    
 
     useEffect(() => {
         let timer;
