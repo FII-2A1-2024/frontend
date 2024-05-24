@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const getComments = async (postId) => {
   try {
-    console.log(`Trying to get data from the http://localhost:3000/comments?post_id=${postId}`);
-    const response = await axios.get(`http://localhost:3000/comments?post_id=${postId}`);
+    console.log(`Trying to get data from the ${import.meta.env.VITE_URL_BACKEND}/comments?post_id=${postId}`);
+    const response = await axios.get(`${import.meta.env.VITE_URL_BACKEND}/comments?post_id=${postId}`);
     const { post } = response.data;
     return post;
   } catch (error) {
@@ -14,7 +14,7 @@ export const getComments = async (postId) => {
 
 export const addComment = async(text, parentId, post_id, author_id) => {
   try {
-    const response = await axios.post(`http://localhost:3000/comments?post_id=${post_id}`, {
+    const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/comments?post_id=${post_id}`, {
       post_id: post_id,
       parent_id: parentId,
       author_id: author_id,

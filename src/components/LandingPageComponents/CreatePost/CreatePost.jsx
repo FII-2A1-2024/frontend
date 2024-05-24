@@ -8,6 +8,7 @@ import CreatePostForm from "../CreatePost/CreatePostForm";
 import axios from "axios";
 import "./CreatePost.css";
 import userProfile from "./media/user_profile.svg";
+import { useTranslation } from "react-i18next";
 
 const CreatePost = () => {
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
@@ -59,8 +60,11 @@ const CreatePost = () => {
   return (
     <div className="createPost_frame">
       <img src={userProfile} alt="Header" className="userProfileImage" />
-      <button className="createPost_redirect" onClick={() => setShowCreatePostForm(true)}>
-        Ask a question or write a new post
+      <button
+        className="createPost_redirect"
+        onClick={() => setShowCreatePostForm(true)}
+      >
+        {t("createPost")}
       </button>
       {showCreatePostForm && (
         <CreatePostForm onCreate={handleCreate} onCancel={handleClose} />

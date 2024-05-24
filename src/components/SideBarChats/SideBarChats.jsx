@@ -10,7 +10,7 @@ function SideBarChats() {
   {
     /*useEffect(() => {
     axios
-      .get("http://localhost:3000/messages/all")
+      .get(`${import.meta.env.VITE_URL_BACKEND}/messages/all`)
       .then((response) => {
         getAll(response.data.messages);
       })

@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 // If uncommented, errors will show up in the console
 
 
-// const socket = io('http://localhost:3000');
+// const socket = io(`${import.meta.env.VITE_URL_BACKEND}`);
 const socket = {
     id: "temp"
 }

@@ -4,9 +4,9 @@ This file is for styles outside components */
 
 section.container {
     background: hsl(0, 0%, 93%);
+    top: 65px;
     height: calc(100vh - 65px);
     /* hard coded - value of the top navbar */
-
     position: relative;
 }
 

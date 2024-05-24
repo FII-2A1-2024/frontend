@@ -11,9 +11,9 @@ const PostList = () => {
 
   const handleDelete = (postId) => {
     axios
-      .delete(`http://localhost:3000/posts?id=${postId}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
       .then((response) => {
-        setPosts(posts.filter((post) => post.id !== postId));
+        getAll(posts.filter((post) => post.id !== postId));
       })
       .catch((error) => {
         console.error("Error deleting post:", error);
@@ -22,14 +22,20 @@ const PostList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/posts/all")
+      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
       .then((response) => {
-        getAll(response.data.posts);
+        const sortedPosts = response.data.posts.sort((a, b) => b.votes - a.votes);
+        getAll(sortedPosts);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

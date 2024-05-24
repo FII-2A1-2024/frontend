@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import NotFound from "../components/NotFound/NotFound.jsx";
 
-
 function NotFoundPage() {
-    return ( <NotFound />);
+  return <NotFound />;
 }
 
-export default NotFoundPage
+export default NotFoundPage;

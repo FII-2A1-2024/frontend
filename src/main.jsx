@@ -12,6 +12,10 @@ import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
+import LandingPageF from "./pages/LandingPageF.jsx";
+import LandingPageSaved from "./pages/LandingPageSaved.jsx";
+import "./i18n.js";
 
 import "./index.css";
 
@@ -47,17 +51,24 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/settings",
+    element: <AccountSettingsPage />
+  },
+  {
     path: "/rules",
     element: <RulesPage />,
   },
   {
     path: "/post/:postId",
     element: <PostPage />,
-    /*render: ({ match }) => {
-      console.log("Match varibale", match);
-      const { id } = match.params;
-      return <PostPage postId={id} />;
-    }*/
+  },
+  {
+    path: "/main/:category",
+    element: <LandingPageF />,
+  },
+  {
+    path: "/main/saved",
+    element: <LandingPageSaved />,
   },
   {
     path: "/searchBy/:searchKey",

@@ -17,7 +17,7 @@ function News() {
           apiKey: 'X1TaQkHIhvK2rMvpirkmNH6ViF12k0rWOotbzmkQzpE3y6g3',
         },
       });
-      setArticles(response.data.news.slice(0, 4));
+      setArticles(response.data.news.slice(0, 10));
       setLoading(false);
     }
     catch(error){

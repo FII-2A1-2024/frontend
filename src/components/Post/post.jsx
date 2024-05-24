@@ -24,7 +24,7 @@ import blockSVG from "./EditPost/icons/block.svg";
 import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
-
+import { useTranslation } from "react-i18next";
 const Post = ({
   id,
   authorId,
@@ -42,7 +42,9 @@ const Post = ({
   const [initialVote, setInitialVote] = useState(upVotesCount);
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [message, setMessage] = useState("");
+  const [followedPostIds, setFollowedPostIds] = useState([]);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -51,6 +53,20 @@ const Post = ({
       setVoted("downVote");
     }
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_URL_BACKEND}/postFollow/user?id=${userId}`)
+      .then((response) => {
+        const followedPosts = response.data.postFollow.map(
+          (follow) => follow.post_id
+        );
+        setFollowedPostIds(followedPosts);
+      })
+      .catch((error) => {
+        console.error("Error fetching followed posts:", error);
+      });
+  }, [userId]);
 
   const handleVote = (voteType) => {
     if (voteType === "upVote" && voted !== "upVote") {
@@ -67,7 +83,7 @@ const Post = ({
 
   const updateVoteCount = (postId, voteCount) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: postId,
         votes: voteCount,
       })
@@ -89,7 +105,7 @@ const Post = ({
 
   const handleConfirmDelete = () => {
     axios
-      .delete(`http://localhost:3000/posts?id=${id}`)
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${id}`)
       .then((response) => {
         console.log("Post deleted successfully");
         window.location.reload();
@@ -123,7 +139,7 @@ const Post = ({
 
   const updateTitle = (new_title) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         title: new_title,
       })
@@ -137,7 +153,7 @@ const Post = ({
 
   const updateContent = (new_content) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         description: new_content,
       })
@@ -151,7 +167,7 @@ const Post = ({
 
   const updateCategory = (new_category) => {
     axios
-      .put(`http://localhost:3000/posts`, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: id,
         category: new_category,
       })
@@ -169,7 +185,7 @@ const Post = ({
     formData.append("file", new_file);
 
     axios
-      .put(`http://localhost:3000/posts`, formData, {
+      .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -188,7 +204,7 @@ const Post = ({
 
   const handleFollow = () => {
     axios
-      .post(`http://localhost:3000/postFollow`, {
+      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
         user_id: userId,
         post_id: id,
       })
@@ -196,6 +212,7 @@ const Post = ({
         console.log("Post saved successfully");
         setMessage("Post saved successfully");
         setMenuVisible(false);
+        setFollowedPostIds([...followedPostIds, id]);
       })
       .catch((error) => {
         console.error("Error saving post:", error);
@@ -204,9 +221,25 @@ const Post = ({
       });
   };
 
+  const handleUnfollow = () => {
+    axios
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/postFollow/?user_id=${userId}&post_id=${id}`)
+      .then((response) => {
+        console.log("Post unsaved successfully");
+        setMessage("Post unsaved successfully");
+        setMenuVisible(false);
+        setFollowedPostIds(followedPostIds.filter((postId) => postId !== id));
+      })
+      .catch((error) => {
+        console.error("Error unsaving post:", error);
+        setMessage("Error unsaving post");
+        setMenuVisible(false);
+      });
+  };
+
   const handleReport = () => {
     /*axios
-      .post(`http://localhost:3000/postFollow`, {
+      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
         user_id: 5,
         post_id: 20,
       })
@@ -220,14 +253,15 @@ const Post = ({
         setMessage("Error saving post");
         setMenuVisible(false);
       });*/
-      setMessage("Post reported successfully");
-      setMenuVisible(false);
+    setMessage("Post reported successfully");
+    setMenuVisible(false);
   };
 
   const handleShare = () => {
-    const postUrl = `http://localhost:3000/post/${id}`;
+    const postUrl = `${import.meta.env.VITE_URL_BACKEND}/post/${id}`;
 
-    navigator.clipboard.writeText(postUrl)
+    navigator.clipboard
+      .writeText(postUrl)
       .then(() => {
         console.log("Post URL copied to clipboard:", postUrl);
         alert("Post URL copied to clipboard!");
@@ -284,19 +318,31 @@ const Post = ({
               <button className="post_menu_btn" onClick={handleReport}>
                 <img
                   src={flagSVG}
-                  alt="upVotes"
+                  alt="Report"
                   className="post_menu_btn_icon"
                 />{" "}
-                Report
+                {t("Report")}
               </button>
-              <button className="post_menu_btn" onClick={handleFollow}>
-                <img
-                  src={frameSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                Save
-              </button>
+
+              {followedPostIds.includes(id) ? (
+                <button className="post_menu_btn" onClick={handleUnfollow}>
+                  <img
+                    src={frameSVG}
+                    alt="upVotes"
+                    className="post_menu_btn_icon"
+                  />{" "}
+                  {t("Unsave")}
+                </button>
+              ) : (
+                <button className="post_menu_btn" onClick={handleFollow}>
+                  <img
+                    src={frameSVG}
+                    alt="upVotes"
+                    className="post_menu_btn_icon"
+                  />{" "}
+                  {t("Save")}
+                </button>
+              )}
             </div>
           )}
 
@@ -329,7 +375,7 @@ const Post = ({
           file.endsWith(".jpeg") ||
           file.endsWith(".jpg") ||
           file.endsWith(".png") ? (
-            <img src={file} alt="Image" className="postFile"/>
+            <img src={file} alt="Image" className="postFile" />
           ) : file.endsWith(".mp4") ? (
             <video controls className="postFile">
               <source src={file} type="video/mp4" />
@@ -383,7 +429,7 @@ const Post = ({
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
           </div>
-          <p>Share</p>
+          <p>{t("share")}</p>
         </div>
       </div>
     </div>

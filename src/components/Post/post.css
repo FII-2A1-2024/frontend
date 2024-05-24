@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --post-background: #FFFBFB;
-  --post-feedback-button-background: #F7ECEC;
+  --post-background: #fffbfb;
+  --post-feedback-button-background: #f7ecec;
   --btn-more-options-hover: #dac5c5;
   --btn-feedback-section-click: #af3e3e;
 }
@@ -10,11 +10,11 @@
 .post {
   font-family: "Poppins", "sans-serif";
 
-  border: 1px solid #E0C9C9;
+  border: 1px solid #e0c9c9;
   border-radius: 10px;
   width: 801px;
   padding: 20px;
-  background-color: #FFFBFB;
+  background-color: #fffbfb;
   /*margin-top: 40px;
   margin-left: 5px;
   margin-right: auto;
@@ -37,15 +37,15 @@
 }
 
 .post_menu {
-  background-color: #FFFBFB;
+  background-color: #fffbfb;
   padding: 5px;
-  border: 1px solid #E0C9C9;
+  border: 1px solid #e0c9c9;
   border-radius: 10px;
   font-family: "Poppins", "sans-serif";
   display: flex;
   flex-direction: column;
   position: absolute;
-  color: #543F3F;
+  color: #543f3f;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -54,11 +54,11 @@
   z-index: 1;
 }
 
-.post_menu_btn{
-display: flex;
-flex-direction: row;
+.post_menu_btn {
+  display: flex;
+  flex-direction: row;
 }
-.post_menu_btn_icon{
+.post_menu_btn_icon {
   margin-right: 5px;
 }
 
@@ -67,7 +67,6 @@ flex-direction: row;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
 }
 
 .userHeader {
@@ -102,7 +101,7 @@ flex-direction: row;
   color: #000000;
 }
 
-.postFile{
+.postFile {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -155,7 +154,6 @@ flex-direction: row;
   font-weight: 400;
 }
 
-
 /*.feedback-container img {
   transform: translateY(1px); 
 }*/
@@ -169,7 +167,6 @@ flex-direction: row;
   width: fit-content;
   position: relative;
 }
-
 
 .btn-upVotes:active img,
 .btn-share:active img {
@@ -200,11 +197,9 @@ flex-direction: row;
   transform: rotate(360deg);
 }*/
 
-
 @media screen and (max-width: 768px) {
   .post {
     width: calc(100% - 20px);
-
   }
 
   .container {
@@ -223,6 +218,6 @@ flex-direction: row;
   }
 }
 
-.btn_message{
+.btn_message {
   position: absolute;
 }
