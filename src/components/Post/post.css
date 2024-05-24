@@ -214,6 +214,27 @@
   transform: rotate(360deg);
 }*/
 
+
+/* Added by Ciprian - error pop-ups */
+
+.error-msg {
+  position: absolute;
+  background-color: hsl(0, 100%, 17%);
+  color: white;
+  padding: 1em;
+  max-width: 40vw;
+  border-radius: 8px;
+  z-index: 3;
+}
+
+.error-msg-comm {
+  padding: 0.5em;
+}
+
+
+
+/* media */
+
 @media screen and (max-width: 768px) {
   .post {
     width: calc(100% - 20px);

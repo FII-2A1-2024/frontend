@@ -9,6 +9,8 @@ import ChatList from "../components/Messages/ChatList";
 import general from '../components/Messages/general.module.css';
 import '../components/Messages/ChatList.css'
 
+import expandChatList from '../components/Messages/media/message-expand.svg';
+
 function MessagesPage() {
     const [isChatListOpen, setIsChatListOpen] = useState(true);
     const [isChatButtonClicked, setIsChatButtonClicked] = useState(false);
@@ -52,16 +54,13 @@ function MessagesPage() {
                     {isChatListOpen ? (
                         <nav className="chat-list-container flex flex-col">
                             <div className="chat-list-top flex justify-around items-center">
-                                <div className="chat-list-title text-2xl">Chat</div>
+                                <div className="chat-list-title text-2xl font-bold">Chats</div>
                                 <button className="chat-list-toggle p-4 flex justify-center items-center" title="Close chat list" onClick={handleCloseChatList}>X</button>
                             </div>
                             <ChatList />
                         </nav>) : (
                         <button className="chat-list-toggle chat-list-expand" onClick={handleCloseChatList} title="Expand chat list">
-                            {location.pathname === "/messages" ? (
-                                <img src="src/components/Messages/media/message-expand.svg" alt="Expand" />) : (
-                                <img src="../src/components/Messages/media/message-expand.svg" alt="Expand" />
-                            )}
+                            <img src={expandChatList} alt="Expand" />
                         </button>
                     )}
 

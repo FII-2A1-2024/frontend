@@ -9,6 +9,7 @@ import commentUnhideButton from "./icons/comment-unhide-button.svg";
 import editSVG from "./icons/edit.svg";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import MessageLink from "../Messages/MessageLink";
 
 const Comment = ({
   comment,
@@ -86,7 +87,9 @@ const Comment = ({
       <div className="comment-right-part">
         <div className="comment-content">
           <div className="comment-header">
-            <div className="comment-author">UserAnonymous</div>
+            <MessageLink username={"Filler"} id={400} type={"CommentLink"}/> 
+            {/* Please change the above line with the correct info about the author */}
+            {/* <div className="comment-author">UserAnonymous</div> */}
             <div className="comment-createdAt">{createdAt}</div>
           </div>
           {!isEditing && (

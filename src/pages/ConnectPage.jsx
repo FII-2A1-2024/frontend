@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "../media/icons/Ilustratie-log_in.svg";
 import Signup from "../media/icons/Signup.svg";
 import Homepage from "../media/icons/homepage.svg";
@@ -30,6 +31,9 @@ import { useTranslation } from "react-i18next";
 ************************************ */
 
 function ConnectPage() {
+
+  const navigate = useNavigate();
+
   const {
     t,
     i18n: { changeLanguage, language },
@@ -125,7 +129,8 @@ function ConnectPage() {
           localStorage.setItem("UserId", result.id);
           console.log(resCode);
           if (resCode === 200) {
-            window.location.href = "/main";
+            navigate("/main");
+            localStorage.removeItem("messages");
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {
