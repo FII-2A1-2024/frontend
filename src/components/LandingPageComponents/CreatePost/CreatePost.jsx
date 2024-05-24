@@ -11,6 +11,7 @@ import userProfile from "./media/user_profile.svg";
 import { useTranslation } from "react-i18next";
 
 const CreatePost = () => {
+  const { t } = useTranslation();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
   const username=localStorage.getItem("username");
