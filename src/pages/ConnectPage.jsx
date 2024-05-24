@@ -108,6 +108,9 @@ function ConnectPage() {
         .then((result) => {
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("username", result.username);
+          localStorage.setItem("token", result.token);
           console.log(resCode);
           if (resCode === 200) {
             window.location.href = "/main";
