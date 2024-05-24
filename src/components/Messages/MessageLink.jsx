@@ -7,7 +7,7 @@ Otherwise, error shows up. Different class for each type (post & comment) due to
 */
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { encryptData } from "./encrypt";
 import { checkConnection } from "./checkConnection";
 
@@ -41,9 +41,9 @@ const MessageLink = ({ username, id, type }) => {
 
     return (
         <span>
-            <a href={`/messages/${hashedUsername}`} style={{ color: "black" }} onClick={handleClick}>
+            <Link to={`/messages/${hashedUsername}`} style={{ color: "black" }} onClick={handleClick}>
                 <p>{username}</p>
-            </a>
+            </Link>
             {error && <div className={errorClass}>{error}</div>}
         </span>
     );
