@@ -5,34 +5,36 @@ import "./PostList.css";
 
 const Post = React.lazy(() => import("../../Post/post"));
 
-const PostList = () => {
-  const [posts, getAll] = useState([]);
-  const [loading, setLoading] = useState(true);
+const PostListF = ({categorie}) => {
+  const [posts, setPosts] = useState([]);
+const [loading, setLoading] = useState(true);
 
   const handleDelete = (postId) => {
     axios
       .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
       .then((response) => {
-        getAll(posts.filter((post) => post.id !== postId));
+        setPosts(posts.filter((post) => post.id !== postId));
       })
       .catch((error) => {
         console.error("Error deleting post:", error);
       });
   };
-
+ 
   useEffect(() => {
+    console.log("Categorie: " + categorie);
     axios
-      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
-      .then((response) => {
-        const sortedPosts = response.data.posts.sort((a, b) => b.votes - a.votes);
-        getAll(sortedPosts);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching posts:", error);
-      });
-  }, []);
-
+    .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
+    .then((response) => {
+      const allPosts = response.data.posts;
+      const filteredPosts = allPosts.filter(post => post.category.toLowerCase() === categorie);
+      setPosts(filteredPosts);
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching posts:", error);
+      setLoading(false);
+    });
+}, [categorie]);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -40,7 +42,9 @@ const PostList = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="container-posts-list">
-        {posts.map((post) => (
+        {
+        posts.map((post) => (
+            
           <Post
             key={post.id}
             id={post.id}
@@ -59,4 +63,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default PostListF;
