@@ -112,7 +112,7 @@ function ConnectPage() {
       const data = JSON.stringify(userData);
 
       //api login
-      fetch(`${import.meta.env.VITE_URL_BACKEND}/login`, {
+      fetch(`http://localhost:3000/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,6 @@ function ConnectPage() {
           localStorage.setItem("UserId", result.id);
           localStorage.setItem("token", result.token);
           localStorage.setItem("username", result.username);
-          localStorage.setItem("token", result.token);
           console.log(resCode);
           if (resCode === 200) {
             window.location.href = "/main";
