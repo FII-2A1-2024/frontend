@@ -57,7 +57,7 @@ function AccountSettingsPage() {
                 <div className="landing-main-content">
                     <div className="settings-page-content-options">
                       <div className="settins-option-item">
-                          <h3 className="h3-as-h2">{t("settings")}</h3>
+                          <h2 className="h3-as-h2">{t("settings")}</h2>
                           {/*<div className="settings-option-item-break"></div>*/}
                       </div>
                       <div className="setting-item-functions">

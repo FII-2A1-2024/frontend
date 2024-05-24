@@ -28,7 +28,8 @@
 .comment-form-textarea {
   width: 100%;
   max-width: 801px;
-
+  max-height: 200px;
+  min-height: 50px;
   margin-top: 1rem;
   margin-left: 5px;
   padding: 12px;

@@ -3,6 +3,7 @@ import CategoryDropdown from "../../LandingPageComponents/CreatePost/CategoryDro
 import axios from "axios";
 import close from "../icons/close.svg";
 import "./editPost.css";
+import "../../LandingPageComponents/CreatePost/CreatePostForm.css"
 
 const EditPopup = ({
   id,
@@ -65,7 +66,7 @@ const EditPopup = ({
     <div className="popup_edit">
       {" "}
       <button className="X_btn" onClick={handleClose}>
-        <img src={close} alt="close" />
+        <img src={close} alt="close" className="close-button-popup"/>
       </button>
       <div className="popup-inner">
         <h2 className="header_edit">Edit Post</h2>
@@ -76,7 +77,7 @@ const EditPopup = ({
             onSelectCategory={handleCategoryChange}
           />
         </div>
-        <div>
+        <div className="input-popup-wrapper">
           <label className="title" htmlFor="title">
             Title:
           </label>
@@ -88,7 +89,7 @@ const EditPopup = ({
             onChange={handleTitleChange}
           />
         </div>
-        <div>
+        <div className="input-popup-wrapper">
           <label htmlFor="content" className="edit_content_header">
             Content:
           </label>
@@ -99,11 +100,11 @@ const EditPopup = ({
             onChange={handleContentChange}
           />
         </div>
-        <div>
+        <div className="create-post-popup-buttons">
           {currentFile ? (
-            <div>    
-              <button onClick={() => setFileChange(true)} className="upload_input_change" >Change file</button>
-              <button onClick={handleFileDelete}  className="upload_delete">Delete file</button>
+            <div className="popup-file-buttons">    
+              <button onClick={() => setFileChange(true)} className="upload_input_change-btn" >Change file</button>
+              <button onClick={handleFileDelete}  className="upload_delete-btn">Delete file</button>
             </div>
           ) : (
             <input type="file"
@@ -120,22 +121,24 @@ const EditPopup = ({
             onChange={handleFileChange}
           />
           )}
-{/*
+            {/*
           <input
             type="file"
             id="file"
             className="upload_input"
             onChange={handleFileChange}
           />*/}
+
+          <div className="buttons_section">
+            <button className="button-popup sec-btn" onClick={handleClose}>
+              Cancel
+            </button>
+            <button className="button-popup primary-btn" onClick={handleSave}>
+              Save
+            </button>
+          </div>
         </div>
-        <div className="buttons_section">
-          <button className="cancel" onClick={handleClose}>
-            Cancel
-          </button>
-          <button className="save" onClick={handleSave}>
-            Save
-          </button>
-        </div>
+       
       </div>
     </div>
   );

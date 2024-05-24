@@ -8,7 +8,7 @@ Description: pop-ul pt 3Dots, delete confirmation and delete function, edit popu
 
 TO DO: Share, Report, options regarding post depending on user_id.
 */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
@@ -205,21 +205,6 @@ const Post = ({
   };
 
   const handleReport = () => {
-    /*axios
-      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
-        user_id: 5,
-        post_id: 20,
-      })
-      .then((response) => {
-        console.log("Post saved successfully");
-        setMessage("Post saved successfully");
-        setMenuVisible(false);
-      })
-      .catch((error) => {
-        console.error("Error saving post:", error);
-        setMessage("Error saving post");
-        setMenuVisible(false);
-      });*/
     setMessage("Post reported successfully");
     setMenuVisible(false);
   };
@@ -238,6 +223,39 @@ const Post = ({
       });
   };
 
+  const dropdownRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (menuVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuVisible]);
+
+  useEffect(() => {
+    let timer;
+    if (message) {
+      // Setează un timer care va șterge mesajul după 3 secunde
+      timer = setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    }
+
+    // Curăță timerul dacă componenta se demontează sau dacă mesajul este schimbat
+    return () => clearTimeout(timer);
+  }, [message]);
+
+
   return (
     <div className="post">
       <div className="postHeader">
@@ -248,18 +266,16 @@ const Post = ({
           </Link>
         </div>
 
-        <div
-          className="three-dots"
-          onMouseEnter={() => setMenuVisible(true)}
-          onMouseLeave={() => setMenuVisible(false)}
-        >
-          <button onClick={toggleMenu} button="true">
+        <div className="three-dots">
+          <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
             <img src={threeDots} alt="ThreeDots" />
           </button>
+          
+          {/* <div className="pop-up-message-status-action"> */}
+            {message && <div className="btn_message">{message}</div>}
+          {/* </div> */}
 
-          {message && <div className="btn_message">{message}</div>}
-
-          {userId === authorId && menuVisible && (
+          {/* {userId === authorId && menuVisible && (
             <div className="post_menu">
               <button className="post_menu_btn" onClick={handleEdit}>
                 <img
@@ -298,6 +314,34 @@ const Post = ({
                 />{" "}
                 {t("save")}
               </button>
+            </div>
+          )} */}
+
+          {menuVisible && (
+            <div className="post_menu" ref={dropdownRef}>
+              {userId === authorId ? (
+                <>
+                  <button className="post_menu_btn" onClick={() => {handleEdit(); setMenuVisible(false);}}>
+                    <img src={editSVG} alt="Edit" className="post_menu_btn_icon" />
+                    {t('edit')}
+                  </button>
+                  <button className="post_menu_btn" onClick={() => {handleDelete(); setMenuVisible(false);}}>
+                    <img src={blockSVG} alt="Delete" className="post_menu_btn_icon" />
+                    {t('delete')}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="post_menu_btn" onClick={() => {handleReport(); setMenuVisible(false);}}>
+                    <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
+                    {t('report')}
+                  </button>
+                  <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
+                    <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
+                    {t('save')}
+                  </button>
+                </>
+              )}
             </div>
           )}
 
