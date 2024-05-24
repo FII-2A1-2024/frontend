@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import CategoryDropdown from "./CategoryDropdown";
 import close from "./media/close.svg";
@@ -12,6 +12,8 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
+  const popupRef = useRef(null);  // Reference pentru popup
+
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -36,15 +38,31 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
     onCancel();
   };
 
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <section className="relative-parent">
       <div className="glass-bg-blur">
-      <div className="popup_create">
-        <button className="X_btn" onClick={handleClose}>
-          <img className="close-button-popup" src={close} alt="close" />
-        </button>
+      <div className="popup_create" ref={popupRef}>
         <div className="popup-inner">
-          <h2 className="header_edit">{t("createNewPost")}</h2>
+          <div className="header-post-create-popup">
+            <h2 className="header_edit">{t("createNewPost")}</h2>
+            <button className="X_btn" onClick={handleClose}>
+              <img className="close-button-popup" src={close} alt="close" />
+            </button>
+          </div>
           <div>
             <CategoryDropdown onSelectCategory={setCategory} />
           </div>
@@ -100,3 +118,4 @@ const CreatePostForm = ({ onCreate, onCancel }) => {
 };
 
 export default CreatePostForm;
+

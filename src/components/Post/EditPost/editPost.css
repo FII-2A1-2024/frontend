@@ -1,38 +1,39 @@
 .popup_edit {
- position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- display: flex;
- flex-direction: column;
- border-radius: 20px;
- padding: 30px;
- border: 1px solid #ccc;
- z-index: 999;
- background: #fafafa;
-}
-
-.popup-file-buttons {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
-    flex-direction: row;
-    gap: 16px;
-}
-
-.upload_input_change-btn,
-.upload_delete-btn {
-    display: flex;
-    flex-wrap: nowrap;
-    color: #850000;
-    border: 1px solid #850000;
-    border-radius: 8px;
-    padding: 8px 16px;
-    background-color: #fff;
-}
-
-.upload_input_change-btn:hover, 
-.upload_delete-btn:hover {
-    transition: ease-out 0.4s;
-    background-color: #850000;
-    color: #fafafa;
-    border-color: transparent;
-}
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    z-index: 999;
+    background: #fafafa;
+   }
+   
+   
+   .popup-file-buttons {
+       display: flex;
+       flex-direction: row;
+       gap: 16px;
+   }
+   
+   .upload_input_change-btn,
+   .upload_delete-btn {
+       display: flex;
+       flex-wrap: nowrap;
+       color: #850000;
+       border: 1px solid #850000;
+       border-radius: 8px;
+       padding: 8px 16px;
+       background-color: #fff;
+   }
+   
+   .upload_input_change-btn:hover, 
+   .upload_delete-btn:hover {
+       transition: ease-out 0.4s;
+       background-color: #850000;
+       color: #fafafa;
+       border-color: transparent;
+   }
