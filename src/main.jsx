@@ -1,3 +1,4 @@
+// index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -15,11 +16,9 @@ import SearchPage from "./pages/SearchPage.jsx";
 import AccountSettings from "./pages/settings/AccountSettingsPage.jsx";
 import LanguageSettings from "./pages/settings/LanguageSettingsPage.jsx";
 import "./i18n.js";
+import { MessageProvider } from "./components/Messages/MessageContext.jsx";
 
 import "./index.css";
-
-/* Ciprian 5 apr: routing system
-Use <Link to=""> instead of <a href=""> */
 
 const router = createBrowserRouter([
   {
@@ -66,11 +65,6 @@ const router = createBrowserRouter([
   {
     path: "/post/:postId",
     element: <PostPage />,
-    /*render: ({ match }) => {
-      console.log("Match varibale", match);
-      const { id } = match.params;
-      return <PostPage postId={id} />;
-    }*/
   },
   {
     path: "/searchBy/:searchKey",
@@ -84,6 +78,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MessageProvider>
+      <RouterProvider router={router} />
+    </MessageProvider>
   </React.StrictMode>
 );

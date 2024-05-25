@@ -1,9 +1,11 @@
+// ChatList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './general.css';
 import './ChatList.css';
 import { encryptData, decryptData } from './encrypt';
 import noMessages from './media/no-messages.svg';
+import { useMessages } from './MessageContext';
 
 const getTimeAgo = (timestamp) => {
     const now = new Date();
@@ -20,11 +22,12 @@ const getTimeAgo = (timestamp) => {
         const minutes = Math.floor(diffInSeconds / 60);
         return `${minutes}m`;
     } else {
-        return `${diffInSeconds}s`;
+        return `Now`;
     }
 };
 
 function ChatList() {
+    const { messages: allMessages, updateMessages } = useMessages(); // Use context
     const [messagesIds, setMessagesIds] = useState([]);
     const [activeChat, setActiveChat] = useState(null);
 
@@ -32,13 +35,15 @@ function ChatList() {
     const location = useLocation();
 
     const fetchMessages = () => {
-        const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
-        const messageIdsArray = Object.keys(storedMessages).map(key => ({
-            id: key,
-            username: storedMessages[key].username,
-            lastMessage: storedMessages[key].messages.length > 0 ? storedMessages[key].messages[storedMessages[key].messages.length - 1].content : 'No messages yet',
-            timestamp: storedMessages[key].messages.length > 0 ? storedMessages[key].messages[storedMessages[key].messages.length - 1].timestamp : 0
-        }));
+        const messageIdsArray = Object.keys(allMessages).map(key => {
+            const messages = allMessages[key].messages || [];
+            return {
+                id: key,
+                username: allMessages[key].username,
+                lastMessage: messages.length > 0 ? messages[messages.length - 1].content : 'No messages yet',
+                timestamp: messages.length > 0 ? messages[messages.length - 1].timestamp : 0
+            };
+        });
         // Sort by most recent message
         messageIdsArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         setMessagesIds(messageIdsArray);
@@ -47,18 +52,10 @@ function ChatList() {
     useEffect(() => {
         fetchMessages();
 
-        const handleStorageChange = (event) => {
-            if (event.key === 'messages') {
-                fetchMessages();
-            }
-        };
+        const intervalId = setInterval(fetchMessages, 60000); // Re-fetch messages every minute (for accurate timestamp)
 
-        window.addEventListener('storage', handleStorageChange);
-
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
-    }, []);
+        return () => clearInterval(intervalId); // Cleanup
+    }, [allMessages]);
 
     useEffect(() => {
         const urlParams = location.pathname.split('/');
@@ -69,12 +66,13 @@ function ChatList() {
                 const chatExists = prevMessagesIds.some(chat => chat.id === decrypted.id);
                 if (!chatExists) {
                     const updatedMessagesIds = [...prevMessagesIds, { id: decrypted.id, username: decrypted.username, lastMessage: 'No messages yet', timestamp: 0 }];
-                    // Save the chat in localStorage
-                    const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
-                    if (!storedMessages[decrypted.id]) {
-                        storedMessages[decrypted.id] = { username: decrypted.username, messages: [] };
-                        localStorage.setItem('messages', JSON.stringify(storedMessages));
+                    // Save the chat in context and localStorage
+                    const updatedAllMessages = { ...allMessages };
+                    if (!updatedAllMessages[decrypted.id]) {
+                        updatedAllMessages[decrypted.id] = { username: decrypted.username, messages: [] };
                     }
+                    // update context
+                    updateMessages(updatedAllMessages);
                     // Sort by most recent message
                     updatedMessagesIds.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                     return updatedMessagesIds;
@@ -83,7 +81,7 @@ function ChatList() {
             });
             setActiveChat(decrypted.id);
         }
-    }, [location.pathname]);
+    }, [location.pathname, allMessages, updateMessages]);
 
     const handleClick = (messData) => {
         setActiveChat(messData.id);
@@ -113,7 +111,7 @@ function ChatList() {
                         </div>
                     </div>
                     <div className="chat-list-item-time">
-                        {messData.timestamp ? getTimeAgo(messData.timestamp) : ''}
+                        {messData.timestamp ? getTimeAgo(messData.timestamp) : 'No messages yet'}
                     </div>
                 </div>
             ))}
