@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import socket from '../../socket';
 
+// Multe comentarii cu initialLoad - daca nu astept ca pagina sa se incarce, dau reset fara sa vreau la mesaje
 const MessageContext = createContext();
 
 export const useMessages = () => {
@@ -9,10 +10,12 @@ export const useMessages = () => {
 
 export const MessageProvider = ({ children }) => {
     const [messages, setMessages] = useState({});
+    const [initialLoad, setInitialLoad] = useState(false);
 
     useEffect(() => {
         const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
         setMessages(storedMessages);
+        setInitialLoad(true); // Indicate that initial load is complete
 
         const handleStorageChange = (event) => {
             if (event.key === 'messages') {
@@ -29,6 +32,8 @@ export const MessageProvider = ({ children }) => {
 
     useEffect(() => {
         const handleMessage = (data) => {
+            if (!initialLoad) return; // Prevent updates before initial load completes
+
             const messageWithTimestamp = {
                 ...data,
                 timestamp: Date.now()
@@ -52,15 +57,17 @@ export const MessageProvider = ({ children }) => {
         return () => {
             socket.off('message', handleMessage);
         };
-    }, []);
+    }, [initialLoad]); // Add initialLoad as a dependency
 
     const updateMessages = (newMessages) => {
+        if (!initialLoad) return; // Prevent updates before initial load completes
         setMessages(newMessages);
         localStorage.setItem('messages', JSON.stringify(newMessages));
         window.dispatchEvent(new Event('storage')); // Force update
     };
 
     const addMessage = (receiver_id, newMessage) => {
+        if (!initialLoad) return; // Prevent updates before initial load completes
         const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
         if (!storedMessages[receiver_id]) {
             storedMessages[receiver_id] = { username: 'Unknown', messages: [] };
