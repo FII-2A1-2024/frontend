@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// MessagePage.jsx
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserStats from '../components/Messages/UserStats.jsx';
 import '../components/Messages/messages.css';
@@ -6,7 +7,7 @@ import '../components/Messages/info.css';
 import MessagesContainer from '../components/Messages/MessagesContainer.jsx';
 import { decryptData } from '../components/Messages/encrypt.js';
 import { sendMessage } from '../components/Messages/handler.js';
-import socket from '../socket';
+import { MessageContext } from '../components/Messages/MessageContext';
 import { useMessageUpdate } from '../components/Messages/useMessageUpdate';
 
 import sendIcon from '../components/Messages/media/send-icon.svg';
@@ -21,12 +22,15 @@ function MessagePage() {
 
     const [isInfoOpen, setIsInfoOpen] = useState(true);
     const [isInfoButtonClicked, setIsInfoButtonClicked] = useState(false);
-    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const { messages } = useContext(MessageContext);
     const { addMessage } = useMessageUpdate();
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredMessages, setFilteredMessages] = useState([]);
+
+    const receiver_id = decrypted.id;
+    const currentMessages = messages[receiver_id]?.messages || [];
 
     const emojiMap = {
         smiling_face: "😊",
@@ -94,7 +98,7 @@ function MessagePage() {
         skeletal: "💀",
         pile_of_poo: "💩",
     };
-    
+
     useEffect(() => {
         function handleResize() {
             if (!isInfoButtonClicked) {
@@ -115,32 +119,6 @@ function MessagePage() {
         };
     }, [isInfoButtonClicked]);
 
-    useEffect(() => {
-        const receiver_id = decrypted.id;
-        const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
-        if (storedMessages[receiver_id]) {
-            setMessages(storedMessages[receiver_id].messages.reverse());
-        } else {
-            setMessages([]);
-        }
-
-        socket.on('message', (data) => {
-            const messageWithTimestamp = {
-                ...data,
-                timestamp: Date.now()
-            };
-            setMessages((prevMessages) => {
-                const updatedMessages = [messageWithTimestamp, ...prevMessages];
-                addMessage(receiver_id, messageWithTimestamp);
-                return updatedMessages;
-            });
-        });
-
-        return () => {
-            socket.off('message');
-        };
-    }, [decrypted.id]);
-
     const handleCloseInfo = () => {
         setIsInfoOpen(prevIsInfoOpen => !prevIsInfoOpen);
         setIsInfoButtonClicked(true);
@@ -150,12 +128,10 @@ function MessagePage() {
         setSelectedFile(event.target.files[0]);
     };
 
-    // Funcție pentru deschiderea/inchiderea selectorului de emoji
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!showEmojiPicker);
     };
 
-    // Funcție pentru selectarea și adăugarea emoji-urilor la mesaj
     const handleEmojiSelection = (emoji) => {
         setNewMessage(prevMessage => prevMessage + emoji);
     };
@@ -168,15 +144,13 @@ function MessagePage() {
         const receiver_id = decrypted.id;
 
         try {
-            if (sender_id !== receiver_id) {
+            if (sender_id != receiver_id) {
                 const response = await sendMessage(sender_id, receiver_id, newMessage);
             }
 
             const timestamp = new Date().toISOString();
             if (newMessage.trim() !== "") {
                 const newMsg = { sender: sender_id, content: newMessage, timestamp: timestamp };
-                const updatedMessages = [newMsg, ...messages];
-                setMessages(updatedMessages);
                 setNewMessage("");
 
                 addMessage(receiver_id, newMsg); // Add message to context and localStorage
@@ -212,7 +186,7 @@ function MessagePage() {
                         id={infoToggleBtnId} onClick={handleCloseInfo}>i</button>
                 </div>
 
-                <MessagesContainer messages={messages} />
+                <MessagesContainer messages={currentMessages} />
 
                 <div className="form-container flex items-center gap-4 relative">
                     <label htmlFor="file-input">
@@ -236,8 +210,7 @@ function MessagePage() {
                     <button onClick={toggleEmojiPicker}> 
                         <img src={emojiIcon} alt="Emojies" className='icon absolute right-24 top-0 bottom-0 m-auto' id="emojies" />
                     </button>
-                     {/* Randează selectorul de emoji condiționat */}
-                    {showEmojiPicker && (
+                     {showEmojiPicker && (
                         <div className="emoji-picker">
                             {Object.keys(emojiMap).map((emojiName) => (
                                 <button key={emojiName} onClick={() => handleEmojiSelection(emojiMap[emojiName])}>

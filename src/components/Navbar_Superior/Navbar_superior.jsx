@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import NotificationsDropdown from "./NotificationsDropdown";
 import SearchBar from "./SearchBar";
 import "./Navbar_superior.css";
@@ -12,19 +12,43 @@ import userProfileHolder from "./media/User.svg";
 import searchIconNavbar from "./media/searchIconNavbar.svg";
 import closeNotifications from "./media/closeNotifications.svg";
 import { useTranslation } from "react-i18next";
+import { useMessages } from "../../components/Messages/MessageContext";
 
 function Navbar_superior({ toggleNavbar }) {
   const { t } = useTranslation();
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false); // Starea pentru deschiderea/închiderea dropdown-ului de notificări
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [hasNewMessage, setHasNewMessage] = useState(false);
+  const location = useLocation();
+  const { messages } = useMessages();
+
+  useEffect(() => {
+    const handleNewMessage = () => {
+      if (!location.pathname.includes("/messages")) {
+        setHasNewMessage(true);
+      }
+    };
+
+    window.addEventListener("storage", handleNewMessage);
+
+    return () => {
+      window.removeEventListener("storage", handleNewMessage);
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname.includes("/messages")) {
+      setHasNewMessage(false);
+    }
+  }, [location.pathname]);
 
   const toggleMenu = () => {
     setIsNavbarVisible(!isNavbarVisible);
-    console.log(isNavbarVisible); // Verifică în consolă dacă starea se schimbă corect
+    console.log(isNavbarVisible);
   };
 
   const toggleNotifications = () => {
-    setIsNotificationsOpen(!isNotificationsOpen); // Inversați starea pentru deschiderea/închiderea dropdown-ului de notificări
+    setIsNotificationsOpen(!isNotificationsOpen);
     console.log(isNotificationsOpen);
   };
 
@@ -38,42 +62,26 @@ function Navbar_superior({ toggleNavbar }) {
             <span className="bar"></span>
           </button>
           <Link to={`/main`}>
-            <img
-              src={logoMascota}
-              alt="Logo-mascota"
-              className="logo-mascota"
-            />
+            <img src={logoMascota} alt="Logo-mascota" className="logo-mascota" />
             <img src={logoFull} alt="Logo" className="logo-full" />
           </Link>
         </div>
         <SearchBar />
         <div className="right-buttons-nav-superior">
           <Link className="searchButton-navbar" to="/">
-            {" "}
-            {/*acesta apare numai la device uri la cu ecranul mai mic de 769px si la click ar trebui sa apara search-barul*/}
             <img src={searchIconNavbar} alt="" className="searchIconNavbar" />
           </Link>
           <Link className="messagesButton-navbar" to="/messages">
-            {" "}
-            {/*linkare la pagina cu chat ul */}
-            <img src={messagesIcon} alt="" className="messagesIcon" />
+            <div className="relative">
+              <img src={messagesIcon} alt="" className="messagesIcon" />
+              {hasNewMessage && <span className="red-dot"></span>}
+            </div>
           </Link>
-          <button
-            className="notifications-button"
-            onClick={toggleNotifications}
-          >
+          <button className="notifications-button" onClick={toggleNotifications}>
             {isNotificationsOpen ? (
-              <img
-                src={closeNotifications}
-                alt=""
-                className="notificationsIcon"
-              />
+              <img src={closeNotifications} alt="" className="notificationsIcon" />
             ) : (
-              <img
-                src={notificationsIcon}
-                alt=""
-                className="notificationsIcon"
-              />
+              <img src={notificationsIcon} alt="" className="notificationsIcon" />
             )}
           </button>
           {isNotificationsOpen && (
@@ -83,17 +91,9 @@ function Navbar_superior({ toggleNavbar }) {
             />
           )}
           <Link to="/" className="userProfileButton">
-            {" "}
-            {/*linkare la pagina userului */}
-            <img
-              src={userProfileHolder}
-              alt=""
-              className="profileHolderNavSuperior"
-            />
+            <img src={userProfileHolder} alt="" className="profileHolderNavSuperior" />
           </Link>
           <Link to="/">
-            {" "}
-            {/* linkare la login page | stergere local storage*/}
             <button className="nav-superior-button-primary">
               {t("logout")}
             </button>

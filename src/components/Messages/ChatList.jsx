@@ -27,7 +27,7 @@ const getTimeAgo = (timestamp) => {
 };
 
 function ChatList() {
-    const { messages: allMessages, updateMessages } = useMessages(); // Use context
+    const { messages: allMessages, updateMessages } = useMessages();
     const [messagesIds, setMessagesIds] = useState([]);
     const [activeChat, setActiveChat] = useState(null);
 
@@ -111,7 +111,7 @@ function ChatList() {
                         </div>
                     </div>
                     <div className="chat-list-item-time">
-                        {messData.timestamp ? getTimeAgo(messData.timestamp) : 'No messages yet'}
+                        {messData.timestamp ? getTimeAgo(messData.timestamp) : ''}
                     </div>
                 </div>
             ))}
