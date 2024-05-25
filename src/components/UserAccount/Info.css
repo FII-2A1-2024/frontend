@@ -1,21 +1,36 @@
 /* Stilizare pentru pagina de cont utilizator */
 .user-account-page {
-    display: flex;
+  display: flex;
   flex-direction: column;
 }
 
+/*fix*/
+.container-posts-list {
+  align-items: center;
+}
+.container-posts-list div:not([class]) {
+  display: none;
+}
+/*fix*/
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .user-account-page-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1;
-    gap: 30px;
-    top: 65px;
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  gap: 30px;
+  top: 65px;
+  position: relative;
 }
 
 .user-account-sidebar {
-    flex: 0 0 300px;
+  flex: 0 0 300px;
   /* position: fixed;*/
   position: relative;
   /* top: 65px;*/
@@ -24,7 +39,7 @@
 }
 
 .user-account-info {
-    display: flex;
+  display: flex;
   flex-direction: column;
 
   position: relative;
@@ -35,57 +50,57 @@
 /* Info.css */
 
 .account-info-container {
-    width: 100%;
-    max-width: 600px; /* Limitează lățimea maximă */
-    background-color: #ffffff;
-    padding: 20px;
-    margin: 20px; /* Spațiu exterior */
-    box-sizing: border-box;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Limitează lățimea maximă */
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 20px; /* Spațiu exterior */
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .info-top {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #007bff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
 }
 
 .profile-pic {
-    font-size: 2.5rem;
-    color: #ffffff;
+  font-size: 2.5rem;
+  color: #ffffff;
 }
 
 .text-2xl {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333333;
 }
 
 .info-stats-container {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .interests-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
 }
 
 .interests-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
