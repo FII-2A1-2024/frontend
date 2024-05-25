@@ -5,8 +5,8 @@ import Navbar from "../components/SideNavbar/Navbar";
 import CreatePost from "../components/LandingPageComponents/CreatePost/CreatePost";
 import PostListF from "../components/LandingPageComponents/PostsList/PostListF";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats";
 import "../styles/LandingPage.css";
+import ChatList from "../components/Messages/ChatList";
 
 function LandingPageF() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -32,7 +32,7 @@ function LandingPageF() {
           </div>
         </div>
         <div className="landing-side-containers">
-          <SideBarChats /> <News />
+          <div className="side_bar_chats_body"><ChatList /></div> <News />
         </div>
       </div>
     </div>

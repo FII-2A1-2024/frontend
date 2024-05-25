@@ -6,13 +6,13 @@ import Fuse from "fuse.js";
 import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
 import Navbar from "../components/SideNavbar/Navbar";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats";
 import MultiSelect from "../components/SearchFilters/Multiselect";
 import BasicSelect from "../components/SearchFilters/BasicSelect";
 import "../styles/LandingPage.css";
 import "../styles/SearchPage.css";
 
 import Post from "../components/Post/post";
+import ChatList from "../components/Messages/ChatList";
 
 const filterByCategory = (post, category) => {
   const postCategory = post.category;
@@ -253,7 +253,7 @@ const SearchPage = () => {
           </div>
         </div>
         <div className="landing-side-containers">
-          <SideBarChats /> <News />
+          <div className="side_bar_chats_body"><ChatList /></div> <News />
         </div>
       </div>
     </div>
