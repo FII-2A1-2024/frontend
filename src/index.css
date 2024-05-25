@@ -45,6 +45,57 @@ Delete this when needed */
 }
 
 
+.side_bar_chats_body {
+  /* Side bar-chats */
+  /* position: absolute;*/
+  position: fixed;
+  width: 340px;
+  max-height: 300px;
+  right: 10px;
+  /* top: 100px;*/
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Auto layout */
+  display: inline-block;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 24px;
+
+  box-sizing: border-box;
+  /* primary dark red/primary-200 */
+  border: 1px solid rgb(224, 201, 201);
+  border-radius: 20px;
+
+  /* primary dark red/Background-color */
+  background: rgb(250, 250, 250);
+}
+
+.side_bar_chats_body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.side_bar_chats_body::-webkit-scrollbar-track {
+  background-color: rgba(251, 252, 255, 1);
+}
+
+.side_bar_chats_body::-webkit-scrollbar-thumb {
+  background-color: #9a1919;
+}
+
+.side_bar_chats_body::-webkit-scrollbar-thumb:hover {
+  background-color: #6e0e0e;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1500px) {
+  .side_bar_chats_body {
+    display: none;
+  }
+}
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
