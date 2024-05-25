@@ -14,6 +14,7 @@ function LandingPage() {
     setShowNavbar(!showNavbar);
   };
 
+
   return (
     <div className="landing-page">
       <Navbar_superior toggleNavbar={toggleNavbar} />
