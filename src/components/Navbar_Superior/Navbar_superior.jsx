@@ -13,6 +13,7 @@ import searchIconNavbar from "./media/searchIconNavbar.svg";
 import closeNotifications from "./media/closeNotifications.svg";
 import { useTranslation } from "react-i18next";
 import { useMessages } from "../../components/Messages/MessageContext";
+import axios from "axios";
 
 function Navbar_superior({ toggleNavbar }) {
   const { t } = useTranslation();
@@ -51,6 +52,35 @@ function Navbar_superior({ toggleNavbar }) {
     setIsNotificationsOpen(!isNotificationsOpen);
     console.log(isNotificationsOpen);
   };
+
+  const handleLogout = () => {
+    const token = localStorage.getItem("token");
+  
+    if (token) {
+      axios
+        .post(
+          "http://localhost:3000/logout",
+          {}, // Corpul cererii este gol, dar trebuie să-l incluzi pentru a specifica antetul de autorizare
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("User logged out");
+          localStorage.removeItem("token");
+          window.location.href = "/"; // Redirecționează utilizatorul către pagina de start sau altă pagină relevantă
+        })
+        .catch((error) => {
+          console.error("Error logging out:", error);
+        });
+    } else {
+      console.error("No token found in localStorage");
+      // Tratează cazul în care nu există un token în localStorage
+    }
+  };
+  
 
   return (
     <nav className="navbar_superior">
@@ -93,11 +123,9 @@ function Navbar_superior({ toggleNavbar }) {
           <Link to="/" className="userProfileButton">
             <img src={userProfileHolder} alt="" className="profileHolderNavSuperior" />
           </Link>
-          <Link to="/">
-            <button className="nav-superior-button-primary">
-              {t("logout")}
-            </button>
-          </Link>
+          <button className="nav-superior-button-primary" onClick={handleLogout}>
+            {t("logout")}
+          </button>
         </div>
       </div>
       {isNavbarVisible && <Navbar />}
