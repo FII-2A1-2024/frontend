@@ -13,8 +13,9 @@ import PostPage from "./pages/PostPage.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import Verify from "./pages/Verify.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
-import AccountSettings from "./pages/settings/AccountSettingsPage.jsx";
-import LanguageSettings from "./pages/settings/LanguageSettingsPage.jsx";
+import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
+import LandingPageF from "./pages/LandingPageF.jsx";
+import LandingPageSaved from "./pages/LandingPageSaved.jsx";
 import "./i18n.js";
 import { MessageProvider } from "./components/Messages/MessageContext.jsx";
 
@@ -50,13 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <AccountSettings />,
-    children: [
-      {
-        path: "/settings/languages",
-        element: <LanguageSettings />,
-      },
-    ],
+    element: <AccountSettingsPage />
   },
   {
     path: "/rules",
@@ -65,6 +60,14 @@ const router = createBrowserRouter([
   {
     path: "/post/:postId",
     element: <PostPage />,
+  },
+  {
+    path: "/main/:category",
+    element: <LandingPageF />,
+  },
+  {
+    path: "/main/saved",
+    element: <LandingPageSaved />,
   },
   {
     path: "/searchBy/:searchKey",

@@ -1,0 +1,138 @@
+.settings-page-content {
+  justify-content: left;
+  gap: 30px;
+}
+
+.settins-option-item {
+  display: flex;
+  flex-direction:column;
+  padding:12px 0;
+}
+
+.settins-option-item .h3-as-h2 {
+  text-align: left;
+}
+
+.settings-option-item-break {
+  border-bottom: 1px solid #ccbbbb;
+  width: 100%;
+}
+
+.settings-page-content-options {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.setting-item-functions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.settings-item-function-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+.setting-preferences {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #AF9595;
+  gap: 200px;
+}
+
+.setting-item-functions h4 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #AF9595;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.button-delete-account,
+.button-change-language {
+
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px 6px 12px;
+    background-color: white;
+    border : 1px solid var(--primary-dark-red-btn);
+    border-radius: 8px;
+    color: var(--primary-dark-red-btn);
+    min-width: 100px;
+  
+}
+
+.button-delete-account:hover,
+.button-change-language:hover {
+  color: white;
+  background-color: var(--primary-dark-red-btn);
+  transition: ease 0.4s;
+}
+
+.setting-option-line{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 200px;
+}
+
+.password-input-reset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.password-input-reset input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccbbbb;
+  font-size: 14px;
+}
+
+.password-input-reset label {
+  font-size: 12px;
+}
+
+.input-forms-password {
+  justify-content: left;
+  gap: 20px;
+}
+
+.reset-password-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link-to-reset-page {
+  font-size: 14px;
+  color: #570000;
+  text-decoration: underline;
+
+}
+
+.reset-password-line-link {
+  font-size: 14px;
+}
+
+.button-change-password {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px 6px 12px;
+  background-color: #850000;
+  border : 1px solid var(--primary-dark-red-btn);
+  border-radius: 8px;
+  color: #fafafa;
+
+}
+
+.button-change-password:hover {
+color: #570000;
+background-color: #fafafa;
+}
