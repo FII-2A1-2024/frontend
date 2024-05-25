@@ -12,6 +12,7 @@ import { useMessageUpdate } from '../components/Messages/useMessageUpdate';
 import sendIcon from '../components/Messages/media/send-icon.svg';
 import emojiIcon from '../components/Messages/media/smile-emoji.svg';
 import attachIcon from '../components/Messages/media/attachment.svg';
+import conversationIcon from '../components/Messages/media/Conversation-rafiki.svg'
 
 function MessagePage() {
     const location = useLocation();
@@ -172,7 +173,7 @@ function MessagePage() {
             const filteredMessages = userMessages.filter(message => message.content.includes(term));
             setFilteredMessages(filteredMessages);
         }
-    };    
+    };
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -236,7 +237,6 @@ function MessagePage() {
                     </div>
                     <div className="info-stats-container flex justify-around">
                         <UserStats number="13" title="Messages" />
-                        <UserStats number="2" title="Files" />
                     </div>
                     <input
                         type="text"
@@ -253,14 +253,7 @@ function MessagePage() {
                         )
                     ) : (
                         <>
-                            <p className="interests-title text-xl">Utilities</p>
-                            <div className="interests-container flex flex-wrap gap-3 justify-center">
-                                {interests.map((interest) => (
-                                    <div key={interest} className="interest-item">
-                                        {interest}
-                                    </div>
-                                ))}
-                            </div>
+                            <img src={conversationIcon} alt="converation" id="conversation" />
                         </>
                     )}
                 </div>
