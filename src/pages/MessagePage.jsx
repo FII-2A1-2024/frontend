@@ -26,6 +26,8 @@ function MessagePage() {
     const { messages } = useContext(MessageContext);
     const { addMessage } = useMessageUpdate();
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredMessages, setFilteredMessages] = useState([]);
 
     const receiver_id = decrypted.id;
     const currentMessages = messages[receiver_id]?.messages || [];
@@ -159,6 +161,22 @@ function MessagePage() {
         }
     };
 
+    const searchMessages = (term) => {
+        const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+        if (storedMessages[decrypted.id]) {
+            const userMessages = storedMessages[decrypted.id].messages;
+            const filteredMessages = userMessages.filter(message => message.content.includes(term));
+            setFilteredMessages(filteredMessages);
+        }
+    };    
+
+    const handleSearch = (e) => {
+        const term = e.target.value;
+        setSearchTerm(term);
+        searchMessages(term);
+    };
+    
+
     return (
         <main className="flex flex-grow" id="messages-main">
             <div className="main-container flex-grow flex flex-col">
@@ -204,7 +222,7 @@ function MessagePage() {
                 </div>
             </div>
 
-            {isInfoOpen && (
+                   {isInfoOpen && (
                 <div className="info-container flex flex-col items-center p-8 gap-8">
                     <div className="info-top flex flex-col items-center">
                         <div className="circle circle-big">
@@ -216,14 +234,31 @@ function MessagePage() {
                         <UserStats number="13" title="Messages" />
                         <UserStats number="2" title="Files" />
                     </div>
-                    <p className="interests-title text-xl">Utilities</p>
-                    <div className="interests-container flex flex-wrap gap-3 justify-center">
-                        {interests.map((interest) => (
-                            <div key={interest} className="interest-item">
-                                {interest}
+                    <input
+                        type="text"
+                        placeholder="Search messages..."
+                        value={searchTerm}
+                        onChange={handleSearch}
+                        className="search_bar_messages"
+                    />
+                    {searchTerm ? (
+                        filteredMessages.length > 0 ? (
+                            <MessagesContainer messages={filteredMessages} />
+                        ) : (
+                            <p>No message was found</p>
+                        )
+                    ) : (
+                        <>
+                            <p className="interests-title text-xl">Utilities</p>
+                            <div className="interests-container flex flex-wrap gap-3 justify-center">
+                                {interests.map((interest) => (
+                                    <div key={interest} className="interest-item">
+                                        {interest}
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        </>
+                    )}
                 </div>
             )}
         </main>
