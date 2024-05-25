@@ -1,4 +1,3 @@
-// MessagePage.jsx
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import UserStats from '../components/Messages/UserStats.jsx';
@@ -155,6 +154,11 @@ function MessagePage() {
 
                 addMessage(receiver_id, newMsg); // Add message to context and localStorage
                 setShowEmojiPicker(false);
+                if (searchTerm.trim() === "") {
+                    setFilteredMessages((prevMessages) => [...prevMessages, newMsg]);
+                } else if (newMsg.content.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    setFilteredMessages((prevMessages) => [...prevMessages, newMsg]);
+                }
             }
         } catch (error) {
             console.error("Error sending message:", error);
