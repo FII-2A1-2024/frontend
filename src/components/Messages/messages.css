@@ -63,3 +63,7 @@
     padding: 10px;
     z-index: 999; /* Asigură-te că popup-ul este la suprafața imaginii */
 }
+.search_bar_messages{
+    background-color: white;
+    border-color: black;
+}
