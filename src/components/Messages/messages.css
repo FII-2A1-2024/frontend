@@ -52,3 +52,14 @@
 .form-container input[type="text"]::placeholder {
     color: #C6C6C6;
 }
+
+.emoji-picker {
+    position: absolute;
+    top: -200%; /* Poziționează popup-ul deasupra */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Setează raza colțurilor la 10px sau la valoarea dorită */
+    padding: 10px;
+    z-index: 999; /* Asigură-te că popup-ul este la suprafața imaginii */
+}

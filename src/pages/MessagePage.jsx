@@ -22,7 +22,75 @@ function MessagePage() {
     const [isInfoButtonClicked, setIsInfoButtonClicked] = useState(false);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+    const emojiMap = {
+        smiling_face: "😊",
+        thumbs_up: "👍",
+        heart_eyes: "😍",
+        laughing: "😂",
+        rolling_on_the_floor_laughing: "🤣",
+        red_heart: "❤️",
+        unamused: "😒",
+        ok_hand: "👌",
+        kissing_face_with_closed_eyes: "😚",
+        smiling_face_with_heart_eyes: "😍",
+        kissing_face: "😘",
+        two_hearts: "💕",
+        grinning_face_with_smiling_eyes: "😁",
+        grinning_face: "😀",
+        face_savoring_food: "😋",
+        smiling_face_with_sunglasses: "😎",
+        smiling_face_with_tear: "🥲",
+        hugging_face: "🤗",
+        star_struck: "🤩",
+        thinking_face: "🤔",
+        brain: "🫡",
+        face_with_raised_eyebrow: "🤨",
+        neutral_face: "😐",
+        expressionless_face: "😑",
+        face_in_clouds: "😶‍🌫️",
+        face_without_mouth: "😶",
+        face_with_rolling_eyes: "🙄",
+        smirking_face: "😏",
+        persevering_face: "😣",
+        disappointed_face: "😞",
+        slightly_frowning_face: "🙁",
+        confounded_face: "😖",
+        worried_face: "😟",
+        fearful_face: "😨",
+        weary_face: "😩",
+        exploding_head: "🤯",
+        flushed_face: "😳",
+        hot_face: "🥵",
+        cold_face: "🥶",
+        dizzy_face: "😵",
+        mask: "😷",
+        angry_face: "😠",
+        face_with_symbols_on_mouth: "🤬",
+        pouting_face: "😡",
+        woozy_face: "🥴",
+        face_exhaling: "😮‍💨",
+        face_with_spiral_eyes: "😵‍💫",
+        nauseated_face: "🤢",
+        face_vomiting: "🤮",
+        sneezing_face: "🤧",
+        smiling_face_with_halo: "😇",
+        partying_face: "🥳",
+        lying_face: "🤥",
+        face_with_monocle: "🧐",
+        nerd_face: "🤓",
+        face_with_head_bandage: "🩹",
+        disguised_face: "🥸",
+        pleading_face: "🥺",
+        zipper_mouth_face: "🤐",
+        face_with_hand_over_mouth: "🤭",
+        face_with_symbols_over_mouth: "🤫",
+        face_with_uneven_eyes_and_wavy_mouth: "🥲",
+        skeletal: "💀",
+        pile_of_poo: "💩",
+    };
+    
     useEffect(() => {
         function handleResize() {
             if (!isInfoButtonClicked) {
@@ -84,6 +152,16 @@ function MessagePage() {
         setSelectedFile(event.target.files[0]);
     };
 
+    // Funcție pentru deschiderea/inchiderea selectorului de emoji
+    const toggleEmojiPicker = () => {
+        setShowEmojiPicker(!showEmojiPicker);
+    };
+
+    // Funcție pentru selectarea și adăugarea emoji-urilor la mesaj
+    const handleEmojiSelection = (emoji) => {
+        setNewMessage(prevMessage => prevMessage + emoji);
+    };
+
     const infoToggleBtnId = isInfoOpen ? "info-toggle-btn-active" : null;
 
     // In your handleSubmit function in MessagePage
@@ -111,13 +189,14 @@ function MessagePage() {
                 }
                 storedMessages[receiver_id].messages.push(newMsg);
                 localStorage.setItem('messages', JSON.stringify(storedMessages));
+                setShowEmojiPicker(false);
             }
         } catch (error) {
             console.error("Error sending message:", error);
         }
     };
 
-
+    
     return (
         <main className="flex flex-grow" id="messages-main">
             <div className="main-container flex-grow flex flex-col">
@@ -146,9 +225,21 @@ function MessagePage() {
                         <button type="submit">
                             <img src={sendIcon} alt="Send" className='icon' />
                         </button>
-
-                        <img src={emojiIcon} alt="Emojies" className='icon absolute right-14 top-0 bottom-0 m-auto' id="emojies" />
+                    
                     </form>
+                    <button onClick={toggleEmojiPicker}> 
+                        <img src={emojiIcon} alt="Emojies" className='icon absolute right-24 top-0 bottom-0 m-auto' id="emojies" />
+                    </button>
+                     {/* Randează selectorul de emoji condiționat */}
+                    {showEmojiPicker && (
+                        <div className="emoji-picker">
+                            {Object.keys(emojiMap).map((emojiName) => (
+                                <button key={emojiName} onClick={() => handleEmojiSelection(emojiMap[emojiName])}>
+                                    {emojiMap[emojiName]}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 
