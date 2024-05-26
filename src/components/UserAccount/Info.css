@@ -40,46 +40,60 @@
 
 .user-account-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
 
   position: relative;
-  width: 340px;
+  width: 500px;
   padding-top: 30px;
 }
 
-/* Info.css */
-
 .account-info-container {
   width: 100%;
-  max-width: 600px; /* Limitează lățimea maximă */
+  max-width: 600px;
   background-color: #ffffff;
   padding: 20px;
-  margin: 20px; /* Spațiu exterior */
+  margin: 20px;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.info-top {
-  display: flex;
-  align-items: center;
+.user-account-settings {
+  display: flex; /* Asigură că elementele sunt pe același rând */
+  justify-content: flex-end; /* Aliniază conținutul la dreapta */
+  align-items: center; /* Aliniază iconul și textul pe verticală */
   margin-bottom: 20px;
 }
 
-.circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #007bff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
+.account-settings-icon {
+  width: 24px; /* Dimensiunea iconului */
+  height: 24px;
+  margin-left: 8px; /* Spațiu între text și icon */
 }
 
-.profile-pic {
-  font-size: 2.5rem;
-  color: #ffffff;
+.account-settings-text {
+  font-size: 1rem;
+  color: #007bff;
+}
+
+
+.info-user-name {
+  display: flex;
+  flex-direction: column;
+  /*align-items: flex-start; */
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.user-anonymous-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.user-id {
+  font-size: 1rem;
+  color: #333333;
 }
 
 .text-2xl {
@@ -89,8 +103,28 @@
 }
 
 .info-stats-container {
+  display: flex;
   margin-bottom: 20px;
 }
+
+.info-stats-posts-made,
+.info-stats-comments,
+.info-stats-votes {
+  flex: 1;
+  text-align: center;
+  margin-right: -5px; /* Compensează marginile între elemente */
+}
+
+.info-stats-votes {
+  margin-right: 0; /* Elimină margin-right pentru ultimul element */
+}
+
+
+.info-stats-text {
+  font-size: 1rem;
+  color: #666666;
+}
+
 
 .interests-title {
   font-size: 1.25rem;
