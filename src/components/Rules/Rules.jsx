@@ -53,7 +53,7 @@ function Rules() {
           </li>
         </ul>
 
-      <p className="introduction">
+      <p>
         Welcome to IncogniTalk! These Terms of Use govern your use of our website and
         services. By accessing or using our services, you agree to be bound by
         these Terms.
@@ -62,9 +62,9 @@ function Rules() {
       <div className="rules_list">
         <section id="Use of Services">
           <h3>1. Use of Services</h3>
-          <section>
-            <h4 id="Membership">1.1. Membership</h4>
-            <p className="paragraph">
+          <section id="Membership">
+            <h4 >1.1. Membership</h4>
+            <p>
               Membership: Access to IncogniTalk is limited to
               students and staff members of the Faculty of Computer Science
               (FII) in Iasi, Romania. By using the Services, you represent and
@@ -73,9 +73,9 @@ function Rules() {
           </section>
         
 
-          <section>
-            <h4 id="Account">1.2. Account</h4>
-            <p className="paragraph">
+          <section  id="Account">
+            <h4>1.2. Account</h4>
+            <p>
               You may need to create an account to access certain features of
               the Services. You are responsible for maintaining the
               confidentiality of your account credentials and for all activities
@@ -83,9 +83,9 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h4 id="User Content">1.3. User Content</h4>
-            <p className="paragraph">
+          <section id="User Content">
+            <h4>1.3. User Content</h4>
+            <p>
               You are solely responsible for any content you post or transmit
               through the Services ("User Content"). You retain ownership of
               your User Content, but by posting it on the Services, you grant us
@@ -97,8 +97,8 @@ function Rules() {
         </section>
 
 
-          <section>
-            <h3 id="Prohibited Conduct">2. Prohibited Conduct</h3>
+          <section id="Prohibited Conduct">
+            <h3 >2. Prohibited Conduct</h3>
             <p>
               You agree not to use the Services for any unlawful or prohibited
               purpose or in any manner that could damage, disable, overburden,
@@ -139,8 +139,8 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Privacy">3. Privacy</h3>
+          <section id="Privacy">
+            <h3>3. Privacy</h3>
             <p>
               Your privacy is important to us. Our Privacy Policy explains how
               we collect, use, and disclose information about you. By using the
@@ -149,8 +149,8 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Intellectual Property">4. Intellectual Property</h3>
+          <section id="Intellectual Property">
+            <h3 >4. Intellectual Property</h3>
             <p>
               The Services and all content, features, and functionality thereof
               are owned by IncogniTalk and are protected by copyright, trademark, and
@@ -158,8 +158,8 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Disclaimer of Warranties">5. Disclaimer of Warranties</h3>
+          <section id="Disclaimer of Warranties">
+            <h3>5. Disclaimer of Warranties</h3>
             <p>
               THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS,
               WITHOUT ANY WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE
@@ -169,8 +169,8 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Limitation of Liability">6. Limitation of Liability</h3>
+          <section id="Limitation of Liability">
+            <h3>6. Limitation of Liability</h3>
             <p>
               IN NO EVENT SHALL IncogniTalk BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
               SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, ARISING OUT OF OR IN
@@ -180,16 +180,16 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Governing Law">7. Governing Law</h3>
+          <section id="Governing Law">
+            <h3>7. Governing Law</h3>
             <p>
               These Terms shall be governed by and construed by the laws of
               Romania, without regard to its conflict of law provisions.
             </p>
           </section>
 
-          <section>
-            <h3 id="Changes to Terms">8. Changes to Terms</h3>
+          <section id="Changes to Terms">
+            <h3>8. Changes to Terms</h3>
             <p>
               We reserve the right to modify or replace these Terms at any time.
               If we make material changes, we will notify you by posting the
@@ -199,16 +199,16 @@ function Rules() {
             </p>
           </section>
 
-          <section>
-            <h3 id="Contact Us">9. Contact Us</h3>
+          <section id="Contact Us">
+            <h3>9. Contact Us</h3>
             <p>
               If you have any questions about these Terms, please contact us at
               incognitalk@contact.com.
             </p>
           </section>
 
-          <section>
-            <h3 id="Entire Agreement">10. Entire Agreement</h3>
+          <section id="Entire Agreement">
+            <h3>10. Entire Agreement</h3>
             <p>
               These Terms constitute the entire agreement between you and IncogniTalk
               regarding your use of the Services and supersede all prior and

@@ -11,7 +11,7 @@
   padding: 30px;
   border: 1px solid #ccbbbb;
   z-index: 999;
-  background: #fafafa;
+  background: #fff;
   gap: 40px;
   align-items: center;
   max-width: 500px;
@@ -43,7 +43,7 @@
   
   .delete-confirmation-buttons .primary-btn {
     background-color: #850000;
-    color: #FAFAFA;
+    color: #fff;
   
 }
 
@@ -62,5 +62,5 @@
     background-color: #850000;
     transition: ease-out 0.4s;
     border-color: transparent;
-    color: #FAFAFA;
+    color: #fff;
 }

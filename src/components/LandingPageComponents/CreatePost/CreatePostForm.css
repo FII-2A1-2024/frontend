@@ -5,7 +5,7 @@
     padding: 30px;
     border: 1px solid #ccbbbb;
     z-index: 2000;
-    background: #FAFAFA;
+    background: #fff;
 }
 
 .relative-parent {
@@ -110,7 +110,7 @@
 }
 .primary-btn {
     background-color: #850000;
-    color: #FAFAFA;
+    color: #fff;
 }
 
 .sec-btn {
@@ -128,7 +128,7 @@
     background-color: #850000;
     transition: ease-out 0.4s;
     border-color: transparent;
-    color: #FAFAFA;
+    color: #fff;
 }
 
 .create-post-popup-buttons {

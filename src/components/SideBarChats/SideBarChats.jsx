@@ -22,7 +22,7 @@ function SideBarChats() {
 
   return (
     <div className="side_bar_chats_body">
-      <h1>Chats</h1>
+      <h4>Chats</h4>
       {/*  {messages.map((message) => (
           <SideBarChat
             key={post.id}
@@ -34,35 +34,35 @@ function SideBarChats() {
         <SideBarChat
           id={0}
           username={"User1"}
-          content={"LastMessageLastMessageLastMessageLastM"}
+          content={"Ce faci?"}
         />
       </Link>
       <Link to="/main">
         <SideBarChat
           id={0}
           username={"User2"}
-          content={"LastMessageLastMessageLastMessageLastM"}
+          content={"Visez la vacanță."}
         />
       </Link>
       <Link to="/main">
         <SideBarChat
           id={0}
           username={"User3"}
-          content={"LastMessageLastMessageLastMessageLastM"}
+          content={"Eu visez la somn."}
         />
       </Link>
       <Link to="/main">
         <SideBarChat
           id={0}
           username={"User4"}
-          content={"LastMessageLastMessageLastMessageLastM"}
+          content={"Eu visez că visez."}
         />
       </Link>
       <Link to="/main">
         <SideBarChat
           id={0}
           username={"User5"}
-          content={"LastMessageLastMessageLastMessageLastM"}
+          content={"Hai că ne-am întrecut!"}
         />
       </Link>
     </div>

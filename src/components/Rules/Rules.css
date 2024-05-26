@@ -5,6 +5,7 @@
     text-align: left;
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
 }
 
 .main-list-rules {
@@ -27,7 +28,7 @@
 }
 
 .sub-list-rules li {
-    margin-left: 50px;
+    margin-left: 20px;
     font-size: 16px;
     font-weight: 500;
 
@@ -39,8 +40,29 @@
     gap: 40px;
 }
 
-  .rules_container h2 {
+.rules_container h2 {
     font-size: 32px;
     line-height: 130%;
     font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+.rules_container h3 {
+    font-size: 28px;
+    line-height: 130%;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.rules_container h4 {
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 600;
+    margin-bottom: 16px;
+    margin-top: 10px;
+}
+
+.rules_container p {
+    margin-bottom: 12px;
 }

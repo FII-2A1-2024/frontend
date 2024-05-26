@@ -11,9 +11,11 @@
   font-family: "Poppins", "sans-serif";
   border: 1px solid #e0c9c9;
   border-radius: 10px;
-  width: 801px;
+  max-width: 830px;
   padding: 20px;
   background-color: #fffbfb;
+  display: flex;
+  flex-direction: column;
 }
 
 .btn_message{
@@ -27,7 +29,7 @@
   padding: 20px;
   border: 1px solid #ccc;
   z-index: 999;
-  background: #fafafa;
+  background: #fff;
   color: #200000;
   font-size: 20px;
   font-weight: 500;
@@ -56,7 +58,7 @@
   position: absolute;
   top: 30px;
   right: 0;
-  background-color: #fafafa;
+  background-color: #fff;
   border: 1px solid #ccbbbb;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -218,18 +220,21 @@
 /* Added by Ciprian - error pop-ups */
 
 .error-msg {
-  position: absolute;
-  background-color: hsl(0, 100%, 17%);
-  color: white;
-  padding: 1em;
-  max-width: 40vw;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3000;
+  background-color: #fff;
+  padding: 40px;
+  border: 1px solid #ccbbbb;
   border-radius: 8px;
-  z-index: 3;
 }
 
-.error-msg-comm {
-  padding: 0.5em;
-}
+/* .error-msg-comm {
+  /* padding: 0.5em; */
 
 
 

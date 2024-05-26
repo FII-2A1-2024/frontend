@@ -9,7 +9,7 @@
     padding: 30px;
     border: 1px solid #ccc;
     z-index: 999;
-    background: #fafafa;
+    background: #fff;
    }
    
    
@@ -34,6 +34,6 @@
    .upload_delete-btn:hover {
        transition: ease-out 0.4s;
        background-color: #850000;
-       color: #fafafa;
+       color: #fff;
        border-color: transparent;
    }

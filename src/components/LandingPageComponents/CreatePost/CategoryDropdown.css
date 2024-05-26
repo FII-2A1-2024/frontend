@@ -8,12 +8,12 @@
     box-sizing: border-box;
     border: 1px solid rgb(204, 187, 187);
     border-radius: 8px;
-    background: rgb(250, 250, 250);
+    background: fff;
     color: rgb(51, 0, 0);
 }
 
 .category{
-    background: rgb(250, 250, 250) !important;
+    background: #fff !important;
     color: black;
     width: 258px !important;
 }
