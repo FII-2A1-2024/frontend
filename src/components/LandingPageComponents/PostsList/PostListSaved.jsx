@@ -81,7 +81,7 @@ const PostListSaved = () => {
                 key={post.id}
                 id={post.id}
                 authorId={post.author_id}
-                userName={`User ${post.author_id}`}
+                userName={post.username ? post.username : `User ${post.author_id}`}
                 title={post.title}
                 content={post.description}
                 upVotesCount={post.votes}
