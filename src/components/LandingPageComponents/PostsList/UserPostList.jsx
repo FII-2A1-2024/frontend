@@ -9,7 +9,7 @@ const PostList = () => {
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userPostCount, setUserPostCount] = useState(0);
-  const userId = 408; // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
+  const userId =  localStorage.getItem("UserId"); // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
 
   const handleDelete = (postId) => {
     axios
