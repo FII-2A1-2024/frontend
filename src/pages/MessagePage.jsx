@@ -18,7 +18,9 @@ function MessagePage() {
     const location = useLocation();
     const urlParams = location.pathname.split('/');
     const decrypted = decryptData(urlParams[2]);
-    const interests = ["Test", "Something", "Test2", "Another", "Third", "Max", "Plane", "Drone"];
+    const [sendMessageError, setSendMessageError] = useState("");
+    const [isErrorVisible, setIsErrorVisible] = useState(false);
+
 
     const [isInfoOpen, setIsInfoOpen] = useState(true);
     const [isInfoButtonClicked, setIsInfoButtonClicked] = useState(false);
@@ -163,6 +165,15 @@ function MessagePage() {
             }
         } catch (error) {
             console.error("Error sending message:", error);
+            setSendMessageError("Message could not be sent. If the message doesn't contains slurs, please try again.");
+            setIsErrorVisible(true);
+            
+            // Setează un timer pentru a ascunde automat mesajul de eroare după un anumit timp
+            setTimeout(() => {
+                setSendMessageError("");
+                setIsErrorVisible(false);
+            }, 3000); // Mesajul de eroare va fi ascuns după 3 secunde
+            
         }
     };
 
@@ -190,9 +201,10 @@ function MessagePage() {
                     <button className="chat-list-toggle p-4 flex justify-center items-center info-toggle" title="Toggle user info"
                         id={infoToggleBtnId} onClick={handleCloseInfo}>i</button>
                 </div>
+               
 
                 <MessagesContainer messages={currentMessages} />
-
+                {sendMessageError && <p className="send-message-error" style={{ color: "black", maxWidth: "90%", marginLeft: "5%" }}>{sendMessageError}</p>}
                 <div className="form-container flex items-center gap-4 relative">
                     <label htmlFor="file-input">
                         <img src={attachIcon} alt="Attach files" className='icon' />
