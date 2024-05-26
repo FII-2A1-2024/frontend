@@ -231,12 +231,12 @@ function MessagePage() {
                 <div className="info-container flex flex-col items-center p-8 gap-8">
                     <div className="info-top flex flex-col items-center">
                         <div className="circle circle-big">
-                            <p className="profile-pic text-5xl">A</p>
+                            <p className="profile-pic text-5xl">{decrypted.username[0]}</p>
                         </div>
                         <p className="text-2xl">{decrypted.username}</p>
                     </div>
                     <div className="info-stats-container flex justify-around">
-                        <UserStats number="13" title="Messages" />
+                        <UserStats number="?" title="Gossips" />
                     </div>
                     <input
                         type="text"

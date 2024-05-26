@@ -41,9 +41,9 @@ export const MessageProvider = ({ children }) => {
 
             setMessages((prevMessages) => {
                 const updatedMessages = { ...prevMessages };
-                const receiver_id = data.sender_id;  // Ensure sender_id is defined
+                const receiver_id = data.sender_id; // Don't ask me the logic of this, I forgot
                 if (!updatedMessages[receiver_id]) {
-                    updatedMessages[receiver_id] = { username: data.username || ('User ' + data.sender_id), messages: [] };
+                    updatedMessages[receiver_id] = { username: data.sender_username || ('User ' + data.sender_id), messages: [] };
                 }
                 updatedMessages[receiver_id].messages.push(messageWithTimestamp);
                 localStorage.setItem('messages', JSON.stringify(updatedMessages));

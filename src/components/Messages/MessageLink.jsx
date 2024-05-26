@@ -6,7 +6,14 @@ import { checkConnection } from "./checkConnection";
 const MessageLink = ({ username, id, type }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const hashedUsername = encryptData(username, id);
+
+    let hashedUsername;
+    // Send messages to yourself
+    if(id == parseInt(localStorage.getItem("UserId"), 10)) {
+        hashedUsername = encryptData("vocile", id);
+    } else {
+        hashedUsername = encryptData(username, id);
+    }
 
     const handleClick = async (e) => {
         e.preventDefault();
