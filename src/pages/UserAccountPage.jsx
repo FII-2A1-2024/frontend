@@ -14,10 +14,10 @@ function UserAccountPage() {
           <Navbar />
         </div>
         <div className="content-wrapper">
+          <div className="user-posts">{<UserPostList />}</div>
           <div className="user-account-info">
             <AccountInfo />
           </div>
-          <div className="user-posts">{<UserPostList />}</div>
         </div>
       </div>
     </div>
