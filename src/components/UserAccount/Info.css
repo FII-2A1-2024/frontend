@@ -7,6 +7,8 @@
 /*fix*/
 .container-posts-list {
   align-items: center;
+  flex: 1;
+  margin-top: 20px;
 }
 .container-posts-list div:not([class]) {
   display: none;
@@ -15,8 +17,10 @@
 .content-wrapper {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+}
+.user-posts {
+  flex: 1;
 }
 
 .user-account-page-content {
@@ -27,6 +31,44 @@
   gap: 30px;
   top: 65px;
   position: relative;
+}
+.topPart h2 {
+  margin-bottom: 50px;
+  text-align: left;
+  font-size: 32px !important;
+}
+.name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftBtn {
+  width: 100%;
+  display: flex;
+}
+.topPart button {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fcfbfb;
+  background-color: #850000;
+  padding: 10px 28px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.topPart ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.topPart ul li {
+  background-color: rgb(248, 243, 236);
+  border-radius: 20px;
+  padding: 7px 15px;
 }
 
 .user-account-sidebar {
@@ -39,8 +81,9 @@
 }
 
 .user-account-info {
+  margin-right: 50px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 
   position: relative;
   width: 500px;
@@ -48,7 +91,8 @@
 }
 
 .account-info-container {
-  width: 100%;
+  height: 70vh;
+  width: 500px;
   max-width: 600px;
   background-color: #ffffff;
   padding: 20px;
@@ -56,6 +100,8 @@
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 120px;
 }
 
 .user-account-settings {
@@ -75,7 +121,6 @@
   font-size: 1rem;
   color: #007bff;
 }
-
 
 .info-user-name {
   display: flex;
@@ -119,12 +164,10 @@
   margin-right: 0; /* Elimină margin-right pentru ultimul element */
 }
 
-
 .info-stats-text {
   font-size: 1rem;
   color: #666666;
 }
-
 
 .interests-title {
   font-size: 1.25rem;

@@ -9,7 +9,7 @@ const PostList = () => {
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userPostCount, setUserPostCount] = useState(0);
-  const userId =  localStorage.getItem("UserId"); // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
+  const userId = 408; //localStorage.getItem("UserId"); // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
 
   const handleDelete = (postId) => {
     axios
@@ -50,10 +50,25 @@ const PostList = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      <div className="topPart">
+        <div className="name">
+          <h2>Anonymous123</h2>
+          <p>Student</p>
+        </div>
+
+        <ul>
+          <li>Overview</li>
+          <li>Posts</li>
+          <li>Comments</li>
+          <li>Upvoted</li>
+          <li>Downvoted</li>
+        </ul>
+        <div className="leftBtn">
+          <button className="createPostBtn">Create Post</button>
+        </div>
+      </div>
       <div className="container-posts-list">
-        <h2 className="mb-[20px]">Posts: {userPostCount}</h2>
         {posts.map((post) =>
-          //localStorage.getItem("UserId") pun un id ca nu merge postarea
           post.author_id == userId ? (
             <Post
               key={post.id}
