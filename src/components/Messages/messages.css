@@ -67,3 +67,15 @@
     background-color: white;
     border-color: black;
 }
+
+
+.send-message-error {
+    background-color: var(--border-color);
+    position: absolute;
+    bottom: 100%;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    left: 50%;
+    transform: translateX(-50%);
+}
