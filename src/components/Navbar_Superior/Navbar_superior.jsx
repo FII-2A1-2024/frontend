@@ -59,7 +59,7 @@ function Navbar_superior({ toggleNavbar }) {
     if (token) {
       axios
         .post(
-          "http://localhost:3000/logout",
+          `${import.meta.env.VITE_URL_BACKEND}/logout`,
           {}, // Corpul cererii este gol, dar trebuie să-l incluzi pentru a specifica antetul de autorizare
           {
             headers: {
