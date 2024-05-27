@@ -59,27 +59,28 @@ function ChatList() {
 
     useEffect(() => {
         const urlParams = location.pathname.split('/');
-        const decrypted = decryptData(urlParams[2]);
-
-        if (decrypted.id && decrypted.username) {
-            setMessagesIds(prevMessagesIds => {
-                const chatExists = prevMessagesIds.some(chat => chat.id === decrypted.id);
-                if (!chatExists) {
-                    const updatedMessagesIds = [...prevMessagesIds, { id: decrypted.id, username: decrypted.username, lastMessage: 'No messages yet', timestamp: 0 }];
-                    // Save the chat in context and localStorage
-                    const updatedAllMessages = { ...allMessages };
-                    if (!updatedAllMessages[decrypted.id]) {
-                        updatedAllMessages[decrypted.id] = { username: decrypted.username, messages: [] };
+        if (location.pathname.includes("messages")) {
+            const decrypted = decryptData(urlParams[2]);
+            if (decrypted.id && decrypted.username) {
+                setMessagesIds(prevMessagesIds => {
+                    const chatExists = prevMessagesIds.some(chat => chat.id === decrypted.id);
+                    if (!chatExists) {
+                        const updatedMessagesIds = [...prevMessagesIds, { id: decrypted.id, username: decrypted.username, lastMessage: 'No messages yet', timestamp: 0 }];
+                        // Save the chat in context and localStorage
+                        const updatedAllMessages = { ...allMessages };
+                        if (!updatedAllMessages[decrypted.id]) {
+                            updatedAllMessages[decrypted.id] = { username: decrypted.username, messages: [] };
+                        }
+                        // update context
+                        updateMessages(updatedAllMessages);
+                        // Sort by most recent message
+                        updatedMessagesIds.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                        return updatedMessagesIds;
                     }
-                    // update context
-                    updateMessages(updatedAllMessages);
-                    // Sort by most recent message
-                    updatedMessagesIds.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                    return updatedMessagesIds;
-                }
-                return prevMessagesIds;
-            });
-            setActiveChat(decrypted.id);
+                    return prevMessagesIds;
+                });
+                setActiveChat(decrypted.id);
+            }
         }
     }, [location.pathname, allMessages, updateMessages]);
 
