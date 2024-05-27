@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "../media/icons/Ilustratie-log_in.svg";
 import Signup from "../media/icons/Signup.svg";
 import Homepage from "../media/icons/homepage.svg";
@@ -9,6 +10,7 @@ import "../styles/Login.css";
 import "../styles/Signup.css";
 import socket from "../socket";
 import { useTranslation } from "react-i18next";
+import { useMessages } from "../components/Messages/MessageContext";
 
 /* ************************************
 1. npm install nodemon
@@ -30,6 +32,10 @@ import { useTranslation } from "react-i18next";
 ************************************ */
 
 function ConnectPage() {
+
+  const navigate = useNavigate();
+  const { updateMessages } = useMessages();
+
   const {
     t,
     i18n: { changeLanguage, language },
@@ -112,7 +118,7 @@ function ConnectPage() {
       const data = JSON.stringify(userData);
 
       //api login
-      fetch(`${import.meta.env.VITE_URL_BACKEND}/login`, {
+      fetch(`http://localhost:3000/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,9 +129,13 @@ function ConnectPage() {
         .then((result) => {
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
+          localStorage.setItem("token", result.token);
+          localStorage.setItem("username", result.username);
           console.log(resCode);
           if (resCode === 200) {
-            window.location.href = "/main";
+            navigate("/main");
+            localStorage.removeItem("messages");
+            updateMessages({});
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {
