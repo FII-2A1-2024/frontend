@@ -146,7 +146,7 @@ function MessagePage() {
         const receiver_id = decrypted.id;
 
         try {
-            if (sender_id != receiver_id) {
+            if (sender_id != receiver_id && newMessage.trim() !== "") {
                 const response = await sendMessage(sender_id, receiver_id, newMessage);
             }
 
