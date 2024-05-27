@@ -197,8 +197,8 @@ function MessagePage() {
                
 
                 <MessagesContainer messages={currentMessages} />
-                {sendMessageError && <p className="send-message-error" style={{ color: "black", maxWidth: "90%", marginLeft: "5%" }}>{sendMessageError}</p>}
                 <div className="form-container flex items-center gap-4 relative">
+                {sendMessageError && <p className="send-message-error">{sendMessageError}</p>}
                     <label htmlFor="file-input">
                         <img src={attachIcon} alt="Attach files" className='icon' />
                     </label>
