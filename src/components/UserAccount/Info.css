@@ -52,12 +52,15 @@
 .report-table tr th {
   text-align: left;
 }
-.postItem {
-  width: 70%;
+.report-table tr {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .reasonBox {
-  padding: 10px;
+  flex: 1;
+  margin: 0px 10px;
 }
 .reason {
   border: 1px solid #e0c9c9;
@@ -67,6 +70,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
+  flex: 1;
 }
 .actionBtns {
   display: flex;
@@ -108,7 +112,7 @@
 }
 
 .topPart ul li {
-  background-color: rgb(248, 243, 236);
+  background-color: #fcf3f3;
   border-radius: 20px;
   padding: 7px 15px;
 }
@@ -123,25 +127,22 @@
 }
 
 .user-account-info {
-  margin-right: 50px;
   display: flex;
   flex-direction: column;
 
   position: relative;
-  width: 500px;
-  padding-top: 30px;
 }
 
 .account-info-container {
-  height: 70vh;
+  height: 80vh;
   width: 500px;
   max-width: 600px;
-  background-color: #ffffff;
+  background-color: #fffbfb;
+  border: 1px solid #ccbbbb;
   padding: 20px;
   margin: 20px;
   box-sizing: border-box;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 120px;
 }
@@ -199,11 +200,6 @@
 .info-stats-votes {
   flex: 1;
   text-align: center;
-  margin-right: -5px; /* Compensează marginile între elemente */
-}
-
-.info-stats-votes {
-  margin-right: 0; /* Elimină margin-right pentru ultimul element */
 }
 
 .info-stats-text {
@@ -222,4 +218,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.account-info-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
+}
+.account-info-content {
+  height: 70vh;
+}
+.account-info-stats p {
+  font-size: 24px;
+  margin: 20px 0px;
 }

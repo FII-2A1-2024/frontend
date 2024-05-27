@@ -121,9 +121,17 @@ function ConnectPage() {
       })
         .then((res) => res.json())
         .then((result) => {
+          console.log(result);
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
-          console.log(resCode);
+          const userRole =
+            result.admin == true
+              ? "admin"
+              : result.teacher == true
+              ? "teacher"
+              : "student";
+          localStorage.setItem("UserRole", userRole);
+          localStorage.setItem("UserName", result.username);
           if (resCode === 200) {
             window.location.href = "/main";
           } else if (resCode === 458) {

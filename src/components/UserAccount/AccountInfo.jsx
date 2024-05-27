@@ -3,8 +3,6 @@ import "../UserAccount/Info.css";
 import axios from "axios";
 import accountSettings from "../UserAccount/Icons/AccountSettingsIcon.svg";
 
-const Post = React.lazy(() => import("../Post/post"));
-
 function AccountInfo() {
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +26,6 @@ function AccountInfo() {
         console.error("Error fetching posts:", error);
       });
   }, []);
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,31 +44,24 @@ function AccountInfo() {
       </div>
       <div className="account-info-content">
         <div className="info-user-name">
-          <p className="user-anonymous-name">Anonymous-demo</p>
+          <p className="user-anonymous-name">
+            {localStorage.getItem("UserName")}
+          </p>
           <p className="text-2xl">ID: {userID}</p>
         </div>
-        <div className="info-stats-container">
-          <div className="info-stats-posts-made">
-            <p className="info-stats-posts-made-number">
-              {posts.filter((post) => post.author_id === userId).length}
-            </p>
-            <p className="info-stats-posts-made-text">Posts made</p>
+        <div className="account-info-stats">
+          <div>
+            <p>Posts made</p>
+            <p>{userPostCount}</p>
           </div>
-          <div className="info-stats-comments">
-            <p className="info-stats-comments-number">0</p>
-            <p className="info-stats-comments-text">Comments on posts</p>
+          <div>
+            <p>Comments on posts</p>
+            <p>0</p>
           </div>
-          <div className="info-stats-votes">
-            <p className="info-stats-votes-number">2</p>
-            <p className="info-stats-votes-text">Votes on posts</p>
+          <div>
+            <p>Votes on posts</p>
+            <p>2</p>
           </div>
-        </div>
-        <p className="interests-title">Interests</p>
-        <div className="interests-container">
-          {/* Aici puteți adăuga elemente pentru interese, dar le-am eliminat în acest exemplu */}
-        </div>
-        <div className="topics-container">
-          {/* Aici puteți adăuga elemente pentru interese, dar le-am eliminat în acest exemplu */}
         </div>
       </div>
     </div>
