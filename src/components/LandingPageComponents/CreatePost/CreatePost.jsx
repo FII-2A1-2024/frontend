@@ -20,7 +20,7 @@ const CreatePost = () => {
   const handleCreate = (title, content, category, file) => {
     axios
       .post(
-        `http://localhost:3000/posts`,
+        `${import.meta.env.VITE_URL_BACKEND}/posts`,
         {
           author_id: userId,
           title: title,

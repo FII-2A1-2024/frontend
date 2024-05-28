@@ -14,7 +14,7 @@ export const getComments = async (postId) => {
 
 export const addComment = async(text, parentId, post_id, author_id) => {
   try {
-    const response = await axios.post(`http://localhost:3000/comments`, {
+    const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/comments`, {
       post_id: post_id,
       parent_id: parentId,
       username: localStorage.getItem('username'),
