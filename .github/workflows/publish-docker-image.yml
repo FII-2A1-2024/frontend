@@ -29,7 +29,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.MY_GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract Docker metadata
         id: meta
@@ -41,14 +41,14 @@ jobs:
         id: set-tag
         run: |
           if [[ "${{ github.ref }}" == *"-rc"* ]]; then
-            echo "::set-output name=tag::rc"
+            echo "::set-output name=tag::${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:rc"
           else
             echo "::set-output name=tag::${{ steps.meta.outputs.tags }}"
           fi  
 
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
