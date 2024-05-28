@@ -2,7 +2,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: [main, dev, feature/refine-gh-actions-workflows]
+    branches: [main, dev]
   release:
     types: [prereleased, released]
 
@@ -36,7 +36,6 @@ jobs:
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          
 
       - name: Set Docker tag
         id: set-tag
