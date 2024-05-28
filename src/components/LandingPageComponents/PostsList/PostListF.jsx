@@ -5,9 +5,9 @@ import "./PostList.css";
 
 const Post = React.lazy(() => import("../../Post/post"));
 
-const PostListF = ({categorie}) => {
+const PostListF = ({ categorie }) => {
   const [posts, setPosts] = useState([]);
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const handleDelete = (postId) => {
     axios
@@ -19,22 +19,29 @@ const [loading, setLoading] = useState(true);
         console.error("Error deleting post:", error);
       });
   };
- 
+
   useEffect(() => {
     console.log("Categorie: " + categorie);
     axios
-    .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
-    .then((response) => {
-      const allPosts = response.data.posts;
-      const filteredPosts = allPosts.filter(post => post.category.toLowerCase() === categorie);
-      setPosts(filteredPosts);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error("Error fetching posts:", error);
-      setLoading(false);
-    });
-}, [categorie]);
+      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
+      .then((response) => {
+        const allPosts = response.data.posts;
+        console.log("postari ", response.data.posts);
+        const filteredPosts = allPosts.filter(
+          (post) =>
+            post.category != null &&
+            categorie != null &&
+            post.category.toLowerCase() === categorie.toLowerCase()
+        );
+        setPosts(filteredPosts);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+        setLoading(false);
+      });
+  }, [categorie]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -42,9 +49,7 @@ const [loading, setLoading] = useState(true);
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="container-posts-list">
-        {
-        posts.map((post) => (
-            
+        {posts.map((post) => (
           <Post
             key={post.id}
             id={post.id}
