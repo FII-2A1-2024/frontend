@@ -129,7 +129,7 @@ function ConnectPage() {
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
           localStorage.setItem("token", result.token);
-          
+          localStorage.setItem("username", result.username);
           console.log(resCode);
           if (resCode === 200) {
             navigate("/main");

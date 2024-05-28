@@ -30,6 +30,7 @@ const Comments = ({ currentUserId, postId }) => {
           id: Date.now(),
           post_id: post_id,
           parent_id: parentId,
+          username : localStorage.getItem('username'),
           author_id: author_id,
           description: text,
           votes: 0,
@@ -46,8 +47,13 @@ const Comments = ({ currentUserId, postId }) => {
       }
       setBackendComments(updatedComments);
 
-      addCommentApi(text, parentId, post_id, author_id).then(() => {
-        fetchComments(postId);
+      //tre sa preluam id-ul din raspuns, si sa il actualizam 
+     addCommentApi(text, parentId, post_id, author_id).then((response) => {
+         // fetchComments(postId);
+         console.log("raspunsul este " , response);
+         updateIdOfNewComment(updatedComments, newComment.detaliiComentariu.id, response.comment_id);
+         console.log("Updated Id of thwe new comment : ",  updatedComments);
+         setBackendComments(updatedComments);
       });
 
       setActiveComment(null);
@@ -122,6 +128,21 @@ const Comments = ({ currentUserId, postId }) => {
       }
     }
   };
+
+  const updateIdOfNewComment = (comments, commentId, backId) => {
+    console.log("INCECRAM SA  gasim comentariul cu id ", commentId, " si il setam la ", backId);
+    for (let comment of comments) {
+      if (comment.detaliiComentariu.id === commentId) {
+          
+          comment.detaliiComentariu.id = backId;
+          return;
+      }
+      if (comment.subcomentarii) {
+        updateExistentComment(comment.subcomentarii, commentId, backId);
+      }
+    }
+  };
+
 
   const updateExistentComment = (comments, commentId, updateData) => {
     for (let comment of comments) {
