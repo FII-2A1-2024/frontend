@@ -9,7 +9,6 @@ on:
       version:
         description: "Version (e.g. v1.0.0-rc.1)"
         required: true
-  push:
 
 jobs:
   create_release_candidate:
