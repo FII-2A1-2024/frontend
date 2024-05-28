@@ -140,7 +140,7 @@ function Navbar_superior({ toggleNavbar }) {
               toggleDropdown={toggleNotifications}
             />
           )}
-          <Link to="/" className="userProfileButton tooltip">
+          <Link to="/useraccount" className="userProfileButton tooltip">
             {" "}
             {/*linkare la pagina userului */}
             <img

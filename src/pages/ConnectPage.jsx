@@ -32,7 +32,6 @@ import { useMessages } from "../components/Messages/MessageContext";
 ************************************ */
 
 function ConnectPage() {
-
   const navigate = useNavigate();
   const { updateMessages } = useMessages();
 
@@ -139,6 +138,7 @@ function ConnectPage() {
               : "student";
           localStorage.setItem("UserRole", userRole);
           localStorage.setItem("UserName", result.username);
+          localStorage.setItem("username", result.username);
           if (resCode === 200) {
             navigate("/main");
             localStorage.removeItem("messages");

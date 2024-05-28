@@ -108,7 +108,6 @@ function UserAccountPage() {
                                 upVotesCount={post.votes}
                                 commentsCount={post.comments_count}
                                 category={post.category}
-                                class="postFix"
                               />
                             </td>
                             <td className="reasonBox">

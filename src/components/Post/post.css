@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-.btn_message{
+.btn_message {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -33,7 +33,7 @@
   color: #200000;
   font-size: 20px;
   font-weight: 500;
- }
+}
 
 .three-dots {
   cursor: pointer;
@@ -79,7 +79,6 @@
 .post_menu_btn:hover {
   background-color: #f0f0f0;
 }
-
 
 .postHeader {
   display: flex;
@@ -216,7 +215,6 @@
   transform: rotate(360deg);
 }*/
 
-
 /* Added by Ciprian - error pop-ups */
 
 .error-msg {
@@ -235,8 +233,6 @@
 
 /* .error-msg-comm {
   /* padding: 0.5em; */
-
-
 
 /* media */
 
