@@ -10,6 +10,7 @@ import "../styles/Login.css";
 import "../styles/Signup.css";
 import socket from "../socket";
 import { useTranslation } from "react-i18next";
+import { useMessages } from "../components/Messages/MessageContext";
 
 /* ************************************
 1. npm install nodemon
@@ -33,6 +34,7 @@ import { useTranslation } from "react-i18next";
 function ConnectPage() {
 
   const navigate = useNavigate();
+  const { updateMessages } = useMessages();
 
   const {
     t,
@@ -134,6 +136,7 @@ function ConnectPage() {
           if (resCode === 200) {
             navigate("/main");
             localStorage.removeItem("messages");
+            updateMessages({});
           } else if (resCode === 458) {
             setPasswordError(true);
           } else if (resCode === 454) {

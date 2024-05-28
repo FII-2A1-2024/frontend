@@ -126,6 +126,17 @@
 }
 
 
+.red-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+
 
 @media (max-width: 768px) {
 

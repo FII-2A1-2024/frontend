@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import NotificationsDropdown from "./NotificationsDropdown";
 import SearchBar from "./SearchBar";
 import "./Navbar_superior.css";
@@ -13,21 +13,75 @@ import searchIconNavbar from "./media/searchIconNavbar.svg";
 import closeNotifications from "./media/closeNotifications.svg";
 import logoutIcon from "./media/logoutIcon.svg"
 import { useTranslation } from "react-i18next";
+import { useMessages } from "../../components/Messages/MessageContext";
+import axios from "axios";
 
 function Navbar_superior({ toggleNavbar }) {
   const { t } = useTranslation();
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false); // Starea pentru deschiderea/închiderea dropdown-ului de notificări
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [hasNewMessage, setHasNewMessage] = useState(false);
+  const location = useLocation();
+  const { messages } = useMessages();
+
+  useEffect(() => {
+    const handleNewMessage = () => {
+      if (!location.pathname.includes("/messages")) {
+        setHasNewMessage(true);
+      }
+    };
+
+    window.addEventListener("storage", handleNewMessage);
+
+    return () => {
+      window.removeEventListener("storage", handleNewMessage);
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (location.pathname.includes("/messages")) {
+      setHasNewMessage(false);
+    }
+  }, [location.pathname]);
 
   const toggleMenu = () => {
     setIsNavbarVisible(!isNavbarVisible);
-    console.log(isNavbarVisible); // Verifică în consolă dacă starea se schimbă corect
+    console.log(isNavbarVisible);
   };
 
   const toggleNotifications = () => {
-    setIsNotificationsOpen(!isNotificationsOpen); // Inversați starea pentru deschiderea/închiderea dropdown-ului de notificări
+    setIsNotificationsOpen(!isNotificationsOpen);
     console.log(isNotificationsOpen);
   };
+
+  const handleLogout = () => {
+    const token = localStorage.getItem("token");
+  
+    if (token) {
+      axios
+        .post(
+          `${import.meta.env.VITE_URL_BACKEND}/logout`,
+          {}, // Corpul cererii este gol, dar trebuie să-l incluzi pentru a specifica antetul de autorizare
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("User logged out");
+          localStorage.removeItem("token");
+          window.location.href = "/"; // Redirecționează utilizatorul către pagina de start sau altă pagină relevantă
+        })
+        .catch((error) => {
+          console.error("Error logging out:", error);
+        });
+    } else {
+      console.error("No token found in localStorage");
+      // Tratează cazul în care nu există un token în localStorage
+    }
+  };
+  
 
   return (
     <nav className="navbar_superior">
@@ -39,11 +93,7 @@ function Navbar_superior({ toggleNavbar }) {
             <span className="bar"></span>
           </button>
           <Link to={`/main`}>
-            <img
-              src={logoMascota}
-              alt="Logo-mascota"
-              className="logo-mascota"
-            />
+            <img src={logoMascota} alt="Logo-mascota" className="logo-mascota" />
             <img src={logoFull} alt="Logo" className="logo-full" />
           </Link>
         </div>
@@ -66,11 +116,7 @@ function Navbar_superior({ toggleNavbar }) {
             onClick={toggleNotifications}
           >
             {isNotificationsOpen ? (
-              <img
-                src={closeNotifications}
-                alt=""
-                className="notificationsIcon"
-              />
+              <img src={closeNotifications} alt="" className="notificationsIcon" />
             ) : (
               <img
                 src={notificationsIcon}
