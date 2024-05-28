@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
 import Navbar from "../components/SideNavbar/Navbar";
 //import NavbarSettings from "../components/Settings/NavbarSettings";
@@ -32,6 +33,22 @@ function AccountSettingsPage() {
       changeLanguage(newLanguage);
       localStorage.setItem("language", newLanguage);
     };
+
+    const handleDeleteAccountButton = async() => {
+        // deleteAccount
+        console.log("tryeing to delere account...");
+        try {
+          const response = await axios.get(`http://localhost:3000/deleteAccount`,
+          {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+          console.log('Success:', response.data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+    }
 
     const handleResetPassword = () => {
           setResetPassword(!showResetPass);
@@ -94,7 +111,7 @@ function AccountSettingsPage() {
                             
                             <div className="setting-option-line">
                                 <div className="setting-item">{t("Delete account")}</div>
-                                <button className="button-delete-account">{t("Delete")}</button>
+                                <button className="button-delete-account" onClick={handleDeleteAccountButton}>{t("Delete")}</button>
                             </div>
 
                           </div>

@@ -113,6 +113,7 @@ function ConnectPage() {
         password: password,
         socket: socket.id,
       };
+      localStorage.setItem("email", email);
       const data = JSON.stringify(userData);
 
       //api login
@@ -127,6 +128,8 @@ function ConnectPage() {
         .then((result) => {
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
+          localStorage.setItem("token", result.token);
+          
           console.log(resCode);
           if (resCode === 200) {
             navigate("/main");
