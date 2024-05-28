@@ -12,7 +12,13 @@ const MessageLink = ({ username, id, type }) => {
     if(id == parseInt(localStorage.getItem("UserId"), 10)) {
         hashedUsername = encryptData("vocile", id);
     } else {
-        hashedUsername = encryptData(username, id);
+        // In case you click on someone's post with a new name, but you already have him in the conv by an old name
+        const storedMessages = JSON.parse(localStorage.getItem('messages')) || {};
+        if (storedMessages[id]) {
+            hashedUsername = encryptData(storedMessages[id].username, id);
+        } else { // Completely new user
+            hashedUsername = encryptData(username, id);
+        }
     }
 
     const handleClick = async (e) => {
