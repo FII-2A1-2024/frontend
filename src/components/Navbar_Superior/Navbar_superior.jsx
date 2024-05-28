@@ -28,34 +28,6 @@ function Navbar_superior({ toggleNavbar }) {
     console.log(isNotificationsOpen);
   };
 
-  const handleLogout = () => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      axios
-        .post(
-          `${import.meta.env.VITE_URL_BACKEND}/logout`,
-          {}, // Corpul cererii este gol, dar trebuie să-l incluzi pentru a specifica antetul de autorizare
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((response) => {
-          console.log("User logged out");
-          localStorage.removeItem("token");
-          window.location.href = "/"; // Redirecționează utilizatorul către pagina de start sau altă pagină relevantă
-        })
-        .catch((error) => {
-          console.error("Error logging out:", error);
-        });
-    } else {
-      console.error("No token found in localStorage");
-      // Tratează cazul în care nu există un token în localStorage
-    }
-  };
-
   return (
     <nav className="navbar_superior">
       <div className="navbar-superior-container">

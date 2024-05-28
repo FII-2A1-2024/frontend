@@ -24,16 +24,9 @@ const CreatePost = (userName) => {
     formData.append("category", category);
     formData.append("file", file);
     axios
-      .post(
-        `${import.meta.env.VITE_URL_BACKEND}/posts`,
-        {
-          author_id: userId,
-          title: title,
-          username: localStorage.getItem("username"),
-          description: content,
-          category: category,
-          votes: 0,
-          file: file,
+      .post(`${import.meta.env.VITE_URL_BACKEND}/posts`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {

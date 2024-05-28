@@ -6,7 +6,7 @@
 .header {
     text-align: start;
     padding: 1em 3em;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid gray;
     font-size: 1.5em;
     position: relative;
 }
@@ -42,7 +42,7 @@
 .form-container input[type="text"] {
     width: calc(100% - 40px);
     background-color: #FFFBFB;
-    border: 1px solid var(--border-color);
+    border: 1px solid gray;
     border-radius: 10px;
     outline: none;
     color: var(--accent-color);
@@ -51,31 +51,4 @@
 
 .form-container input[type="text"]::placeholder {
     color: #C6C6C6;
-}
-
-.emoji-picker {
-    position: absolute;
-    top: -100%; /* Poziționează popup-ul deasupra */
-    left: 0;
-    background-color: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 10px; /* Setează raza colțurilor la 10px sau la valoarea dorită */
-    padding: 10px;
-    z-index: 999; /* Asigură-te că popup-ul este la suprafața imaginii */
-}
-.search_bar_messages{
-    background-color: white;
-    border-color: black;
-}
-
-
-.send-message-error {
-    background-color: var(--border-color);
-    position: absolute;
-    bottom: 100%;
-    padding: 1em;
-    border-radius: 8px;
-    border: 1px solid var(--accent-color);
-    left: 50%;
-    transform: translateX(-50%);
 }
