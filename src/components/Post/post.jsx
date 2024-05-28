@@ -10,7 +10,7 @@ TO DO: Share, Report, options regarding post depending on user_id.
 */
 
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
 import Modal from "react-modal";
@@ -67,6 +67,7 @@ const Post = ({
   const userId = parseInt(localStorage.getItem("UserId"), 10);
   const { t } = useTranslation();
   const [showReportModal, setShowReportModal] = useState(false);
+  const location = useLocation();
 
 
   useEffect(() => {
@@ -336,64 +337,63 @@ const Post = ({
             <MessageLink username={userName} id={authorId} type={"PostLink"}/>
         </div>
 
-        <div className="three-dots">
-          <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
-            <img src={threeDots} alt="ThreeDots" />
-          </button>
+        {!location.pathname.includes("useraccount") && (
+          <div className="three-dots">
+            <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
+              <img src={threeDots} alt="ThreeDots" />
+            </button>
           
-          {/* <div className="pop-up-message-status-action"> */}
             {message && <div className="btn_message">{message}</div>}
-          {/* </div> */}
 
-          {menuVisible && (
-            <div className="post_menu" ref={dropdownRef}>
-              {userId === authorId ? (
-                <>
-                  <button className="post_menu_btn" onClick={() => {handleEdit(); setMenuVisible(false);}}>
-                    <img src={editSVG} alt="Edit" className="post_menu_btn_icon" />
-                    {t('edit')}
-                  </button>
-                  <button className="post_menu_btn" onClick={() => {handleDelete(); setMenuVisible(false);}}>
-                    <img src={blockSVG} alt="Delete" className="post_menu_btn_icon" />
-                    {t('delete')}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className="post_menu_btn" onClick={() => {handleReport(); setMenuVisible(false);}}>
-                    <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
-                    {t('report')}
-                  </button>
-                  
-                  <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
-                    <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
-                    {t('save')}
-                  </button>
-                </>
-              )}
-            </div>
-          )}
+            {menuVisible && (
+              <div className="post_menu" ref={dropdownRef}>
+                {userId === authorId ? (
+                  <>
+                    <button className="post_menu_btn" onClick={() => {handleEdit(); setMenuVisible(false);}}>
+                      <img src={editSVG} alt="Edit" className="post_menu_btn_icon" />
+                      {t('edit')}
+                    </button>
+                    <button className="post_menu_btn" onClick={() => {handleDelete(); setMenuVisible(false);}}>
+                      <img src={blockSVG} alt="Delete" className="post_menu_btn_icon" />
+                      {t('delete')}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="post_menu_btn" onClick={() => {handleReport(); setMenuVisible(false);}}>
+                      <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
+                      {t('report')}
+                    </button>
+                    
+                    <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
+                      <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
+                      {t('save')}
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
 
-          {showEditPopup && (
-            <EditPopup
-              id={id}
-              currentCategory={category}
-              currentContent={content}
-              currentTitle={title}
-              currentFile={file}
-              onSave={handleSave}
-              onCancel={handleCancel}
-            />
-          )}
+            {showEditPopup && (
+              <EditPopup
+                id={id}
+                currentCategory={category}
+                currentContent={content}
+                currentTitle={title}
+                currentFile={file}
+                onSave={handleSave}
+                onCancel={handleCancel}
+              />
+            )}
 
-          {/* Delete confirmation popup */}
-          {showDeleteConfirmation && (
-            <DeleteConfirmationPopup
-              onDelete={handleConfirmDelete}
-              onClose={handleCloseDeleteConfirmation}
-            />
-          )}
-        </div>
+            {showDeleteConfirmation && (
+              <DeleteConfirmationPopup
+                onDelete={handleConfirmDelete}
+                onClose={handleCloseDeleteConfirmation}
+              />
+            )}
+          </div>
+        )}
       </div>
 
       <div className="postArticle">
@@ -425,7 +425,6 @@ const Post = ({
       </div>
 
       <div className="feedback-section">
-        {/* Likes/DisLike Button */}
         <div className="feedback-container">
           <div className="btn btn-upVotes" onClick={() => handleVote("upVote")}>
             <img src={upVotesSVG} alt="upVotes" />
@@ -442,7 +441,6 @@ const Post = ({
           </div>
         </div>
 
-        {/* Comments Button*/}
         <Link to={`/post/${id}`} style={{ color: "black" }}>
           <div className="feedback-container comm-btn">
             <div className="btn">
@@ -452,7 +450,6 @@ const Post = ({
           </div>
         </Link>
 
-        {/* Shares Button */}
         <div className="feedback-container" onClick={handleShare}>
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
@@ -461,7 +458,6 @@ const Post = ({
         </div>
       </div>
       <ReportModal isOpen={showReportModal} onRequestClose={handleCloseReportModal} onSubmit={handleSubmitReport} />
-
     </div>
   );
 };
