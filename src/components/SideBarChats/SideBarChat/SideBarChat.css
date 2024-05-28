@@ -1,0 +1,53 @@
+.sidebar_message{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  max-width: 385px;
+  padding: 12px;
+  align-items: center;
+}
+
+.user-image {
+  width: 44px;
+  height: 44px;
+}
+
+.side-bar-messages-right-content {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.user_Header {
+  display: flex;
+  align-self: start;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.message_content p {
+  margin: 0;
+  white-space: nowrap; /* Nu permite textului să se împartă pe mai multe rânduri */
+  overflow: hidden;    /* Ascunde textul care depășește containerul */
+  text-overflow: ellipsis; /* Adaugă puncte de suspensie la sfârșitul textului dacă este prea lung */
+  max-width: 100%; /* Asigură-te că textul se limitează la lățimea containerului părinte */
+  font-size: 14px;
+}
+
+
+
+
+
+  @media screen and (max-width: 1204px) {
+    .message_content {
+        display: none;
+      }
+      .sidebar_message{
+        display: none;
+      }
+      .user_Header{
+        display: none;
+      }
+  }

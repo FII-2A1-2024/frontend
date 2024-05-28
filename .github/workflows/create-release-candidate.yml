@@ -1,0 +1,31 @@
+name: Create Release Candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_id:
+        description: "Commit id"
+        required: true
+      version:
+        description: "Version (e.g. v1.0.0-rc.1)"
+        required: true
+
+jobs:
+  create_release_candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.commit_id }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: true
+          tag_name: ${{ github.event.inputs.version }}
+          name: Release Candidate ${{ github.event.inputs.version }}
+          generate_release_notes: true
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

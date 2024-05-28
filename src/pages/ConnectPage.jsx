@@ -115,6 +115,7 @@ function ConnectPage() {
         password: password,
         socket: socket.id,
       };
+      localStorage.setItem("email", email);
       const data = JSON.stringify(userData);
 
       //api login

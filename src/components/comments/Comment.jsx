@@ -87,7 +87,9 @@ const Comment = ({
       <div className="comment-right-part">
         <div className="comment-content">
           <div className="comment-header">
-            <MessageLink username={comment.detaliiComentariu.username ? comment.detaliiComentariu.username : `User ${comment.detaliiComentariu.author_id}`} id={comment.detaliiComentariu.author_id} type={"CommentLink"}/> 
+            <MessageLink username={comment.detaliiComentariu.username == null ? "Filler" : comment.detaliiComentariu.username} id={400} type={"CommentLink"}/> 
+            {/* Please change the above line with the correct info about the author */}
+            {/* <div className="comment-author">UserAnonymous</div> */}
             <div className="comment-createdAt">{createdAt}</div>
           </div>
           {!isEditing && (

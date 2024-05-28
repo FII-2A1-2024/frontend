@@ -50,6 +50,7 @@ const Comments = ({ currentUserId, postId }) => {
       //tre sa preluam id-ul din raspuns, si sa il actualizam 
      addCommentApi(text, parentId, post_id, author_id).then((response) => {
          // fetchComments(postId);
+         console.log("raspunsul este " , response);
          updateIdOfNewComment(updatedComments, newComment.detaliiComentariu.id, response.comment_id);
          console.log("Updated Id of thwe new comment : ",  updatedComments);
          setBackendComments(updatedComments);

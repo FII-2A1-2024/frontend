@@ -42,29 +42,32 @@ const PostListSaved = () => {
   }, [userId]);
 
   useEffect(() => {
-    // Funcție pentru a obține toate postările urmărite după ID
     const fetchPostsByIds = async () => {
       try {
         const postsData = await Promise.all(
           followedPostIds.map(async (postId) => {
             const url = `${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`;
             console.log(`Fetching post with URL: ${url}`);
-            const response = await axios.get(url);
-            console.log(`Response for post ID ${postId}:`, response.data);
-            return response.data.post;
+            try {
+              const response = await axios.get(url);
+              console.log(`Response for post ID ${postId}:`, response.data);
+              return response.data.post;
+            } catch (error) {
+              console.error(`Eroare la obținerea postării cu ID ${postId}:`, error);
+              return null;  // Returnează null pentru postările care dau eroare
+            }
           })
         );
-        getAll(postsData);
-        setLoading(false);
+        const validPosts = postsData.filter(post => post !== null);  // Filtrează postările valide
+        getAll(validPosts);
       } catch (error) {
         console.error("Eroare la obținerea postărilor:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    if (followedPostIds.length > 0) {
-      fetchPostsByIds();
-    }
+    fetchPostsByIds();
   }, [followedPostIds]);
 
   if (loading) {
@@ -76,6 +79,7 @@ const PostListSaved = () => {
       <div className="container-posts-list">
         {posts.length > 0 ? (
           <ul>
+           {console.log("Postari " + posts)} 
             {posts.map((post) => (
               <Post
                 key={post.id}

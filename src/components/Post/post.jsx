@@ -8,10 +8,13 @@ Description: pop-ul pt 3Dots, delete confirmation and delete function, edit popu
 
 TO DO: Share, Report, options regarding post depending on user_id.
 */
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
+import Modal from "react-modal";
+import ReportModal from './ReportPost';
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
 import EditPopup from "./EditPost/editPost";
 import MessageLink from '../Messages/MessageLink';
@@ -26,6 +29,23 @@ import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
 import { useTranslation } from "react-i18next";
+
+// const reportReasons = [
+//   "Unlawful content",
+//   "Harmful content",
+//   "Threats",
+//   "Abuse",
+//   "Defamation",
+//   "Vulgar language",
+//   "Libel",
+//   "Invasion of privacy",
+//   "Hate speech",
+//   "Racially or ethnically offensive content",
+//   "Profanity",
+//   "Insults"
+// ];
+
+
 const Post = ({
   id,
   authorId,
@@ -46,6 +66,8 @@ const Post = ({
   const [followedPostIds, setFollowedPostIds] = useState([]);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
   const { t } = useTranslation();
+  const [showReportModal, setShowReportModal] = useState(false);
+
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -238,24 +260,25 @@ const Post = ({
       });
   };
 
+  // const handleReport = () => {
+  //   setMessage("Post reported successfully");
+  //   setMenuVisible(false);
+  // };
+
   const handleReport = () => {
-    /*axios
-      .post(`${import.meta.env.VITE_URL_BACKEND}/postFollow`, {
-        user_id: 5,
-        post_id: 20,
-      })
-      .then((response) => {
-        console.log("Post saved successfully");
-        setMessage("Post saved successfully");
-        setMenuVisible(false);
-      })
-      .catch((error) => {
-        console.error("Error saving post:", error);
-        setMessage("Error saving post");
-        setMenuVisible(false);
-      });*/
+    setShowReportModal(true);
+  };
+
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
+  };
+
+  const handleSubmitReport = (reason) => {
+    // Trimite raportul către server sau efectuează alte acțiuni
+    console.log('Report reason:', reason);
+    setShowReportModal(false);
     setMessage("Post reported successfully");
-    setMenuVisible(false);
+
   };
 
   const handleShare = () => {
@@ -272,6 +295,39 @@ const Post = ({
       });
   };
 
+  const dropdownRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (menuVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuVisible]);
+
+  useEffect(() => {
+    let timer;
+    if (message) {
+      // Setează un timer care va șterge mesajul după 3 secunde
+      timer = setTimeout(() => {
+        setMessage('');
+      }, 2000);
+    }
+
+    // Curăță timerul dacă componenta se demontează sau dacă mesajul este schimbat
+    return () => clearTimeout(timer);
+  }, [message]);
+
+
   return (
     <div className="post">
       <div className="postHeader">
@@ -280,67 +336,40 @@ const Post = ({
             <MessageLink username={userName} id={authorId} type={"PostLink"}/>
         </div>
 
-        <div
-          className="three-dots"
-          onMouseEnter={() => setMenuVisible(true)}
-          onMouseLeave={() => setMenuVisible(false)}
-        >
-          <button onClick={toggleMenu} button="true">
+        <div className="three-dots">
+          <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
             <img src={threeDots} alt="ThreeDots" />
           </button>
+          
+          {/* <div className="pop-up-message-status-action"> */}
+            {message && <div className="btn_message">{message}</div>}
+          {/* </div> */}
 
-          {message && <div className="btn_message">{message}</div>}
-
-          {userId === authorId && menuVisible && (
-            <div className="post_menu">
-              <button className="post_menu_btn" onClick={handleEdit}>
-                <img
-                  src={editSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />
-                Edit
-              </button>
-              <button className="post_menu_btn" onClick={handleDelete}>
-                <img
-                  src={blockSVG}
-                  alt="upVotes"
-                  className="post_menu_btn_icon"
-                />{" "}
-                Delete
-              </button>
-            </div>
-          )}
-
-          {userId !== authorId && menuVisible && (
-            <div className="post_menu">
-              <button className="post_menu_btn" onClick={handleReport}>
-                <img
-                  src={flagSVG}
-                  alt="Report"
-                  className="post_menu_btn_icon"
-                />{" "}
-                {t("Report")}
-              </button>
-
-              {followedPostIds.includes(id) ? (
-                <button className="post_menu_btn" onClick={handleUnfollow}>
-                  <img
-                    src={frameSVG}
-                    alt="upVotes"
-                    className="post_menu_btn_icon"
-                  />{" "}
-                  {t("Unsave")}
-                </button>
+          {menuVisible && (
+            <div className="post_menu" ref={dropdownRef}>
+              {userId === authorId ? (
+                <>
+                  <button className="post_menu_btn" onClick={() => {handleEdit(); setMenuVisible(false);}}>
+                    <img src={editSVG} alt="Edit" className="post_menu_btn_icon" />
+                    {t('edit')}
+                  </button>
+                  <button className="post_menu_btn" onClick={() => {handleDelete(); setMenuVisible(false);}}>
+                    <img src={blockSVG} alt="Delete" className="post_menu_btn_icon" />
+                    {t('delete')}
+                  </button>
+                </>
               ) : (
-                <button className="post_menu_btn" onClick={handleFollow}>
-                  <img
-                    src={frameSVG}
-                    alt="upVotes"
-                    className="post_menu_btn_icon"
-                  />{" "}
-                  {t("Save")}
-                </button>
+                <>
+                  <button className="post_menu_btn" onClick={() => {handleReport(); setMenuVisible(false);}}>
+                    <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
+                    {t('report')}
+                  </button>
+                  
+                  <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
+                    <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
+                    {t('save')}
+                  </button>
+                </>
               )}
             </div>
           )}
@@ -431,6 +460,8 @@ const Post = ({
           <p>{t("share")}</p>
         </div>
       </div>
+      <ReportModal isOpen={showReportModal} onRequestClose={handleCloseReportModal} onSubmit={handleSubmitReport} />
+
     </div>
   );
 };

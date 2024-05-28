@@ -1,0 +1,28 @@
+.side_bar_chats_body {
+  position: fixed;
+  width: 340px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid rgb(224, 201, 201);
+  border-radius: 20px;
+  background: #fff;
+  right: 10px;
+}
+
+.side_bar_chats_body h4 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-left: 12px;
+}
+
+@media screen and (max-width: 1500px) {
+  .side_bar_chats_body {
+    display: none;
+  }
+}

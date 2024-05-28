@@ -18,13 +18,18 @@
 }
 
 .generic-btn {
-    background-color: hsl(0, 100%, 17%);
-    color: #FFFBFB;
-    border: 1px solid #850000;
-    border-radius: 100px;
-    padding: 10px 24px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #FCFBFB;
+    background-color: #850000;
+    padding: 16px 32px;
+    border-radius: 8px;
+    height: auto;
 }
 
 .generic-btn:hover, .generic-btn:target {
-    background-color: hsl(0, 100%, 11%);
+    background-color: #570000;
 }
