@@ -16,9 +16,9 @@ import SearchPage from "./pages/SearchPage.jsx";
 import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
 import LandingPageF from "./pages/LandingPageF.jsx";
 import LandingPageSaved from "./pages/LandingPageSaved.jsx";
+import UserAccount from "./pages/UserAccountPage.jsx";
 import "./i18n.js";
 import { MessageProvider } from "./components/Messages/MessageContext.jsx";
-
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -76,6 +76,10 @@ const router = createBrowserRouter([
   {
     path: "*", // Definim o rută implicită pentru NotFoundPage
     element: <NotFoundPage />,
+  },
+  {
+    path: "/useraccount",
+    element: <UserAccount />,
   },
 ]);
 

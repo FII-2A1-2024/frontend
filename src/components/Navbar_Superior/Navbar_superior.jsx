@@ -120,8 +120,14 @@ function Navbar_superior({ toggleNavbar }) {
               toggleDropdown={toggleNotifications}
             />
           )}
-          <Link to="/" className="userProfileButton">
-            <img src={userProfileHolder} alt="" className="profileHolderNavSuperior" />
+          <Link to="/useraccount" className="userProfileButton">
+            {" "}
+            {/*linkare la pagina userului */}
+            <img
+              src={userProfileHolder}
+              alt=""
+              className="profileHolderNavSuperior"
+            />
           </Link>
           <button className="nav-superior-button-primary" onClick={handleLogout}>
             {t("logout")}
