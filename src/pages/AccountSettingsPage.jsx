@@ -20,7 +20,6 @@ function AccountSettingsPage() {
       setShowNavbar(!showNavbar);
     };
 
-    console.log("this is the width of the site", width);
 
     const {
       t,
@@ -111,7 +110,7 @@ function AccountSettingsPage() {
                             
                             <div className="setting-option-line">
                                 <div className="setting-item">{t("Delete account")}</div>
-                                <button className="button-delete-account" onClick={handleDeleteAccountButton}>{t("Delete")}</button>
+                                <Link className="button-delete-account" to="/" onClick={handleDeleteAccountButton}>{t("Delete")} </Link>
                             </div>
 
                           </div>
@@ -139,7 +138,7 @@ function AccountSettingsPage() {
                           <div className="settings-item-function-container">
                             <div className="setting-option-line">
                               <div>{t("Display language")}</div>
-                              <button className="button-change-language" onClick={handleChangeLanguage}>{t("Change language")}</button>
+                              <button className="button-change-language" onClick={handleChangeLanguage} to="">{t("Change language")}</button>
                             </div>
                           </div>
                         </div>
