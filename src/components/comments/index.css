@@ -157,6 +157,7 @@
   color: gray;
   font-size: 12px;
   transform: translateY(1.1px);
+  margin-left: 1em;
 }
 
 .comment-content {

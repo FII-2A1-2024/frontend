@@ -20,18 +20,39 @@
     align-self: flex-end;
     margin-right: 2em;
     flex-direction: row-reverse;
+    
+}
+
+.right > .message-content {
+    background-color: var(--primary-msg-color);
+    color: var(--msg-bg-color);
+}
+
+.left > .profile-pic {
+    background-color: var(--primary-msg-color);
+    color: var(--msg-bg-color);
+}
+
+.right > .profile-pic {
+    background-color: var(--msg-bg-color);
+    color: var(--primary-msg-color);
 }
 
 .message-content {
     padding: 5px 10px;
-    border: 1px solid gray;
+    border: 1px solid var(--border-color);
     border-radius: 1em;
     margin: .05em .5em .05em .5em;
     max-width: 70%;
+    word-break: break-word;
 }
 
-.extra-margin {
-    margin: .05em .5em .05em 2.5em;
+.extra-margin-left {
+    margin-left: 2.5em;
+}
+
+.extra-margin-right {
+    margin-right: 2.5em;
 }
 
 

@@ -5,14 +5,15 @@ import Navbar from "../components/SideNavbar/Navbar";
 import CreatePost from "../components/LandingPageComponents/CreatePost/CreatePost";
 import PostList from "../components/LandingPageComponents/PostsList/PostList";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats";
 import "../styles/LandingPage.css";
+import ChatList from "../components/Messages/ChatList";
 
 function LandingPage() {
   const [showNavbar, setShowNavbar] = useState(true);
   const toggleNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+
 
   return (
     <div className="landing-page">
@@ -31,7 +32,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="landing-side-containers">
-          <SideBarChats /> <News />
+        <div className="side_bar_chats_body"><ChatList /></div> <News />
         </div>
       </div>
     </div>
@@ -55,7 +56,7 @@ export default LandingPage;
           mama
         </div>
         <div className="side-containers">
-          <SideBarChats /> <News />
+          <div className="side_bar_chats_body"><div className="side_bar_chats_body"><ChatList /></div></div> <News />
         </div>
       </div>
   </div> */

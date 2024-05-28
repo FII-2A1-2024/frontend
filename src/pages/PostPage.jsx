@@ -5,9 +5,9 @@ import Navbar_superior from "../components/Navbar_Superior/Navbar_superior";
 import Navbar from "../components/SideNavbar/Navbar";
 import Post from "../components/Post/post";
 import News from "../components/news/News";
-import SideBarChats from "../components/SideBarChats/SideBarChats";
 import Comments from "../components/comments/Comments";
 import "../styles/PostPage.css";
+import ChatList from "../components/Messages/ChatList";
 
 const PostPage = () => {
   const [post, setPost] = useState([]);
@@ -66,7 +66,7 @@ const PostPage = () => {
           </div>
         </div>
         <div className="landing-side-containers">
-          <SideBarChats /> <News />
+          <div className="side_bar_chats_body"><ChatList /></div> <News />
         </div>
       </div>
     </div>
@@ -96,7 +96,7 @@ export default PostPage;
           <Comments currentUserId={currentUserId} postId={postIdInt} />
         </div>
         <div className="side-containers">
-          <SideBarChats />  <News /> 
+          <div className="side_bar_chats_body"><ChatList /></div>  <News /> 
         </div>
       </div>
     </div> */

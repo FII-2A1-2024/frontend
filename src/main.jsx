@@ -1,3 +1,4 @@
+// index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,11 +17,9 @@ import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
 import LandingPageF from "./pages/LandingPageF.jsx";
 import LandingPageSaved from "./pages/LandingPageSaved.jsx";
 import "./i18n.js";
+import { MessageProvider } from "./components/Messages/MessageContext.jsx";
 
 import "./index.css";
-
-/* Ciprian 5 apr: routing system
-Use <Link to=""> instead of <a href=""> */
 
 const router = createBrowserRouter([
   {
@@ -82,6 +81,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MessageProvider>
+      <RouterProvider router={router} />
+    </MessageProvider>
   </React.StrictMode>
 );

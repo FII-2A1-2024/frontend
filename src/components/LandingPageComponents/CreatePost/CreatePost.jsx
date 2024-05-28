@@ -10,31 +10,47 @@ import "./CreatePost.css";
 import userProfile from "./media/user_profile.svg";
 import { useTranslation } from "react-i18next";
 
-const CreatePost = (userName) => {
+const CreatePost = () => {
   const { t } = useTranslation();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
 
   const handleCreate = (title, content, category, file) => {
-    const formData = new FormData();
-    formData.append("author_id", userId);
-    formData.append("title", title);
-    formData.append("description", content);
-    formData.append("votes", "0");
-    formData.append("category", category);
-    formData.append("file", file);
     axios
-      .post(`${import.meta.env.VITE_URL_BACKEND}/posts`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      .post(
+        `${import.meta.env.VITE_URL_BACKEND}/posts`,
+        {
+          author_id: userId,
+          title: title,
+          username: localStorage.getItem("username"),
+          description: content,
+          category: category,
+          votes: 0,
+          file: file,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
       .then((response) => {
         console.log("Post created successfully");
         window.location.reload();
       })
       .catch((error) => {
-        console.error("Error creating post:", error);
+        if (error.response) {
+          console.error("Error creating post:", error.response.data);
+        } else if (error.request) {
+          console.error(
+            "Error creating post: No response received",
+            error.request
+          );
+        } else {
+          console.error("Error creating post:", error.message);
+        }
       });
   };
 
