@@ -1,234 +1,275 @@
 /* Stilizare pentru pagina de cont utilizator */
 .user-account-page {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 /*fix*/
 .container-posts-list {
-  align-items: center;
-  flex: 1;
-  margin-top: 20px;
+	align-items: center;
+	flex: 1;
+	margin-top: 20px;
 }
 .container-posts-list div:not([class]) {
-  display: none;
+	display: none;
 }
 /*fix*/
 .content-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
+	flex: 1;
+	display: flex;
+	flex-direction: row;
 }
 .user-posts {
-  flex: 1;
+	flex: 1;
 }
 
 .user-account-page-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex: 1;
-  gap: 30px;
-  top: 65px;
-  position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex: 1;
+	gap: 30px;
+	top: 65px;
+	position: relative;
 }
 .topPart h2 {
-  margin-bottom: 50px;
-  text-align: left;
-  font-size: 32px !important;
+	margin-bottom: 50px;
+	text-align: left;
+	font-size: 32px !important;
+}
+.account-type {
+	display: flex;
+}
+.account-type p {
+	margin-left: 8px;
 }
 .name {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 .name p {
-  margin-right: 20px;
+	margin-right: 20px;
 }
 .report-table {
-  width: 100%;
+	width: 100%;
+	border-collapse: collapse;
 }
 .report-table tr th {
-  text-align: left;
+	text-align: left;
+}
+
+.report-table th,
+.report-table td {
+	padding: 10px;
+	text-align: left;
+	vertical-align: top;
+}
+
+.report-table th {
+	width: auto;
+	white-space: nowrap;
+}
+.report-table th:nth-child(1) {
+	width: 72%;
+}
+
+.report-table th:nth-child(2) {
+	width: 15%;
+}
+
+.report-table th:nth-child(3) {
+	width: 15%;
 }
 .report-table tr {
-  display: flex;
-  width: 100%;
-  margin-bottom: 10px;
+	display: flex;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.flex-column {
+	display: flex;
+	flex-direction: column;
 }
 
 .reasonBox {
-  flex: 1;
-  margin: 0px 10px;
+	flex: 1;
+	margin: 0px 10px;
 }
 .reason {
-  border: 1px solid #e0c9c9;
-  border-radius: 10px;
-  background-color: #fffbfb;
-  height: 210px;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  flex: 1;
+	border: 1px solid #e0c9c9;
+	border-radius: 10px;
+	background-color: #fffbfb;
+	height: 210px;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	flex: 1;
 }
 .actionBtns {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 210px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 210px;
 }
 .action-button {
-  margin-top: 5px !important;
+	margin-top: 5px !important;
 }
 
+.postItem {
+	display: flex;
+	flex-direction: column;
+}
 .three-dots {
-  display: none;
+	display: none;
 }
 
 .leftBtn {
-  width: 100%;
-  display: flex;
+	width: 100%;
+	display: flex;
+}
+.createPostBtn {
+	margin-right: 12px;
 }
 .topPart button {
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fcfbfb;
-  background-color: #850000;
-  padding: 10px 28px;
-  border-radius: 8px;
-  margin-top: 20px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 500;
+	color: #fcfbfb;
+	background-color: #850000;
+	padding: 10px 28px;
+	border-radius: 8px;
+	margin-top: 20px;
 }
 .topPart h3 {
-  text-align: left;
-  margin: 20px 0px;
+	text-align: left;
+	margin: 20px 0px;
 }
 
 .topPart ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .topPart ul li {
-  background-color: #fcf3f3;
-  border-radius: 20px;
-  padding: 7px 15px;
+	background-color: #fcf3f3;
+	border-radius: 20px;
+	padding: 7px 15px;
 }
 
 .user-account-sidebar {
-  flex: 0 0 300px;
-  /* position: fixed;*/
-  position: relative;
-  /* top: 65px;*/
-  width: 300px;
-  margin-right: 10px;
+	flex: 0 0 300px;
+	/* position: fixed;*/
+	position: relative;
+	/* top: 65px;*/
+	width: 300px;
+	margin-right: 10px;
 }
 
 .user-account-info {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  position: relative;
+	position: relative;
 }
 
 .account-info-container {
-  height: 80vh;
-  width: 500px;
-  max-width: 600px;
-  background-color: #fffbfb;
-  border: 1px solid #ccbbbb;
-  padding: 20px;
-  margin: 20px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  position: sticky;
-  top: 120px;
+	height: 80vh;
+	width: 500px;
+	max-width: 600px;
+	background-color: #fffbfb;
+	border: 1px solid #ccbbbb;
+	padding: 20px;
+	margin: 20px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	position: sticky;
+	top: 120px;
 }
 
 .user-account-settings {
-  display: flex; /* Asigură că elementele sunt pe același rând */
-  justify-content: flex-end; /* Aliniază conținutul la dreapta */
-  align-items: center; /* Aliniază iconul și textul pe verticală */
-  margin-bottom: 20px;
+	display: flex; /* Asigură că elementele sunt pe același rând */
+	justify-content: flex-end; /* Aliniază conținutul la dreapta */
+	align-items: center; /* Aliniază iconul și textul pe verticală */
+	margin-bottom: 20px;
 }
 
 .account-settings-icon {
-  width: 24px; /* Dimensiunea iconului */
-  height: 24px;
-  margin-left: 8px; /* Spațiu între text și icon */
+	width: 24px; /* Dimensiunea iconului */
+	height: 24px;
+	margin-left: 8px; /* Spațiu între text și icon */
 }
 
 .account-settings-text {
-  font-size: 1rem;
-  color: #007bff;
+	font-size: 1rem;
+	color: #007bff;
 }
 
 .info-user-name {
-  display: flex;
-  flex-direction: column;
-  /*align-items: flex-start; */
-  align-self: center;
-  margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	/*align-items: flex-start; */
+	align-self: center;
+	margin-bottom: 20px;
 }
 
 .user-anonymous-name {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .user-id {
-  font-size: 1rem;
-  color: #333333;
+	font-size: 1rem;
+	color: #333333;
 }
 
 .text-2xl {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333333;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #333333;
 }
 
 .info-stats-container {
-  display: flex;
-  margin-bottom: 20px;
+	display: flex;
+	margin-bottom: 20px;
 }
 
 .info-stats-posts-made,
 .info-stats-comments,
 .info-stats-votes {
-  flex: 1;
-  text-align: center;
+	flex: 1;
+	text-align: center;
 }
 
 .info-stats-text {
-  font-size: 1rem;
-  color: #666666;
+	font-size: 1rem;
+	color: #666666;
 }
 
 .interests-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #333333;
-  margin-bottom: 10px;
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: #333333;
+	margin-bottom: 10px;
 }
 
 .interests-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 .account-info-stats {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 80%;
 }
 .account-info-content {
-  height: 70vh;
+	height: 70vh;
 }
 .account-info-stats p {
-  font-size: 24px;
-  margin: 20px 0px;
+	font-size: 24px;
+	margin: 20px 0px;
 }
