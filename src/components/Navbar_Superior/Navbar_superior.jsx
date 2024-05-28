@@ -11,6 +11,7 @@ import notificationsIcon from "./media/notificationsIcon.svg";
 import userProfileHolder from "./media/User.svg";
 import searchIconNavbar from "./media/searchIconNavbar.svg";
 import closeNotifications from "./media/closeNotifications.svg";
+import logoutIcon from "./media/logoutIcon.svg"
 import { useTranslation } from "react-i18next";
 import { useMessages } from "../../components/Messages/MessageContext";
 import axios from "axios";
@@ -98,34 +99,56 @@ function Navbar_superior({ toggleNavbar }) {
         </div>
         <SearchBar />
         <div className="right-buttons-nav-superior">
-          <Link className="searchButton-navbar" to="/">
+          <Link className="searchButton-navbar tooltip" to="/">
+            {" "}
+            {/*acesta apare numai la device uri la cu ecranul mai mic de 769px si la click ar trebui sa apara search-barul*/}
             <img src={searchIconNavbar} alt="" className="searchIconNavbar" />
+            <span className="tooltip-text">Searchbar</span>
           </Link>
-          <Link className="messagesButton-navbar" to="/messages">
-            <div className="relative">
-              <img src={messagesIcon} alt="" className="messagesIcon" />
-              {hasNewMessage && <span className="red-dot"></span>}
-            </div>
+          <Link className="messagesButton-navbar tooltip" to="/messages">
+            {" "}
+            {/*linkare la pagina cu chat ul */}
+            <img src={messagesIcon} alt="" className="messagesIcon" />
+            <span className="tooltip-text">Messages</span>
           </Link>
-          <button className="notifications-button" onClick={toggleNotifications}>
+          <button
+            className="notifications-button tooltip"
+            onClick={toggleNotifications}
+          >
             {isNotificationsOpen ? (
               <img src={closeNotifications} alt="" className="notificationsIcon" />
             ) : (
-              <img src={notificationsIcon} alt="" className="notificationsIcon" />
+              <img
+                src={notificationsIcon}
+                alt=""
+                className="notificationsIcon"
+              />
             )}
+            <span className="tooltip-text">Notifications</span>
+
           </button>
+
           {isNotificationsOpen && (
             <NotificationsDropdown
               isOpen={isNotificationsOpen}
               toggleDropdown={toggleNotifications}
             />
           )}
-          <Link to="/" className="userProfileButton">
-            <img src={userProfileHolder} alt="" className="profileHolderNavSuperior" />
+          <Link to="/" className="userProfileButton tooltip">
+            {" "}
+            {/*linkare la pagina userului */}
+            <img
+              src={userProfileHolder}
+              alt=""
+              className="profileHolderNavSuperior"
+            />
+            <span className="tooltip-text">Your profile</span>
+
           </Link>
-          <button className="nav-superior-button-primary" onClick={handleLogout}>
-            {t("logout")}
-          </button>
+          <Link className="tooltip logout-button" to="/" onClick={() => localStorage.clear()}>
+            <img src={logoutIcon} alt="Logout" className="logoutIcon" />
+            <span className="tooltip-text">Logout</span>
+          </Link>
         </div>
       </div>
       {isNavbarVisible && <Navbar />}

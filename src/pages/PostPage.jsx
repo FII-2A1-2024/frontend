@@ -25,12 +25,9 @@ const PostPage = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-    console.log("This is the post: ", post);
+  
   }, []);
 
-  useEffect(() => {
-    console.log("This is the post:", post);
-  }, [post]); // Log post whenever it changes
 
   const [showNavbar, setShowNavbar] = useState(true);
   const toggleNavbar = () => {

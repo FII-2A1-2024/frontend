@@ -4,10 +4,13 @@ import './DeleteConfirmationPopup.css';
 const DeleteConfirmationPopup = ({ onDelete, onClose }) => {
   return (
     <div className="delete-confirmation-popup">
-      <p>All data including comments will be deleted. Are you sure?</p>
+      <div className="delete-confirmation-text-wrapper">
+        <h2>Delete post</h2>
+        <p>Are you sure you want to delete your post? All data including comments will be deleted.</p>
+      </div>
       <div className="delete-confirmation-buttons">
-        <button onClick={onDelete}>Yes</button>
-        <button onClick={onClose}>No</button>
+        <button className="button-popup sec-btn" onClick={onClose}>Cancel</button>
+        <button className="button-popup primary-btn" onClick={onDelete}>Delete</button>
       </div>
     </div>
   );

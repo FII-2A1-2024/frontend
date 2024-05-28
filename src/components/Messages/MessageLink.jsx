@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { encryptData } from "./encrypt";
 import { checkConnection } from "./checkConnection";
-
 const MessageLink = ({ username, id, type }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();

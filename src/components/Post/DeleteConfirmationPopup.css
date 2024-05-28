@@ -1,27 +1,66 @@
 
 /* DeleteConfirmationPopup.css */
 .delete-confirmation-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #FFFBFB;
-    padding: 5px;
-    border: 1px solid #E0C9C9;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-family: "Poppins", "sans-serif";
-    z-index: 9999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid #ccbbbb;
+  z-index: 999;
+  background: #fff;
+  gap: 40px;
+  align-items: center;
+  max-width: 500px;
+  }
+
+  .delete-confirmation-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
   
   .delete-confirmation-buttons {
-    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .delete-confirmation-popup p {
+    color: #200000;
+    /* width: 60%; */
+  }
+
+  .delete-confirmation-buttons .button-popup {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    flex: 1;
   }
   
-  .delete-confirmation-buttons button {
-    margin-right: 40px;
-    margin-left: 80px;
-  }
+  .delete-confirmation-buttons .primary-btn {
+    background-color: #850000;
+    color: #fff;
   
+}
+
+.delete-confirmation-buttons .sec-btn {
+    border-color: #850000;
+    color: #850000;
+    background-color: #fff;
+}
+
+.primary-btn:hover {
+    background-color: #570000;
+    transition: ease-out 0.4s;
+}
+
+.sec-btn:hover {
+    background-color: #850000;
+    transition: ease-out 0.4s;
+    border-color: transparent;
+    color: #fff;
+}
