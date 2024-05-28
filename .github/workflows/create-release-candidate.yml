@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       commit_id:
-        description: "Commit ID"
+        description: "Commit id"
         required: true
       version:
         description: "Version (e.g. v1.0.0-rc.1)"
