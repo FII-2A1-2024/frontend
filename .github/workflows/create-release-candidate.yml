@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  prerelease:
+  create_release_candidate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
