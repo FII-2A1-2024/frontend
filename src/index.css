@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* DO NOT DELETE THIS 3 LINES EVEN IF HIGHLIGHTED AS PROBLEMS */
 @tailwind base;
 @tailwind component;
 @tailwind utilities;
 
-body{
+body {
   width: 100vw;
   height: 100vh;
   max-width: 100%;
@@ -22,7 +21,7 @@ Delete this when needed */
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #FFFBFB;
+  background-color: #fffbfb;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,20 +36,19 @@ Delete this when needed */
 .temporary {
   border: 1px solid white;
   border-radius: 2em;
-  padding: .5rem 2rem;
+  padding: 0.5rem 2rem;
   color: hsl(160, 89%, 82%);
   position: absolute;
   bottom: 5rem;
   right: 5rem;
 }
 
-
 .side_bar_chats_body {
   /* Side bar-chats */
   /* position: absolute;*/
   position: fixed;
   width: 340px;
-  max-height: 300px;
+  height: 300px;
   right: 10px;
   /* top: 100px;*/
   overflow-y: auto;
@@ -95,12 +93,9 @@ Delete this when needed */
   }
 }
 
-
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
 }
-

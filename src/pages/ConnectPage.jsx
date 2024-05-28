@@ -32,7 +32,6 @@ import { useMessages } from "../components/Messages/MessageContext";
 ************************************ */
 
 function ConnectPage() {
-
   const navigate = useNavigate();
   const { updateMessages } = useMessages();
 
@@ -128,11 +127,18 @@ function ConnectPage() {
       })
         .then((res) => res.json())
         .then((result) => {
+          console.log(result);
           const resCode = result.resCode;
           localStorage.setItem("UserId", result.id);
-          localStorage.setItem("token", result.token);
+          const userRole =
+            result.admin == true
+              ? "admin"
+              : result.teacher == true
+              ? "teacher"
+              : "student";
+          localStorage.setItem("UserRole", userRole);
+          localStorage.setItem("UserName", result.username);
           localStorage.setItem("username", result.username);
-          console.log(resCode);
           if (resCode === 200) {
             navigate("/main");
             localStorage.removeItem("messages");
