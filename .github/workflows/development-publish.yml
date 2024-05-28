@@ -1,4 +1,4 @@
-name: Docker
+name: Development Workflow
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,12 +8,9 @@ name: Docker
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    branches: ["dev"]
   pull_request:
-
-    branches: ["main"]
+    branches: ["dev"]
 
 env:
   # Use docker.io for Docker Hub if empty
