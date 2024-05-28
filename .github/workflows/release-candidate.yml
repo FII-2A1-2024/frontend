@@ -7,7 +7,6 @@ on:
         description: "The release version to tag the package (e.g., 1.0.0-rc.1 or v1.0.0-rc.1)"
         required: true
         default: ""
-  push:
 
 env:
   REGISTRY: ghcr.io
