@@ -38,7 +38,7 @@ function AccountSettingsPage() {
         // deleteAccount
         console.log("tryeing to delere account...");
         try {
-          const response = await axios.get(`http://localhost:3000/deleteAccount`,
+          const response = await axios.get(`${VITE_URL_BACKEND}/deleteAccount`,
           {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
