@@ -11,7 +11,7 @@ import notificationsIcon from "./media/notificationsIcon.svg";
 import userProfileHolder from "./media/User.svg";
 import searchIconNavbar from "./media/searchIconNavbar.svg";
 import closeNotifications from "./media/closeNotifications.svg";
-import logoutIcon from "./media/logoutIcon.svg"
+import logoutIcon from "./media/logoutIcon.svg";
 import { useTranslation } from "react-i18next";
 import { useMessages } from "../../components/Messages/MessageContext";
 import axios from "axios";
@@ -56,7 +56,7 @@ function Navbar_superior({ toggleNavbar }) {
 
   const handleLogout = () => {
     const token = localStorage.getItem("token");
-  
+
     if (token) {
       axios
         .post(
@@ -81,7 +81,6 @@ function Navbar_superior({ toggleNavbar }) {
       // Tratează cazul în care nu există un token în localStorage
     }
   };
-  
 
   return (
     <nav className="navbar_superior">
@@ -93,7 +92,11 @@ function Navbar_superior({ toggleNavbar }) {
             <span className="bar"></span>
           </button>
           <Link to={`/main`}>
-            <img src={logoMascota} alt="Logo-mascota" className="logo-mascota" />
+            <img
+              src={logoMascota}
+              alt="Logo-mascota"
+              className="logo-mascota"
+            />
             <img src={logoFull} alt="Logo" className="logo-full" />
           </Link>
         </div>
@@ -116,7 +119,11 @@ function Navbar_superior({ toggleNavbar }) {
             onClick={toggleNotifications}
           >
             {isNotificationsOpen ? (
-              <img src={closeNotifications} alt="" className="notificationsIcon" />
+              <img
+                src={closeNotifications}
+                alt=""
+                className="notificationsIcon"
+              />
             ) : (
               <img
                 src={notificationsIcon}
@@ -125,7 +132,6 @@ function Navbar_superior({ toggleNavbar }) {
               />
             )}
             <span className="tooltip-text">Notifications</span>
-
           </button>
 
           {isNotificationsOpen && (
@@ -134,7 +140,7 @@ function Navbar_superior({ toggleNavbar }) {
               toggleDropdown={toggleNotifications}
             />
           )}
-          <Link to="/" className="userProfileButton tooltip">
+          <Link to="/useraccount" className="userProfileButton tooltip">
             {" "}
             {/*linkare la pagina userului */}
             <img
@@ -143,9 +149,12 @@ function Navbar_superior({ toggleNavbar }) {
               className="profileHolderNavSuperior"
             />
             <span className="tooltip-text">Your profile</span>
-
           </Link>
-          <Link className="tooltip logout-button" to="/" onClick={() => localStorage.clear()}>
+          <Link
+            className="tooltip logout-button"
+            to="/"
+            onClick={() => localStorage.clear()}
+          >
             <img src={logoutIcon} alt="Logout" className="logoutIcon" />
             <span className="tooltip-text">Logout</span>
           </Link>
