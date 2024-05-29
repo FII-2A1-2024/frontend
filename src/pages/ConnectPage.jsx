@@ -139,6 +139,7 @@ function ConnectPage() {
           localStorage.setItem("UserRole", userRole);
           localStorage.setItem("UserName", result.username);
           localStorage.setItem("username", result.username);
+          localStorage.setItem("token", result.token);
           if (resCode === 200) {
             navigate("/main");
             localStorage.removeItem("messages");
