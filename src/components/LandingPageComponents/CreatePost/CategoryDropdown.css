@@ -1,27 +1,19 @@
 .category-dropdown{   
-    /* Dropdown */
-    position: absolute;
     width: 258px;
-    left: 32px;
-    top: 112px;
-    /* Auto layout */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: 12px 10px 12px 10px;
-    
+    padding: 12px 10px;
     box-sizing: border-box;
-    /* text-color/Stroke */
     border: 1px solid rgb(204, 187, 187);
     border-radius: 8px;
-    background: rgb(250, 250, 250);
+    background: fff;
     color: rgb(51, 0, 0);
-    margin-left: -11px;
-    margin-top: -10px;
-    }
-    .category{
-        background: rgb(250, 250, 250) !important;
-        color: black;
-        width: 258px !important;
-    }
+}
+
+.category{
+    background: #fff !important;
+    color: black;
+    width: 258px !important;
+}

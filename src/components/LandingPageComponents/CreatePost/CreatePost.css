@@ -8,50 +8,33 @@
 }
 
 .createPost_frame {
-
-    /* New post frame */
     font-family: "Poppins", "sans-serif";
-   /* position: relative;*/
-    max-width: 801px;
-    height: 74px;
-    left: 40px;
-    top: 40px;
-    /* Auto layout */
+    max-width: 830px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    box-sizing: border-box;
-    /* text-color/Stroke */
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
     border: 1px solid #E0C9C9;
     border-radius: 10px;
     padding: 20px;
     background-color: #FFFBFB;
-  /*  margin-top: 0px;
-    margin-left: -35px;
-    margin-right: auto;
-    margin-bottom: 55px;*/
+    gap: 10px;
 }
 
 .createPost_redirect {
-    /* Frame 155 */
-    position: static;
     width: 710px;
     height: 41px;
     /* Auto layout */
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: left;
     align-items: center;
-    padding: 10px 16px 10px 16px;
-    margin-left: 40px !important;
-    margin-top: -35px !important;
+    padding: 10px 16px;
 
     /* Inside Auto Layout */
     flex: none;
     order: 1;
     flex-grow: 1;
-    margin: 0px 10px;
     box-sizing: border-box;
     /* text-color/Stroke */
     border: 1px solid rgb(204, 187, 187);
@@ -61,8 +44,7 @@
 }
 
 .userProfileImage {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    object-fit: cover;
   }
