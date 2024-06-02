@@ -236,7 +236,7 @@
 
 /* media */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .post {
     width: calc(100% - 20px);
   }
@@ -255,4 +255,4 @@
   .postArticle p {
     font-size: 12px;
   }
-}
+} */
