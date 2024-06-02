@@ -6,7 +6,7 @@ Description: template-ul la post
 Patricia Onisor(01.05.2024)
 Description: pop-ul pt 3Dots, delete confirmation and delete function, edit popup and edit function. UpVotes and DownVote.
 
-TO DO: Share, Report, options regarding post depending on user_id.
+TO DO: Share
 */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -29,22 +29,6 @@ import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
 import { useTranslation } from "react-i18next";
-
-// const reportReasons = [
-//   "Unlawful content",
-//   "Harmful content",
-//   "Threats",
-//   "Abuse",
-//   "Defamation",
-//   "Vulgar language",
-//   "Libel",
-//   "Invasion of privacy",
-//   "Hate speech",
-//   "Racially or ethnically offensive content",
-//   "Profanity",
-//   "Insults"
-// ];
-
 
 const Post = ({
   id,
@@ -261,11 +245,6 @@ const Post = ({
       });
   };
 
-  // const handleReport = () => {
-  //   setMessage("Post reported successfully");
-  //   setMenuVisible(false);
-  // };
-
   const handleReport = () => {
     setShowReportModal(true);
   };
@@ -274,12 +253,9 @@ const Post = ({
     setShowReportModal(false);
   };
 
-  const handleSubmitReport = (reason) => {
-    // Trimite raportul către server sau efectuează alte acțiuni
-    console.log('Report reason:', reason);
+  const handleSubmitReport = (message) => {
     setShowReportModal(false);
-    setMessage("Post reported successfully");
-
+    setMessage(message);
   };
 
   const handleShare = () => {
@@ -334,7 +310,7 @@ const Post = ({
       <div className="postHeader">
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
-            <MessageLink username={userName} id={authorId} type={"PostLink"}/>
+          <MessageLink username={userName} id={authorId} type={"PostLink"}/>
         </div>
 
         {!location.pathname.includes("useraccount") && (
@@ -342,9 +318,7 @@ const Post = ({
             <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
               <img src={threeDots} alt="ThreeDots" />
             </button>
-          
             {message && <div className="btn_message">{message}</div>}
-
             {menuVisible && (
               <div className="post_menu" ref={dropdownRef}>
                 {userId === authorId ? (
@@ -364,7 +338,6 @@ const Post = ({
                       <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
                       {t('report')}
                     </button>
-                    
                     <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
                       <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
                       {t('save')}
@@ -373,7 +346,6 @@ const Post = ({
                 )}
               </div>
             )}
-
             {showEditPopup && (
               <EditPopup
                 id={id}
@@ -385,7 +357,6 @@ const Post = ({
                 onCancel={handleCancel}
               />
             )}
-
             {showDeleteConfirmation && (
               <DeleteConfirmationPopup
                 onDelete={handleConfirmDelete}
@@ -395,14 +366,13 @@ const Post = ({
           </div>
         )}
       </div>
-
       <div className="postArticle">
         <h1>{title}</h1>
         <p>{content} </p>
         {file ? (
           file.endsWith(".jpeg") ||
-            file.endsWith(".jpg") ||
-            file.endsWith(".png") ? (
+          file.endsWith(".jpg") ||
+          file.endsWith(".png") ? (
             <img src={file} alt="Image" className="postFile" />
           ) : file.endsWith(".mp4") ? (
             <video controls className="postFile">
@@ -423,7 +393,6 @@ const Post = ({
           <p></p>
         )}
       </div>
-
       <div className="feedback-section">
         <div className="feedback-container">
           <div className="btn btn-upVotes" onClick={() => handleVote("upVote")}>
@@ -440,7 +409,6 @@ const Post = ({
             <img src={downVotesSVG} alt="downVotes" />
           </div>
         </div>
-
         <Link to={`/post/${id}`} style={{ color: "black" }}>
           <div className="feedback-container comm-btn">
             <div className="btn">
@@ -449,7 +417,6 @@ const Post = ({
             <p>{commentsCount !== null ? commentsCount : 0}</p>
           </div>
         </Link>
-
         <div className="feedback-container" onClick={handleShare}>
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
@@ -457,7 +424,7 @@ const Post = ({
           <p>{t("share")}</p>
         </div>
       </div>
-      <ReportModal isOpen={showReportModal} onRequestClose={handleCloseReportModal} onSubmit={handleSubmitReport} />
+      <ReportModal isOpen={showReportModal} onRequestClose={handleCloseReportModal} onSubmit={handleSubmitReport} postId={id} />
     </div>
   );
 };
