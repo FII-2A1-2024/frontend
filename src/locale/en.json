@@ -1,6 +1,6 @@
 {
   "translation": {
-    "loginGreeting": "Welcome back",
+    "loginGreeting": "Welcome sir",
     "loginQuestion": "Don't have an account? ",
     "signUpButton": "Sign up",
     "loginButton": "Log in",
@@ -32,7 +32,7 @@
     "help": "Help",
     "support": "Support",
     "settings": "Settings",
-    "createPost": "Ask a question or write a new post",
+    "createPost": "Create new post",
     "createNewPost": "Create New Post",
     "selectCategory": "Select category",
     "newPostTitle": "Title:",

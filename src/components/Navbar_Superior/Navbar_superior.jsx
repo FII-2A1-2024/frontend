@@ -15,14 +15,20 @@ import logoutIcon from "./media/logoutIcon.svg";
 import { useTranslation } from "react-i18next";
 import { useMessages } from "../../components/Messages/MessageContext";
 import axios from "axios";
+import SideBar_Mobile from "./SideBar_Mobile";
 
-function Navbar_superior({ toggleNavbar }) {
+function Navbar_superior() {
   const { t } = useTranslation();
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const [showSideBarMobileVersion, setShowSideBarMobileVersion] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const location = useLocation();
   const { messages } = useMessages();
+
+  const handleClose = () => {
+    setShowSideBarMobileVersion(false);
+  };
 
   useEffect(() => {
     const handleNewMessage = () => {
@@ -47,6 +53,11 @@ function Navbar_superior({ toggleNavbar }) {
   const toggleMenu = () => {
     setIsNavbarVisible(!isNavbarVisible);
     console.log(isNavbarVisible);
+  };
+
+  const toggleNavbar = () => {
+    setShowSideBarMobileVersion(!showSideBarMobileVersion);
+    
   };
 
   const toggleNotifications = () => {
@@ -161,6 +172,9 @@ function Navbar_superior({ toggleNavbar }) {
         </div>
       </div>
       {isNavbarVisible && <Navbar />}
+      {showSideBarMobileVersion && (
+        <SideBar_Mobile handleClose={handleClose}/>
+      )}
     </nav>
   );
 }

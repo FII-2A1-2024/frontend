@@ -27,8 +27,8 @@
     background-color: rgba(14, 13, 13, 0.6);
     border-radius: 20px !important;
     padding: 30px !important;
-    max-width: 600px;
     height: max-content;
+    width: 30% !important;
   }
   
   /* Stilizare pentru titlul modalului */
@@ -57,4 +57,12 @@
 
   .modal-buttons-popup .button-popup{
     flex: 1;
+  }
+
+
+  @media (max-width: 768px) {
+    .ReactModal__Content {
+      width: 80% !important;
+    }
+    
   }

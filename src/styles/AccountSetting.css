@@ -1,6 +1,6 @@
 .settings-page-content {
   justify-content: left;
-  gap: 30px;
+  gap: 2rem;
 }
 
 .settins-option-item {
@@ -103,6 +103,9 @@
 }
 
 .input-forms-password {
+  display: flex;
+  flex-direction: row;
+  align-items: first baseline;
   justify-content: left;
   gap: 20px;
 }
@@ -138,4 +141,18 @@
 .button-change-password:hover {
 color: #570000;
 background-color: #fafafa;
+}
+
+@media (max-width: 480px) {
+  .input-forms-password {
+    flex-direction: column;
+  }
+
+  .setting-option-line {
+    gap: 100px;
+  }
+
+  .reset-password-container .setting-option-line {
+    gap: 30px;
+  }
 }
