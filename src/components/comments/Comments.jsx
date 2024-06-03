@@ -62,13 +62,13 @@ const Comments = ({ currentUserId, postId }) => {
     }
   };
 
-  const updateComment = async (commentId, updateData) => {
+  const updateComment = async (userId, commentId, updateData) => {
     try {
       const updatedComments = [...backendComments];
 
       if (updateData.description !== undefined) {
         console.log("Updatam textul comentului");
-        updateExistentComment(updatedComments, commentId, updateData);
+        updateExistentComment(updatedComments,  commentId, updateData);
         setBackendComments(updatedComments);
         setActiveComment(null);
         await axios
@@ -82,18 +82,19 @@ const Comments = ({ currentUserId, postId }) => {
         console.log("Success:");
       } else if (updateData.votes !== undefined) {
         console.log("Updatam voturile comentului");
-        updateExistentComment(updatedComments, commentId, updateData);
+        updateExistentComment(updatedComments, userId, commentId, updateData);
         setBackendComments(updatedComments);
         setActiveComment(null);
         await axios
           .put(`${import.meta.env.VITE_URL_BACKEND}/comments`, {
             id: commentId,
             votes: updateData.votes,
+            user_id: userId
           })
           .then(() => {
             //fetchComments(postId); we dont need to GET the comments back
+            console.log("Success:");
           });
-        console.log("Success:");
       } else {
         throw new Error("Invalid update data");
       }
