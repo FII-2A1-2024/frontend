@@ -11,12 +11,25 @@
   font-family: "Poppins", "sans-serif";
   border: 1px solid #e0c9c9;
   border-radius: 10px;
+  width: calc(100vw - 660px); /* navbar stanga - 230 + gap - 30 * 2 + elemente dreapta 340 */
   max-width: 830px;
   padding: 20px;
   background-color: #fffbfb;
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 992px) {
+  .post {
+    width: calc(100vw - 320px);
+  }
+ }
+
+ @media screen and (max-width: 768px) {
+  .post {
+    width: calc(100vw - 20px);
+  }
+ }
 
 .btn_message {
   position: fixed;
