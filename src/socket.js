@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { removeLoggedUser, addLoggedUser, removeLoggedUserWithBeacon } from './components/Messages/handler';
+import { removeLoggedUser, addLoggedUser } from './components/Messages/handler';
 
 const socket = io(import.meta.env.VITE_URL_SITE, {
     path: import.meta.env.VITE_SOCKET_PATH,
