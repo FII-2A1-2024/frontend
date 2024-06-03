@@ -90,6 +90,7 @@
     min-width: 95%;
     margin: 0 2.5%;
     border-radius: 1em;
+    padding: 2em;
 }
 
 .chat-list-item:hover {

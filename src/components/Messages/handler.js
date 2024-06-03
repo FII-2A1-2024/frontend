@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const sendMessage = async (sender_id, receiver_id, content) => {
     try {
         const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/messages`, {
@@ -14,28 +13,34 @@ export const sendMessage = async (sender_id, receiver_id, content) => {
     }
 };
 
+// Use a beacon to assure the info is sent, regardless of optimizations made by the broswer
+// Send the socket only if you are not on the auth page
+// Ideally you would use useLocation, not window.href but location needs to be in a component
+// I don't want to surround the page in another component just for this workaround
+export const removeLoggedUser = (socket_id) => {
+    if (window.location.pathname !== '/') {
+        const token = localStorage.getItem("token");
+        const url = `${import.meta.env.VITE_URL_BACKEND}/socket/delete`;
 
-export const removeLoggedUser = async (socket_id) => {
-    if (localStorage.getItem('UserName') != null) {
-        try {
-            const response = await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/socket/delete`, {
-                params: { socket: socket_id },
+        const data = new Blob([JSON.stringify({ socket: socket_id })], { type: 'application/json' });
+
+        // Use sendBeacon to send the data
+        if (!navigator.sendBeacon(url, data)) {
+            axios.delete(url, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    'Content-Type': 'application/json'
-                }
+                    'Authorization': `Bearer ${token}`
+                },
+                params: { socket: socket_id }
+            }).catch(error => {
+                console.error("Error at deleting a user from LoggedUsers", error);
             });
-            return response.data;
-        } catch (error) {
-            console.error("Error at deleting a user from LoggedUsers", error);
-            throw error;
         }
     }
 };
 
 
 export const addLoggedUser = async (socketId) => {
-    if (localStorage.getItem('UserName') != null) {
+    if (window.location.pathname !== '/') {
         try {
             const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/socket/add`, {
                 uid: parseInt(localStorage.getItem("UserId"), 10),
