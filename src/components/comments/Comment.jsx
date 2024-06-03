@@ -23,6 +23,7 @@ const Comment = ({
   const { t } = useTranslation();
   const canEdit = currentUserId === comment.detaliiComentariu.author_id;
   const canDelete = currentUserId === comment.detaliiComentariu.author_id;
+  const userId = parseInt(localStorage.getItem("UserId"), 10);
   const createdAt = new Date(
     comment.detaliiComentariu.created_at
   ).toLocaleDateString();
@@ -45,19 +46,19 @@ const Comment = ({
     if (voteType === "upvote" && voted !== "upvote") {
       setVoted("upvote");
       const updateData = { votes: upVotesCount + 1 };
-      updateComment(comment.detaliiComentariu.id, updateData);
+      updateComment(userId, comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted !== "downvote") {
       setVoted("downvote");
       const updateData = { votes: Math.max(upVotesCount - 1, 0) };
-      updateComment(comment.detaliiComentariu.id, updateData);
+      updateComment(userId, comment.detaliiComentariu.id, updateData);
     } else if (voteType === "upvote" && voted === "upvote") {
       setVoted(null);
       const updateData = { votes: Math.max(upVotesCount - 1, 0) };
-      updateComment(comment.detaliiComentariu.id, updateData);
+      updateComment(userId, comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted === "downvote") {
       setVoted(null);
       const updateData = { votes: upVotesCount + 1 };
-      updateComment(comment.detaliiComentariu.id, updateData);
+      updateComment(userId, comment.detaliiComentariu.id, updateData);
     } else {
       setVoted(voteType);
       // const updateData = {votes: upVotesCount};
