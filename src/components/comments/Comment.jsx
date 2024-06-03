@@ -10,6 +10,7 @@ import commentUnhideButton from "./icons/comment-unhide-button.svg";
 import editSVG from "./icons/edit.svg";
 import { useTranslation } from "react-i18next";
 import MessageLink from "../Messages/MessageLink";
+import flagSVG from "./icons/flag.svg";
 
 const Comment = ({
   comment,
@@ -99,7 +100,7 @@ const Comment = ({
               initialText={comment.detaliiComentariu.description}
               handleSubmit={(text) => {
                 const updateData = { description: text };
-                updateComment(comment.detaliiComentariu.id, updateData);
+                updateComment(currentUserId, comment.detaliiComentariu.id, updateData);
               }}
               handleCancel={() => setActiveComment(null)}
             />
@@ -166,6 +167,17 @@ const Comment = ({
                 Delete
               </div>
             )}
+              <div
+                className="comment-reacts"
+              >
+                {" "}
+                <div className="btn">
+                  <img src={flagSVG} alt="nush" className="SVG" />
+                </div>
+                <div>Report</div>
+              </div>
+            
+
           </div>
         </div>
         {isReplying && (
@@ -176,7 +188,7 @@ const Comment = ({
                 text,
                 comment.detaliiComentariu.id,
                 comment.detaliiComentariu.post_id,
-                comment.detaliiComentariu.author_id
+                currentUserId
               )
             }
             handleCancel={() => setActiveComment(null)}

@@ -44,7 +44,7 @@ export const addLoggedUser = async (socketId) => {
         try {
             const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/socket/add`, {
                 uid: parseInt(localStorage.getItem("UserId"), 10),
-                username: localStorage.getItem('username'),
+                username: localStorage.getItem('UserName'),
                 socket: socketId
             }, {
                 headers: {
