@@ -2,14 +2,18 @@ import React, { useState, useEffect, Suspense } from "react";
 import "../UserAccount/Info.css";
 import axios from "axios";
 import accountSettings from "../UserAccount/Icons/AccountSettingsIcon.svg";
+import { getComments as getCommentsApi } from "../comments/api";
 
 function AccountInfo() {
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userPostCount, setUserPostCount] = useState(0);
   const userId = 408; //localStorage.getItem("UserId"); // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
+  const [userComments, setUserComments] = useState([]);
 
   useEffect(() => {
+    let commentsUser = [];
+
     axios
       .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
       .then((response) => {
@@ -20,15 +24,27 @@ function AccountInfo() {
         setUserPostCount(
           sortedPosts.filter((post) => post.author_id == userId).length
         );
-        setLoading(false);
+
+        const commentPromises = sortedPosts.map((post) =>
+          getCommentsApi(post.id).then((data) => {
+            data.forEach((element) => {
+              console.log(element);
+              if (element.detaliiComentariu.author_id == 408) {
+                commentsUser.push(element.detaliiComentariu);
+              }
+            });
+          })
+        );
+
+        Promise.all(commentPromises).then(() => {
+          setUserComments(commentsUser);
+          setLoading(false);
+        });
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
   }, []);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const userID = localStorage.getItem("UserId");
 
@@ -56,11 +72,11 @@ function AccountInfo() {
           </div>
           <div>
             <p>Comments on posts</p>
-            <p>0</p>
+            <p>{userComments.length}</p>
           </div>
           <div>
             <p>Votes on posts</p>
-            <p>2</p>
+            <p>?</p>
           </div>
         </div>
       </div>

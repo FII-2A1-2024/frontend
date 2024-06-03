@@ -22,6 +22,10 @@
   flex: 1;
 }
 
+.reportsBtn {
+  margin-left: 10px;
+}
+
 .user-account-page-content {
   display: flex;
   flex-direction: row;
@@ -55,13 +59,14 @@
   text-align: left;
 }
 .report-table tr {
-  display: flex;
   width: 100%;
   margin-bottom: 10px;
+  display: flex;
 }
 
 .reasonBox {
   margin: 0px 10px;
+  flex: 1;
 }
 .reason {
   border: 1px solid #e0c9c9;
@@ -71,7 +76,6 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  flex: 1;
 }
 .actionBtns {
   display: flex;
@@ -112,6 +116,8 @@
   background-color: #fcf3f3;
   border-radius: 20px;
   padding: 7px 15px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .user-account-sidebar {
@@ -142,6 +148,17 @@
   border-radius: 10px;
   position: sticky;
   top: 120px;
+}
+.commentContainer {
+  background-color: #fffbfb;
+  border: 1px solid #ccbbbb;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .user-account-settings {
@@ -192,7 +209,7 @@
   margin-bottom: 20px;
 }
 .postItem {
-  flex: 1;
+  flex: 2;
 }
 
 .info-stats-posts-made,
