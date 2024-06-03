@@ -8,6 +8,7 @@ import axios from "axios";
 import { getComments as getCommentsApi } from "../components/comments/api";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import CreatePostForm from "../components/LandingPageComponents/CreatePost/CreatePostForm";
 
 const Post = React.lazy(() => import("../components/Post/post"));
 
@@ -19,13 +20,14 @@ function UserAccountPage() {
   const [loading, setLoading] = useState(true);
   const [userPostCount, setUserPostCount] = useState(0);
   const userAccount = localStorage.getItem("UserRole");
-  const userId = 408; //localStorage.getItem("UserId"); // ID-ul utilizatorului curent, poți schimba cu valoarea din localStorage
+  const userId = localStorage.getItem("UserId");
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const username = localStorage.getItem("username");
   const token = localStorage.getItem("token");
 
   const [quickAction, setQuickAction] = useState("posts");
   const [userComments, setUserComments] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleCreate = (title, content, category, file) => {
     axios
@@ -49,6 +51,10 @@ function UserAccountPage() {
       .then((response) => {
         console.log("Post created successfully");
         window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error creating post:", error);
+        setError("Error creating post");
       });
   };
 
@@ -59,37 +65,96 @@ function UserAccountPage() {
   useEffect(() => {
     let commentsUser = [];
 
-    axios
-      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
-      .then((response) => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_URL_BACKEND}/posts/all`
+        );
         const sortedPosts = response.data.posts.sort(
           (a, b) => b.votes - a.votes
         );
         getAll(sortedPosts);
-        setUserPostCount(
-          sortedPosts.filter((post) => post.author_id == userId).length
+        setLoading(false);
+
+        const userPostCount = sortedPosts.filter(
+          (post) => post.author_id == userId
+        ).length;
+        setUserPostCount(userPostCount);
+
+        console.log(posts);
+
+        const postsWithComments = sortedPosts.filter(
+          (post) => post.comments_count
         );
 
-        const commentPromises = sortedPosts.map((post) =>
-          getCommentsApi(post.id).then((data) => {
-            data.forEach((element) => {
-              if (element.detaliiComentariu.author_id == 408) {
-                commentsUser.push(element.detaliiComentariu);
-              }
-            });
-          })
+        const commentPromises = postsWithComments.map((post) =>
+          getCommentsApi(post.id)
+            .then((data) => {
+              data.forEach((element) => {
+                if (element.detaliiComentariu.author_id == userId) {
+                  commentsUser.push(element.detaliiComentariu);
+                }
+              });
+            })
+            .catch((error) => {
+              console.error(
+                `Error fetching comments for post ${post.id}:`,
+                error
+              );
+              setError(`Error fetching comments for some posts`);
+            })
         );
 
-        Promise.all(commentPromises).then(() => {
-          setUserComments(commentsUser);
-          setLoading(false);
-        });
+        await Promise.all(commentPromises);
+
+        setUserComments(commentsUser);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setError("Error fetching posts");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [userId]);
+
+  const handleDelete = (postId) => {
+    axios
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
+      .then((response) => {
+        getAll(posts.filter((post) => post.id !== postId));
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
       });
-  }, []);
+  };
+  const handleWarnUser = (userId) => {
+    axios
+      .delete(`${import.meta.env.VITE_URL_BACKEND}/posts?id=${postId}`)
+      .then((response) => {
+        getAll(posts.filter((post) => post.id !== postId));
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
+  };
+  const handleTimeOutUser = (userId) => {
+    axios
+      .delete(
+        `${import.meta.env.VITE_URL_BACKEND}/admin/timeoutUser?id=${userId}`
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error time out user:", error);
+      });
+  };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <>
@@ -108,125 +173,114 @@ function UserAccountPage() {
             </div>
           </div>
         </div>
-      ) : userRole == "admin" ? (
+      ) : userRole === "admin" ? (
         <div className="user-account-page">
           <Navbar_superior />
-          {reportsAdmin == false ? (
+          {reportsAdmin === false ? (
             <div className="user-account-page-content">
               <div className="user-account-sidebar">
                 <Navbar />
               </div>
               <div className="content-wrapper">
                 <div className="user-posts">
-                  {
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <div className="topPart">
-                        <div className="name">
-                          <h2>{localStorage.getItem("UserName")}</h2>
-                          <p>Student</p>
-                        </div>
-                        <ul>
-                          <li
-                            onClick={() => setQuickAction("overview")}
-                            className={
-                              quickAction == "overview" ? "outLine" : ""
-                            }
-                          >
-                            Overview
-                          </li>
-                          <li
-                            onClick={() => setQuickAction("posts")}
-                            className={quickAction == "posts" ? "outLine" : ""}
-                          >
-                            Posts
-                          </li>
-                          <li
-                            onClick={() => setQuickAction("comments")}
-                            className={
-                              quickAction == "comments" ? "outLine" : ""
-                            }
-                          >
-                            Comments
-                          </li>
-                          <li
-                            onClick={() => setQuickAction("upvoted")}
-                            className={
-                              quickAction == "upvoted" ? "outLine" : ""
-                            }
-                          >
-                            Upvoted
-                          </li>
-                          <li
-                            onClick={() => setQuickAction("downvoted")}
-                            className={
-                              quickAction == "downvoted" ? "outLine" : ""
-                            }
-                          >
-                            Downvoted
-                          </li>
-                        </ul>
-                        <div className="left">
-                          <button
-                            className="createBtn"
-                            onClick={() => setShowCreatePostForm(true)}
-                          >
-                            Create post
-                          </button>
-                          <button
-                            className="reportsBtn"
-                            onClick={() => setReportsAdmin(true)}
-                          >
-                            View reports
-                          </button>
-                          {showCreatePostForm && (
-                            <CreatePostForm
-                              onCreate={handleCreate}
-                              onCancel={handleClose}
-                            />
-                          )}
-                        </div>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <div className="topPart">
+                      <div className="name">
+                        <h2>{localStorage.getItem("UserName")}</h2>
+                        <p>{localStorage.getItem("UserRole")}</p>
                       </div>
-                      {quickAction == "posts" ? (
-                        <div className="container-posts-list">
-                          {posts.map((post) =>
-                            post.author_id == userId ? (
-                              <Post
-                                key={post.id}
-                                id={post.id}
-                                authorId={post.author_id}
-                                userName={localStorage.getItem("UserName")}
-                                title={post.title}
-                                content={post.description}
-                                upVotesCount={post.votes}
-                                commentsCount={post.comments_count}
-                                category={post.category}
-                                file={post.url}
-                              />
-                            ) : (
-                              <div key={post.id}></div>
-                            )
-                          )}
-                        </div>
-                      ) : quickAction == "overview" ? (
-                        <div>overview</div>
-                      ) : quickAction == "comments" ? (
-                        <div>
-                          {userComments.map((comment) => (
-                            <Link to={`/post/${comment.post_id}`}>
-                              <div className="commentContainer">
-                                <h2>{comment.description}</h2>
-                                <p>{comment.created_at}</p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      ) : quickAction == "upvoted" ? (
-                        <div>upvoted</div>
-                      ) : (
-                        <div>downvoted</div>
-                      )}
-                    </Suspense>
-                  }
+                      <ul>
+                        <li
+                          onClick={() => setQuickAction("posts")}
+                          className={quickAction === "posts" ? "outLine" : ""}
+                        >
+                          Posts
+                        </li>
+                        <li
+                          onClick={() => setQuickAction("comments")}
+                          className={
+                            quickAction === "comments" ? "outLine" : ""
+                          }
+                        >
+                          Comments
+                        </li>
+                        <li
+                          onClick={() => setQuickAction("upvoted")}
+                          className={quickAction === "upvoted" ? "outLine" : ""}
+                        >
+                          Upvoted
+                        </li>
+                        <li
+                          onClick={() => setQuickAction("downvoted")}
+                          className={
+                            quickAction === "downvoted" ? "outLine" : ""
+                          }
+                        >
+                          Downvoted
+                        </li>
+                      </ul>
+                      <div className="left">
+                        <button
+                          className="createBtn"
+                          onClick={() => setShowCreatePostForm(true)}
+                        >
+                          Create post
+                        </button>
+                        <button
+                          className="reportsBtn"
+                          onClick={() => setReportsAdmin(true)}
+                        >
+                          View reports
+                        </button>
+                        {showCreatePostForm && (
+                          <CreatePostForm
+                            onCreate={handleCreate}
+                            onCancel={handleClose}
+                          />
+                        )}
+                      </div>
+                    </div>
+                    {quickAction === "posts" ? (
+                      <div className="container-posts-list">
+                        {posts.map((post) =>
+                          post.author_id == userId ? (
+                            <Post
+                              key={post.id}
+                              id={post.id}
+                              authorId={post.author_id}
+                              userName={localStorage.getItem("UserName")}
+                              title={post.title}
+                              content={post.description}
+                              upVotesCount={post.votes}
+                              commentsCount={post.comments_count}
+                              category={post.category}
+                              file={post.url}
+                            />
+                          ) : (
+                            <div key={post.id}></div>
+                          )
+                        )}
+                      </div>
+                    ) : quickAction === "comments" ? (
+                      <div>
+                        {userComments.map((comment) => (
+                          <Link
+                            to={`/post/${comment.post_id}`}
+                            key={comment.id}
+                          >
+                            <div className="commentContainer">
+                              <h2>{comment.description}</h2>
+                              <p>{comment.created_at}</p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : quickAction === "upvoted" ? (
+                      <div>upvoted</div>
+                    ) : (
+                      <div>downvoted</div>
+                    )}
+                  </Suspense>
                 </div>
                 <div className="user-account-info">
                   <AccountInfo />
@@ -246,23 +300,22 @@ function UserAccountPage() {
                       <div className="topPart">
                         <div className="name">
                           <h2>{localStorage.getItem("UserName")}</h2>
-                          <p>Admin</p>
+                          <p>{localStorage.getItem("UserRole")}</p>
                         </div>
                         <h3>Reported posts</h3>
-                        <table class="report-table">
+                        <table className="report-table">
                           <thead>
                             <tr>
-                              <th class="flex-column">Post</th>
+                              <th className="flex-column">Post</th>
                               <th>Reason</th>
                               <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             {posts.map((post) => (
-                              <tr>
+                              <tr key={post.id}>
                                 <td className="postItem">
                                   <Post
-                                    key={post.id}
                                     id={post.id}
                                     authorId={post.author_id}
                                     userName={`User ${post.author_id}`}
@@ -271,6 +324,7 @@ function UserAccountPage() {
                                     upVotesCount={post.votes}
                                     commentsCount={post.comments_count}
                                     category={post.category}
+                                    file={post.url}
                                   />
                                 </td>
                                 <td className="reasonBox">
@@ -279,13 +333,30 @@ function UserAccountPage() {
                                   </p>
                                 </td>
                                 <td className="actionBtns">
-                                  <button class="action-button">
+                                  <button
+                                    className="action-button"
+                                    onClick={() =>
+                                      console.log(
+                                        `warned user: ${post.author_id}`
+                                      )
+                                    }
+                                  >
                                     Warn User
                                   </button>
-                                  <button class="action-button">
+                                  <button
+                                    className="action-button"
+                                    onClick={() =>
+                                      console.log(
+                                        `timeout user: ${post.author_id}`
+                                      )
+                                    }
+                                  >
                                     Timeout User
                                   </button>
-                                  <button class="action-button">
+                                  <button
+                                    className="action-button"
+                                    onClick={() => handleDelete(post.id)}
+                                  >
                                     Delete Post
                                   </button>
                                 </td>
@@ -304,6 +375,7 @@ function UserAccountPage() {
       ) : (
         <div>moderator</div>
       )}
+      {error && <div className="error-message">{error}</div>}
     </>
   );
 }

@@ -4,7 +4,6 @@ import "./PostList.css";
 import { useTranslation } from "react-i18next";
 import CreatePostForm from "../CreatePost/CreatePostForm";
 import { Link } from "react-router-dom";
-
 import { getComments as getCommentsApi } from "../../comments/api";
 
 const Post = React.lazy(() => import("../../Post/post"));
@@ -15,18 +14,14 @@ const PostList = () => {
   const username = localStorage.getItem("username");
   const token = localStorage.getItem("token");
 
-  //
   const [posts, getAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quickAction, setQuickAction] = useState("posts");
-
   const [userPostCount, setUserPostCount] = useState(0);
   const userAccount = localStorage.getItem("UserRole");
-  const userId = 408; //localStorage.getItem("UserId");
-
+  const userId = localStorage.getItem("UserId");
   const [userComments, setUserComments] = useState([]);
-
-  // POSTurile SUNT A USERULUI 408, ^^^^^
+  const [error, setError] = useState(null);
 
   const handleCreate = (title, content, category, file) => {
     axios
@@ -54,13 +49,16 @@ const PostList = () => {
       .catch((error) => {
         if (error.response) {
           console.error("Error creating post:", error.response.data);
+          setError("Error creating post: " + error.response.data.message);
         } else if (error.request) {
           console.error(
             "Error creating post: No response received",
             error.request
           );
+          setError("Error creating post: No response received");
         } else {
           console.error("Error creating post:", error.message);
+          setError("Error creating post: " + error.message);
         }
       });
   };
@@ -72,37 +70,60 @@ const PostList = () => {
   useEffect(() => {
     let commentsUser = [];
 
-    axios
-      .get(`${import.meta.env.VITE_URL_BACKEND}/posts/all`)
-      .then((response) => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_URL_BACKEND}/posts/all`
+        );
         const sortedPosts = response.data.posts.sort(
           (a, b) => b.votes - a.votes
         );
+
+        console.log(posts);
+
         getAll(sortedPosts);
-        console.log(sortedPosts);
-        setUserPostCount(
-          sortedPosts.filter((post) => post.author_id == userId).length
+        setLoading(false);
+
+        const userPostCount = sortedPosts.filter(
+          (post) => post.author_id == userId
+        ).length;
+        setUserPostCount(userPostCount);
+
+        const postsWithComments = sortedPosts.filter(
+          (post) => post.comments_count
         );
 
-        const commentPromises = sortedPosts.map((post) =>
-          getCommentsApi(post.id).then((data) => {
-            data.forEach((element) => {
-              if (element.detaliiComentariu.author_id == 408) {
-                commentsUser.push(element.detaliiComentariu);
-              }
-            });
-          })
+        const commentPromises = postsWithComments.map((post) =>
+          getCommentsApi(post.id)
+            .then((data) => {
+              data.forEach((element) => {
+                if (element.detaliiComentariu.author_id == userId) {
+                  commentsUser.push(element.detaliiComentariu);
+                }
+              });
+            })
+            .catch((error) => {
+              console.error(
+                `Error fetching comments for post ${post.id}:`,
+                error
+              );
+              setError(`Error fetching comments for some posts`);
+            })
         );
 
-        Promise.all(commentPromises).then(() => {
-          setUserComments(commentsUser);
-          setLoading(false);
-        });
-      })
-      .catch((error) => {
+        await Promise.all(commentPromises);
+
+        setUserComments(commentsUser);
+      } catch (error) {
         console.error("Error fetching posts:", error);
-      });
-  }, []);
+        setError("Error fetching posts");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [userId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -113,36 +134,30 @@ const PostList = () => {
       <div className="topPart">
         <div className="name">
           <h2>{localStorage.getItem("UserName")}</h2>
-          <p>Student</p>
+          <p>{localStorage.getItem("UserRole")}</p>
         </div>
         <ul>
           <li
-            onClick={() => setQuickAction("overview")}
-            className={quickAction == "overview" ? "outLine" : ""}
-          >
-            Overview
-          </li>
-          <li
             onClick={() => setQuickAction("posts")}
-            className={quickAction == "posts" ? "outLine" : ""}
+            className={quickAction === "posts" ? "outLine" : ""}
           >
             Posts
           </li>
           <li
             onClick={() => setQuickAction("comments")}
-            className={quickAction == "comments" ? "outLine" : ""}
+            className={quickAction === "comments" ? "outLine" : ""}
           >
             Comments
           </li>
           <li
             onClick={() => setQuickAction("upvoted")}
-            className={quickAction == "upvoted" ? "outLine" : ""}
+            className={quickAction === "upvoted" ? "outLine" : ""}
           >
             Upvoted
           </li>
           <li
             onClick={() => setQuickAction("downvoted")}
-            className={quickAction == "downvoted" ? "outLine" : ""}
+            className={quickAction === "downvoted" ? "outLine" : ""}
           >
             Downvoted
           </li>
@@ -159,7 +174,7 @@ const PostList = () => {
           )}
         </div>
       </div>
-      {quickAction == "posts" ? (
+      {quickAction === "posts" ? (
         <div className="container-posts-list">
           {posts.map((post) =>
             post.author_id == userId ? (
@@ -180,12 +195,10 @@ const PostList = () => {
             )
           )}
         </div>
-      ) : quickAction == "overview" ? (
-        <div>overview</div>
-      ) : quickAction == "comments" ? (
+      ) : quickAction === "comments" ? (
         <div>
           {userComments.map((comment) => (
-            <Link to={`/post/${comment.post_id}`}>
+            <Link to={`/post/${comment.post_id}`} key={comment.id}>
               <div className="commentContainer">
                 <h2>{comment.description}</h2>
                 <p>{comment.created_at}</p>
@@ -193,11 +206,12 @@ const PostList = () => {
             </Link>
           ))}
         </div>
-      ) : quickAction == "upvoted" ? (
+      ) : quickAction === "upvoted" ? (
         <div>upvoted</div>
       ) : (
         <div>downvoted</div>
       )}
+      {error && <div className="error-message">{error}</div>}
     </Suspense>
   );
 };
