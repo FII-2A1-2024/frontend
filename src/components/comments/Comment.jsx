@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommentsForm from "./CommentsForm";
 import "./index.css";
+import ReportModal from "./ReportComment";
 import UserPofile from "./user_profile.svg";
 import upVotesSVG from "../Post/icons/shift_up.svg";
 import downVotesSVG from "../Post/icons/shift_down.svg";
@@ -33,6 +34,20 @@ const Comment = ({
   const [isHidden, setIsHidden] = useState(false);
   const [voted, setVoted] = useState(null);
   const [localUpVotesCount, setLocalUpVotesCount] = useState(upVotesCount);
+  const [showReportModal, setShowReportModal] = useState(false);
+
+  const handleReport = () => {
+    setShowReportModal(true);
+  };
+
+  const handleCloseReportModal = () => {
+    setShowReportModal(false);
+  };
+
+  const handleSubmitReport = (message) => {
+    setShowReportModal(false);
+    setMessage(message);
+  };
 
   const isReplying =
     activeComment &&
@@ -209,6 +224,12 @@ const Comment = ({
             />
           ))}
       </div>
+      <ReportModal
+        isOpen={showReportModal}
+        onRequestClose={handleCloseReportModal}
+        onSubmit={handleSubmitReport}
+        postId={id}
+      />
     </div>
   );
 };
