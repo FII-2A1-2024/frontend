@@ -34,7 +34,6 @@ function AccountSettingsPage() {
 
   const handleDeleteAccountButton = async () => {
     // deleteAccount
-    console.log("tryeing to delere account...");
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_URL_BACKEND}/deleteAccount`,

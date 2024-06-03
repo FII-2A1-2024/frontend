@@ -102,7 +102,7 @@ function ChatList() {
     return (
         <div className="flex flex-col gap-2">
             {messagesIds.map((messData) => (
-                <div key={messData.id} className={`chat-list-item flex justify-between px-10 py-4 ${activeChat === messData.id ? 'active-chat' : ''}`} onClick={() => handleClick(messData)}>
+                <div key={messData.id} className={`chat-list-item flex justify-between py-4 ${activeChat === messData.id ? 'active-chat' : ''}`} onClick={() => handleClick(messData)}>
                     <div className="chat-list-item-info">
                         <div className="chat-list-item-name">
                             {messData.username}

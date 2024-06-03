@@ -1,0 +1,26 @@
+.relative-parent-sidebar {
+  position: relative;
+
+}
+
+.glass-bg-blur-sidebar {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  backdrop-filter: blur(2px);
+  top: 0;
+  left: 0;
+  /* transform: translate(-50%, -50%); */
+  background-color: rgba(20, 15, 15, 0.6);
+  z-index: 1999;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    display: block;
+  }
+}

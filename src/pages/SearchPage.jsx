@@ -233,11 +233,12 @@ const SearchPage = () => {
                 <Post
                   key={post.id}
                   id={post.id}
-                  userName={`User ${post.author_id}`}
+                  authorId={post.author_id}
+                  userName={post.username ? post.username : `User ${post.author_id}`}
                   title={post.title}
                   content={post.description}
                   upVotesCount={post.votes}
-                  commentsCount={post.comments_count} // Count comments nu e în JSON
+                  commentsCount={post.comments_count}
                   category={post.category}
                   file={post.url}
                 />

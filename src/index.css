@@ -9,6 +9,7 @@ body {
   width: 100vw;
   height: 100vh;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Temporary css - Ciprian 5 apr
@@ -21,7 +22,7 @@ Delete this when needed */
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #fffbfb;
+  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,8 +47,8 @@ Delete this when needed */
 .side_bar_chats_body {
   /* Side bar-chats */
   /* position: absolute;*/
-  position: fixed;
-  width: 340px;
+  /* position: fixed; */
+  /* width: 340px; */
   height: 300px;
   right: 10px;
   /* top: 100px;*/
@@ -59,7 +60,7 @@ Delete this when needed */
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 24px;
+  padding: 16px;
 
   box-sizing: border-box;
   /* primary dark red/primary-200 */
@@ -87,11 +88,11 @@ Delete this when needed */
   border-radius: 5px;
 }
 
-@media screen and (max-width: 1500px) {
+/* @media screen and (max-width: 1500px) {
   .side_bar_chats_body {
     display: none;
   }
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {
