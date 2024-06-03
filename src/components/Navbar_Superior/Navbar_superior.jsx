@@ -124,6 +124,7 @@ function Navbar_superior() {
             {/*linkare la pagina cu chat ul */}
             <img src={messagesIcon} alt="" className="messagesIcon" />
             <span className="tooltip-text">Messages</span>
+            {hasNewMessage && <span className="red-dot"></span>}
           </Link>
           <button
             className="notifications-button tooltip"
