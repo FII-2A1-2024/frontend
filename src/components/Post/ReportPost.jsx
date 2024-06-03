@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./ReportPost.css";
 
 // Setting the app element for accessibility
@@ -12,7 +13,7 @@ const ReportModal = ({ isOpen, onRequestClose, onSubmit, postId }) => {
   const handleSubmit = () => {
     if (selectedReason) {
       const token = localStorage.getItem('token'); 
-      axios.post('${import.meta.env.VITE_URL_BACKEND}/posts/report', {
+      axios.post(`${import.meta.env.VITE_URL_BACKEND}/posts/report`, {
         post_id: postId,
         reason: selectedReason,
       }, {
@@ -23,6 +24,7 @@ const ReportModal = ({ isOpen, onRequestClose, onSubmit, postId }) => {
       .then(response => {
         onSubmit(response.data.message);
         setSelectedReason('');
+        console.log("Reported successfully");
       })
       .catch(error => {
         console.error("Error reporting post:", error);
