@@ -1,7 +1,7 @@
 .news_body {
   /* News */
-  position: fixed;
-  width: 340px;
+  /* position: fixed; */
+  /* width: 340px; */
   height: auto;
   right: 10px;
   top: 410px;
@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 24px;
+  padding: 16px;
   box-sizing: border-box;
 
   /* primary dark red/primary-200 */
@@ -22,7 +22,7 @@
 .article-link {
   color: black;
 }
-
+/* 
 @media screen and (max-width: 1500px) {
   .news_body {
     display: none;
@@ -30,7 +30,7 @@
   .article-link {
     display: none;
   }
-}
+} */
 
 .news_title {
   margin-top: -3px !important ;

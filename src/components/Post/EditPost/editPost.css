@@ -10,12 +10,13 @@
     border: 1px solid #ccc;
     z-index: 999;
     background: #fff;
+    width: 50%;
    }
    
    
    .popup-file-buttons {
        display: flex;
-       flex-direction: row;
+       flex-direction: column;
        gap: 16px;
    }
    
@@ -37,3 +38,9 @@
        color: #fff;
        border-color: transparent;
    }
+
+   @media (max-width: 768px) {
+    .popup_edit {
+        width: 80%;
+    }
+}
