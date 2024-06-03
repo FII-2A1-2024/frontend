@@ -11,6 +11,7 @@ import CommentsForm from "./CommentsForm";
 const Comments = ({ currentUserId, postId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
+  const [isCommentWithSlurs, setIsCommentWIthSlurs] = useState(false);
 
   const rootComments = backendComments.filter(
     (backendComment) => backendComment.detaliiComentariu.parent_id === -1
@@ -24,13 +25,14 @@ const Comments = ({ currentUserId, postId }) => {
       ---> GET the comments (needed for ID of comments from the database)
    */
   const addComment = async (text, parentId, post_id, author_id) => {
+    
     try {
       const newComment = {
         detaliiComentariu: {
           id: Date.now(),
           post_id: post_id,
           parent_id: parentId,
-          username : localStorage.getItem('username'),
+          username : localStorage.getItem('UserName'),
           author_id: author_id,
           description: text,
           votes: 0,
@@ -46,14 +48,20 @@ const Comments = ({ currentUserId, postId }) => {
         addNewComment(updatedComments, parentId, newComment);
       }
       setBackendComments(updatedComments);
-
-      //tre sa preluam id-ul din raspuns, si sa il actualizam 
      addCommentApi(text, parentId, post_id, author_id).then((response) => {
-         // fetchComments(postId);
-         console.log("raspunsul este " , response);
-         updateIdOfNewComment(updatedComments, newComment.detaliiComentariu.id, response.comment_id);
-         console.log("Updated Id of thwe new comment : ",  updatedComments);
-         setBackendComments(updatedComments);
+         if (response == "Comment could not be added, it may contain slurs") {
+            setIsCommentWIthSlurs(true);
+            const updatedComments = [...backendComments];
+            deleteExistentComment(updatedComments, parentId, newComment.detaliiComentariu.id);
+            setBackendComments(updatedComments);
+            setTimeout(() => {
+              setIsCommentWIthSlurs(false);
+          }, 3000); 
+          
+         } else {
+            updateIdOfNewComment(updatedComments, newComment.detaliiComentariu.id, response.comment_id);
+            setBackendComments(updatedComments);
+         }
       });
 
       setActiveComment(null);
@@ -75,6 +83,7 @@ const Comments = ({ currentUserId, postId }) => {
           .put(`${import.meta.env.VITE_URL_BACKEND}/comments`, {
             id: commentId,
             description: updateData.description,
+            user_id: userId
           })
           .then(() => {
             //fetchComments(postId); we dont need to GET the comments back
@@ -106,12 +115,10 @@ const Comments = ({ currentUserId, postId }) => {
   const deleteComment = async (commentId, parent_id) => {
     try {
       const updatedComments = [...backendComments];
-      console.log("trying to delete comment ...");
       deleteExistentComment(updatedComments, parent_id, commentId);
       setBackendComments(updatedComments);
 
       await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/comments?id=${commentId}`);
-      fetchComments(postId);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -131,7 +138,6 @@ const Comments = ({ currentUserId, postId }) => {
   };
 
   const updateIdOfNewComment = (comments, commentId, backId) => {
-    console.log("INCECRAM SA  gasim comentariul cu id ", commentId, " si il setam la ", backId);
     for (let comment of comments) {
       if (comment.detaliiComentariu.id === commentId) {
           
@@ -165,7 +171,6 @@ const Comments = ({ currentUserId, postId }) => {
 
   const deleteExistentComment = (comments, parentId, commentId) => {
     if (parentId === -1) {
-      console.log("Trying to delete base comment....");
       for (let i = 0; i < comments.length; i++) {
         if (comments[i].detaliiComentariu.id === commentId) {
           comments.splice(i, 1);
@@ -212,6 +217,7 @@ const Comments = ({ currentUserId, postId }) => {
           handleSubmit={(text) => addComment(text, -1, postId, currentUserId)}
         />
       }
+      {isCommentWithSlurs && <div className="btn_message">The comment may contain slurs!</div>}
       <div className="comments-container">
         {rootComments.map((rootComment) => (
           <Comment

@@ -16,7 +16,7 @@ export const sendMessage = async (sender_id, receiver_id, content) => {
 
 
 export const removeLoggedUser = async (socket_id) => {
-    if (localStorage.getItem('username') != null) {
+    if (localStorage.getItem('UserName') != null) {
         try {
             const response = await axios.delete(`${import.meta.env.VITE_URL_BACKEND}/socket/delete`, {
                 params: { socket: socket_id },
@@ -35,11 +35,11 @@ export const removeLoggedUser = async (socket_id) => {
 
 
 export const addLoggedUser = async (socketId) => {
-    if (localStorage.getItem('username') != null) {
+    if (localStorage.getItem('UserName') != null) {
         try {
             const response = await axios.post(`${import.meta.env.VITE_URL_BACKEND}/socket/add`, {
                 uid: parseInt(localStorage.getItem("UserId"), 10),
-                username: localStorage.getItem('username'),
+                username: localStorage.getItem('UserName'),
                 socket: socketId
             }, {
                 headers: {
