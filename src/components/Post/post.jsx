@@ -6,7 +6,7 @@ Description: template-ul la post
 Patricia Onisor(01.05.2024)
 Description: pop-ul pt 3Dots, delete confirmation and delete function, edit popup and edit function. UpVotes and DownVote.
 
-TO DO: Share, Report, options regarding post depending on user_id.
+TO DO: Share
 */
 
 import React, { useState, useEffect, useRef } from "react";
@@ -14,10 +14,10 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./post.css";
 import Modal from "react-modal";
-import ReportModal from './ReportPost';
+import ReportModal from "./ReportPost";
 import DeleteConfirmationPopup from "./DeleteConfirmationPopup";
 import EditPopup from "./EditPost/editPost";
-import MessageLink from '../Messages/MessageLink';
+import MessageLink from "../Messages/MessageLink";
 import userProfile from "./icons/user_profile.svg";
 import threeDots from "./icons/3-dots.svg";
 import shareSVG from "./icons/share.svg";
@@ -29,22 +29,6 @@ import editSVG from "./EditPost/icons/edit.svg";
 import flagSVG from "./EditPost/icons/flag.svg";
 import frameSVG from "./EditPost/icons/Frame.svg";
 import { useTranslation } from "react-i18next";
-
-// const reportReasons = [
-//   "Unlawful content",
-//   "Harmful content",
-//   "Threats",
-//   "Abuse",
-//   "Defamation",
-//   "Vulgar language",
-//   "Libel",
-//   "Invasion of privacy",
-//   "Hate speech",
-//   "Racially or ethnically offensive content",
-//   "Profanity",
-//   "Insults"
-// ];
-
 
 const Post = ({
   id,
@@ -68,7 +52,6 @@ const Post = ({
   const { t } = useTranslation();
   const [showReportModal, setShowReportModal] = useState(false);
   const location = useLocation();
-
 
   useEffect(() => {
     if (initialVote > upVotesCount) {
@@ -110,6 +93,7 @@ const Post = ({
       .put(`${import.meta.env.VITE_URL_BACKEND}/posts`, {
         id: postId,
         votes: voteCount,
+        user_id: userId,
       })
       .then((response) => {
         console.log("Vote count updated successfully");
@@ -247,7 +231,11 @@ const Post = ({
 
   const handleUnfollow = () => {
     axios
-      .delete(`${import.meta.env.VITE_URL_BACKEND}/postFollow/?user_id=${userId}&post_id=${id}`)
+      .delete(
+        `${
+          import.meta.env.VITE_URL_BACKEND
+        }/postFollow/?user_id=${userId}&post_id=${id}`
+      )
       .then((response) => {
         console.log("Post unsaved successfully");
         setMessage("Post unsaved successfully");
@@ -261,11 +249,6 @@ const Post = ({
       });
   };
 
-  // const handleReport = () => {
-  //   setMessage("Post reported successfully");
-  //   setMenuVisible(false);
-  // };
-
   const handleReport = () => {
     setShowReportModal(true);
   };
@@ -274,12 +257,9 @@ const Post = ({
     setShowReportModal(false);
   };
 
-  const handleSubmitReport = (reason) => {
-    // Trimite raportul către server sau efectuează alte acțiuni
-    console.log('Report reason:', reason);
+  const handleSubmitReport = (message) => {
     setShowReportModal(false);
-    setMessage("Post reported successfully");
-
+    setMessage(message);
   };
 
   const handleShare = () => {
@@ -305,13 +285,13 @@ const Post = ({
 
   useEffect(() => {
     if (menuVisible) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuVisible]);
 
@@ -320,7 +300,7 @@ const Post = ({
     if (message) {
       // Setează un timer care va șterge mesajul după 3 secunde
       timer = setTimeout(() => {
-        setMessage('');
+        setMessage("");
       }, 2000);
     }
 
@@ -328,52 +308,108 @@ const Post = ({
     return () => clearTimeout(timer);
   }, [message]);
 
-
   return (
     <div className="post">
       <div className="postHeader">
         <div className="userHeader">
           <img src={userProfile} alt="Header" className="userProfileImage" />
-            <MessageLink username={userName} id={authorId} type={"PostLink"}/>
+          <MessageLink username={userName} id={authorId} type={"PostLink"} />
         </div>
 
         {!location.pathname.includes("useraccount") && (
           <div className="three-dots">
-            <button onClick={() => setMenuVisible(!menuVisible)} className="btn-three-dots">
+            <button
+              onClick={() => setMenuVisible(!menuVisible)}
+              className="btn-three-dots"
+            >
               <img src={threeDots} alt="ThreeDots" />
             </button>
-          
             {message && <div className="btn_message">{message}</div>}
-
             {menuVisible && (
               <div className="post_menu" ref={dropdownRef}>
                 {userId === authorId ? (
                   <>
-                    <button className="post_menu_btn" onClick={() => {handleEdit(); setMenuVisible(false);}}>
-                      <img src={editSVG} alt="Edit" className="post_menu_btn_icon" />
-                      {t('edit')}
+                    <button
+                      className="post_menu_btn"
+                      onClick={() => {
+                        handleEdit();
+                        setMenuVisible(false);
+                      }}
+                    >
+                      <img
+                        src={editSVG}
+                        alt="Edit"
+                        className="post_menu_btn_icon"
+                      />
+                      {t("edit")}
                     </button>
-                    <button className="post_menu_btn" onClick={() => {handleDelete(); setMenuVisible(false);}}>
-                      <img src={blockSVG} alt="Delete" className="post_menu_btn_icon" />
-                      {t('delete')}
+                    <button
+                      className="post_menu_btn"
+                      onClick={() => {
+                        handleDelete();
+                        setMenuVisible(false);
+                      }}
+                    >
+                      <img
+                        src={blockSVG}
+                        alt="Delete"
+                        className="post_menu_btn_icon"
+                      />
+                      {t("delete")}
                     </button>
                   </>
                 ) : (
                   <>
-                    <button className="post_menu_btn" onClick={() => {handleReport(); setMenuVisible(false);}}>
-                      <img src={flagSVG} alt="Report" className="post_menu_btn_icon" />
-                      {t('report')}
+                    <button
+                      className="post_menu_btn"
+                      onClick={() => {
+                        handleReport();
+                        setMenuVisible(false);
+                      }}
+                    >
+                      <img
+                        src={flagSVG}
+                        alt="Report"
+                        className="post_menu_btn_icon"
+                      />
+                      {t("report")}
                     </button>
-                    
-                    <button className="post_menu_btn" onClick={() => {handleFollow(); setMenuVisible(false);}}>
-                      <img src={frameSVG} alt="Follow" className="post_menu_btn_icon" />
-                      {t('save')}
-                    </button>
+
+                    {followedPostIds.includes(id) ? (
+                      <button
+                        className="post_menu_btn"
+                        onClick={() => {
+                          handleUnfollow();
+                          setMenuVisible(false);
+                        }}
+                      >
+                        <img
+                          src={frameSVG}
+                          alt="Unsave"
+                          className="post_menu_btn_icon"
+                        />{" "}
+                        {t("Unsave")}
+                      </button>
+                    ) : (
+                      <button
+                        className="post_menu_btn"
+                        onClick={() => {
+                          handleFollow();
+                          setMenuVisible(false);
+                        }}
+                      >
+                        <img
+                          src={frameSVG}
+                          alt="Save"
+                          className="post_menu_btn_icon"
+                        />{" "}
+                        {t("Save")}
+                      </button>
+                    )}
                   </>
                 )}
               </div>
             )}
-
             {showEditPopup && (
               <EditPopup
                 id={id}
@@ -385,7 +421,6 @@ const Post = ({
                 onCancel={handleCancel}
               />
             )}
-
             {showDeleteConfirmation && (
               <DeleteConfirmationPopup
                 onDelete={handleConfirmDelete}
@@ -395,14 +430,13 @@ const Post = ({
           </div>
         )}
       </div>
-
       <div className="postArticle">
         <h1>{title}</h1>
         <p>{content} </p>
         {file ? (
           file.endsWith(".jpeg") ||
-            file.endsWith(".jpg") ||
-            file.endsWith(".png") ? (
+          file.endsWith(".jpg") ||
+          file.endsWith(".png") ? (
             <img src={file} alt="Image" className="postFile" />
           ) : file.endsWith(".mp4") ? (
             <video controls className="postFile">
@@ -423,7 +457,6 @@ const Post = ({
           <p></p>
         )}
       </div>
-
       <div className="feedback-section">
         <div className="feedback-container">
           <div className="btn btn-upVotes" onClick={() => handleVote("upVote")}>
@@ -440,7 +473,6 @@ const Post = ({
             <img src={downVotesSVG} alt="downVotes" />
           </div>
         </div>
-
         <Link to={`/post/${id}`} style={{ color: "black" }}>
           <div className="feedback-container comm-btn">
             <div className="btn">
@@ -449,7 +481,6 @@ const Post = ({
             <p>{commentsCount !== null ? commentsCount : 0}</p>
           </div>
         </Link>
-
         <div className="feedback-container" onClick={handleShare}>
           <div className="btn btn-share">
             <img src={shareSVG} alt="Share" />
@@ -457,7 +488,12 @@ const Post = ({
           <p>{t("share")}</p>
         </div>
       </div>
-      <ReportModal isOpen={showReportModal} onRequestClose={handleCloseReportModal} onSubmit={handleSubmitReport} />
+      <ReportModal
+        isOpen={showReportModal}
+        onRequestClose={handleCloseReportModal}
+        onSubmit={handleSubmitReport}
+        postId={id}
+      />
     </div>
   );
 };

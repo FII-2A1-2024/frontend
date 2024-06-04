@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import CommentsForm from "./CommentsForm";
 import "./index.css";
 import UserPofile from "./user_profile.svg";
@@ -7,9 +8,9 @@ import commentsSVG from "../Post/icons/chat_bubble.svg";
 import commentHideButton from "./icons/comment-hide-button.svg";
 import commentUnhideButton from "./icons/comment-unhide-button.svg";
 import editSVG from "./icons/edit.svg";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MessageLink from "../Messages/MessageLink";
+import flagSVG from "./icons/flag.svg";
 
 const Comment = ({
   comment,
@@ -23,6 +24,7 @@ const Comment = ({
   const { t } = useTranslation();
   const canEdit = currentUserId === comment.detaliiComentariu.author_id;
   const canDelete = currentUserId === comment.detaliiComentariu.author_id;
+  const userId = parseInt(localStorage.getItem("UserId"), 10);
   const createdAt = new Date(
     comment.detaliiComentariu.created_at
   ).toLocaleDateString();
@@ -30,6 +32,7 @@ const Comment = ({
 
   const [isHidden, setIsHidden] = useState(false);
   const [voted, setVoted] = useState(null);
+  const [localUpVotesCount, setLocalUpVotesCount] = useState(upVotesCount);
 
   const isReplying =
     activeComment &&
@@ -42,34 +45,29 @@ const Comment = ({
     activeComment.id === comment.detaliiComentariu.id;
 
   const handleVote = (voteType) => {
+    let newVoteCount = localUpVotesCount;
     if (voteType === "upvote" && voted !== "upvote") {
+      newVoteCount = localUpVotesCount + 1;
       setVoted("upvote");
-      const updateData = { votes: upVotesCount + 1 };
-      updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted !== "downvote") {
+      newVoteCount = localUpVotesCount - 1;
       setVoted("downvote");
-      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
-      updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "upvote" && voted === "upvote") {
+      newVoteCount = localUpVotesCount - 1;
       setVoted(null);
-      const updateData = { votes: Math.max(upVotesCount - 1, 0) };
-      updateComment(comment.detaliiComentariu.id, updateData);
     } else if (voteType === "downvote" && voted === "downvote") {
+      newVoteCount = localUpVotesCount + 1;
       setVoted(null);
-      const updateData = { votes: upVotesCount + 1 };
-      updateComment(comment.detaliiComentariu.id, updateData);
-    } else {
-      setVoted(voteType);
-      // const updateData = {votes: upVotesCount};
-      //  updateComment(comment.detaliiComentariu.id, updateData);
     }
+
+    setLocalUpVotesCount(newVoteCount);
+    updateComment(userId, comment.detaliiComentariu.id, { votes: newVoteCount });
   };
 
   const handleHideButton = () => {
     setIsHidden(!isHidden);
   };
 
-  //const replyId = parentId ? parentId : comment.id;
   return (
     <div className="comment">
       <div className="comment-image-container">
@@ -88,8 +86,6 @@ const Comment = ({
         <div className="comment-content">
           <div className="comment-header">
             <MessageLink username={comment.detaliiComentariu.username == null ? "Filler" : comment.detaliiComentariu.username} id={400} type={"CommentLink"}/> 
-            {/* Please change the above line with the correct info about the author */}
-            {/* <div className="comment-author">UserAnonymous</div> */}
             <div className="comment-createdAt">{createdAt}</div>
           </div>
           {!isEditing && (
@@ -104,7 +100,7 @@ const Comment = ({
               initialText={comment.detaliiComentariu.description}
               handleSubmit={(text) => {
                 const updateData = { description: text };
-                updateComment(comment.detaliiComentariu.id, updateData);
+                updateComment(currentUserId, comment.detaliiComentariu.id, updateData);
               }}
               handleCancel={() => setActiveComment(null)}
             />
@@ -117,7 +113,7 @@ const Comment = ({
               >
                 <img src={upVotesSVG} alt="upVote" />
               </div>
-              <p>{upVotesCount}</p>
+              <p>{localUpVotesCount}</p>
               <div
                 className="comments-react-btn comments-react-btn-upvotes"
                 onClick={() => handleVote("downvote")}
@@ -171,6 +167,17 @@ const Comment = ({
                 Delete
               </div>
             )}
+              <div
+                className="comment-reacts"
+              >
+                {" "}
+                <div className="btn">
+                  <img src={flagSVG} alt="nush" className="SVG" />
+                </div>
+                <div>Report</div>
+              </div>
+            
+
           </div>
         </div>
         {isReplying && (
@@ -181,7 +188,7 @@ const Comment = ({
                 text,
                 comment.detaliiComentariu.id,
                 comment.detaliiComentariu.post_id,
-                comment.detaliiComentariu.author_id
+                currentUserId
               )
             }
             handleCancel={() => setActiveComment(null)}

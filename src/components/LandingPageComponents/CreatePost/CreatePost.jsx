@@ -14,8 +14,9 @@ const CreatePost = () => {
   const { t } = useTranslation();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
   const userId = parseInt(localStorage.getItem("UserId"), 10);
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("UserName");
   const token = localStorage.getItem("token");
+  const [isPostWithSlurs, setIsPostWIthSlurs] = useState(false);
 
   const handleCreate = (title, content, category, file) => {
     axios
@@ -24,7 +25,7 @@ const CreatePost = () => {
         {
           author_id: userId,
           title: title,
-          username: localStorage.getItem("username"),
+          username: localStorage.getItem("UserName"),
           description: content,
           category: category,
           votes: 0,
@@ -41,6 +42,7 @@ const CreatePost = () => {
         window.location.reload();
       })
       .catch((error) => {
+
         if (error.response) {
           console.error("Error creating post:", error.response.data);
         } else if (error.request) {
@@ -51,6 +53,10 @@ const CreatePost = () => {
         } else {
           console.error("Error creating post:", error.message);
         }
+        setIsPostWIthSlurs(true);
+        setTimeout(() => {
+          setIsPostWIthSlurs(false);
+      }, 3000); 
       });
   };
 
@@ -70,6 +76,7 @@ const CreatePost = () => {
       {showCreatePostForm && (
         <CreatePostForm onCreate={handleCreate} onCancel={handleClose} />
       )}
+      {isPostWithSlurs && <div className="btn_message_post">The post may contain slurs!</div>}
     </div>
   );
 };
