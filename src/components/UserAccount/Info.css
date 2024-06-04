@@ -22,12 +22,15 @@
   flex: 1;
 }
 
+.reportsBtn {
+  margin-left: 10px;
+}
+
 .user-account-page-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
-  gap: 30px;
   top: 65px;
   position: relative;
 }
@@ -44,6 +47,7 @@
 }
 .name h2 {
   margin: 40px 0px;
+  text-wrap: nowrap;
 }
 .name p {
   margin-right: 20px;
@@ -55,13 +59,14 @@
   text-align: left;
 }
 .report-table tr {
-  display: flex;
   width: 100%;
   margin-bottom: 10px;
+  display: flex;
 }
 
 .reasonBox {
   margin: 0px 10px;
+  flex: 1;
 }
 .reason {
   border: 1px solid #e0c9c9;
@@ -71,7 +76,6 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  flex: 1;
 }
 .actionBtns {
   display: flex;
@@ -112,6 +116,8 @@
   background-color: #fcf3f3;
   border-radius: 20px;
   padding: 7px 15px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .user-account-sidebar {
@@ -132,16 +138,35 @@
 
 .account-info-container {
   height: 80vh;
-  width: 500px;
-  max-width: 600px;
+  padding: 20px;
+  max-width: 300px;
   background-color: #fffbfb;
   border: 1px solid #ccbbbb;
-  padding: 20px;
   margin: 20px;
   box-sizing: border-box;
   border-radius: 10px;
   position: sticky;
-  top: 120px;
+  top: 85px;
+}
+.account-info-container p {
+  font-size: 20px;
+}
+.commentContainer {
+  background-color: #fffbfb;
+  border: 1px solid #ccbbbb;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0px 0px 0px;
+  width: calc(100vw - 660px);
+  max-width: 830px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.user-posts div a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .user-account-settings {
@@ -192,7 +217,7 @@
   margin-bottom: 20px;
 }
 .postItem {
-  flex: 1;
+  flex: 2;
 }
 
 .info-stats-posts-made,
@@ -229,6 +254,6 @@
   height: 70vh;
 }
 .account-info-stats p {
-  font-size: 24px;
+  font-size: 18px;
   margin: 20px 0px;
 }

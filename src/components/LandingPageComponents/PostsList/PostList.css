@@ -5,3 +5,16 @@
   justify-content: flex-start;
   gap: 1rem;
 }
+.createBtn {
+  width: 150px;
+  padding: 10px 0px !important;
+}
+.left {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-left: 0px !important;
+}
+.outLine {
+  border: 1px solid rgb(134, 0, 0);
+}
